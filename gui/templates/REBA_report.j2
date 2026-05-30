@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Report {{ m.Method|default("REBA") }}</title>
+  <style>
+    /* Basic typography that Qt understands */
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 11pt;
+      color: #111827;
+    }
+    h1 {
+      font-size: 22pt;
+      margin-bottom: 2px;
+    }
+    .subtitle {
+      font-size: 12pt;
+      color: #6b7280;
+    }
+    /* Simple utility classes */
+    .label-text { font-size: 9pt; color: #64748b; font-weight: bold; }
+    .val-text { font-size: 14pt; font-weight: bold; color: #1e293b; }
+
+    /* Hardcoded page break for Qt engine */
+    .page-break {
+      page-break-before: always;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================
+       PAGE 1: MAIN METRICS & TABLES
+       ========================================= -->
+
+  <!-- Header Title -->
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <td align="center">
+        <h1>Risultati Analisi {{ m.Method|default("REBA") }}</h1>
+        <p class="subtitle">Valutazione ergonomica posturale • Metodo Hignett &amp; McAtamney</p>
+      </td>
+    </tr>
+  </table>
+
+
+  <!-- 3-Column Meta Block using primitive HTML attributes for layout -->
+  <table width="100%" cellpadding="8" cellspacing="4" border="0">
+    <tr>
+      <td width="33.33%" bgcolor="#f8fafc" align="center" style="border: 1px solid #e2e8f0;">
+        <font size="2" color="#64748b"><b>N° FRAME ANALIZZATI</b></font><br />
+        <font size="5" color="#1e293b"><b>{{ m.n_frames }}</b></font>
+      </td>
+      <td width="33.33%" bgcolor="#f8fafc" align="center" style="border: 1px solid #e2e8f0;">
+        <font size="2" color="#64748b"><b>CONFIDENZA AI</b></font><br />
+        <font size="5" color="#1e293b"><b>{{ m.confidenza }}</b></font>
+      </td>
+      <td width="33.33%" bgcolor="#f8fafc" align="center" style="border: 1px solid #e2e8f0;">
+        <font size="2" color="#64748b"><b>DURATA VIDEO</b></font><br />
+        <font size="5" color="#1e293b"><b>{{ m.durata }}</b></font>
+      </td>
+    </tr>
+  </table>
+
+  <br />
+
+  <!-- Full-Width Main Data Table -->
+  <table width="100%" cellpadding="8" cellspacing="0" style="border: 1px solid #cbd5e1;">
+    <!-- Table Header -->
+    <tr bgcolor="#1e293b">
+      <td align="left"><font color="#ffffff"><b>Parametro {{ m.Method|default("REBA") }}</b></font></td>
+      <td align="right" width="25%"><font color="#ffffff"><b>Punteggio AI</b></font></td>
+    </tr>
+
+    <!-- Gruppo A -->
+    <tr bgcolor="#f1f5f9">
+      <td colspan="2" align="left"><b>Gruppo A (Tronco, Collo, Gambe)</b></td>
+    </tr>
+    <tr>
+      <td align="left" style="border-bottom: 1px solid #e2e8f0;">Tronco (Score)</td>
+      <td align="right" style="border-bottom: 1px solid #e2e8f0;"><b>{{ m.Trunk|round(2) }}</b></td>
+    </tr>
+    <tr>
+      <td align="left" style="border-bottom: 1px solid #e2e8f0;">Collo (Score)</td>
+      <td align="right" style="border-bottom: 1px solid #e2e8f0;"><b>{{ m.Neck|round(2) }}</b></td>
+    </tr>
+    <tr>
+      <td align="left" style="border-bottom: 1px solid #e2e8f0;">Gambe (Score)</td>
+      <td align="right" style="border-bottom: 1px solid #e2e8f0;"><b>{{ m.Legs|round(2) }}</b></td>
+    </tr>
+    <tr bgcolor="#f8fafc">
+      <td align="left" style="border-bottom: 1px solid #e2e8f0;"><b>TOTALE SCORE A</b></td>
+      <td align="right" style="border-bottom: 1px solid #e2e8f0;"><b>{{ m.Total_A|round(2) }}</b></td>
+    </tr>
+
+    <!-- Gruppo B -->
+    <tr bgcolor="#f1f5f9">
+      <td colspan="2" align="left"><b>Gruppo B (Braccia, Polsi)</b></td>
+    </tr>
+    <tr>
+      <td align="left" style="border-bottom: 1px solid #e2e8f0;">Braccio (Score)</td>
+      <td align="right" style="border-bottom: 1px solid #e2e8f0;"><b>{{ m.Upper_Arm|round(2) }}</b></td>
+    </tr>
+    <tr>
+      <td align="left" style="border-bottom: 1px solid #e2e8f0;">Avambraccio (Score)</td>
+      <td align="right" style="border-bottom: 1px solid #e2e8f0;"><b>{{ m.Lower_Arm|round(2) }}</b></td>
+    </tr>
+    <tr>
+      <td align="left" style="border-bottom: 1px solid #e2e8f0;">Polso (Score)</td>
+      <td align="right" style="border-bottom: 1px solid #e2e8f0;"><b>{{ m.Wrist|round(2) }}</b></td>
+    </tr>
+    <tr bgcolor="#f8fafc">
+      <td align="left" style="border-bottom: 1px solid #e2e8f0;"><b>TOTALE SCORE B</b></td>
+      <td align="right" style="border-bottom: 1px solid #e2e8f0;"><b>{{ m.Total_B|round(2) }}</b></td>
+    </tr>
+
+    <!-- Esito Finale -->
+    <tr bgcolor="#f1f5f9">
+      <td colspan="2" align="left"><b>Punteggio C ed Esito</b></td>
+    </tr>
+    <tr>
+      <td align="left" style="border-bottom: 1px solid #e2e8f0;">Punteggio Attività (C)</td>
+      <td align="right" style="border-bottom: 1px solid #e2e8f0;"><b>{{ m.Score_C|round(2) }}</b></td>
+    </tr>
+
+    <!-- Big Highlighted Final Score Row -->
+    <tr bgcolor="#eff6ff">
+      <td align="left" style="border-top: 2px solid #2563eb; border-bottom: 2px solid #2563eb;">
+        <font size="4" color="#1e40af"><b>{{ m.Method|default("REBA") }} SCORE FINALE</b></font>
+      </td>
+      <td align="right" style="border-top: 2px solid #2563eb; border-bottom: 2px solid #2563eb;">
+        <font size="4" color="#1e40af"><b>{{ m.Final|round(2) }}</b></font>
+      </td>
+    </tr>
+
+    <!-- Risk Badge Row mapped with strict table bgcolor overrides -->
+    {% set risk_val = m.risk|default("N/A")|string %}
+    {% set bg_color = "#16a34a" if risk_val == "Trascurabile" else "#eab308" if risk_val == "Basso" else "#f97316" if risk_val == "Medio" else "#dc2626" if risk_val == "Alto" else "#7f1d1d" %}
+    {% set text_color = "#000000" if risk_val == "Basso" else "#ffffff" %}
+    <tr bgcolor="#f8fafc">
+      <td align="left" style="vertical-align: middle;"><b>LIVELLO DI RISCHIO GENERALE</b></td>
+      <td align="right">
+        <table bgcolor="{{ bg_color }}" cellpadding="6" cellspacing="0" style="border-radius: 4px;">
+          <tr>
+            <td align="center"><font color="{{ text_color }}"><b>{{ risk_val|upper }}</b></font></td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+
+  <br /><br />
+
+  <!-- Reference Index Table Section -->
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <td align="left" style="border-bottom: 2px solid #e2e8f0; padding-bottom: 5px;">
+        <font size="4" color="#0f172a"><b>Tabella di Riferimento: Livelli di Azione</b></font>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><font color="#475569">Classificazione dei livelli standard basata sulla validazione scientifica del metodo applicato:</font></p>
+      </td>
+    </tr>
+  </table>
+
+  <table width="100%" cellpadding="6" cellspacing="0" style="border: 1px solid #cbd5e1;">
+    <tr bgcolor="#1e293b">
+      <th align="left" width="15%"><font color="#ffffff">Punteggio</font></th>
+      <th align="left" width="25%"><font color="#ffffff">Livello</font></th>
+      <th align="left" width="60%"><font color="#ffffff">Intervento Richiesto</font></th>
+    </tr>
+    <tr>
+      <td style="border-bottom: 1px solid #e2e8f0;">1</td>
+      <td bgcolor="#16a34a" style="border-bottom: 1px solid #e2e8f0;"><font color="#ffffff"><b>Trascurabile</b></font></td>
+      <td style="border-bottom: 1px solid #e2e8f0;">Nessun intervento necessario.</td>
+    </tr>
+    <tr>
+      <td style="border-bottom: 1px solid #e2e8f0;">2 - 3</td>
+      <td bgcolor="#eab308" style="border-bottom: 1px solid #e2e8f0;"><font color="#000000"><b>Basso</b></font></td>
+      <td style="border-bottom: 1px solid #e2e8f0;">Potrebbe essere necessario un intervento preventivo.</td>
+    </tr>
+    <tr>
+      <td style="border-bottom: 1px solid #e2e8f0;">4 - 7</td>
+      <td bgcolor="#f97316" style="border-bottom: 1px solid #e2e8f0;"><font color="#ffffff"><b>Medio</b></font></td>
+      <td style="border-bottom: 1px solid #e2e8f0;">Intervento correttivo necessario.</td>
+    </tr>
+    <tr>
+      <td style="border-bottom: 1px solid #e2e8f0;">8 - 10</td>
+      <td bgcolor="#dc2626" style="border-bottom: 1px solid #e2e8f0;"><font color="#ffffff"><b>Alto</b></font></td>
+      <td style="border-bottom: 1px solid #e2e8f0;">Intervento necessario nel breve periodo.</td>
+    </tr>
+    <tr>
+      <td>11 - 15</td>
+      <td bgcolor="#7f1d1d"><font color="#ffffff"><b>Altissimo</b></font></td>
+      <td>Intervento immediato e improrogabile.</td>
+    </tr>
+  </table>
+
+
+  <!-- =========================================
+       PAGE 2: CHARTS & REFERENCE
+       ========================================= -->
+  <div class="page-break"><br /></div>
+
+  <!-- Chart Section (Width forced explicitly via attribute) -->
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+      <td align="left" style="border-bottom: 2px solid #e2e8f0; padding-bottom: 5px;">
+        <font size="4" color="#0f172a"><b>Visualizzazione Grafica delle Metriche</b></font>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <p><font color="#475569">Il grafico sottostante mostra la distribuzione temporale o di frequenza legata ai punteggi calcolati dall'algoritmo.</font></p>
+      </td>
+    </tr>
+    <tr>
+      <td align="center">
+        <!-- Using explicit html width targeting standard A4 printable bounding box inside Qt -->
+        <img src="data:image/png;base64,{{ chart }}" width="650" alt="Grafico Analisi AI" />
+      </td>
+    </tr>
+  </table>
+
+</body>
+</html>

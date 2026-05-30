@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="assets/ergomocap_logo_dark.png">
+    <link rel="apple-touch-icon" href="assets/ergomocap_logo_dark.png">
+    <title>ERGOMOCAP | Computer Vision Ergonomics Engine</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Brutalist Technical Palette - Light Mode Base */
+            --color-white: #ffffff;
+            --color-light-gray: #f5f5f5;
+            --color-medium-gray: #888888;
+            --color-dark-gray: #333333;
+            --color-black: #000000;
+            --color-accent-red: #dc2626;
+
+            --color-background: var(--color-white);
+            --color-surface: var(--color-light-gray);
+            --color-text-primary: var(--color-black);
+            --color-text-secondary: var(--color-dark-gray);
+            --color-text-muted: var(--color-medium-gray);
+            --color-border: var(--color-dark-gray);
+            --color-accent: var(--color-accent-red);
+
+            --font-heading: 'Impact', 'Arial Black', sans-serif;
+            --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+
+            --nav-height: 80px;
+        }
+
+        [data-theme="dark"] {
+            --color-background: #0a0a0a;
+            --color-surface: #1a1a1a;
+            --color-text-primary: #f5f5f5;
+            --color-text-secondary: #b8b8b8;
+            --color-text-muted: #888888;
+            --color-border: #333333;
+            --color-accent: #ff3333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text-primary);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            padding-top: var(--nav-height);
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: var(--nav-height);
+            background: var(--color-background);
+            border-bottom: 4px solid var(--color-accent);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .brand {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a,
+        .theme-toggle {
+            color: var(--color-text-secondary);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: 0.2s;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+
+        .nav-links a:hover,
+        .theme-toggle:hover {
+            color: var(--color-accent);
+        }
+
+        .github-icon {
+            display: flex;
+            align-items: center;
+            padding: 0;
+            line-height: 0;
+        }
+
+        /* --- CREDITS SECTION --- */
+
+        .freemocap-credits {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: var(--color-background);
+            /* Dark slate */
+            padding: 1rem 2rem;
+            border-radius: 9999px;
+            /* Pill shape */
+            font-size: 1.5rem;
+            box-shadow: 0 1px 3px var(--color-text-muted);
+            border: 1px solid var(--color-border);
+            margin-bottom: 1.5rem;
+
+        }
+
+        .credits-label {
+            color: var(--color-text-muted);
+            /* Muted gray-blue */
+            font-weight: 500;
+        }
+
+        .credits-link {
+            color: var(--color-accent);
+            /* Bright electric blue */
+            text-decoration: none;
+            font-weight: 700;
+            transition: color 0.2s ease, transform 0.2s ease;
+        }
+
+        /* Smooth hover state without needing JavaScript */
+        .credits-link:hover {
+            color: var(--color-accent);
+        }
+
+        .skull-emoji {
+            display: inline-block;
+            transition: transform 0.2s ease;
+        }
+
+        /* Subtle easter egg: rocket tilts slightly when hovering over the link */
+        .credits-link:hover .skull-emoji {
+            transform: translate(1px, -1px) scale(1.1);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            padding: 160px 20px 80px;
+            text-align: center;
+            border-bottom: 1px solid var(--color-border);
+        }
+
+        .subhero {
+            padding: 80px 20px 40px;
+            text-align: center;
+            border-top: 1px solid var(--color-accent);
+        }
+
+        .sub-header {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--color-accent);
+            letter-spacing: 3px;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(3rem, 10vw, 6.5rem);
+            color: var(--color-text-primary);
+            text-transform: uppercase;
+            line-height: 0.85;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            color: var(--color-accent);
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 7vw, 4.5rem);
+            line-height: 0.85;
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .normativa-tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 2.5rem;
+        }
+
+        .version-tag {
+            border: 1px solid var(--color-border);
+            border-radius: 9999px;
+            padding: 4px 4px;
+            /* Increased side padding slightly so the pill shape looks clean with 2rem text */
+            font-family: var(--font-mono);
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: var(--color-white);
+            background-color: var(--color-accent-red);
+            width: 70%;
+            margin: 2rem auto;
+        }
+
+        .version-tag:hover {
+            border: 1px solid var(--color-accent);
+            color: var(--color-accent-red);
+            background-color: var(--color-background);
+        }
+
+        .tag {
+            border: 1px solid var(--color-border);
+            padding: 4px 12px;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: var(--color-text-muted);
+        }
+
+
+        .tag:hover {
+            border: 1px solid var(--color-accent);
+            color: var(--color-accent-red);
+        }
+
+        .hero-p {
+            max-width: 850px;
+            margin: 0 auto 3rem;
+            font-size: 1.2rem;
+            color: var(--color-text-secondary);
+            font-weight: 500;
+        }
+
+        /* --- BRUTALIST BUTTONS --- */
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 18px 36px;
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 3px solid var(--color-text-primary);
+            font-size: 1rem;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: var(--color-text-primary);
+            color: var(--color-background);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-text-primary);
+        }
+
+        .btn:hover {
+            transform: translate(-5px, -5px);
+            box-shadow: 8px 8px 0 var(--color-accent);
+        }
+
+        /* --- INFINITE SCROLL MARQUEE --- */
+        .marquee-container {
+            background: var(--color-surface);
+            padding: 40px 0;
+            border-bottom: 1px solid var(--color-border);
+            overflow: hidden;
+            mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
+            -webkit-mask-image: linear-gradient(to right, transparent, black 2%, black 98%, transparent);
+        }
+
+        .marquee-content {
+            display: flex;
+            width: max-content;
+            gap: 30px;
+            animation: scroll 60s linear infinite;
+        }
+
+        .app-shot {
+            height: 380px;
+            width: auto;
+            border: 2px solid var(--color-border);
+            background: var(--color-background);
+            object-fit: contain;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: zoom-in;
+        }
+
+        .app-shot:hover {
+            transform: scale(1.02);
+            box-shadow: 10px 10px 0px var(--color-accent);
+            z-index: 10;
+        }
+
+        .image-shot {
+            border: 2px solid var(--color-border);
+            background: var(--color-background);
+            object-fit: contain;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: zoom-in;
+        }
+
+        .image-shot:hover {
+            transform: scale(1.02);
+            box-shadow: 10px 10px 0px var(--color-accent);
+            z-index: 10;
+        }
+
+        .mock-window {
+            width: 450px;
+            height: 280px;
+            background: var(--color-background);
+            border: 2px solid var(--color-border);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .mock-header {
+            height: 25px;
+            border-bottom: 1px solid var(--color-border);
+            background: var(--color-surface);
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            gap: 5px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--color-border);
+        }
+
+        .mock-body {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--color-text-secondary);
+            padding: 20px;
+            background: #111111;
+            color: #00ff00;
+        }
+
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* --- IMAGES ZOOM --- */
+        /* Helper class to pause marquee animation via JS when expanded */
+        .marquee-paused {
+            animation-play-state: paused !important;
+        }
+
+        /* --- LIGHTBOX MODAL --- */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: var(--color-background);
+            opacity: 0;
+            transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 20px;
+
+            /* Scanline overlays to preserve your retro-brutalist CRT vibe */
+            position: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Lightbox Open State (Triggered by JS) */
+        .lightbox-modal.show {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 1;
+        }
+
+        /* The Zoomed Image: Styled like a brutalist framed display window */
+        .lightbox-content {
+            margin: 0 auto;
+            display: block;
+            max-width: 90%;
+            max-height: 80vh;
+            object-fit: contain;
+            background: var(--color-surface);
+            border: 4px solid var(--color-text-primary);
+            box-shadow: 15px 15px 0px var(--color-accent);
+            transform: scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .lightbox-modal.show .lightbox-content {
+            transform: scale(1);
+        }
+
+        /* Technical Image Caption matching your data tables */
+        .lightbox-caption {
+            margin-top: 2rem;
+            text-align: center;
+            color: var(--color-text-primary);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: var(--color-surface);
+            border: 2px solid var(--color-border);
+            padding: 8px 16px;
+        }
+
+        /* Brutalist Close Button System */
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: var(--color-text-primary);
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            line-height: 1;
+            cursor: pointer;
+            transition: 0.2s;
+            background: var(--color-surface);
+            border: 3px solid var(--color-text-primary);
+            padding: 0 12px 6px;
+        }
+
+        .lightbox-close:hover {
+            color: var(--color-background);
+            background: var(--color-accent);
+            transform: translate(-2px, -2px);
+            box-shadow: 4px 4px 0px var(--color-text-primary);
+        }
+
+        /* --- ACCENT CAUTION CONTAINER --- */
+        .guide-container {
+            max-width: 1100px;
+            margin: 80px auto;
+            padding: 0 2rem;
+        }
+
+        .caution-box {
+            border-left: 8px solid var(--color-accent);
+            padding: 30px;
+            margin-bottom: 80px;
+            background: var(--color-surface);
+        }
+
+        /* --- ALTERNATING SCROLL LAYOUTS --- */
+        .guide-step {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 40px;
+            margin-bottom: 120px;
+        }
+
+        .step-number {
+            font-family: var(--font-heading);
+            font-size: 5rem;
+            color: var(--color-accent);
+            line-height: 0.8;
+            opacity: 0.9;
+        }
+
+        pre {
+            font-family: var(--font-mono);
+            background: var(--color-surface);
+            color: var(--color-text-secondary);
+            padding: 30px;
+            border: 1px solid var(--color-border);
+            border-left: 5px solid var(--color-accent);
+            margin-top: 25px;
+            overflow-x: auto;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            position: relative;
+            box-shadow: 10px 10px 0px rgba(0, 0, 0, 0.1);
+        }
+
+        pre::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.05) 50%),
+                linear-gradient(90deg, rgba(255, 0, 0, 0.01), rgba(0, 255, 0, 0.005), rgba(0, 0, 255, 0.01));
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Section 1 & 2 Custom Clean Classes */
+        .mission-title {
+            font-family: var(--font-heading);
+            margin-bottom: 10px;
+            color: var(--color-accent-red);
+        }
+
+        .mission-text {
+            font-family: var(--font-body);
+            font-size: 1.2rem;
+            color: var(--color-text-secondary);
+            line-height: 1.7;
+        }
+
+        .paragraph-spacing {
+            margin-bottom: 15px;
+        }
+
+        .brutalist-quote {
+            border-left: 4px solid var(--color-accent);
+            padding: 15px;
+            background: var(--color-surface);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin: 20px 0;
+        }
+
+        .text-secondary-style {
+            color: var(--color-text-secondary);
+        }
+
+        .brutalist-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 25px;
+            width: 100%;
+        }
+
+        .brutalist-row {
+            border: 1px solid var(--color-border);
+            padding: 20px;
+            background: var(--color-surface);
+            width: 100%;
+        }
+
+        .border-primary-accent {
+            border-left: 5px solid var(--color-text-primary);
+        }
+
+        .border-brand-accent {
+            border-left: 5px solid var(--color-accent);
+        }
+
+        .row-title {
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            color: var(--color-accent);
+        }
+
+        .row-desc {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+        }
+
+        /* --- VERTICAL PIPELINE --- */
+        .vertical-pipeline {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 40px auto;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .pipeline-node {
+            background: var(--color-surface);
+            color: var(--color-text-primary);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            text-align: center;
+            padding: 15px 25px;
+            border: 2px solid var(--color-border);
+            width: 100%;
+            box-shadow: 6px 6px 0px rgba(0, 0, 0, 0.15);
+            position: relative;
+        }
+
+        /* Vertical line spans connecting the boxes */
+        .pipeline-connector {
+            display: block;
+            width: 4px;
+            height: 40px;
+            /* Controls the vertical gap between nodes */
+            background-color: var(--color-accent);
+            position: relative;
+        }
+
+        /* Arrowheads built into the connector spans */
+        .pipeline-connector::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 8px solid var(--color-accent);
+        }
+
+        .roadmap-subtext {
+            margin-top: 12px;
+            color: var(--color-text-secondary);
+        }
+
+        .status-box-margin {
+            margin-top: 60px;
+            border-left-color: var(--color-text-muted);
+        }
+
+        .status-title {
+            font-family: var(--font-heading);
+            margin-bottom: 10px;
+            color: var(--color-text-secondary);
+        }
+
+        .status-text {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--color-text-muted);
+        }
+
+        /* Section Get Started Clean Classes */
+        .installation-box-title {
+            font-family: var(--font-heading);
+            margin-bottom: 10px;
+        }
+
+        .installation-box-desc {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--color-text-secondary);
+        }
+
+        .installation-box-nav {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+        }
+
+        .anchor-highlight {
+            color: var(--color-accent);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .ordered-list-style {
+            font-family: var(--font-body);
+            margin: 20px 0;
+            padding-left: 20px;
+            color: var(--color-text-secondary);
+        }
+
+        .list-item-spacing {
+            margin-bottom: 12px;
+        }
+
+        .anchor-accent {
+            color: var(--color-accent);
+        }
+
+        .file-structure-box {
+            border: 1px solid var(--color-border);
+            padding: 20px;
+            background: var(--color-surface);
+            margin: 25px 0;
+        }
+
+        .file-structure-title {
+            font-family: var(--font-heading);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .file-structure-desc {
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .unordered-list-style {
+            font-family: var(--font-body);
+            margin-left: 20px;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+        }
+
+        .list-item-spacing-small {
+            margin-bottom: 8px;
+        }
+
+        .dashed-caution-note {
+            border-left: 4px solid var(--color-accent);
+            padding: 10px 0 10px 15px;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            background: var(--color-background);
+            border: 1px dashed var(--color-accent);
+        }
+
+        /* Developer Installation & Fixes Custom Classes */
+        .requirement-heading {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            margin-top: 20px;
+            color: var(--color-text-secondary);
+        }
+
+        .requirement-desc {
+            margin-bottom: 10px;
+        }
+
+        .requirement-list {
+            font-family: var(--font-body);
+            margin: 0 0 20px 20px;
+            color: var(--color-text-secondary);
+        }
+
+        .requirement-heading-margin {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            margin-top: 25px;
+            color: var(--color-text-secondary);
+        }
+
+        .dev-list-style {
+            font-family: var(--font-body);
+            margin: 10px 0 20px 20px;
+            color: var(--color-text-secondary);
+        }
+
+        .terminal-instruction-spacing {
+            margin-top: 20px;
+        }
+
+        .launch-success-tip {
+            margin-top: 20px;
+            font-weight: 700;
+            color: var(--color-accent);
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+        }
+
+        .troubleshooting-list {
+            font-family: var(--font-body);
+            margin: 20px 0;
+            padding-left: 20px;
+            color: var(--color-text-secondary);
+            line-height: 1.8;
+        }
+
+        /* --- RESPONSIVE MEDIA BREAKPOINTS --- */
+        @media (max-width: 768px) {
+            .guide-step {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .step-number {
+                font-size: 3.5rem;
+            }
+
+            .nav-links a:not(.github-icon) {
+                display: none;
+            }
+
+            .guide-container {
+                padding: 0 1.5rem;
+            }
+
+            pre {
+                max-width: calc(100vw - 3rem);
+                padding: 15px;
+                font-size: 0.75rem;
+            }
+
+            .app-shot {
+                height: 240px;
+            }
+
+
+            .mock-window {
+                width: 320px;
+                height: 220px;
+            }
+
+            /* Responsive updates for custom classes */
+            .mission-text {
+                font-size: 1.1rem;
+            }
+
+            .footer {
+                padding: 40px 20px;
+            }
+        }
+
+        @media (max-width: 500px) {
+            .brand {
+                font-size: 1.1rem;
+            }
+
+            .freemocap-credits {
+                font-size: 1.1rem;
+            }
+
+            .github-icon {
+                display: none !important;
+            }
+
+
+            .theme-toggle {
+                font-size: 0 !important;
+            }
+
+            body:not([data-theme="dark"]) .theme-toggle::after {
+                content: "[ D ]";
+                font-size: 0.5rem;
+            }
+
+            body[data-theme="dark"] .theme-toggle::after {
+                content: "[ L ]";
+                font-size: 0.5rem;
+            }
+
+            /* Extra adjustments for tightly constrained viewports */
+            .status-box-margin {
+                margin-top: 40px;
+            }
+
+            .file-structure-box {
+                padding: 15px;
+            }
+        }
+
+        .footer {
+            background: var(--color-black);
+            color: var(--color-white);
+            padding: 80px 20px;
+            text-align: center;
+            border-top: 10px solid var(--color-accent);
+        }
+    </style>
+</head>
+
+<body data-theme="dark">
+
+    <nav class="navbar">
+        <div class="nav-content">
+            <a class="brand" href="https://medlav.app/">ERGOMOCAP // MEDLAV.APP</a>
+            <div class="nav-links">
+                <a href="home.html">DOCS</a>
+                <a href="#pipeline">TUTORIAL</a>
+                <a href="https://github.com/medlav" target="_blank" class="github-icon" aria-label="GitHub Repository">
+                    <svg height="20" viewBox="0 0 16 16" width="20" fill="currentColor">
+                        <path
+                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
+                        </path>
+                    </svg>
+                </a>
+                <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">[ LIGHT_MODE ]</button>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="version-tag">
+            <strong>PRE-ALPHA</strong> VERSION
+        </div>
+        <div class="sub-header">COMPUTER_VISION // MARKERLESS_MOTION_CAPTURE // PY_SIDE6</div>
+        <h1>ERGO<span style="color:var(--color-accent)">MOCAP</span></h1>
+
+        <div class="normativa-tags">
+            <span class="tag">FREEMOCAP CORE</span>
+            <span class="tag">REBA ANALYSIS</span>
+            <span class="tag">RULA ANALYSIS</span>
+            <span class="tag">PYSIDE6 ASYNCHRONOUS ENGINE</span>
+            <span class="tag">3D KINEMATICS</span>
+        </div>
+
+        <div class="freemocap-credits">
+            <span class="credits-label">Powered by</span>
+            <a href="https://freemocap.org/" target="_blank" rel="noopener noreferrer" class="credits-link">
+                FreeMoCap <span class="skull-emoji">💀</span>
+            </a>
+        </div>
+
+        <p class="hero-p">
+            A FOSS desktop application built entirely on Python and PySide6 that interprets
+            raw 3D motion-tracking datasets compiled through the FreeMoCap pipeline. Automate complete skeletal joint
+            angle calculation trajectories and translate complex spatial paths into actionable ergonomic risk reports.
+        </p>
+
+        <div class="btn-group">
+            <a href="https://github.com/medlav/ergomocap" class="btn btn-primary">GET_SOURCE_CODE (AGPL)</a>
+            <a href="#tutorial" class="btn btn-secondary">START_TUTORIAL</a>
+        </div>
+    </header>
+
+    <!-- Images Marquee Section -->
+
+    <section class="marquee-container">
+        <div class="marquee-content" id="imgMarquee">
+            <img src="images/screenshots/step1_select_recording_session.png" alt="Recording Selection Window"
+                class="app-shot">
+            <img src="images/screenshots/step1_select_video.png" alt="Skeletal Joint Tracking Preview" class="app-shot">
+            <img src="images/screenshots/step2_select_method_reba.png" alt="Assessment Method Selection"
+                class="app-shot">
+            <img src="images/screenshots/step2_analysis_finished.png" alt="Asynchronous Engine Logs Finished"
+                class="app-shot">
+            <img src="images/screenshots/step3_video_skeleton_overlay.png" alt="Skeleton Mesh Rig Overlay"
+                class="app-shot">
+            <img src="images/screenshots/step4_report_dashboard.png" alt="Statistical Distribution Dashboard"
+                class="app-shot">
+
+            <img src="images/screenshots/step1_select_recording_session.png" alt="Recording Selection Window"
+                class="app-shot">
+            <img src="images/screenshots/step1_select_video.png" alt="Skeletal Joint Tracking Preview" class="app-shot">
+            <img src="images/screenshots/step2_select_method_reba.png" alt="Assessment Method Selection"
+                class="app-shot">
+            <img src="images/screenshots/step2_analysis_finished.png" alt="Asynchronous Engine Logs Finished"
+                class="app-shot">
+            <img src="images/screenshots/step3_video_skeleton_overlay.png" alt="Skeleton Mesh Rig Overlay"
+                class="app-shot">
+            <img src="images/screenshots/step4_report_dashboard.png" alt="Statistical Distribution Dashboard"
+                class="app-shot">
+        </div>
+    </section>
+
+    <!-- Images Zoom -->
+
+    <div id="imageLightbox" class="lightbox-modal">
+        <span class="lightbox-close">&times;</span>
+        <img class="lightbox-content" id="lightboxTargetImg" alt="Expanded view">
+        <div id="lightboxCaption" class="lightbox-caption"></div>
+    </div>
+
+    <!-- Code Marquee Section -->
+
+    <section class="marquee-container">
+        <div class="marquee-content">
+            <div class="mock-window">
+                <div class="mock-header">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="mock-body">calculators/adapters/freemocap_adapter.py</div>
+            </div>
+            <div class="mock-window">
+                <div class="mock-header">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="mock-body">calculators/reba_calculator/REBA_calculator.py</div>
+            </div>
+            <div class="mock-window">
+                <div class="mock-header">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="mock-body">calculators/reba_calculator/body_parts/trunk_reba.py</div>
+            </div>
+            <div class="mock-window">
+                <div class="mock-header">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="mock-body">calculators/reba_calculator/reba_score_tables.py</div>
+            </div>
+            <div class="mock-window">
+                <div class="mock-header">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="mock-body">gui/backend/backend.py</div>
+            </div>
+            <div class="mock-window">
+                <div class="mock-header">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="mock-body">gui/workers/analysis_worker.py</div>
+            </div>
+
+            <div class="mock-window">
+                <div class="mock-header">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="mock-body">gui/views/report_view.py</div>
+            </div>
+            <div class="mock-window">
+                <div class="mock-header">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="mock-body">gui/widgets/video_canvas.py</div>
+            </div>
+            <div class="mock-window">
+                <div class="mock-header">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="mock-body">gui/core/session_manager.py</div>
+            </div>
+            <div class="mock-window">
+                <div class="mock-header">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="mock-body">gui/core/analysis_engine.py</div>
+            </div>
+            <div class="mock-window">
+                <div class="mock-header">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="mock-body">gui/templates/REBA_report.j2</div>
+            </div>
+            <div class="mock-window">
+                <div class="mock-header">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="mock-body">exports/pdf_generator.py</div>
+            </div>
+
+            <div class="mock-window">
+                <div class="mock-header">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="mock-body">calculators/adapters/freemocap_adapter.py</div>
+            </div>
+            <div class="mock-window">
+                <div class="mock-header">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="mock-body">calculators/reba_calculator/REBA_calculator.py</div>
+            </div>
+            <div class="mock-window">
+                <div class="mock-header">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="mock-body">calculators/reba_calculator/body_parts/trunk_reba.py</div>
+            </div>
+            <div class="mock-window">
+                <div class="mock-header">
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="mock-body">calculators/reba_calculator/reba_score_tables.py</div>
+            </div>
+        </div>
+    </section>
+
+
+    <header class="subhero" id="what-is-ergomocap">
+        <h2>WHAT IS ERGOMOCAP?</h2>
+    </header>
+
+    <div class="guide-container">
+        <div class="caution-box reveal">
+            <h3 class="mission-title">MOTION CAPTURE x COMPUTER VISION × ERGONOMICS</h3>
+            <p class="mission-text">
+                <strong>ErgoMoCap</strong> is a local-first, Free and Open Source (FOSS) Python desktop suite designed
+                to bridge the gap between markerless 3D motion capture and standardized occupational ergonomic
+                assessments. It serves as a working academic instrument for deep-integrating research-grade motion
+                capture data without requiring expensive, certified safety software suites.
+            </p>
+        </div>
+
+        <section class="guide-step reveal">
+            <div class="step-number">01</div>
+            <div class="guide-text">
+                <h2 style="font-family:var(--font-heading); font-size: 2.5rem;">THE MISSION & PHILOSOPHY</h2>
+                <p class="paragraph-spacing">
+                    This project was created to fulfill a critical need in academic and study environments: providing an
+                    accessible, scientifically verifiable mechanism to run validated multi-joint risk profiles (REBA,
+                    RULA, NIOSH, SNOOK) directly from video data arrays.
+                </p>
+                <p class="paragraph-spacing">
+                    We don't want to reinvent the wheel, we want to build on top of giants. ErgoMoCap proudly stands on
+                    the shoulders of the incredible <strong>FreeMoCap project</strong>. We share their exact core
+                    values, match their open-source DNA, and explicitly design our tools to complement and extend their
+                    groundbreaking markerless tracking ecosystem. Massive credit, respect, and a huge shoutout go to the
+                    FreeMoCap community for paving the way.
+                </p>
+                <blockquote class="brutalist-quote">
+                    <strong>📢 CITATION FROM THE FREEMOCAP PHILOSOPHY:</strong><br>
+                    "Knowledge is free. Labor is expensive. Anything that can be infinitely and losslessly
+                    duplicated, code, documentation, videos, should be available to everyone, for free."
+                </blockquote>
+                <p class="text-secondary-style">
+                    In total alignment with this philosophy, ErgoMoCap offers no proprietary customer solutions,
+                    paywalls, or premium tiers. Under its <strong>AGPL-3.0 License</strong>, you are free to deploy,
+                    tweak, or fork the software architecture, provided all evolutionary changes are shared under the
+                    exact same open-source provisions.
+                </p>
+            </div>
+        </section>
+
+        <section class="guide-step reveal">
+            <div class="step-number">02</div>
+            <div class="guide-text">
+                <h2 style="font-family:var(--font-heading); font-size: 2.5rem;">HOW IT WORKS</h2>
+                <p class="paragraph-spacing">
+                    The system is structured as a decoupled processing pipeline that translates spatial coordinate
+                    configurations into clinical ergonomic tracking logs.
+                </p>
+
+                <div class="brutalist-stack">
+                    <div class="brutalist-row border-primary-accent">
+                        <h4 class="row-title">1. Ingestion</h4>
+                        <p class="row-desc">The application ingests spatial
+                            3D kinematic trajectories using specialized translation modules like the
+                            <code>freemocap_adapter</code>, formatting coordinate matrices into a uniform 22-element
+                            biological joint vector. In this the pre-alpha v0.0.1 the only 3D data used are the joint
+                            angles.
+                        </p>
+                    </div>
+                    <div class="brutalist-row border-brand-accent">
+                        <h4 class="row-title">2. Computation</h4>
+                        <p class="row-desc">The pure-logic math engine
+                            processes inputs using <strong>Numba JIT compilation</strong> and vectorized <strong>NumPy
+                                lookups</strong>, calculating frame-by-frame joint angle boundary deviations instantly.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="vertical-pipeline">
+                    <div class="pipeline-node">Raw MoCap Stream</div>
+                    <span class="pipeline-connector"></span>
+
+                    <div class="pipeline-node">Translation Layer</div>
+                    <span class="pipeline-connector"></span>
+
+                    <div class="pipeline-node">Standardized 22-Element Vector</div>
+                    <span class="pipeline-connector"></span>
+
+                    <div class="pipeline-node">Ergonomic Engines (REBA/RULA)</div>
+                    <span class="pipeline-connector"></span>
+
+                    <div class="pipeline-node">Reports</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="guide-step reveal">
+            <div class="step-number">03</div>
+            <div class="guide-text">
+                <h2 style="font-family:var(--font-heading); font-size: 2.5rem;">THE LONG-TERM PLAN</h2>
+                <p>
+                    ErgoMoCap currently acts as an interactive GUI wrapper initiating local FreeMoCap execution threads
+                    via system calls to manage data acquisition. However, this is a long-term academic experiment
+                    spanning multiple deployment phases.
+                </p>
+                <p class="roadmap-subtext">
+                    The final objective is to execute a <strong>"Frankenstein" blending sequence</strong>, forking and
+                    integrating the essential machine vision tracking and kinematic extraction components directly into
+                    the ErgoMoCap framework. This will eventually yield a completely standalone, unified desktop utility
+                    optimized strictly for ergonomic researchers, independent of any external environment setup.
+                </p>
+            </div>
+        </section>
+
+        <div class="caution-box reveal status-box-margin">
+            <h3 class="status-title">⚠️ SYSTEM STATUS & QUALITY GATE</h3>
+            <div class="status-text">
+                <p class="paragraph-spacing">
+                    <strong>CURRENT PHASE: PRE-ALPHA (V0.0.1)</strong><br>
+                    Core GUI subprocess controls and FreeMoCap data adapters are operational. The RULA tracking vectors
+                    remain unstable; the system is functioning strictly as an unvalidated academic testbed.
+                </p>
+                <div class="brutalist-stack" style="margin: 15px 0;">
+                    <div class="brutalist-row border-brand-accent" style="padding: 10px 15px;">
+                        <div class="row-title" style="font-size: 0.8rem;">Active Audit Pipeline</div>
+                        <div class="row-desc" style="font-size: 0.75rem; font-family: var(--font-mono);">
+                            [REBA/RULA Integration] ──> [NIOSH / OCRA Engine Validation] ──> [i18n Italian Localization]
+                        </div>
+                    </div>
+                </div>
+                <p>
+                    <strong>MERGE CONFIGURATION:</strong> Git hooks strictly enforce
+                    <code>mkdocs build --clean --strict</code>
+                    and 100% parameter testing coverage across the <code>calculators/</code> repository tree (including
+                    SNOOK, EWAS, and biomechanical adapters). Local commits are structurally blocked if edge-case
+                    angular thresholds (e.g., joint flexion deltas) skew from verified standard textbook formulas.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <header class="subhero" id="get-started">
+        <h2>GET STARTED</h2>
+    </header>
+
+    <div class="guide-container">
+        <div class="caution-box reveal">
+            <h3 class="installation-box-title">⚙️ INSTALL AND GET STARTED</h3>
+            <p class="installation-box-desc">
+                Follow these steps to set up ErgoMoCap on your computer.
+            </p>
+            <p class="installation-box-nav">
+                👉 Follow <a href="#simple-install" class="anchor-highlight">A. SIMPLE INSTALL</a> if
+                you don't know how to code or use dev tools.<br>
+                👉 Follow <a href="#dev-install" class="anchor-highlight">B. DEV INSTALL</a> if you
+                are familiar with dev tools.
+            </p>
+        </div>
+
+        <section id="simple-install" class="guide-step reveal">
+            <div class="step-number">01</div>
+            <div class="guide-text">
+                <h2 style="font-family:var(--font-heading); font-size: 2.5rem;">A. SIMPLE INSTALL</h2>
+                <p>Follow these quick steps to get the application up and running without configuration:</p>
+
+                <ol class="ordered-list-style">
+                    <li class="list-item-spacing"><strong>Download:</strong> Get the latest ZIP file from the <a
+                            href="https://github.com/" class="anchor-accent" target="_blank">GitHub
+                            releases page</a> of the public repository.</li>
+                    <li class="list-item-spacing"><strong>Extract:</strong> Extract all the files and folders from the
+                        downloaded ZIP to your desired location.</li>
+                    <li><strong>Launch:</strong> Run <code>ErgoMoCap.exe</code> to start the application.</li>
+                </ol>
+
+                <div class="file-structure-box">
+                    <h4 class="file-structure-title">File Structure & Output</h4>
+                    <p class="file-structure-desc">Inside the extracted folder, you will find an
+                        <code>_internal</code> directory. Here is what you need to know about it:
+                    </p>
+
+                    <ul class="unordered-list-style">
+                        <li class="list-item-spacing-small"><strong>Output Location:</strong> Your generated files will
+                            be
+                            saved inside <code>_internal/ergomocap_data/</code>. This directory will contain your
+                            annotated videos, pure MoCap/MediaPipe data, and post-processed files.</li>
+                        <li><strong>FreeMoCap Integration:</strong> If you are using and setting up
+                            <strong>FreeMoCap</strong> for the first time, we highly recommend placing your
+                            <code>freemocap_data</code> folder right here inside the <code>_internal</code> directory.
+                        </li>
+                    </ul>
+
+                    <div class="dashed-caution-note">
+                        ⚠️ <strong>Important Note:</strong> The <code>_internal</code> folder contains a large number of
+                        system packages and core files. We strongly suggest <strong>not touching or modifying</strong>
+                        anything else inside this directory unless you know exactly what you are doing.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="dev-install" class="guide-step reveal">
+            <div class="step-number">02</div>
+            <div class="guide-text">
+                <h2 style="font-family:var(--font-heading); font-size: 2.5rem;">B. DEV INSTALL & LAUNCH</h2>
+
+                <h3 class="requirement-heading">1. REQUIREMENTS</h3>
+                <p class="requirement-desc">Before you start, make sure you have these installed:</p>
+                <ul class="requirement-list">
+                    <li class="list-item-spacing-small"><strong>Python 3.12 or higher</strong>: This is the engine that
+                        runs
+                        the code.</li>
+                    <li><strong>FreeMoCap</strong>: If you want to record new data, you need their software installed
+                        and calibrated.</li>
+                </ul>
+
+                <h3 class="requirement-heading-margin">2. INSTALLATION</h3>
+                <ol class="dev-list-style">
+                    <li class="list-item-spacing-small"><strong>Download the code</strong>: Clone the folder or download
+                        the source ZIP from the repository.
+                        <pre><code>https://github.com/medlav/ergomocap.git</code></pre>
+                    </li>
+
+                    <li class="list-item-spacing-small"><strong>Open your Terminal/Command Prompt</strong>: Navigate to
+                        the
+                        <code>ergomocap</code> folder.
+                        <pre><code>cd path/to/ergomocap/</code></pre>
+                    </li>
+
+                    <li class="list-item-spacing-small"><strong>Create a Virtual Environment</strong>: Initialize a
+                        clean isolated
+                        environment inside the directory.
+                        <pre><code>python -m venv venv</code></pre>
+                    </li>
+
+                    <li class="list-item-spacing-small"><strong>Activate the Virtual Environment (Windows)</strong>: Run
+                        the activation script via Command Prompt or PowerShell.
+                        <pre><code>venv\Scripts\activate</code></pre>
+                    </li>
+
+                    <li class="list-item-spacing-small"><strong>Activate the Virtual Environment (Linux/macOS)</strong>:
+                        Source the activation script into your current shell.
+                        <pre><code>source venv/bin/activate</code></pre>
+                    </li>
+
+
+                    <li><strong>Install the dependencies</strong>: Run this command to install all the libraries (like
+                        PySide, Pandas, and Matplotlib) at once:
+                        <pre><code>pip install -r requirements.txt</code></pre>
+                    </li>
+                </ol>
+
+
+                <h3 class="requirement-heading-margin">3. LAUNCHING THE APP</h3>
+                <p>You must be in the Ergomocap folder to launch the app execution thread.</p>
+
+                <pre><code>cd path/to/ergomocap/</code></pre>
+
+                <p class="terminal-instruction-spacing">Then run the <code>main.py</code> file from terminal window:</p>
+
+                <pre><code>python main.py</code></pre>
+
+                <p class="launch-success-tip">
+                    💡 The dark-themed main window should appear on your screen immediately.
+                </p>
+            </div>
+        </section>
+
+        <section id="first-five-minutes" class="guide-step reveal">
+            <div class="step-number">03</div>
+            <div class="guide-text">
+                <h2 style="font-family:var(--font-heading); font-size: 2.5rem;">YOUR FIRST 5 MINUTES</h2>
+                <p>If you just want to see how it works without recording anything completely new:</p>
+
+                <ol class="ordered-list-style">
+                    <li class="list-item-spacing"><strong>Set your folder:</strong> Click <strong>📂 SELECT FREEMOCAP
+                            ROOT</strong> and point it to the folder where your FreeMoCap data lives.</li>
+                    <li class="list-item-spacing"><strong>Pick a session:</strong> Use the dropdown menu to select a
+                        recording (e.g., <code>session_001</code>).</li>
+                    <li class="list-item-spacing"><strong>Run a test:</strong> Select <strong>REBA</strong> from the
+                        method list and click <strong>🏃 RUN ANALYSIS</strong>.</li>
+                    <li><strong>Check the stats:</strong> Once the status bar says "Finished," click <strong>📊 OPEN
+                            REPORT DASHBOARD</strong> to see the charts.</li>
+                </ol>
+            </div>
+        </section>
+
+        <section id="troubleshooting" class="guide-step reveal">
+            <div class="step-number">04</div>
+            <div class="guide-text">
+                <h2 style="font-family:var(--font-heading); font-size: 2.5rem;">🛠️ COMMON FIXES</h2>
+                <p>Review these quick pipeline patches if execution engine flags errors:</p>
+
+                <ul class="troubleshooting-list">
+                    <li class="list-item-spacing">
+                        <strong>"Command not found":</strong> Make sure Python is added to your environment variables
+                        "PATH" array structure during its core installation step.
+                    </li>
+                    <li class="list-item-spacing">
+                        <strong>Video not loading:</strong> Ensure you have a folder named <code>annotated_videos</code>
+                        exactly configured inside your session data folder environment.
+                    </li>
+                    <li>
+                        <strong>Missing Skeletal Data:</strong> The app needs the <code>.csv</code> or <code>.npy</code>
+                        dataset matrices created by FreeMoCap to work. If they are missing, execute the FreeMoCap
+                        "Post-Processing" step first.
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <!-- Tutorial section -->
+    <header class="subhero" id="tutorial">
+        <h2>TUTORIAL</h2>
+    </header>
+
+
+
+    <div class="guide-container">
+        <div class="caution-box reveal">
+            <h3 style="font-family:var(--font-heading); margin-bottom:10px; color:var(--color-accent-red)">PREREQUISITE
+                CHECK
+            </h3>
+            <p style="font-family:var(--font-mono); font-size:0.9rem;">
+                You must have already completed a FreeMoCap recording session with valid 3D trajectory data.
+                If you need to record new data, click the <strong>💀 RUN FREEMOCAP</strong> button in the main
+                interface.
+                New to FreeMoCap? Read the <a href="https://docs.freemocap.org/documentation/index_md.html"
+                    style="color:var(--color-accent);" target="_blank">Official Documentation</a>.
+            </p>
+        </div>
+
+        <section id="pipeline" class="guide-step reveal">
+            <div class="step-number">01</div>
+            <div class="guide-text">
+                <h2 style="font-family:var(--font-heading); font-size: 2.5rem;">GET YOUR DATA IN</h2>
+                <p>Load your FreeMoCap recording session into ErgoMoCap. The application expects data organized in the
+                    standard <code>freemocap_data/record_sessions</code> directory structure.</p>
+                <ol style="font-family:var(--font-body); margin:20px 0 20px 20px; color:var(--color-text-secondary);">
+                    <li style="margin-bottom:12px;">Open the ErgoMoCap application</li>
+                    <li style="margin-bottom:12px;">Click <strong>📂 SELECT FREEMOCAP ROOT</strong> and navigate to your
+                        <code>freemocap_data/record_sessions</code> folder (not the parent <code>freemocap_data</code>
+                        directory)
+                    </li>
+                    <li style="margin-bottom:12px;">Use the <strong>Select Recording Session</strong> dropdown to choose
+                        your specific session folder</li>
+                    <li>Select a video file from the <strong>Select Video</strong> list, the skeleton overlay should
+                        appear immediately in the preview pane</li>
+                </ol>
+                <img class="image-shot" src="images/screenshots/step1_select_recording_session.png"
+                    alt="Selecting Recording Session"
+                    style="width:100%; border:2px solid var(--color-border); margin:15px 0;">
+                <img class="image-shot" src="images/screenshots/step1_select_video.png"
+                    alt="Selecting Video and Loading Skeleton"
+                    style="width:100%; border:2px solid var(--color-border); margin:15px 0;">
+                <p style="font-family:var(--font-mono); font-size:0.85rem; color:var(--color-text-muted);">Files
+                    involved: <code>gui/core/session_manager.py</code>,
+                    <code>calculators/adapters/freemocap_adapter.py</code>
+                </p>
+            </div>
+        </section>
+
+        <section class="guide-step reveal">
+            <div class="step-number">02</div>
+            <div class="guide-text">
+                <h2 style="font-family:var(--font-heading); font-size: 2.5rem;">CHOOSE YOUR METHOD</h2>
+                <p>Select which ergonomic assessment protocol to apply. REBA (Rapid Entire Body Assessment) evaluates
+                    full-body posture; RULA (Rapid Upper Limb Assessment) focuses on neck, trunk, and upper limbs.</p>
+                <ol style="font-family:var(--font-body); margin:20px 0 20px 20px; color:var(--color-text-secondary);">
+                    <li style="margin-bottom:12px;">Navigate to the <strong>Select Ergonomic Method</strong> dropdown
+                        menu</li>
+                    <li style="margin-bottom:12px;">Choose <strong>REBA</strong> for full-body lifting tasks, or
+                        <strong>RULA</strong> for upper-body repetitive work
+                    </li>
+                    <li style="margin-bottom:12px;">Click <strong>🏃 RUN ANALYSIS</strong> to begin computation</li>
+                    <li>Monitor the status bar at the bottom, wait for "Analysis Complete" before proceeding</li>
+                </ol>
+                <img class="image-shot" src="images/screenshots/step2_select_method_reba.png"
+                    alt="Selecting Ergonomic Method"
+                    style="width:100%; border:2px solid var(--color-border); margin:15px 0;">
+                <img class="image-shot" src="images/screenshots/step2_analysis_finished.png"
+                    alt="Analysis Finished Confirmation"
+                    style="width:100%; border:2px solid var(--color-border); margin:15px 0;">
+                <div
+                    style="border-left:4px solid var(--color-accent); padding:15px; background:var(--color-surface); margin:20px 0; font-family:var(--font-mono); font-size:0.85rem;">
+                    ⚠️ NOTE: Analysis is CPU-intensive. Thread safety prevents UI freezing, but video playback may lag
+                    during computation. Wait for completion for optimal performance.
+                </div>
+                <p style="font-family:var(--font-mono); font-size:0.85rem; color:var(--color-text-muted);">Files
+                    involved: <code>calculators/reba_calculator/REBA_calculator.py</code>,
+                    <code>gui/workers/analysis_worker.py</code>, <code>gui/core/analysis_engine.py</code>
+                </p>
+            </div>
+        </section>
+
+        <section class="guide-step reveal">
+            <div class="step-number">03</div>
+            <div class="guide-text">
+                <h2 style="font-family:var(--font-heading); font-size: 2.5rem;">CHECK THE VIDEO</h2>
+                <p>Validate that the computed skeleton accurately tracks the subject throughout the recording. Visual
+                    verification ensures your ergonomic scores reflect real movement.</p>
+                <ol style="font-family:var(--font-body); margin:20px 0 20px 20px; color:var(--color-text-secondary);">
+                    <li style="margin-bottom:12px;">Click <strong>▶ PLAY / PAUSE</strong> to start video playback</li>
+                    <li style="margin-bottom:12px;">Observe the skeleton overlay, joints should remain anchored to the
+                        subject's body</li>
+                    <li style="margin-bottom:12px;">If the skeleton appears "shaky" or jumps erratically, review your
+                        recording conditions:</li>
+                </ol>
+                <ul style="font-family:var(--font-body); margin:0 0 20px 40px; color:var(--color-text-secondary);">
+                    <li style="margin-bottom:8px;">✅ Ensure adequate, even lighting (avoid harsh shadows)</li>
+                    <li style="margin-bottom:8px;">✅ Keep camera view unobstructed (no boxes, chairs, or people blocking
+                        joints)</li>
+                    <li style="margin-bottom:8px;">✅ Use FreeMoCap's ChArUco calibration for improved 3D accuracy</li>
+                </ul>
+                <img class="image-shot" src="images/screenshots/step3_video_skeleton_overlay.png"
+                    alt="Checking Skeleton Overlay"
+                    style="width:100%; border:2px solid var(--color-border); margin:15px 0;">
+                <p style="font-family:var(--font-mono); font-size:0.85rem; color:var(--color-text-muted);">Files
+                    involved: <code>gui/widgets/video_canvas.py</code>,
+                    <code>calculators/adapters/freemocap_adapter.py</code>
+                </p>
+            </div>
+        </section>
+
+        <section class="guide-step reveal">
+            <div class="step-number">04</div>
+            <div class="guide-text">
+                <h2 style="font-family:var(--font-heading); font-size: 2.5rem;">SEE RESULTS & EXPORT</h2>
+                <p>Review your ergonomic risk assessment and generate shareable documentation for compliance records or
+                    team review.</p>
+                <ol style="font-family:var(--font-body); margin:20px 0 20px 20px; color:var(--color-text-secondary);">
+                    <li style="margin-bottom:12px;">Click <strong>📊 OPEN REPORT DASHBOARD</strong> to launch the
+                        results viewer</li>
+                    <li style="margin-bottom:12px;">Examine the <strong>Risk Pie Charts</strong>, red zones indicate
+                        "High Risk" postures requiring intervention</li>
+                    <li style="margin-bottom:12px;">Review time-series graphs showing risk score evolution across the
+                        task duration</li>
+                    <li>Export your findings using the available formats:</li>
+                </ol>
+                <ul style="font-family:var(--font-body); margin:0 0 20px 40px; color:var(--color-text-secondary);">
+                    <li style="margin-bottom:8px;">📜 <strong>EXPORT TO PDF</strong>, Immutable, print-ready compliance
+                        report</li>
+                    <li>📄 <strong>EXPORT TO DOCX</strong>, Editable Word document for annotations or integration</li>
+                </ul>
+                <img class="image-shot" src="images/screenshots/step4_report_dashboard.png"
+                    alt="Report Dashboard Overview"
+                    style="width:100%; border:2px solid var(--color-border); margin:15px 0;">
+                <p style="font-family:var(--font-mono); font-size:0.85rem; color:var(--color-text-muted);">Files
+                    involved: <code>gui/views/report_view.py</code>, <code>gui/templates/REBA_report.j2</code>,
+                    <code>exports/pdf_generator.py</code>
+                </p>
+            </div>
+        </section>
+
+        <div class="caution-box reveal" style="margin-top:60px; border-left-color:var(--color-text-muted);">
+            <h3 style="font-family:var(--font-heading); margin-bottom:15px; color:var(--color-text-secondary);">💡 PRO
+                TIPS FOR BETTER RESULTS</h3>
+            <ul style="font-family:var(--font-body); color:var(--color-text-secondary); line-height:1.8;">
+                <li><strong>Use FreeMoCap Calibration</strong>: Run the built-in ChArUco board calibration before
+                    recording, this dramatically improves 3D joint position accuracy.</li>
+                <li><strong>Maintain Clear Camera Views</strong>: Ensure no objects obstruct the subject's joints
+                    (knees, elbows, shoulders). Occluded joints produce unreliable scores.</li>
+                <li><strong>Optimize Lighting</strong>: Avoid low-light conditions or harsh directional shadows. Even,
+                    diffuse lighting reduces tracking "noise" and skeleton jitter.</li>
+                <li><strong>Double-Check Critical Scores</strong>: Automated systems can misclassify edge cases. Always
+                    visually verify any "High Risk" flags against the actual video footage before making safety
+                    decisions.</li>
+            </ul>
+            <p
+                style="font-family:var(--font-mono); font-size:0.8rem; color:var(--color-text-muted); margin-top:20px; border-top:1px solid var(--color-border); padding-top:15px;">
+                For advanced recording techniques, calibration workflows, and MoCap best practices, consult the <a
+                    href="https://docs.freemocap.org/documentation/index_md.html" style="color:var(--color-accent);"
+                    target="_blank">FreeMoCap Official Documentation</a>.
+            </p>
+        </div>
+
+        <div class="caution-box reveal">
+            <h3
+                style="font-family:var(--font-heading); margin-bottom:15px; color:var(--color-text-secondary); width:90%; margin:20px">
+                🏁 NEXT
+                STEPS</h3>
+            <p style="margin-bottom:15px;">Now that the software engine is running, you need to learn how to navigate
+                the interface system layout and interpret the compiled econometric data arrays.</p>
+
+            <ul
+                style="font-family:var(--font-body); color:var(--color-text-secondary); line-height:1.8; margin-bottom:20px;">
+                <li><strong>Read the <a href="user_guide.html"
+                            style="color:var(--color-accent); text-decoration:none; font-weight:700;">User
+                            Guide</a></strong>: Learn what each dashboard module button does and how to parse out raw
+                    risk charts.</li>
+                <li><strong>Follow the <a href="tutorial.html"
+                            style="color:var(--color-accent); text-decoration:none; font-weight:700;">Tutorial</a></strong>:
+                    Walk through your first end-to-end REBA assessment pipeline from start to finish.</li>
+            </ul>
+
+        </div>
+    </div>
+
+
+
+    <footer class="footer">
+        <p style="letter-spacing: 2px;">© 2026 ERGOMOCAP | made by MEDLAV </p>
+        <div
+            style="margin-top:20px; font-family:var(--font-mono); font-size:0.75rem; opacity:0.6; max-width:650px; margin-left:auto; margin-right:auto;">
+            Powered by Python, PySide6, FreeMoCap and many more FOSS | Local-First Architecture | Licensed under
+            AGPL-3.0. All modifications must be shared back under the same conditions.
+        </div>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const btn = document.getElementById('themeBtn');
+            if (body.hasAttribute('data-theme')) {
+                body.removeAttribute('data-theme');
+                btn.innerText = '[ DARK_MODE ]';
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                btn.innerText = '[ LIGHT_MODE ]';
+            }
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.05 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const marquee = document.getElementById('imgMarquee');
+            if (marquee) {
+                marquee.addEventListener('mouseenter', function () {
+                    this.style.animationPlayState = 'paused';
+                });
+                marquee.addEventListener('mouseleave', function () {
+                    this.style.animationPlayState = 'running';
+                });
+            }
+        });
+
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const lightbox = document.getElementById("imageLightbox");
+            const lightboxImg = document.getElementById("lightboxTargetImg");
+            const captionText = document.getElementById("lightboxCaption");
+            const closeBtn = document.querySelector(".lightbox-close");
+            const marqueeContent = document.getElementById("imgMarquee");
+            const appShots = document.querySelectorAll(".app-shot ");
+
+            // Open Lightbox
+            appShots.forEach(img => {
+                img.addEventListener("click", () => {
+                    // Pause the marquee track instantly
+                    if (marqueeContent) marqueeContent.classList.add("marquee-paused");
+
+                    // Set up modal display properties
+                    lightbox.style.display = "flex";
+                    // Timeout allows CSS transitions to calculate correctly for animation frame opacity
+                    setTimeout(() => {
+                        lightbox.classList.add("show");
+                    }, 10);
+
+                    lightboxImg.src = img.src;
+                    captionText.innerHTML = img.alt;
+                });
+            });
+
+            // Close Lightbox function
+            const closeLightbox = () => {
+                lightbox.classList.remove("show");
+
+                // Wait for CSS fade animation to wrap before setting display to hidden
+                setTimeout(() => {
+                    lightbox.style.display = "none";
+                    // Resume marquee tracking
+                    if (marqueeContent) marqueeContent.classList.remove("marquee-paused");
+                }, 300);
+            };
+
+            // Close on 'X' button click
+            closeBtn.addEventListener("click", closeLightbox);
+
+            // Close when clicking empty dark space outside the viewport image
+            lightbox.addEventListener("click", (e) => {
+                if (e.target === lightbox || e.target === lightbox.parentElement) {
+                    closeLightbox();
+                }
+            });
+
+            // Accessibility bonus: Close via Escape key
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape" && lightbox.classList.contains("show")) {
+                    closeLightbox();
+                }
+            });
+        });
+
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const lightbox = document.getElementById("imageLightbox");
+            const lightboxImg = document.getElementById("lightboxTargetImg");
+            const captionText = document.getElementById("lightboxCaption");
+            const closeBtn = document.querySelector(".lightbox-close");
+
+            // Explicitly target your tutorial section's image-shot elements
+            const imageShots = document.querySelectorAll(".image-shot");
+
+            // Open Lightbox for tutorial images
+            imageShots.forEach(img => {
+                img.addEventListener("click", () => {
+                    // Set up modal display properties
+                    lightbox.style.display = "flex";
+
+                    // Timeout allows CSS transitions to calculate correctly for animation frame opacity
+                    setTimeout(() => {
+                        lightbox.classList.add("show");
+                    }, 10);
+
+                    lightboxImg.src = img.src;
+                    captionText.innerHTML = img.alt;
+                });
+            });
+
+            // Close Lightbox function
+            const closeLightbox = () => {
+                lightbox.classList.remove("show");
+
+                // Wait for CSS fade animation to wrap before setting display to hidden
+                setTimeout(() => {
+                    lightbox.style.display = "none";
+                }, 300);
+            };
+
+            // Close on 'X' button click
+            if (closeBtn) {
+                closeBtn.addEventListener("click", closeLightbox);
+            }
+
+            // Close when clicking empty dark space outside the viewport image
+            lightbox.addEventListener("click", (e) => {
+                if (e.target === lightbox || e.target === lightbox.parentElement) {
+                    closeLightbox();
+                }
+            });
+
+            // Accessibility: Close via Escape key
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape" && lightbox.classList.contains("show")) {
+                    closeLightbox();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

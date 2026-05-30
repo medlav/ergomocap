@@ -1,0 +1,76 @@
+repos:
+  # 1. SECURITY (Bandit)
+  - repo: https://github.com/PyCQA/bandit
+    rev: 1.8.2
+    hooks:
+      - id: bandit
+        args: ["-c", "pyproject.toml", "-r", "."]
+        additional_dependencies: ["bandit[toml]"]
+
+  # 2. LINT & FORMAT (Ruff)
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.3.4
+    hooks:
+      - id: ruff
+        args: [ --fix ]
+      - id: ruff-format
+
+  # 3. LOCAL AUDIT (Tests, Docs, Badges)
+  - repo: local
+    hooks:
+      - id: doc-coverage
+        name: Documentation Coverage (Interrogate)
+        entry: interrogate -v --generate-badge assets .
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: pytest-run
+        name: Run Pytests
+        entry: pytest --cov=calculators --cov=gui --cov-report=xml --cov-report=term-missing
+        language: system
+        pass_filenames: false
+
+      - id: tests-badge
+        name: Generate Test Badge
+        entry: anybadge --label=tests --value=passing --file=assets/tests_badge.svg --overwrite --color=green
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: coverage-badge
+        name: Update README Badge
+        entry: coverage-badge -f -o assets/coverage.svg
+        language: system
+        pass_filenames: false
+        always_run: true
+
+      - id: generate-todo-list
+        name: Update TODO.md
+        entry: python scripts/todo_scanner.py
+        language: python
+        files: ^.*.(py|toml|yml|sh|md)$
+        pass_filenames: false
+        always_run: true
+
+      - id: mkdocs-build
+        name: Build ErgoMoCap MkDocs
+        entry: mkdocs build --clean --strict
+        language: system
+        pass_filenames: false
+        always_run: true
+
+
+      # - id: pydoclint-check
+      #   name: Lint Docstring Layout (pydoclint)
+      #   entry: pydoclint .
+      #   language: system
+      #   types: [python]
+      #   pass_filenames: true
+
+      - id: generate-pip-licenses
+        name: Generate Dependency Credits (pip-licenses)
+        entry: pip-licenses --format=markdown --output-file=CREDITS.md
+        language: system
+        pass_filenames: false
+        always_run: true

@@ -1,0 +1,60 @@
+site_name: ErgoMoCap
+theme:
+  name: material
+  features:
+      - navigation.sections
+      - navigation.expand
+      - content.code.copy
+
+use_directory_urls: false
+# site_url: https://medlav.github.io/ergomocap/
+
+plugins:
+  - search
+  - autorefs
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: ["."]
+          setup_commands:
+            - import os
+            - import sys
+            - sys.path.append('.') # Allows MkDocs to see the /calculators and /gui folders
+            - sys.path.append(os.getcwd())
+          inventories:
+            - https://docs.python.org/3/objects.inv
+            - https://pandas.pydata.org/pandas-docs/stable/objects.inv
+            - https://numpy.org/doc/stable/objects.inv
+            - https://matplotlib.org/stable/objects.inv
+          options:
+            docstring_style: google
+            alternative_cross_references: true
+            import_identifier_as_base: true
+            allow_lookup: true
+            show_source: true
+            show_root_heading: true
+            show_category_heading: true
+            import_timeout: 30
+            preload_modules:
+              - calculators
+              - gui
+            docstring_section_style: table
+            inventory_plugins:
+              - https://docs.python.org/3/objects.inv
+              - https://numpy.org/doc/stable/objects.inv
+              - https://pandas.pydata.org/pandas-docs/stable/objects.inv
+              - https://matplotlib.org/stable/objects.inv
+              - https://docs.freemocap.org/objects.inv
+
+nav:
+  - Landing Page: index.html
+  - Home: home.md
+  - Install and Get Started: install.md
+  - User Guide: user_guide.md
+  - Tutorial: tutorial.md
+  - Roadmap: roadmap.md
+  - GUI Architecture: gui_architecture.md
+  - Calculators Docs and Audit: calculators.md
+  - API Reference: reference.md
+  - Checklist: checklist.md
+  - Doc Guide: documentation_guide.md
