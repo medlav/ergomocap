@@ -1,0 +1,1357 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.6">
+    
+    
+      
+        <title>ErgoMoCap Calculators Module - ErgoMoCap</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.484c7ddc.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ergomocap-calculators-module" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="ErgoMoCap" class="md-header__button md-logo" aria-label="ErgoMoCap" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ErgoMoCap
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ErgoMoCap Calculators Module
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="ErgoMoCap" class="md-nav__button md-logo" aria-label="ErgoMoCap" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    ErgoMoCap
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Landing Page
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../home.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../install.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Install and Get Started
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../user_guide.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorial.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../roadmap.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Roadmap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gui_architecture.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    GUI Architecture
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../calculators.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Calculators Docs and Audit
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    API Reference
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../checklist.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Checklist
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../documentation_guide.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Doc Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#technical-design-api-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Technical Design &amp; API Documentation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-system-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. System Architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. System Architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#data-pipeline-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Data Pipeline Steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-core-api-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Core API Reference
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Core API Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#21-reba-calculator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.1 REBA Calculator
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.1 REBA Calculator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#return-value" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Return Value
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vector-mapping-slice-ranges-degs-via-degsindexes-di" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vector Mapping &amp; Slice Ranges (degs via DegsIndexes / DI):
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#internal-functions-matrix-lookups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Internal Functions &amp; Matrix Lookups:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#22-rula-calculator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.2 RULA Calculator
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2.2 RULA Calculator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#return-value_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Return Value
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vector-mapping-index-extractions-degs-via-degsindexes-di" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vector Mapping &amp; Index Extractions (degs via DegsIndexes / DI):
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sub-score-processing-table-lookups" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Sub-Score Processing &amp; Table Lookups:
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-implementation-status" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Implementation Status
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-technical-details-performance-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Technical Details &amp; Performance Optimization
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Technical Details &amp; Performance Optimization">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#vectorization-jit-compilation-strategy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vectorization &amp; JIT Compilation Strategy
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-project-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Project Structure
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-integration-the-facade-layer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Integration &amp; The Facade Layer
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Integration &amp; The Facade Layer">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#calculatorscalculatorspy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        calculators/calculators.py
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-adapter-domain-decomposition" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Adapter &amp; Domain Decomposition
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-usage-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Usage Example
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-structural-constraints-edge-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Structural Constraints &amp; Edge Cases
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-developer-guide-adding-a-new-calculator" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Developer Guide: Adding a New Calculator
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Developer Guide: Adding a New Calculator">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-directory-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Directory Setup
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-adapter-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Adapter Creation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-facade-registration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Facade Registration
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-license" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. License
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="ergomocap-calculators-module">ErgoMoCap Calculators Module</h1>
+<h2 id="technical-design-api-documentation">Technical Design &amp; API Documentation</h2>
+<p>The ErgoMoCap <code>calculators</code> module processes spatial tracking data and joint angles from FreeMoCap pipelines into ergonomic risk scores. The engine uses data adapters, modular assessment sub-packages, and fixed kinematic mappings to evaluate poses against standard ergonomic assessment methods (REBA, RULA, NIOSH, OCRA, EWAS, and Snook).</p>
+<h2 id="1-system-architecture">1. System Architecture</h2>
+<p>The package separates the acquisition of coordinate/joint data from the execution of ergonomic scoring rules. It accepts tracking data (such as FreeMoCap's exported <code>joint_angles.csv</code>) and maps those variables to standard matrices.</p>
+<pre><code class="language-mermaid">graph TD
+    A[FreeMoCap Joint Angles / CSV Data] --&gt; B[FreeMoCap Adapter]
+    B --&gt;|DegsIndexes Enumeration| C{Kinematic Mapping}
+    C --&gt;|22-element Degs Array| D[Calculators: REBA / RULA / NIOSH / OCRA / EWAS / SNOOK]
+    F[Other Inputs e.g., Force, Balance] --&gt; G[Specific Adapters]
+    A --&gt; F
+    G --&gt;|Biomechanical Variables| D
+    D --&gt; H[Final Risk Indices]
+    E[Human Inputs] --&gt; H
+
+</code></pre>
+<h3 id="data-pipeline-steps">Data Pipeline Steps</h3>
+<ol>
+<li><strong>Data Ingestion:</strong> Reads angular and landmark data exported from the tracking source (<code>joint_angles.csv</code>).</li>
+<li><strong>Kinematic Mapping:</strong> Maps raw coordinates/angles using index enumerations (<code>DegsIndexes</code>) to build a uniform 22-element input vector.</li>
+<li><strong>Segmentation &amp; Factor Extraction:</strong> Groups inputs by body regions (Group A: Upper/Lower Arm, Wrist; Group B: Neck, Trunk, Legs) or extracts external constraints using dedicated adapters (e.g., <code>force_adapter.py</code>).</li>
+<li><strong>Postural Evaluation:</strong> Passes the mapped vectors to individual calculation rules to compute specific segment penalty scores.</li>
+<li><strong>Synthesis:</strong> Looks up intermediate group scores in cross-reference tables to generate final risk indices.</li>
+</ol>
+<hr />
+<h2 id="2-core-api-reference">2. Core API Reference</h2>
+<h3 id="21-reba-calculator">2.1 REBA Calculator</h3>
+<p><code>REBA_calculator.py</code></p>
+<p>Processes skeletal joint angles to calculate frame-by-frame Rapid Entire Body Assessment (REBA) risk scores. Calculations are divided into <strong>Group A</strong> (Trunk, Neck, Legs) and <strong>Group B</strong> (Upper Arm, Lower Arm, Wrist).</p>
+<ul>
+<li><strong>Primary Function:</strong> <code>calculate_frame_reba_from_degs(degs)</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>degs</code></td>
+<td><code>NDArray[np.float64]</code></td>
+<td>A 1D array containing exactly 22 values mapped to <code>DegsIndexes</code>.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="return-value">Return Value</h4>
+<p>Returns a <code>tuple[dict[str, int], dict[str, Any]]</code>:</p>
+<ol>
+<li><strong><code>final_scores</code></strong>: A dictionary containing calculated segment scores, intermediate table scores, and the final index:</li>
+<li><code>"Legs_Score_REBA"</code>: Integer score for the leg segment.</li>
+<li><code>"Trunk_Score_REBA"</code>: Integer score for the trunk segment.</li>
+<li><code>"Neck_Score_REBA"</code>: Integer score for the neck segment.</li>
+<li><code>"Upper_Arm_Score_REBA"</code>: Integer score for the upper arm segment.</li>
+<li><code>"Lower_Arm_Score_REBA"</code>: Integer score for the lower arm segment.</li>
+<li><code>"Wrist_Score_REBA"</code>: Integer score for the wrist segment.</li>
+<li><code>"Score_A_REBA"</code>: Intermediate Group A score adjusted for loads.</li>
+<li><code>"Score_B_REBA"</code>: Intermediate Group B score adjusted for coupling.</li>
+<li><code>"Score_C_REBA"</code>: Combined score from Table C lookup.</li>
+<li>
+<p><code>"Final_Score_REBA"</code>: The final index combining Score C and activity modifiers.</p>
+</li>
+<li>
+<p><strong><code>degrees_map</code></strong>: Empty dictionary <code>{}</code> (maintained for API consistency).</p>
+</li>
+</ol>
+<h4 id="vector-mapping-slice-ranges-degs-via-degsindexes-di">Vector Mapping &amp; Slice Ranges (<code>degs</code> via <code>DegsIndexes</code> / <code>DI</code>):</h4>
+<p>Slices use explicit <code>[START : END + 1]</code> indices to prevent out-of-bounds errors when querying mapped data:</p>
+<ul>
+<li><strong><code>[0:2]</code> Legs:</strong> <code>degs[DI.RIGHT_KNEE_EXTENSION_FLEXION : DI.LEFT_KNEE_EXTENSION_FLEXION + 1]</code></li>
+<li>
+<p>Evaluates knee flexion/extension. Calls <code>leg_reba_score</code>.</p>
+</li>
+<li>
+<p><strong><code>[2:5]</code> Trunk:</strong> <code>degs[DI.SPINE_EXTENSION_FLEXION : DI.SPINE_ROTATION_TORSION + 1]</code></p>
+</li>
+<li>
+<p>Evaluates trunk extension/flexion, lateral flexion, and torsion. Calls <code>trunk_reba_score</code>.</p>
+</li>
+<li>
+<p><strong><code>[5:8]</code> Neck:</strong> <code>degs[DI.NECK_EXTENSION_FLEXION : DI.NECK_ROTATION + 1]</code></p>
+</li>
+<li>
+<p>Evaluates neck extension/flexion, lateral flexion, and rotation. Calls <code>neck_reba_score</code>.</p>
+</li>
+<li>
+<p><strong><code>[8:14]</code> Upper Arm:</strong> <code>degs[DI.RIGHT_SHOULDER_EXTENSION_FLEXION : DI.LEFT_SHOULDER_RISE + 1]</code></p>
+</li>
+<li>
+<p>Evaluates shoulder extension/flexion, abduction/adduction, and elevation. Calls <code>upper_arm_reba_score</code>.</p>
+</li>
+<li>
+<p><strong><code>[14:16]</code> Lower Arm:</strong> <code>degs[DI.RIGHT_ELBOW_EXTENSION_FLEXION : DI.LEFT_ELBOW_EXTENSION_FLEXION + 1]</code></p>
+</li>
+<li>
+<p>Evaluates elbow extension/flexion. Calls <code>lower_arm_reba_score</code>.</p>
+</li>
+<li>
+<p><strong><code>[16:22]</code> Wrist:</strong> <code>degs[DI.RIGHT_HAND_EXTENSION_FLEXION : DI.LEFT_HAND_TWIST + 1]</code></p>
+</li>
+<li>Evaluates wrist extension/flexion, lateral deviation, and twist. Calls <code>wrist_reba_score</code>.</li>
+</ul>
+<h4 id="internal-functions-matrix-lookups">Internal Functions &amp; Matrix Lookups:</h4>
+<ul>
+<li><strong><code>get_score_a(trunk: int, neck: int, legs: int) -&gt; int</code></strong></li>
+<li>Looks up data in <code>_TABLE_A_DATA</code>.</li>
+<li>Clamps inputs to safe ranges: Trunk <code>[1, 5]</code>, Neck <code>[1, 3]</code>, Legs <code>[1, 4]</code>.</li>
+<li>
+<p>Converts float inputs to integers to ensure matrix index compatibility.</p>
+</li>
+<li>
+<p><strong><code>get_score_b(upper_arm: int, lower_arm: int, wrist: int) -&gt; int</code></strong></p>
+</li>
+<li>Looks up data in <code>_TABLE_B_DATA</code>.</li>
+<li>
+<p>Clamps inputs to safe ranges: Upper Arm <code>[1, 6]</code>, Lower Arm <code>[1, 2]</code>, Wrist <code>[1, 3]</code>.</p>
+</li>
+<li>
+<p><strong><code>get_final_reba(score_a: int, score_b: int, load: int = 0, activity: int = 0) -&gt; int</code></strong></p>
+</li>
+<li>Cross-references Score A and Score B using <code>_TABLE_C_DATA</code>.</li>
+<li>Adds external modifiers (load weight and activity stability parameters) to compute the final value.</li>
+</ul>
+<hr />
+<h3 id="22-rula-calculator">2.2 RULA Calculator</h3>
+<p><code>RULA_calculator.py</code></p>
+<p>Calculates upper limb postural and repetitive action risks per frame. Divides analysis into Group A (Upper Arm, Lower Arm, Wrist, Wrist Twist) and Group B (Neck, Trunk, Legs).</p>
+<ul>
+<li><strong>Primary Function:</strong> <code>calculate_frame_rula_from_degs(degs, muscle_score=0, force_score=0, is_arm_supported=False, are_legs_unsupported=False)</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>degs</code></td>
+<td><code>NDArray[np.float64]</code></td>
+<td><em>Required</em></td>
+<td>A 1D array of exactly 22 joint values mapped using <code>DegsIndexes</code>.</td>
+</tr>
+<tr>
+<td><code>muscle_score</code></td>
+<td><code>int</code></td>
+<td><code>0</code></td>
+<td>Penalty score for static postures or repetitions (0 or 1).</td>
+</tr>
+<tr>
+<td><code>force_score</code></td>
+<td><code>int</code></td>
+<td><code>0</code></td>
+<td>Penalty score for external loads (0, 1, 2, or 3).</td>
+</tr>
+<tr>
+<td><code>is_arm_supported</code></td>
+<td><code>bool</code></td>
+<td><code>False</code></td>
+<td>Flag that decreases upper arm penalty if supports are detected.</td>
+</tr>
+<tr>
+<td><code>are_legs_unsupported</code></td>
+<td><code>bool</code></td>
+<td><code>False</code></td>
+<td>Flag that increases Group B leg score if lower limbs lack support.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="return-value_1">Return Value</h4>
+<p>Returns a <code>tuple[dict[str, int], dict[str, Any]]</code>:</p>
+<ol>
+<li><strong><code>final_scores</code></strong>: A dictionary containing calculated raw scores, subgroup scores, and the final RULA risk index:</li>
+<li><code>"Upper_Arm_Score_RULA"</code>: Calculated score for the upper arm.</li>
+<li><code>"Lower_Arm_Score_RULA"</code>: Calculated score for the lower arm.</li>
+<li><code>"Trunk_Score_RULA"</code>: Calculated score for the trunk.</li>
+<li><code>"Neck_Score_RULA"</code>: Calculated score for the neck.</li>
+<li><code>"Wrist_Score_RULA"</code>: Calculated score for the wrist.</li>
+<li><code>"Score_A_RULA"</code>: Group A score adjusted for muscle and force variables.</li>
+<li><code>"Score_B_RULA"</code>: Group B score adjusted for muscle and force variables.</li>
+<li>
+<p><code>"Final_Score_RULA"</code>: Final evaluation index from Table C lookup.</p>
+</li>
+<li>
+<p><strong><code>metadata</code></strong>: Empty dictionary <code>{}</code> (maintained for API consistency).</p>
+</li>
+</ol>
+<h4 id="vector-mapping-index-extractions-degs-via-degsindexes-di">Vector Mapping &amp; Index Extractions (<code>degs</code> via <code>DegsIndexes</code> / <code>DI</code>):</h4>
+<p>RULA selects specific indices from the 22-element vector (Group A elements map to the right side of the body by default):</p>
+<ul>
+<li><strong>Group A: Upper Limb</strong></li>
+<li><strong>Upper Arm:</strong> Derived from <code>degs[DI.RIGHT_SHOULDER_EXTENSION_FLEXION]</code>, <code>degs[DI.RIGHT_SHOULDER_ABDUCTION_ADDUCTION]</code>, and <code>degs[DI.RIGHT_SHOULDER_RISE]</code>. Passed to <code>upper_arm_rula_score</code>.</li>
+<li><strong>Lower Arm:</strong> Derived from <code>degs[DI.RIGHT_ELBOW_EXTENSION_FLEXION]</code>. Passed to <code>lower_arm_rula_score</code>.</li>
+<li><strong>Wrist:</strong> Derived from <code>degs[DI.RIGHT_HAND_EXTENSION_FLEXION]</code> and <code>degs[DI.RIGHT_HAND_LATERAL_SIDE]</code>. Passed to <code>wrist_rula_score</code>.</li>
+<li>
+<p><strong>Wrist Twist:</strong> Derived from <code>degs[DI.RIGHT_HAND_TWIST]</code>. Passed to <code>wrist_twist_rula_score</code> (applies a penalty if twist exceeds 40 degrees).</p>
+</li>
+<li>
+<p><strong>Group B: Neck, Trunk, Legs</strong></p>
+</li>
+<li><strong>Neck:</strong> Derived from <code>degs[DI.NECK_EXTENSION_FLEXION]</code>, <code>degs[DI.NECK_LATERAL_FLEXION]</code>, and <code>degs[DI.NECK_ROTATION]</code>. Passed to <code>neck_rula_score</code>.</li>
+<li><strong>Trunk:</strong> Derived from <code>degs[DI.SPINE_EXTENSION_FLEXION]</code>, <code>degs[DI.SPINE_LATERAL_FLEXION]</code>, and <code>degs[DI.SPINE_ROTATION_TORSION]</code>. Passed to <code>trunk_rula_score</code>.</li>
+<li><strong>Legs:</strong> Evaluated via input arguments; returns 2 if <code>are_legs_unsupported</code> is <code>True</code>, otherwise defaults to 1.</li>
+</ul>
+<h4 id="sub-score-processing-table-lookups">Sub-Score Processing &amp; Table Lookups:</h4>
+<ul>
+<li><strong>Group A Sub-Score Synthesis:</strong></li>
+<li>Uses <code>upper_arm_score</code>, <code>lower_arm_score</code>, <code>wrist_score</code>, and <code>wrist_twist_score</code> to look up the raw value in <code>_TABLE_A_DATA</code> using 0-based indexing (<code>score - 1</code>).</li>
+<li><code>grand_score_a</code> is calculated by adding <code>muscle_score</code> and <code>force_score</code> to the lookup result, then clamped to a <code>[1, 8]</code> interval:</li>
+</ul>
+<p>$$\text{grand_score_a} = \max(1, \min(\text{score_a_raw} + \text{muscle_score} + \text{force_score}, 8))$$</p>
+<ul>
+<li><strong>Group B Sub-Score Synthesis:</strong></li>
+<li>Uses <code>neck_score</code>, <code>trunk_score</code>, and <code>legs_score</code> to look up the raw value in <code>_TABLE_B_DATA</code> using 0-based indexing.</li>
+<li><code>grand_score_b</code> is calculated by adding <code>muscle_score</code> and <code>force_score</code> to the lookup result, then clamped to a <code>[1, 7]</code> interval:</li>
+</ul>
+<p>$$\text{grand_score_b} = \max(1, \min(\text{score_b_raw} + \text{muscle_score} + \text{force_score}, 7))$$</p>
+<ul>
+<li><strong>Final Score Synthesis (Table C):</strong></li>
+<li>Maps <code>grand_score_a</code> and <code>grand_score_b</code> to <code>_TABLE_C_DATA</code> using 0-based offsets (<code>grand_score_a - 1</code>, <code>grand_score_b - 1</code>) to return the final integer <code>final_rula</code> index.</li>
+</ul>
+<hr />
+<h2 id="3-implementation-status">3. Implementation Status</h2>
+<p>Calculators are organized into individual modules. Unimplemented modules return placeholder values to prevent integration breakages during development.</p>
+<table>
+<thead>
+<tr>
+<th>Standard / Calculator</th>
+<th>Target Module</th>
+<th>Status</th>
+<th>Core Functions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>REBA</strong></td>
+<td><code>REBA_calculator.py</code></td>
+<td>Complete</td>
+<td><code>calculate_frame_reba_from_degs</code></td>
+</tr>
+<tr>
+<td><strong>RULA</strong></td>
+<td><code>RULA_calculator.py</code></td>
+<td>Complete</td>
+<td><code>calculate_frame_rula_from_degs</code></td>
+</tr>
+<tr>
+<td><strong>NIOSH</strong></td>
+<td><code>NIOSH_calculator.py</code></td>
+<td>Pending (Placeholder)</td>
+<td><code>calculate_frame_niosh_li</code></td>
+</tr>
+<tr>
+<td><strong>OCRA</strong></td>
+<td><code>OCRA_calculator.py</code></td>
+<td>Pending (Placeholder)</td>
+<td><code>calculate_frame_ocra_index</code></td>
+</tr>
+<tr>
+<td><strong>EWAS</strong></td>
+<td><code>EWAS_calculator.py</code></td>
+<td>Pending (Placeholder)</td>
+<td><code>calculate_frame_ewas_score</code></td>
+</tr>
+<tr>
+<td><strong>SNOOK</strong></td>
+<td><code>SNOOK_calculator.py</code></td>
+<td>Pending (Placeholder)</td>
+<td><code>calculate_frame_snook_index</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="4-technical-details-performance-optimization">4. Technical Details &amp; Performance Optimization</h2>
+<h3 id="vectorization-jit-compilation-strategy">Vectorization &amp; JIT Compilation Strategy</h3>
+<p>To manage execution overhead from nested conditional checks, the module utilizes the following strategies:</p>
+<ul>
+<li><strong>NumPy Vectorization:</strong> Nested conditional checks are replaced with flat lookup operations using NumPy arrays for all scoring tables.</li>
+<li><strong>Numba Integration:</strong> Core math functions are written to compile under Numba’s <code>@njit</code> (No-Python mode) runtime.</li>
+<li><strong>Current Status (JIT Disabled):</strong> To simplify debugging and testing, <code>@njit</code> decorators are currently commented out (<code># from numba import njit TODO test numba and activate</code>). These will be re-enabled once core data orchestration interfaces are finalized.</li>
+</ul>
+<hr />
+<h2 id="5-project-structure">5. Project Structure</h2>
+<p>The codebase isolates components by task and calculation domain.</p>
+<pre><code>└── 📁calculators
+    ├── 📁adapters                   # Data transformations
+    │   ├── __init__.py
+    │   ├── force_adapter.py         # Formats weight, forces, and load vectors
+    │   ├── freemocap_adapter.py     # Parses joint_angles.csv and maps DegsIndexes
+    │   └── ...                      # Planned updates (e.g., balance_adapter.py)
+    ├── 📁calculators_utils          # Shared mathematical and conversion utilities
+    │   ├── __init__.py
+    │   ├── constants.py             # Shared ergonomics boundaries and indexes
+    │   ├── conversion_utils.py      # Rotations, trigonometry, and array utilities
+    │   └── ...
+    ├── 📁ewas_calculator            # Ergonomic Assessment Work Sheet (EWAS)
+    │   ├── __init__.py
+    │   └── EWAS_calculator.py
+    ├── 📁niosh_calculator           # NIOSH Lifting Equation Module
+    │   ├── __init__.py
+    │   └── NIOSH_calculator.py
+    ├── 📁ocra_calculator            # Occupational Repetitive Actions index
+    │   ├── __init__.py
+    │   └── OCRA_calculator.py
+    ├── 📁reba_calculator            # Postural Analysis (REBA)
+    │   ├── 📁body_parts             # Segment-specific subroutines
+    │   │   ├── __init__.py
+    │   │   ├── leg_reba.py
+    │   │   ├── lower_arm_reba.py
+    │   │   ├── neck_reba.py
+    │   │   ├── trunk_reba.py
+    │   │   ├── upper_arm_reba.py
+    │   │   └── wrist_reba.py
+    │   ├── __init__.py
+    │   ├── REBA_calculator.py
+    │   └── reba_score_tables.py
+    ├── 📁rula_calculator            # Upper Limb Analysis (RULA)
+    │   ├── __init__.py
+    │   ├── rula_body_parts.py       # Segment calculations for limbs
+    │   ├── RULA_calculator.py
+    │   └── rula_score_tables.py
+    ├── 📁snook_calculator           # Snook &amp; Ciriello Tables
+    │   ├── __init__.py
+    │   └── SNOOK_calculator.py
+    ├── __init__.py                  # Package level exports
+    └── calculators.py               # Package Facade Interface
+
+</code></pre>
+<hr />
+<h2 id="6-integration-the-facade-layer">6. Integration &amp; The Facade Layer</h2>
+<p>The entry interface uses a Facade Pattern within <code>calculators.py</code> to compile sub-modules, expose static types, and support editor auto-completion.</p>
+<h3 id="calculatorscalculatorspy"><code>calculators/calculators.py</code></h3>
+<pre><code class="language-python"># ---
+# project: ErgoMoCap
+# file: calculators.py
+# author: medlav
+# created: 2026-05-19
+# license: AGPL-3.0
+# ---
+# Copyright (C) 2026 medlav
+
+from calculators.adapters.freemocap_adapter import (
+    map_fmc_joint_angles_to_ergo_degs,
+    map_fmc_kinematics_to_niosh_vars,
+    map_fmc_kinematics_to_ocra_vars,
+    map_fmc_kinematics_to_ewas_vars,
+    map_fmc_kinematics_to_snook_vars,
+)
+
+# 2. Import from the specific calculators
+from calculators.reba_calculator.REBA_calculator import calculate_frame_reba_from_degs
+from calculators.rula_calculator.RULA_calculator import calculate_frame_rula_from_degs
+from calculators.niosh_calculator.NIOSH_calculator import (
+    calculate_frame_niosh_li,
+)  # TODO all niosh_calculator/ code and relative adapter/ is to be done
+from calculators.ocra_calculator.OCRA_calculator import (
+    calculate_frame_ocra_index,
+)  # TODO all ocra_calculator/ code and relative adapter/ is to be done
+from calculators.ewas_calculator.EWAS_calculator import (
+    calculate_frame_ewas_score,
+)  # TODO all ewas_calculator/ code and relative adapter/ is to be done
+from calculators.snook_calculator.SNOOK_calculator import (
+    calculate_frame_snook_index,
+)  # TODO all snook_calculator/ code and relative adapter/ is to be done
+
+
+# 3. Define __all__ to control what is exported and help Pylance/Intellisense
+__all__ = [
+    &quot;map_fmc_joint_angles_to_ergo_degs&quot;,
+    &quot;map_fmc_kinematics_to_niosh_vars&quot;,  # TODO all niosh_calculator/ code and relative adapter/ is to be done
+    &quot;map_fmc_kinematics_to_ocra_vars&quot;,  # TODO all ocra_calculator/ code and relative adapter/ is to be done
+    &quot;map_fmc_kinematics_to_ewas_vars&quot;,  # TODO all ewas_calculator/ code and relative adapter/ is to be done
+    &quot;map_fmc_kinematics_to_snook_vars&quot;,  # TODO all snook_calculator/ code and relative adapter/ is to be done
+    &quot;calculate_frame_reba_from_degs&quot;,
+    &quot;calculate_frame_rula_from_degs&quot;,
+    &quot;calculate_frame_niosh_li&quot;,  # TODO all niosh_calculator/ code and relative adapter/ is to be done
+    &quot;calculate_frame_ocra_index&quot;,  # TODO all ocra_calculator/ code and relative adapter/ is to be done
+    &quot;calculate_frame_ewas_score&quot;,  # TODO all ewas_calculator/ code and relative adapter/ is to be done
+    &quot;calculate_frame_snook_index&quot;,  # TODO all snook_calculator/ code and relative adapter/ is to be done
+]
+
+</code></pre>
+<hr />
+<h2 id="7-adapter-domain-decomposition">7. Adapter &amp; Domain Decomposition</h2>
+<p>The module uses separate data adapters to map spatial coordinate files into uniform parameters:</p>
+<ul>
+<li><strong><code>freemocap_adapter.py</code></strong>: Ingests joint positions, calculates joint/plane offsets (such as sagittal plane asymmetry), and generates configuration tracking states via the <code>DegsIndexes</code> enumeration.</li>
+<li><strong><code>force_adapter.py</code></strong>: Combines physical workspace parameters (such as weight loads) with spatial frame logs.</li>
+<li><strong>Future Adapters (e.g., balance, cycle metrics)</strong>: Appends additional data tracking vectors (e.g., balance metrics) to the spatial datasets.</li>
+</ul>
+<hr />
+<h2 id="8-usage-example">8. Usage Example</h2>
+<pre><code class="language-python">import numpy as np
+from calculators import (
+    map_fmc_joint_angles_to_ergo_degs,
+    calculate_frame_reba_from_degs
+)
+
+# 1. Generate an array matching tracking source output specifications
+raw_fmc_joint_data = np.random.rand(30)
+
+# 2. Re-map data points into the 22-element input array configuration
+ergo_degs = map_fmc_joint_angles_to_ergo_degs(raw_fmc_joint_data)
+
+# 3. Execute processing frame
+final_reba_scores, _ = calculate_frame_reba_from_degs(ergo_degs)
+print(f&quot;Frame REBA Score: {final_reba_scores['Final_Score_REBA']}&quot;)
+
+</code></pre>
+<hr />
+<h2 id="9-structural-constraints-edge-cases">9. Structural Constraints &amp; Edge Cases</h2>
+<ul>
+<li><strong>Array Length Enforcement:</strong> Calculation components require exact input array lengths. The 22-element spatial arrays mapped using <code>DegsIndexes</code> must be fully populated and cannot contain null values.</li>
+<li><strong>Sampling Rate Synchronization:</strong> * <strong>Sampling Rate Synchronization:</strong> When tracking coordinates and external structural metrics (from <code>force_adapter.py</code>) use different data collection frequencies, data adapters must re-align frames to identical timestamps before scoring calculations execute.</li>
+</ul>
+<hr />
+<h2 id="10-developer-guide-adding-a-new-calculator">10. Developer Guide: Adding a New Calculator</h2>
+<p>To implement a new ergonomic rule or scoring engine variant:</p>
+<h3 id="1-directory-setup">1. Directory Setup</h3>
+<p>Initialize a sub-directory within the <code>/calculators</code> path containing:</p>
+<ul>
+<li><code>__init__.py</code>: Package entry file.</li>
+<li><code>[Name]_calculator.py</code>: Core processing routines configured for execution with NumPy structures.</li>
+</ul>
+<h3 id="2-adapter-creation">2. Adapter Creation</h3>
+<p>Write corresponding data transformation code inside <code>calculators/adapters</code> to map source coordinates to the target array indexes required by the new standard.</p>
+<h3 id="3-facade-registration">3. Facade Registration</h3>
+<p>Expose internal calculator functions and data formatting modules inside <code>calculators/calculators.py</code> by adding references explicitly to the module's <code>__all__</code> array to maintain strict export definitions.</p>
+<hr />
+<h2 id="11-license">11. License</h2>
+<p>This project is licensed under the <strong>GNU Affero General Public License v3.0 (AGPL-3.0)</strong>.</p>
+<pre><code>This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+</code></pre>
+<p><em>Copyright (C) 2026 medlav</em></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "navigation.expand", "content.code.copy"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
