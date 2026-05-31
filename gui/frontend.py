@@ -375,80 +375,69 @@ class MainWindow(QMainWindow):
             None (None): Populates UI widgets with initial data.
         """
         root_path: Path | None = ErgoPaths.SESSIONS
-        if root_path:
-            sessions: list[str] = self.backend.set_root_and_scan(root_path)
+        if not root_path:
+            return
 
-            if not sessions:
-                logger.warning(
-                    "No Session Data Found. Check if the root folder is the correct 'freemocap_data' folder."
+        sessions: list[str] = self.backend.set_root_and_scan(root_path)
+
+        if not sessions:
+            logger.warning(
+                "No Session Data Found. Check if the root folder is the correct 'freemocap_data' folder."
+            )
+            self.sidebar.set_status(
+                self.tr(
+                    "No Session Data Found. Check if the root folder is the correct one."
                 )
-                self.sidebar.set_status(
-                    self.tr(
-                        "No Session Data Found. Check if the root folder is the correct one."
-                    )
+            )
+            return
+
+        # Update UI with available sessions
+        self.sidebar.update_sessions(sessions)
+
+        # Attempt to automatically load the first session
+        session_data = self.backend.load_session_automatically(sessions[0])
+
+        if not session_data:
+            logger.warning(
+                "No Session Data Found. Check if the root folder is the correct 'freemocap_data' folder."
+            )
+            return
+
+        if not session_data.success:
+            self.sidebar.set_status(
+                self.tr("Error during initialization: No Success {}.").format(
+                    session_data.message
                 )
+            )
+            return
 
-                return
-
-            self.sidebar.update_sessions(sessions)
-
-            if sessions:
-                session_data = self.backend.load_session_automatically(sessions[0])
-
-                if not session_data:
-                    logger.warning(
-                        "No Session Data Found. Check if the root folder is the correct 'freemocap_data' folder."
-                    )
-                    return
-
-                if not session_data.success:
-                    self.sidebar.set_status(
-                        self.tr("Error during initialization: No Success {}.").format(
-                            session_data.message
-                        )
-                    )
-                    return
-
-                if not session_data.video_paths or len(session_data.video_paths) == 0:
-                    self.sidebar.set_status(
-                        self.tr("Error during initialization: No Videos {}.").format(
-                            session_data.message
-                        )
-                    )
-                    return
-
-                self.sidebar.update_videos(session_data.video_paths)
-
-                target_video = session_data.video_paths[0]
-                if not session_data.video_paths:
-                    self.sidebar.set_status(
-                        self.tr(
-                            "Error during initialization: Videos Folder is Empty {}."
-                        ).format(session_data.message)
-                    )
-                    return
-
-                video_result = self.backend.load_video_source(target_video)
-                self.sidebar.set_status(self.tr("{}").format(video_result.message))
-                if video_result.success:
-                    self.handle_video_selection_changed()
-
-            if not session_data:
-                logger.warning(
-                    "No Session Data Found. Check if the root folder is the correct 'freemocap_data' folder."
+        if not session_data.video_paths or len(session_data.video_paths) == 0:
+            self.sidebar.set_status(
+                self.tr("Error during initialization: No Videos {}.").format(
+                    session_data.message
                 )
-                self.sidebar.set_status(
-                    self.tr(
-                        "No Session Data Found. Check if the root folder is the correct one."
-                    )
-                )
+            )
+            return
 
-                return
+        # Populates UI with videos found
+        self.sidebar.update_videos(session_data.video_paths)
 
+        # Safe to extract target video now that length check has passed
+        target_video = session_data.video_paths[0]
+        video_result = self.backend.load_video_source(target_video)
+
+        # Check video loading outcome
+        if video_result.success:
+            self.handle_video_selection_changed()
+            # Set the final successful status message here so it doesn't get overwritten unexpectedly
             self.sidebar.set_status(
                 self.tr("Found {} sessions. Loaded {} videos").format(
                     len(sessions), len(session_data.video_paths)
                 )
+            )
+        else:
+            self.sidebar.set_status(
+                self.tr("Video Load Error: {}").format(video_result.message)
             )
 
     @Slot()
@@ -465,6 +454,9 @@ class MainWindow(QMainWindow):
             self, self.tr("Select FreeMoCap Data Folder")
         )
         if root_path:
+            chosen_path = Path(root_path)
+            ErgoPaths.update_user_root(chosen_path)  # resets constant class paths
+
             sessions_folder: Path = Path(root_path) / ErgoPaths.SESSIONS_FOLDER_NAME
             sessions: list[str] = self.backend.set_root_and_scan(sessions_folder)
             self.sidebar.update_sessions(sessions)
@@ -489,8 +481,10 @@ class MainWindow(QMainWindow):
 
         if session_data.success:
             videos_num: int = len(session_data.video_paths)
-            if session_data.video_paths and videos_num == 0:
+            if session_data.video_paths and videos_num > 0:
                 self.sidebar.update_videos(session_data.video_paths)
+                self.handle_video_selection_changed()
+
             self.sidebar.btn_play_video.setEnabled(True)
             self.sidebar.btn_next_frame.setEnabled(True)
             self.sidebar.btn_prev_frame.setEnabled(True)

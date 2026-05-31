@@ -589,6 +589,9 @@ class ErgoBackend(QObject):
         session_path = ErgoPaths.session_folder(session_name)
 
         if not session_path.exists():
+            logger.error(
+                f"Session folder with name {session_name} not found at: {session_path}"
+            )
             return SessionData(
                 name=session_name,
                 success=False,
@@ -625,9 +628,14 @@ class ErgoBackend(QObject):
         if target_video:
             video_full_path = ErgoPaths.video_folder(session_name) / target_video
             video_result = self.load_video_source(str(video_full_path))
-            # TODO handle success or failure
+            # TODO check this and test it
             if not video_result.success:
-                print("Error", video_result.message)
+                logger.error(f"Video Load Failed: {video_result.message}")
+                return SessionData(
+                    name=session_name,
+                    success=False,
+                    message=video_result.message,
+                )
 
         session_data = SessionData(
             name=session_name,

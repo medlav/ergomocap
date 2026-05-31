@@ -40,6 +40,8 @@ from PySide6.QtWidgets import (
     QDockWidget,
     QFrame,
     QHBoxLayout,
+    QSizePolicy,
+    QTextEdit,
     QVBoxLayout,
     QGroupBox,
     QPushButton,
@@ -157,6 +159,11 @@ class ErgoSidebar(QDockWidget):
 
         # 2. Create a Container Widget for the scroll area
         self.container: QWidget = QWidget()
+        self.container.setFixedWidth(300)
+        self.container.setSizePolicy(
+            QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Expanding
+        )
+
         self.scroll_area.setWidget(self.container)
 
         # 3. The actual layout for your buttons
@@ -266,9 +273,19 @@ class ErgoSidebar(QDockWidget):
         self.btn_next_frame.setFocusPolicy(Qt.FocusPolicy.NoFocus)
 
         # --- STATUS BOX ---
-        self.status_label: QLabel = QLabel(self.tr("STATUS: READY"))
-        self.status_label.setWordWrap(True)
-        self.status_label.setMinimumHeight(60)
+        self.status_label: QTextEdit = QTextEdit()
+        self.status_label.setReadOnly(True)
+        self.status_label.setPlainText(self.tr("STATUS: READY"))
+
+        self.status_label.setFrameStyle(QFrame.Shape.NoFrame)
+        self.status_label.viewport().setAutoFillBackground(False)
+        self.status_label.setMinimumHeight(120)
+        self.status_label.setMaximumWidth(300)
+        self.status_label.setSizePolicy(
+            QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Expanding
+        )
+
+        self.scroll_area.setWidget(self.container)
         self.status_label.setAlignment(
             Qt.AlignmentFlag.AlignTop | Qt.AlignmentFlag.AlignLeft
         )

@@ -134,6 +134,34 @@ class ErgoPaths:
     # --- Common Files ---
     LOGO = ASSETS / "ergomocap_logo_dark.png"
 
+    @classmethod
+    def update_user_root(cls, new_root: Path) -> None:
+        """
+        Dynamically updates the base path location when a user selects
+        a custom root folder from the interface.
+
+
+        Args:
+            new_root (Path): The unique identifier/folder name of the session.
+
+        Returns:
+            None: Simply Updated the class.
+        """
+        if new_root.name == cls.SESSIONS_FOLDER_NAME:
+            # If they picked 'recording_sessions', go one step up to find freemocap_data
+            cls.USER_DATA = new_root.parent
+            cls.SESSIONS = new_root
+        elif (
+            new_root / cls.SESSIONS_FOLDER_NAME
+        ).exists() or new_root.name == "freemocap_data":
+            # If they picked 'freemocap_data' or a directory containing 'recording_sessions'
+            cls.USER_DATA = new_root
+            cls.SESSIONS = new_root / cls.SESSIONS_FOLDER_NAME
+        else:
+            # Fallback treat whatever they picked as the directory containing session folders
+            cls.USER_DATA = new_root.parent
+            cls.SESSIONS = new_root
+
     @staticmethod
     def session_folder(session_name: str) -> Path:
         """
