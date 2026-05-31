@@ -346,23 +346,36 @@ def test_handle_session_selected_success(window, mock_backend):
     mock_session_data.success = True
     mock_session_data.message = "Loaded"
 
-    # Mock video_paths: truthy (MagicMock default) but len() returns 0
-    mock_session_data.video_paths = MagicMock()
-    mock_session_data.video_paths.__len__.return_value = 0  # len() == 0
+    # Fix: Provide at least one dummy video path so len() > 0 passes the guard clause
+    mock_session_data.video_paths = ["video_1.mp4"]
 
     with (
         patch.object(window.sidebar, "get_current_session", return_value="session_02"),
         patch.object(window.sidebar, "update_videos") as mock_update,
+        patch.object(
+            window, "handle_video_selection_changed"
+        ) as mock_selection_changed,
     ):
-        # 👇 Configure backend mock return value
+        # Configure backend mock return value
         mock_backend.load_session_automatically.return_value = mock_session_data
 
+        # Set initial conditions
         window.sidebar.btn_play_video.setEnabled(False)
+
+        # Execute the method under test
         window.handle_session_selected()
 
+        # Assertions
         mock_backend.load_session_automatically.assert_called_with("session_02")
-        mock_update.assert_called_once()  # ✅ Now passes
+        mock_update.assert_called_once_with(["video_1.mp4"])
+        mock_selection_changed.assert_called_once()
+
+        # Verify UI states update correctly
         assert window.sidebar.btn_play_video.isEnabled() is True
+
+        # Verify the QTextEdit status text is updated properly
+        # Note: If set_status uses setPlainText/setHtml under the hood, this tests its side effect
+        assert "Session Loaded" in window.sidebar.status_label.toPlainText()
 
 
 def test_handle_session_selected_empty_string(window, mock_backend):

@@ -12,7 +12,7 @@
 # (at your option) any later version.
 #
 # This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the representation of
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU Affero General Public License for more details.
 #
@@ -39,7 +39,7 @@ def test_sidebar_initial_state(sidebar):
     """Verify initial UI state, default labels, and asset constraints."""
     assert sidebar.objectName() == "Sidebar"
     assert sidebar.width() == 320
-    assert "READY" in sidebar.status_label.text()
+    assert "READY" in sidebar.status_label.toPlainText()
     assert sidebar.combo_method.count() > 0
     assert not sidebar.btn_play_video.isEnabled()
     assert not sidebar.btn_prev_frame.isEnabled()
@@ -56,7 +56,7 @@ def test_update_sessions_logic(sidebar):
 
     # Verify UI state update
     assert sidebar.combo_sessions.count() == 2
-    assert "Found 2 sessions." in sidebar.status_label.text()
+    assert "Found 2 sessions." in sidebar.status_label.toPlainText()
 
     # Statement Coverage: Verify signals were successfully blocked during list updates
     spy.assert_not_called()
@@ -91,7 +91,7 @@ def test_getters_and_setters(sidebar):
     assert sidebar.get_selected_method() == "RULA (Unstable)"
 
     sidebar.set_status("Running Framework pipeline...")
-    assert "STATUS: Running Framework pipeline..." in sidebar.status_label.text()
+    assert "STATUS: Running Framework pipeline..." in sidebar.status_label.toPlainText()
 
 
 def test_signal_emissions(sidebar, qtbot):
@@ -163,4 +163,4 @@ def test_unimplemented_method_branch_coverage(sidebar):
     sidebar.btn_analysis.click()
 
     # Assert fallback loop captures standard error message strings accurately
-    assert "OCRA (PLANNED) is not implemented." in sidebar.status_label.text()
+    assert "OCRA (PLANNED) is not implemented." in sidebar.status_label.toPlainText()
