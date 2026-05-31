@@ -75,7 +75,7 @@ from gui.core.report_strategies import RebaStrategy, RulaStrategy
 from gui.widgets.table_report_widget import TableReportWidget
 
 
-from gui.utils.logger import logger
+# from gui.utils.logger import logger TODO implement logger
 
 
 class ReportView(QMainWindow):

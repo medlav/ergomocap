@@ -34,7 +34,6 @@ the worker handles dispatch requests gracefully using Qt's cross-thread signal s
 and dispatches typed structural analysis receipts upon operation boundaries.
 """
 
-import logging
 from pathlib import Path
 from typing import Union
 import numpy as np

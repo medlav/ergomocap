@@ -41,7 +41,6 @@ Key Features:
     * Signal-based communication for real-time GUI updates and error handling.
 """
 
-import logging
 import sys
 
 from pathlib import Path
