@@ -831,6 +831,12 @@
 
         /* --- RESPONSIVE MEDIA BREAKPOINTS --- */
         @media (max-width: 768px) {
+
+
+            .version-tag {
+                font-size: 1.2rem;
+            }
+
             .guide-step {
                 grid-template-columns: 1fr;
                 gap: 20px;
@@ -880,6 +886,10 @@
 
         @media (max-width: 600px) {
 
+            .version-tag {
+                font-size: 1rem;
+            }
+
 
             .freemocap-credits {
                 font-size: 1rem;
@@ -912,6 +922,10 @@
 
 
         @media (max-width: 500px) {
+
+            .version-tag {
+                font-size: 0.8rem;
+            }
 
             .brand {
                 /* Effectively hides the original text "ERGOMOCAP // MEDLAV.APP" */
@@ -1011,9 +1025,8 @@
         </div>
 
         <p class="hero-p">
-            A FOSS desktop application built entirely on Python and PySide6 that interprets
-            raw 3D motion-tracking datasets compiled through the FreeMoCap pipeline. Automate complete skeletal joint
-            angle calculation trajectories and translate complex spatial paths into actionable ergonomic risk reports.
+            A free, open-source desktop app built with Python. It takes the tracking data from your FreeMoCap videos and
+            automatically turns it into clear, easy-to-read ergonomic risk reports.
         </p>
 
         <div class="btn-group">
@@ -1031,11 +1044,9 @@
             <img src="images/screenshots/step1_select_video.png" alt="Skeletal Joint Tracking Preview" class="app-shot">
             <img src="images/screenshots/step2_select_method_reba.png" alt="Assessment Method Selection"
                 class="app-shot">
-            <img src="images/screenshots/step2_analysis_finished.png" alt="Asynchronous Engine Logs Finished"
+            <img src="images/screenshots/step2_analysis_finished.png" alt="Ergonomic Analysis Finished"
                 class="app-shot">
-            <img src="images/screenshots/step3_video_skeleton_overlay.png" alt="Skeleton Mesh Rig Overlay"
-                class="app-shot">
-            <img src="images/screenshots/step4_report_dashboard.png" alt="Statistical Distribution Dashboard"
+            <img src="images/screenshots/step4_report_dashboard.png" alt="Statistical Report Dashboard"
                 class="app-shot">
 
             <img src="images/screenshots/step1_select_recording_session.png" alt="Recording Selection Window"
@@ -1043,11 +1054,9 @@
             <img src="images/screenshots/step1_select_video.png" alt="Skeletal Joint Tracking Preview" class="app-shot">
             <img src="images/screenshots/step2_select_method_reba.png" alt="Assessment Method Selection"
                 class="app-shot">
-            <img src="images/screenshots/step2_analysis_finished.png" alt="Asynchronous Engine Logs Finished"
+            <img src="images/screenshots/step2_analysis_finished.png" alt="Ergonomic Analysis Finished"
                 class="app-shot">
-            <img src="images/screenshots/step3_video_skeleton_overlay.png" alt="Skeleton Mesh Rig Overlay"
-                class="app-shot">
-            <img src="images/screenshots/step4_report_dashboard.png" alt="Statistical Distribution Dashboard"
+            <img src="images/screenshots/step4_report_dashboard.png" alt="Statistical Report Dashboard"
                 class="app-shot">
         </div>
     </section>
@@ -1206,10 +1215,11 @@
         <div class="caution-box reveal">
             <h3 class="mission-title">MOTION CAPTURE x COMPUTER VISION × ERGONOMICS ASSESSMENT</h3>
             <p class="mission-text">
-                <strong>ErgoMoCap</strong> is a local-first, Free and Open Source (FOSS) Python desktop suite designed
-                to bridge the gap between markerless 3D motion capture and standardized occupational ergonomic
-                assessments. It serves as a working academic instrument for ergonomics risk assessments using motion
-                capture data without requiring expensive, certified safety software suites.
+                <strong>ErgoMoCap</strong> is a free, open-source app that runs completely on your own computer. It
+                connects standard video motion tracking with official workplace ergonomics checks. It gives students and
+                researchers a free, and reliable way to measure physical workplace safety
+                risks without needing to buy expensive, corporate hardware and software. At the time of v0.0.1 the tool
+                is not reliable and prone to errors.
             </p>
         </div>
 
@@ -1218,17 +1228,15 @@
             <div class="guide-text">
                 <h2 style="font-family:var(--font-heading); font-size: 2.5rem;">THE MISSION & PHILOSOPHY</h2>
                 <p class="paragraph-spacing">
-                    This project was created to fulfill a critical need in academic and study environments: providing an
-                    accessible, scientifically verifiable mechanism to run validated multi-joint ergonomic risk
-                    assessment (REBA,
-                    RULA, NIOSH, SNOOK) directly from videos.
+                    We built this tool to solve a common problem in school and research settings: making it easy and
+                    completely free to get reliable ergonomics safety scores (like REBA, RULA, NIOSH, and SNOOK)
+                    directly from simple video files.
                 </p>
                 <p class="paragraph-spacing">
-                    We don't want to reinvent the wheel, we want to build on top of giants. ErgoMoCap proudly stands on
-                    the shoulders of the incredible <strong>FreeMoCap project</strong>. We share their exact core
-                    values, match their open-source DNA, and explicitly design our tools to complement and extend their
-                    groundbreaking markerless tracking ecosystem. Massive credit, respect, and a huge shoutout go to the
-                    FreeMoCap community for paving the way.
+                    We didn't want to reinvent the wheel. ErgoMoCap is built directly on top of the amazing work done by
+                    the <strong>FreeMoCap project</strong>. We share their values, use their open-source setup, and
+                    designed our app to expand on their excellent video tracking tools. Huge thanks and credit go to the
+                    FreeMoCap community for making this possible!
                 </p>
                 <blockquote class="brutalist-quote">
                     <strong>📢 CITATION FROM THE FREEMOCAP PHILOSOPHY:</strong><br>
@@ -1236,10 +1244,9 @@
                     duplicated, code, documentation, videos, should be available to everyone, for free."
                 </blockquote>
                 <p class="text-secondary-style">
-                    In total alignment with this philosophy, ErgoMoCap offers no proprietary customer solutions,
-                    paywalls, or premium tiers. Under its <strong>AGPL-3.0 License</strong>, you are free to deploy,
-                    tweak, or fork the software architecture, provided all changes are shared under the
-                    exact same open-source provisions.
+                    Believing fully in this idea, ErgoMoCap has absolutely no paid extras, no paywalls, and no premium
+                    versions. Under our <strong>AGPL-3.0 License</strong>, you are completely free to use, change, or
+                    build upon this software, as long as you share your updates under the exact same open terms.
                 </p>
             </div>
         </section>
@@ -1249,45 +1256,44 @@
             <div class="guide-text">
                 <h2 style="font-family:var(--font-heading); font-size: 2.5rem;">HOW IT WORKS</h2>
                 <p class="paragraph-spacing">
-                    The system is structured as a decoupled processing pipeline that translates spatial coordinate
-                    configurations detected from videos into clinical ergonomic assessments.
+                    The app works like a simple assembly line: it takes the physical movement data captured from your
+                    videos and calculates standard ergonomic safety scores.
                 </p>
 
                 <div class="brutalist-stack">
                     <div class="brutalist-row border-primary-accent">
-                        <h4 class="row-title">1. Ingestion</h4>
-                        <p class="row-desc">The application ingests spatial
-                            3D kinematic trajectories, processed by freemocap, using specialized translation modules
-                            like the
-                            <code>freemocap_adapter</code>, formatting coordinate matrices into a uniform 22-element
-                            biological joint vector. In this the pre-alpha v0.0.1 the only 3D data used are the joint
-                            angles.
+                        <h4 class="row-title">1. Loading Data</h4>
+                        <p class="row-desc">
+                            The app imports the 3D body tracking data created by FreeMoCap. It uses a translation file
+                            (the <code>freemocap_adapter</code>) to read the positions of 22 key body joints. Right now,
+                            in this early version (v0.0.1), the app uses the calculated joint angles to run its checks.
                         </p>
                     </div>
                     <div class="brutalist-row border-brand-accent">
-                        <h4 class="row-title">2. Computation</h4>
-                        <p class="row-desc">The pure-logic math engine
-                            processes inputs using <strong>Numba JIT compilation</strong> and vectorized <strong>NumPy
-                                lookups</strong>, calculating frame-by-frame joint angle boundary deviations instantly.
-                            NOTE: as of now numba is unused to speed up the development, at least until v0.1.0.
+                        <h4 class="row-title">2. Calculating Scores</h4>
+                        <p class="row-desc">
+                            The math engine instantly reads these joint positions frame-by-frame and checks them against
+                            standard ergonomic safety limits to find any risky movements. <em>Note: Speed optimizations
+                                are planned for version v0.1.0, but the current engine is already fast enough for
+                                standard use.</em>
                         </p>
                     </div>
                 </div>
 
                 <div class="vertical-pipeline">
-                    <div class="pipeline-node">Raw MoCap Stream</div>
+                    <div class="pipeline-node">Raw Video Data</div>
                     <span class="pipeline-connector"></span>
 
-                    <div class="pipeline-node">Translation Layer</div>
+                    <div class="pipeline-node">Data Reader</div>
                     <span class="pipeline-connector"></span>
 
-                    <div class="pipeline-node">Standardized 22-Element Vector</div>
+                    <div class="pipeline-node">22-Joint Body Map</div>
                     <span class="pipeline-connector"></span>
 
-                    <div class="pipeline-node">Ergonomic Engines (REBA/RULA)</div>
+                    <div class="pipeline-node">Ergonomic Calculators (REBA/RULA)</div>
                     <span class="pipeline-connector"></span>
 
-                    <div class="pipeline-node">Reports</div>
+                    <div class="pipeline-node">Finished Reports</div>
                 </div>
             </div>
         </section>
@@ -1297,47 +1303,44 @@
             <div class="guide-text">
                 <h2 style="font-family:var(--font-heading); font-size: 2.5rem;">THE LONG-TERM PLAN</h2>
                 <p>
-                    ErgoMoCap currently acts as an interactive GUI wrapper initiating local FreeMoCap execution threads
-                    via system calls to manage data acquisition. However, this is a long-term academic experiment
-                    spanning multiple deployment phases.
+                    Right now, ErgoMoCap acts as an easy-to-use visual screen that controls FreeMoCap behind the scenes
+                    to gather your data. However, this is just the first step in a larger project.
                 </p>
                 <p class="roadmap-subtext">
-                    The final objective is to execute a <strong>"Frankenstein" blending sequence</strong>, forking and
-                    integrating the essential machine vision tracking and kinematic extraction components directly into
-                    the ErgoMoCap framework. This will eventually yield a completely standalone, unified desktop utility
-                    optimized strictly for ergonomic researchers, independent of any external environment setup.
+                    Our ultimate goal is to combine the best parts of both systems. We plan to build the video tracking
+                    features right into ErgoMoCap itself. This will eventually give ergonomics researchers a single,
+                    standalone desktop app that handles everything from video recording to final safety reports with no
+                    extra setup required.
                 </p>
             </div>
         </section>
 
         <div class="caution-box reveal status-box-margin">
-            <h3 class="status-title">⚠️ SYSTEM STATUS & QUALITY GATE</h3>
+            <h3 class="status-title">⚠️ SYSTEM STATUS</h3>
             <div class="status-text">
                 <p class="paragraph-spacing">
                     <strong>CURRENT PHASE: PRE-ALPHA (V0.0.1)</strong><br>
-                    Core GUI subprocess controls and FreeMoCap data adapters are operational. The RULA tracking vectors
-                    remain unstable; the system is functioning strictly as an unvalidated academic testbed.
+                    The main visual controls and FreeMoCap data links are working. However, the RULA tracking scores are
+                    still unstable. Right now, the app should only be used for testing and academic experiments, not
+                    official certifications.
                 </p>
                 <div class="brutalist-stack" style="margin: 15px 0;">
                     <div class="brutalist-row border-brand-accent" style="padding: 10px 15px;">
-                        <div class="row-title" style="font-size: 0.8rem;">Active Audit Pipeline</div>
+                        <div class="row-title" style="font-size: 0.8rem;">Development Progress</div>
                         <div class="row-desc" style="font-size: 0.75rem; font-family: var(--font-mono);">
-                            [REBA/RULA Integration] ──> [Calculators Testing (unittest + e2e)] ──> [Calculators
-                            Validation]
+                            [REBA/RULA Setup] ──> [Testing Calculators] ──> [Final Safety Checks]
                         </div>
                     </div>
                 </div>
                 <p>
-                    <strong>MERGE CONFIGURATION:</strong> Git hooks strictly enforce
-                    <code>mkdocs build --clean --strict</code>
-                    and at least 90% parameter testing coverage across the <code>calculators/</code> repository tree
-                    (including
-                    SNOOK, EWAS, and biomechanical adapters). Local commits are blocked if one of the core pre-commit
-                    hooks don't pass.
+                    <strong>DEVELOPER NOTE:</strong> Our code updates strictly require successful documentation builds
+                    and at least 90% test coverage across our math tools (including SNOOK and EWAS) before changes can
+                    be saved. If any automated pre-commit check fails, the commit is blocked.
                 </p>
             </div>
         </div>
     </div>
+
 
     <header class="subhero" id="get-started">
         <h2>GET STARTED</h2>
