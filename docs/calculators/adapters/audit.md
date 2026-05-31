@@ -1,7 +1,9 @@
-# Pre-Flight Audit: Calculators Adapters
+# Pre-Flight Audit: Calculators Adapters (calculators/adapters/)
 
 
-> ⚠️ **Status: Unimplemented** > This module is currently a stub and has not yet been integrated into the active `ergomocap` processing pipeline.
+> ⚠️ **Status: To Complete**
+> This module is currently incomplete and has not yet been fully integrated into the active `ergomocap` processing pipeline. Except for freemocap_adapter.py wich is a core component of the REBA and RULA calculators already implemented.
+
 
 
 ## Current Progress Tracking
