@@ -75,7 +75,7 @@
 | **TODO** | [`gui\backend\backend.py:261`](gui\backend\backend.py#L261) | replace tuple with Custom Message Model |
 | **TODO** | [`gui\backend\backend.py:335`](gui\backend\backend.py#L335) | do better handling here and signal error to frontend |
 | **TODO** | [`gui\backend\backend.py:446`](gui\backend\backend.py#L446) | change return type to custom model |
-| **TODO** | [`gui\backend\backend.py:628`](gui\backend\backend.py#L628) | handle success or failure |
+| **TODO** | [`gui\backend\backend.py:631`](gui\backend\backend.py#L631) | check this and test it |
 | **TODO** | [`gui\backend\report_backend.py:170`](gui\backend\report_backend.py#L170) | print_reactivate |
 | **TODO** | [`gui\backend\report_backend.py:174`](gui\backend\report_backend.py#L174) | print_reactivate |
 | **TODO** | [`gui\backend\report_backend.py:312`](gui\backend\report_backend.py#L312) | make this programmatic, now is REBA centric |
@@ -96,7 +96,7 @@
 | **TODO** | [`gui\core\report_strategies.py:193`](gui\core\report_strategies.py#L193) | Next Calculator |
 | **TODO** | [`gui\core\report_strategies.py:196`](gui\core\report_strategies.py#L196) | Next Calculator |
 | **TODO** | [`gui\core\session_manager.py:155`](gui\core\session_manager.py#L155) | print_reactivate |
-| **TODO** | [`gui\utils\app_paths.py:214`](gui\utils\app_paths.py#L214) | do something better like return ErgoPaths.output_folder() / f"{method.lower()}_analysis.csv" |
+| **TODO** | [`gui\utils\app_paths.py:243`](gui\utils\app_paths.py#L243) | do something better like return ErgoPaths.output_folder() / f"{method.lower()}_analysis.csv" |
 | **TODO** | [`gui\utils\constants.py:101`](gui\utils\constants.py#L101) | uncomment when implemented pdf/docx and scores_list in video canvas for rula too |
 | **TODO** | [`gui\utils\constants.py:257`](gui\utils\constants.py#L257) | check if need to be deleted |
 | **TODO** | [`gui\utils\utils.py:62`](gui\utils\utils.py#L62) | generate a table with the averages or remove this from backend |
