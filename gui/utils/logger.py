@@ -37,7 +37,7 @@ import sys
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 
-from gui.utils.app_paths import get_external_root
+from gui.utils.app_paths import get_internal_root
 
 #######################
 # ---    LOGGER   --- #
@@ -55,7 +55,7 @@ def setup_logger(name: str = "ergomocap_gui") -> logging.Logger:
         `logging.Logger` (logging.Logger): A configured logger instance with rotating file and console handlers.
     """
     # 1. Create logs directory if it doesn't exist
-    root = get_external_root()
+    root = get_internal_root()
 
     log_dir = root / Path("logs")
     log_dir.mkdir(exist_ok=True)

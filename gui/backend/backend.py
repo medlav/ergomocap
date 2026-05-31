@@ -41,6 +41,9 @@ Key Features:
     * Signal-based communication for real-time GUI updates and error handling.
 """
 
+import multiprocessing
+import os
+import subprocess
 import sys
 
 from pathlib import Path
@@ -251,45 +254,36 @@ class ErgoBackend(QObject):
         self._current_method = new_method
 
     def launch_freemocap(self) -> tuple[bool, str]:
-        """
-        Launches the external FreeMoCap GUI as a subprocess with Qprocess.
+        """Launches the external FreeMoCap GUI as an isolated subprocess,
+        by redispatching the execution path back to the primary compiled executable.
 
         Returns:
             tuple[bool, str]: A tuple containing (success_status, status_message).
-            TODO replace tuple with Custom Message Model
-
-        NOTE:
-            A better approach would be to not call freemocap as subprocess,
-            but to integrate the fmc code in this codebase as a fork. from v2.0+
         """
-        # If a process is already running, avoid spawning multiple instances
         if (
-            self.freemocap_process
-            and self.freemocap_process.state() != QProcess.ProcessState.NotRunning
+            hasattr(self, "freemocap_process")
+            and self.freemocap_process
+            and self.freemocap_process.poll() is None
         ):
             return False, self.tr("FreeMoCap is already running.")
 
         try:
-            # 1. Instantiate the QProcess
-            self.freemocap_process = QProcess()
+            if getattr(sys, "frozen", False):
+                # --- PYINSTALLER EXE MODE ---
+                # Call your own ErgoMoCap.exe with a custom routing switch
+                args = [sys.executable, "--run-freemocap-gui"]
+            else:
+                # --- VS CODE DEVELOPMENT MODE ---
+                args = [sys.executable, "-m", "freemocap"]
 
-            # 2. Define the program executable and its arguments
-            program = sys.executable
-            arguments = ["-m", "freemocap"]
+            creation_flags = 0
+            if sys.platform == "win32":
+                creation_flags = subprocess.CREATE_NO_WINDOW
 
-            # Optional: Forward standard output/error to your main terminal
-            self.freemocap_process.setProcessChannelMode(
-                QProcess.ProcessChannelMode.ForwardedChannels
+            # Fire the subprocess using the self-contained interpreter context
+            self.freemocap_process = subprocess.Popen(
+                args, creationflags=creation_flags
             )
-
-            # 3. Start the process asynchronously
-            self.freemocap_process.start(program, arguments)
-
-            # 4. Check if it failed to start immediately
-            if not self.freemocap_process.waitForStarted(
-                2000
-            ):  # Wait up to 2 seconds to confirm start
-                return False, self.tr("Failed to start the FreeMoCap process.")
 
             return True, self.tr(
                 "FreeMoCap is starting successfully. Please wait until it opens."

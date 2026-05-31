@@ -33,10 +33,13 @@ asynchronous thread cleanup, and shortcuts.
 import os
 from pathlib import Path
 import sys
+import time
 
-from PySide6.QtCore import QUrl, Qt, Slot
+from PySide6.QtCore import QCoreApplication, QUrl, Qt, Slot
 from PySide6.QtWidgets import (
     QApplication,
+    QDialog,
+    QLabel,
     QMainWindow,
     QWidget,
     QVBoxLayout,
@@ -662,14 +665,36 @@ class MainWindow(QMainWindow):
 
     @Slot()
     def handle_run_fmc(self) -> None:
-        """
-        Triggers the FreeMoCap processing workflow.
+        """Triggers FreeMoCap processing with a forced 2-second visual delay.
 
         Returns:
-            None (None): Initiates an external process via the backend.
+            None
         """
+        self.wait_dialog = QDialog(parent=self)
+        self.wait_dialog.setWindowModality(Qt.WindowModality.WindowModal)
+
+        layout = QVBoxLayout()
+        layout.addWidget(
+            QLabel(
+                self.tr("Initializing FreeMoCap... Please wait until it opens."),
+                self.wait_dialog,
+            )
+        )
+
+        self.wait_dialog.setLayout(layout)
+        self.wait_dialog.show()
+        QCoreApplication.processEvents()
+
+        start_time = time.time()
         success, msg = self.backend.launch_freemocap()
         self.sidebar.set_status(self.tr("{}").format(msg))
+
+        elapsed = time.time() - start_time
+        if elapsed < 3.0:
+            time.sleep(3.0 - elapsed)
+
+        self.wait_dialog.accept()
+        self.wait_dialog.deleteLater()
 
     @Slot()
     def handle_import(self) -> None:
