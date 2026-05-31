@@ -387,6 +387,7 @@
             padding: 20px;
             background: #111111;
             color: #00ff00;
+            overflow: hidden;
         }
 
         @keyframes scroll {
@@ -863,6 +864,10 @@
                 height: 220px;
             }
 
+            .mock-body {
+                font-size: 0.6rem;
+            }
+
             /* Responsive updates for custom classes */
             .mission-text {
                 font-size: 1.1rem;
@@ -873,19 +878,12 @@
             }
         }
 
-        @media (max-width: 500px) {
-            .brand {
-                font-size: 1.1rem;
-            }
+        @media (max-width: 600px) {
+
 
             .freemocap-credits {
-                font-size: 1.1rem;
+                font-size: 1rem;
             }
-
-            .github-icon {
-                display: none !important;
-            }
-
 
             .theme-toggle {
                 font-size: 0 !important;
@@ -893,12 +891,12 @@
 
             body:not([data-theme="dark"]) .theme-toggle::after {
                 content: "[ D ]";
-                font-size: 0.5rem;
+                font-size: 0.9rem;
             }
 
             body[data-theme="dark"] .theme-toggle::after {
                 content: "[ L ]";
-                font-size: 0.5rem;
+                font-size: 0.9rem;
             }
 
             /* Extra adjustments for tightly constrained viewports */
@@ -908,6 +906,55 @@
 
             .file-structure-box {
                 padding: 15px;
+            }
+
+        }
+
+
+        @media (max-width: 500px) {
+
+            .brand {
+                /* Effectively hides the original text "ERGOMOCAP // MEDLAV.APP" */
+                font-size: 0;
+            }
+
+            .brand::after {
+                /* Injects the new text and restores the font size */
+                content: "ERGOMOCAP";
+                font-size: 1.5rem;
+            }
+
+            .theme-toggle {
+                font-size: 0 !important;
+            }
+
+            body:not([data-theme="dark"]) .theme-toggle::after {
+                content: "[ D ]";
+                font-size: 0.7rem;
+            }
+
+            body[data-theme="dark"] .theme-toggle::after {
+                content: "[ L ]";
+                font-size: 0.7rem;
+            }
+
+        }
+
+        @media (max-width: 300px) {
+
+            .brand {
+                /* Effectively hides the original text "ERGOMOCAP // MEDLAV.APP" */
+                font-size: 0;
+            }
+
+            .brand::after {
+                /* Injects the new text and restores the font size */
+                content: "ERGOMOCAP";
+                font-size: 1rem;
+            }
+
+            .github-icon {
+                display: none !important;
             }
         }
 
@@ -945,14 +992,14 @@
         <div class="version-tag">
             <strong>PRE-ALPHA</strong> VERSION
         </div>
-        <div class="sub-header">COMPUTER_VISION // MARKERLESS_MOTION_CAPTURE // PY_SIDE6</div>
+        <div class="sub-header">COMPUTER_VISION // MOTION_CAPTURE // ERGONOMICS_ASSESSMENT</div>
         <h1>ERGO<span style="color:var(--color-accent)">MOCAP</span></h1>
 
         <div class="normativa-tags">
             <span class="tag">FREEMOCAP CORE</span>
             <span class="tag">REBA ANALYSIS</span>
             <span class="tag">RULA ANALYSIS</span>
-            <span class="tag">PYSIDE6 ASYNCHRONOUS ENGINE</span>
+            <span class="tag">PYSIDE6 GUI</span>
             <span class="tag">3D KINEMATICS</span>
         </div>
 
@@ -1157,11 +1204,11 @@
 
     <div class="guide-container">
         <div class="caution-box reveal">
-            <h3 class="mission-title">MOTION CAPTURE x COMPUTER VISION × ERGONOMICS</h3>
+            <h3 class="mission-title">MOTION CAPTURE x COMPUTER VISION × ERGONOMICS ASSESSMENT</h3>
             <p class="mission-text">
                 <strong>ErgoMoCap</strong> is a local-first, Free and Open Source (FOSS) Python desktop suite designed
                 to bridge the gap between markerless 3D motion capture and standardized occupational ergonomic
-                assessments. It serves as a working academic instrument for deep-integrating research-grade motion
+                assessments. It serves as a working academic instrument for ergonomics risk assessments using motion
                 capture data without requiring expensive, certified safety software suites.
             </p>
         </div>
@@ -1172,8 +1219,9 @@
                 <h2 style="font-family:var(--font-heading); font-size: 2.5rem;">THE MISSION & PHILOSOPHY</h2>
                 <p class="paragraph-spacing">
                     This project was created to fulfill a critical need in academic and study environments: providing an
-                    accessible, scientifically verifiable mechanism to run validated multi-joint risk profiles (REBA,
-                    RULA, NIOSH, SNOOK) directly from video data arrays.
+                    accessible, scientifically verifiable mechanism to run validated multi-joint ergonomic risk
+                    assessment (REBA,
+                    RULA, NIOSH, SNOOK) directly from videos.
                 </p>
                 <p class="paragraph-spacing">
                     We don't want to reinvent the wheel, we want to build on top of giants. ErgoMoCap proudly stands on
@@ -1190,7 +1238,7 @@
                 <p class="text-secondary-style">
                     In total alignment with this philosophy, ErgoMoCap offers no proprietary customer solutions,
                     paywalls, or premium tiers. Under its <strong>AGPL-3.0 License</strong>, you are free to deploy,
-                    tweak, or fork the software architecture, provided all evolutionary changes are shared under the
+                    tweak, or fork the software architecture, provided all changes are shared under the
                     exact same open-source provisions.
                 </p>
             </div>
@@ -1202,14 +1250,15 @@
                 <h2 style="font-family:var(--font-heading); font-size: 2.5rem;">HOW IT WORKS</h2>
                 <p class="paragraph-spacing">
                     The system is structured as a decoupled processing pipeline that translates spatial coordinate
-                    configurations into clinical ergonomic tracking logs.
+                    configurations detected from videos into clinical ergonomic assessments.
                 </p>
 
                 <div class="brutalist-stack">
                     <div class="brutalist-row border-primary-accent">
                         <h4 class="row-title">1. Ingestion</h4>
                         <p class="row-desc">The application ingests spatial
-                            3D kinematic trajectories using specialized translation modules like the
+                            3D kinematic trajectories, processed by freemocap, using specialized translation modules
+                            like the
                             <code>freemocap_adapter</code>, formatting coordinate matrices into a uniform 22-element
                             biological joint vector. In this the pre-alpha v0.0.1 the only 3D data used are the joint
                             angles.
@@ -1220,6 +1269,7 @@
                         <p class="row-desc">The pure-logic math engine
                             processes inputs using <strong>Numba JIT compilation</strong> and vectorized <strong>NumPy
                                 lookups</strong>, calculating frame-by-frame joint angle boundary deviations instantly.
+                            NOTE: as of now numba is unused to speed up the development, at least until v0.1.0.
                         </p>
                     </div>
                 </div>
@@ -1272,16 +1322,18 @@
                     <div class="brutalist-row border-brand-accent" style="padding: 10px 15px;">
                         <div class="row-title" style="font-size: 0.8rem;">Active Audit Pipeline</div>
                         <div class="row-desc" style="font-size: 0.75rem; font-family: var(--font-mono);">
-                            [REBA/RULA Integration] ──> [NIOSH / OCRA Engine Validation] ──> [i18n Italian Localization]
+                            [REBA/RULA Integration] ──> [Calculators Testing (unittest + e2e)] ──> [Calculators
+                            Validation]
                         </div>
                     </div>
                 </div>
                 <p>
                     <strong>MERGE CONFIGURATION:</strong> Git hooks strictly enforce
                     <code>mkdocs build --clean --strict</code>
-                    and 100% parameter testing coverage across the <code>calculators/</code> repository tree (including
-                    SNOOK, EWAS, and biomechanical adapters). Local commits are structurally blocked if edge-case
-                    angular thresholds (e.g., joint flexion deltas) skew from verified standard textbook formulas.
+                    and at least 90% parameter testing coverage across the <code>calculators/</code> repository tree
+                    (including
+                    SNOOK, EWAS, and biomechanical adapters). Local commits are blocked if one of the core pre-commit
+                    hooks don't pass.
                 </p>
             </div>
         </div>
@@ -1445,12 +1497,18 @@
                     </li>
                     <li class="list-item-spacing">
                         <strong>Video not loading:</strong> Ensure you have a folder named <code>annotated_videos</code>
-                        exactly configured inside your session data folder environment.
+                        exactly configured inside your session data folder
+                        <code>freemocap_data/recording_sessions/</code>. Select the correct <code>freemocap_data/</code>
+                        folder using <strong>📂 SELECT FREEMOCAP ROOT</strong>.
+
+
                     </li>
                     <li>
                         <strong>Missing Skeletal Data:</strong> The app needs the <code>.csv</code> or <code>.npy</code>
                         dataset matrices created by FreeMoCap to work. If they are missing, execute the FreeMoCap
-                        "Post-Processing" step first.
+                        "Post-Processing" step first. For more info read the <a
+                            href="https://docs.freemocap.org/documentation/index_md.html"
+                            style="color:var(--color-accent);" target="_blank">FreeMoCap Official Documentation</a>.
                     </li>
                 </ul>
             </div>
@@ -1487,8 +1545,13 @@
                 <ol style="font-family:var(--font-body); margin:20px 0 20px 20px; color:var(--color-text-secondary);">
                     <li style="margin-bottom:12px;">Open the ErgoMoCap application</li>
                     <li style="margin-bottom:12px;">Click <strong>📂 SELECT FREEMOCAP ROOT</strong> and navigate to your
-                        <code>freemocap_data/record_sessions</code> folder (not the parent <code>freemocap_data</code>
-                        directory)
+                        <code>freemocap_data</code> folder.
+
+                        <div
+                            style="border-left:4px solid var(--color-accent); padding:15px; background:var(--color-surface); margin:20px 0; font-family:var(--font-mono); font-size:0.85rem;">
+                            ⚠️ NOTE: Use the same freemocap_data folder used by FreeMoCap! Read the FreeMoCap docs
+                            for the instruction on how to select the freemocap_data folder inside FreeMoCap.
+                        </div>
                     </li>
                     <li style="margin-bottom:12px;">Use the <strong>Select Recording Session</strong> dropdown to choose
                         your specific session folder</li>
@@ -1555,10 +1618,10 @@
                         recording conditions:</li>
                 </ol>
                 <ul style="font-family:var(--font-body); margin:0 0 20px 40px; color:var(--color-text-secondary);">
-                    <li style="margin-bottom:8px;">✅ Ensure adequate, even lighting (avoid harsh shadows)</li>
-                    <li style="margin-bottom:8px;">✅ Keep camera view unobstructed (no boxes, chairs, or people blocking
+                    <li style="margin-bottom:8px;">Ensure adequate, even lighting (avoid harsh shadows)</li>
+                    <li style="margin-bottom:8px;">Keep camera view unobstructed (no boxes, chairs, or people blocking
                         joints)</li>
-                    <li style="margin-bottom:8px;">✅ Use FreeMoCap's ChArUco calibration for improved 3D accuracy</li>
+                    <li style="margin-bottom:8px;">Use FreeMoCap's ChArUco calibration for improved 3D accuracy</li>
                 </ul>
                 <img class="image-shot" src="images/screenshots/step3_video_skeleton_overlay.png"
                     alt="Checking Skeleton Overlay"
