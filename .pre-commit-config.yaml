@@ -53,6 +53,13 @@ repos:
         pass_filenames: false
         always_run: true
 
+      - id: pydoclint-check
+        name: Lint Docstring Layout (pydoclint)
+        entry: pydoclint .
+        language: system
+        types: [python]
+        pass_filenames: true
+
       - id: mkdocs-build
         name: Build ErgoMoCap MkDocs
         entry: mkdocs build --clean --strict
@@ -60,13 +67,12 @@ repos:
         pass_filenames: false
         always_run: true
 
-
-      # - id: pydoclint-check
-      #   name: Lint Docstring Layout (pydoclint)
-      #   entry: pydoclint .
+      # - id: mkdocs-deploy
+      #   name: Deploy ErgoMoCap MkDocs to Github
+      #   entry: mkdocs gh-deploy --force
       #   language: system
-      #   types: [python]
-      #   pass_filenames: true
+      #   pass_filenames: false
+      #   always_run: true
 
       - id: generate-pip-licenses
         name: Generate Dependency Credits (pip-licenses)

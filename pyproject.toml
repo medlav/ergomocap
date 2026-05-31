@@ -212,3 +212,9 @@ output = "png"
 
 format = "markdown"
 output-file = "CREDITS.md"
+
+
+[tool.pydoclint]
+style = 'google'
+# This regex ignores your build, envs, tests, data, and dev folders
+exclude = '(\.venv|venv|ENV|env|dist|build|htmlcov|\.tox|\.pytest_cache|\.ruff_cache|tests|scripts|ergomocap_data|freemocap_data|output|runs|release|site|\.github|\.vscode)/|__pycache__|\.py[cod]'

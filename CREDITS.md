@@ -1,6 +1,7 @@
 | Name                          | Version      | License                                                                        |
 |-------------------------------|--------------|--------------------------------------------------------------------------------|
 | Cython                        | 3.2.5        | Apache-2.0                                                                     |
+| Eel                           | 0.18.2       | MIT License                                                                    |
 | Jinja2                        | 3.1.6        | BSD License                                                                    |
 | MarkupSafe                    | 3.0.3        | BSD-3-Clause                                                                   |
 | Pillow                        | 10.0.1       | Historical Permission Notice and Disclaimer (HPND)                             |
@@ -12,13 +13,17 @@
 | QtPy                          | 2.4.1        | MIT License                                                                    |
 | absl-py                       | 2.4.0        | Apache-2.0                                                                     |
 | ajc27_freemocap_blender_addon | 2026.4.1039  | UNKNOWN                                                                        |
+| altgraph                      | 0.17.5       | MIT License                                                                    |
 | aniposelib                    | 0.4.3        | BSD License                                                                    |
 | annotated-types               | 0.7.0        | MIT License                                                                    |
 | anybadge                      | 1.16.0       | MIT License                                                                    |
 | asttokens                     | 3.0.1        | Apache 2.0                                                                     |
 | attrs                         | 26.1.0       | MIT                                                                            |
 | audioread                     | 3.1.0        | MIT                                                                            |
+| auto-py-to-exe                | 2.50.1       | MIT License                                                                    |
 | bandit                        | 1.9.4        | Apache-2.0                                                                     |
+| bottle                        | 0.13.4       | MIT License                                                                    |
+| bottle-websocket              | 0.2.9        | MIT License                                                                    |
 | certifi                       | 2026.5.20    | Mozilla Public License 2.0 (MPL 2.0)                                           |
 | cffi                          | 2.0.0        | MIT                                                                            |
 | charset-normalizer            | 3.4.7        | MIT                                                                            |
@@ -41,7 +46,12 @@
 | fonttools                     | 4.63.0       | MIT                                                                            |
 | freemocap                     | 1.8.2        | GNU Affero General Public License v3 or later (AGPLv3+)                        |
 | fsspec                        | 2026.4.0     | BSD-3-Clause                                                                   |
+| future                        | 1.0.0        | MIT License                                                                    |
+| gevent                        | 26.5.0       | MIT                                                                            |
+| gevent-websocket              | 0.10.1       | Copyright 2011-2017 Jeffrey Gelens <jeffrey@noppo.pro>                         |
+| greenlet                      | 3.5.1        | MIT AND PSF-2.0                                                                |
 | idna                          | 3.17         | BSD-3-Clause                                                                   |
+| importlib_resources           | 7.1.0        | Apache-2.0                                                                     |
 | iniconfig                     | 2.3.0        | MIT                                                                            |
 | interrogate                   | 1.7.0        | MIT License                                                                    |
 | ipykernel                     | 6.23.1       | BSD License                                                                    |
@@ -77,6 +87,7 @@
 | packaging                     | 23.2         | Apache Software License; BSD License                                           |
 | pandas                        | 2.1.4        | BSD License                                                                    |
 | parso                         | 0.8.7        | MIT License                                                                    |
+| pefile                        | 2024.8.26    | MIT                                                                            |
 | platformdirs                  | 4.10.0       | MIT                                                                            |
 | plotly                        | 5.14.1       | MIT License                                                                    |
 | pluggy                        | 1.6.0        | MIT License                                                                    |
@@ -92,6 +103,8 @@
 | pydantic                      | 2.13.4       | MIT                                                                            |
 | pydantic_core                 | 2.46.4       | MIT                                                                            |
 | pydoclint                     | 0.8.4        | MIT License                                                                    |
+| pyinstaller                   | 6.20.0       | GNU General Public License v2 (GPLv2)                                          |
+| pyinstaller-hooks-contrib     | 2026.5       | Apache Software License; GNU General Public License v2 (GPLv2)                 |
 | pyparsing                     | 3.3.2        | MIT                                                                            |
 | pyqtgraph                     | 0.13.3       | MIT License                                                                    |
 | pytest                        | 9.0.3        | MIT                                                                            |
@@ -100,6 +113,7 @@
 | python-dateutil               | 2.9.0.post0  | Apache Software License; BSD License                                           |
 | python-docx                   | 1.2.0        | MIT License                                                                    |
 | pytz                          | 2026.2       | MIT License                                                                    |
+| pywin32-ctypes                | 0.2.3        | BSD-3-Clause                                                                   |
 | pyzmq                         | 27.1.0       | BSD License                                                                    |
 | requests                      | 2.34.2       | Apache Software License                                                        |
 | rich                          | 13.7.0       | MIT License                                                                    |
@@ -135,3 +149,5 @@
 | ultralytics                   | 8.3.253      | GNU Affero General Public License v3 or later (AGPLv3+)                        |
 | ultralytics-thop              | 2.0.19       | GNU Affero General Public License v3 or later (AGPLv3+)                        |
 | urllib3                       | 2.7.0        | MIT                                                                            |
+| zope.event                    | 6.2          | ZPL-2.1                                                                        |
+| zope.interface                | 8.5          | ZPL-2.1                                                                        |

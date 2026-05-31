@@ -72,9 +72,6 @@ def main() -> None:
     Returns:
         None: This function terminates the process by calling `sys.exit()`.
 
-    Raises:
-        FileNotFoundError: If critical UI resources are missing, though the application
-            is designed to fail gracefully with logging in most resource-missing scenarios.
 
     Examples:
         To start the application from the command line:

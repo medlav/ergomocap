@@ -4,7 +4,7 @@
 
 | Status | Location | Description |
 | :--- | :--- | :--- |
-| **TODO** | [`main.py:88`](main.py#L88) | implement this |
+| **TODO** | [`main.py:85`](main.py#L85) | implement this |
 | **TODO** | [`pyproject.toml:55`](pyproject.toml#L55) | remove this or specify only for matplotlib |
 | **TODO** | [`pyproject.toml:77`](pyproject.toml#L77) | should be 100% or closer!! |
 | **TODO** | [`README.md:274`](README.md#L274) | Scan** | `pre-commit run generate-todo-list --all-files` | Triggers the local task scanning script. | |
