@@ -377,10 +377,29 @@ class MainWindow(QMainWindow):
         root_path: Path | None = ErgoPaths.SESSIONS
         if root_path:
             sessions: list[str] = self.backend.set_root_and_scan(root_path)
+
+            if not sessions:
+                logger.warning(
+                    "No Session Data Found. Check if the root folder is the correct 'freemocap_data' folder."
+                )
+                self.sidebar.set_status(
+                    self.tr(
+                        "No Session Data Found. Check if the root folder is the correct one."
+                    )
+                )
+
+                return
+
             self.sidebar.update_sessions(sessions)
 
             if sessions:
                 session_data = self.backend.load_session_automatically(sessions[0])
+
+                if not session_data:
+                    logger.warning(
+                        "No Session Data Found. Check if the root folder is the correct 'freemocap_data' folder."
+                    )
+                    return
 
                 if not session_data.success:
                     self.sidebar.set_status(
@@ -413,6 +432,18 @@ class MainWindow(QMainWindow):
                 self.sidebar.set_status(self.tr("{}").format(video_result.message))
                 if video_result.success:
                     self.handle_video_selection_changed()
+
+            if not session_data:
+                logger.warning(
+                    "No Session Data Found. Check if the root folder is the correct 'freemocap_data' folder."
+                )
+                self.sidebar.set_status(
+                    self.tr(
+                        "No Session Data Found. Check if the root folder is the correct one."
+                    )
+                )
+
+                return
 
             self.sidebar.set_status(
                 self.tr("Found {} sessions. Loaded {} videos").format(
@@ -531,6 +562,8 @@ class MainWindow(QMainWindow):
             if video_result.success:
                 self._reconnect_video_signals()
                 self.sidebar.btn_play_video.setEnabled(True)
+                self.sidebar.btn_next_frame.setEnabled(True)
+                self.sidebar.btn_prev_frame.setEnabled(True)
 
     def _reconnect_video_signals(self) -> None:
         """
