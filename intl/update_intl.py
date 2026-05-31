@@ -42,7 +42,7 @@ from pathlib import Path
 
 
 logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("intl logger")
 
 
 def run_intl() -> None:

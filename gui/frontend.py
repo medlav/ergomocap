@@ -57,10 +57,7 @@ from gui.widgets.menu_bar import MenuBar
 # from gui.widgets.navbar import Navbar
 from gui.widgets.sidebar import ErgoSidebar
 from gui.widgets.video_canvas import VideoCanvas
-import logging
-
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
+from gui.utils.logger import logger
 
 
 class MainWindow(QMainWindow):

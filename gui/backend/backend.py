@@ -77,8 +77,7 @@ from gui.core.calculators_adapter import (
     SNOOKAdapter,
 )
 
-logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
+from gui.utils.logger import logger
 
 
 class ErgoBackend(QObject):

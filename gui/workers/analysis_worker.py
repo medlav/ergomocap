@@ -49,7 +49,7 @@ from gui.utils.app_paths import ErgoPaths
 from gui.utils.constants import AssessmentMethod, MetricType, RiskLevel
 from gui.utils.models import AnalysisResult
 
-logger = logging.getLogger()
+from gui.utils.logger import logger
 
 
 class AnalysisWorker(QObject):

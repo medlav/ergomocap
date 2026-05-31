@@ -75,9 +75,7 @@ from gui.core.report_strategies import RebaStrategy, RulaStrategy
 from gui.widgets.table_report_widget import TableReportWidget
 
 
-import logging
-
-logging.getLogger("matplotlib").setLevel(logging.WARNING)
+from gui.utils.logger import logger
 
 
 class ReportView(QMainWindow):
