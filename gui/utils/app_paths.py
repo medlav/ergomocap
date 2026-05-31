@@ -103,6 +103,7 @@ class ErgoPaths:
         LOGO (Path): Absolute filesystem locator path to the primary application logo graphic.
 
     Methods:
+        update_user_root: Updates the USER_DATA path and all constant paths at a class level.
         session_folder: Constructs the absolute path to a specific recording session directory.
         data_folder: Constructs the absolute path to the data subfolder of a session.
         video_folder: Constructs the absolute path to the video subfolder of a session.
