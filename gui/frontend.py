@@ -54,6 +54,7 @@ from gui.theme.style import get_stylesheet, ErgoTheme
 from gui.utils.app_paths import ErgoPaths
 from gui.utils.models import AnalysisRequest, AnalysisResult, VideoCommand, VideoControl
 from gui.views.report_view import ReportView
+from gui.views.review_view import ReviewView
 from gui.widgets.menu_actions import MenuActions
 from gui.widgets.menu_bar import MenuBar
 
@@ -106,6 +107,7 @@ class MainWindow(QMainWindow):
         handle_toggle_video: Slot to play or pause video playback.
         handle_run_fmc: Slot to trigger external FreeMoCap processing.
         handle_import: Slot to manually import joint data files.
+        show_review: Displays the live review window.
         show_report: Displays the analysis reporting window.
         run_analysis: Triggers the ergonomic calculation engine.
         _update_export_status: Unified status formatter for background processing.
@@ -130,8 +132,11 @@ class MainWindow(QMainWindow):
         self.setWindowIcon(QIcon(str(icon_path)))
         self.setMinimumSize(1200, 800)
 
-        # Initialize your ReportView as a persistent separate window
+        # Initialize your Report Window as a persistent separate window
         self.report_window: ReportView = ReportView(self)
+
+        # Initialize your Review Window as a persistent separate window
+        self.review_window: ReviewView = ReviewView()
 
         self.setup_ui()
         self.connect_signals()
@@ -315,6 +320,7 @@ class MainWindow(QMainWindow):
         s.btn_select_root.clicked.connect(self.handle_select_root)
         s.combo_sessions.currentIndexChanged.connect(self.handle_session_selected)
         s.run_analysis_clicked.connect(self.run_analysis)
+        s.btn_review.clicked.connect(self.show_review)
         s.btn_report.clicked.connect(self.show_report)
         s.btn_load_video.clicked.connect(self.handle_load_video)
         s.btn_play_video.clicked.connect(self.handle_toggle_video)
@@ -710,6 +716,30 @@ class MainWindow(QMainWindow):
         if path:
             success, msg = self.backend.import_joint_data(path)
             self.sidebar.set_status(self.tr("{}").format(msg))
+
+    @Slot()
+    def show_review(self) -> None:
+        """
+        Displays the Review window and updates it with the current method.
+
+        Returns:
+            None (None): Shows or raises the `review_window`.
+        """
+
+        current_video: str = self.sidebar.get_current_video()
+
+        self.review_window.update_video(current_video)
+
+        selected_method: str = self.sidebar.get_selected_method().upper()
+        method: AssessmentMethod = AssessmentMethod[selected_method]
+        self.review_window.set_method(method)
+        self.review_window.update_current_strategy()
+
+        if self.review_window.isHidden():
+            self.review_window.show()
+        else:
+            self.review_window.raise_()
+            self.review_window.activateWindow()
 
     @Slot()
     def show_report(self) -> None:

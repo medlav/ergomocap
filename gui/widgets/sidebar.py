@@ -82,6 +82,7 @@ class ErgoSidebar(QDockWidget):
         combo_method (QComboBox): Dropdown selection layout offering supported framework algorithms.
         export_frames_checkbox (QCheckBox): Checkbox indicating whether output frame buffers should persist.
         btn_analysis (QPushButton): Trigger execution wrapper to launch backend processing logic.
+        btn_review (QPushButton): Trigger shortcut to open live review dashboard for human-in.the-loop analysis.
         btn_report (QPushButton): Navigation trigger shortcut to deploy dashboard analytics displays.
         lbl_video_select (QLabel): Title layout text label header for picking file streams.
         combo_videos (QComboBox): Dropdown selector populated with multi-camera recordings if existing.
@@ -222,9 +223,17 @@ class ErgoSidebar(QDockWidget):
         self.export_frames_checkbox = QCheckBox(text="Export Frames?")
         analysis_lay.addWidget(self.combo_method)
         analysis_lay.addWidget(self.export_frames_checkbox)
+
+        # Analysis Buttons
         self.btn_analysis: QPushButton = QPushButton(self.tr("🏃 RUN ANALYSIS"))
         self.btn_analysis.setObjectName("AnalyzeBtn")
         analysis_lay.addWidget(self.btn_analysis)
+
+        # new Review button
+        self.btn_review: QPushButton = QPushButton(self.tr("🧐 RUN REVIEW"))
+        self.btn_review.setObjectName("ReviewBtn")
+        analysis_lay.addWidget(self.btn_review)
+
         layout.addWidget(analysis_group)
 
         # --- REPORTS ---
