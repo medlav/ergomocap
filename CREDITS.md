@@ -83,7 +83,6 @@
 | numba                         | 0.65.1       | BSD License                                                                    |
 | numpy                         | 1.26.2       | BSD License                                                                    |
 | opencv-contrib-python         | 4.8.1.78     | Apache Software License                                                        |
-| opencv-python                 | 4.11.0.86    | Apache Software License                                                        |
 | opt_einsum                    | 3.4.0        | MIT                                                                            |
 | packaging                     | 23.2         | Apache Software License; BSD License                                           |
 | pandas                        | 2.1.4        | BSD License                                                                    |
