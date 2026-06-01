@@ -41,13 +41,11 @@ Key Features:
     * Signal-based communication for real-time GUI updates and error handling.
 """
 
-import multiprocessing
-import os
 import subprocess
 import sys
 
 from pathlib import Path
-from PySide6.QtCore import QObject, QProcess, Qt, Signal, QThread, Slot
+from PySide6.QtCore import QObject, Qt, Signal, QThread, Slot
 import pandas as pd
 
 from gui.utils.app_paths import ErgoPaths

@@ -19,8 +19,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-"""
-ErgoMoCap: Application Entry Point
+"""ErgoMoCap: Application Entry Point
 ----------------------------------
 Main execution script for the ErgoMoCap ergonomic analysis suite.
 
@@ -30,15 +29,23 @@ instantiation. It serves as the bridge between the system environment and
 the [MainWindow][gui.frontend.MainWindow] component.
 
 Key Initialization Steps:
-- **Environment Setup**: Configures the `QApplication` with system arguments.
-- **Localization**: Detects system `QLocale` and attempts to load corresponding
-  `.qm` translation files from the `intl/generated` directory.
-- **Theming**: Applies the "Fusion" style and the project's custom dark-mode
-  stylesheet via [get_stylesheet][gui.theme.style].
-- **Path Management**: Utilizes [ErgoPaths][gui.utils.app_paths.ErgoPaths] to
-  locate resources like the application icon.
-- **Window Management**: Launches the main GUI and handles the clean exit
-  of the process.
+1.  **Stream Fallbacks**: Safeguards standard I/O streams by intercepting detached or
+    missing system environments and overriding `sys.stdout` and `sys.stderr` with
+    in-memory `io.StringIO` buffers.
+2.  **Multiprocessing Support**: Invokes `multiprocessing.freeze_support()` to ensure
+    proper process spawning behaviors within PyInstaller frozen execution runtimes.
+3.  **Subprocess Redispatching**: Evaluates CLI arguments early to catch specific internal
+    routing directives (e.g., `--run-freemocap-gui`), dynamically self-modifying Python's
+    `sys.path` and working directories to isolate bundled background operations seamlessly.
+4.  **Environment Setup**: Configures the `QApplication` instance with native system arguments.
+5.  **Localization**: Detects system `QLocale` and attempts to load corresponding
+    `.qm` translation files from the `intl/generated` directory.
+6.  **Theming**: Applies the "Fusion" style and the project's custom dark-mode
+    stylesheet via [get_stylesheet][gui.theme.style].
+7.  **Path Management**: Utilizes [ErgoPaths][gui.utils.app_paths.ErgoPaths] to
+    locate resources like the application icon.
+8.  **Window Management**: Launches the main GUI and handles the clean exit
+    of the process.
 """
 
 import multiprocessing
@@ -72,8 +79,10 @@ def main() -> None:
 
     The function orchestrates the following bootstrap sequence:
     1.  Handles PyInstaller multiprocessing requirements via freeze_support().
-    2.  Intercepts custom CLI routing flags (e.g., `--launch-freemocap`) to
-        run bundled background modules dynamically from the frozen environment.
+    2.  Intercepts custom CLI routing flags (e.g., `--run-freemocap-gui`) to
+        run bundled background modules dynamically from the frozen environment,
+        safely altering the working directory to `_internal` if present to guarantee
+        proper asset resolution.
     3.  Creates the `QApplication` and handles CLI arguments.
     4.  Searches for and loads `.qm` translation files from the `intl/generated`
         directory.
@@ -103,7 +112,6 @@ def main() -> None:
             base_path = getattr(sys, "_MEIPASS")
             sys.path.insert(0, base_path)
 
-            # --- FIX: Shift working directory to '_internal' so Blender can resolve relative paths ---
             internal_path = Path(base_path) / "_internal"
             if internal_path.exists():
                 os.chdir(internal_path)
@@ -119,6 +127,7 @@ def main() -> None:
         except Exception as e:
             print(f"Failed to route FreeMoCap subprocess execution: {e}")
             sys.exit(1)
+
     ##########################################
 
     app = QApplication(sys.argv)

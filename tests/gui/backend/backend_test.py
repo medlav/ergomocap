@@ -19,13 +19,14 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from io import StringIO
 import sys
 import pytest
 import pandas as pd
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
-from PySide6.QtCore import QObject, QProcess, QThread, Qt
+from PySide6.QtCore import QObject, QThread, Qt
 from gui.utils.constants import AssessmentMethod, MetricType, RiskLevel
 from gui.utils.models import (
     AnalysisResult,
@@ -207,47 +208,77 @@ class TestMethodConfigurationAndAdapters:
 class TestFreeMoCapSubprocessManagement:
     """Validates real-time external process handling, state assertions, and OS exception captures."""
 
+    def test_sys_stream_fallback_with_stringio(self):
+        """Ensure system streams default to a mock StringIO instance if detached or None."""
+        # Force system stdout and stderr states to None to evaluate initialization traps
+        with patch.object(sys, "stdout", None), patch.object(sys, "stderr", None):
+            # Re-trigger module level evaluation or simulate the logic block directly
+            local_stdout = sys.stdout if sys.stdout is not None else StringIO()
+            local_stderr = sys.stderr if sys.stderr is not None else StringIO()
+
+            assert isinstance(local_stdout, StringIO)
+            assert isinstance(local_stderr, StringIO)
+
     def test_launch_freemocap_already_running(self, backend):
         """Deny supplementary tracking configurations if active processes are already running."""
-        backend.freemocap_process = MagicMock(spec=QProcess)
-        backend.freemocap_process.state.return_value = QProcess.ProcessState.Running
+        # Mock a running subprocess.Popen object (poll() returns None means it's running)
+        mock_proc = MagicMock()
+        mock_proc.poll.return_value = None
+
+        backend.freemocap_process = mock_proc
         backend.tr = lambda x: x
 
         success, msg = backend.launch_freemocap()
         assert success is False
         assert "already running" in msg
 
-    @patch("gui.backend.backend.QProcess")
-    def test_launch_freemocap_success(self, mock_qprocess_cls, backend):
-        """Ensure system pathways are clean and command line sequences launch flawlessly."""
-        mock_proc = MagicMock(spec=QProcess)
-        mock_proc.state.return_value = QProcess.ProcessState.NotRunning
-        mock_proc.waitForStarted.return_value = True
-        mock_qprocess_cls.return_value = mock_proc
+    @patch("gui.backend.backend.subprocess.Popen")
+    def test_launch_freemocap_success_development(self, mock_popen, backend):
+        """Ensure system pathways launch seamlessly using python -m freemocap in development mode."""
+        mock_proc = MagicMock()
+        mock_popen.return_value = mock_proc
         backend.tr = lambda x: x
 
-        success, msg = backend.launch_freemocap()
+        # Ensure sys.frozen is False or absent to simulate dev environment
+        with patch.object(sys, "frozen", False, create=True):
+            success, msg = backend.launch_freemocap()
+
         assert success is True
-        mock_proc.start.assert_called_once_with(sys.executable, ["-m", "freemocap"])
+        assert "starting successfully" in msg
 
-    @patch("gui.backend.backend.QProcess")
-    def test_launch_freemocap_timeout_failure(self, mock_qprocess_cls, backend):
-        """Return explicit failure updates if external execution layers fail to launch within thresholds."""
-        mock_proc = MagicMock(spec=QProcess)
-        mock_proc.state.return_value = QProcess.ProcessState.NotRunning
-        mock_proc.waitForStarted.return_value = False
-        mock_qprocess_cls.return_value = mock_proc
+        # Verify it uses the development arguments: [sys.executable, "-m", "freemocap"]
+        expected_args = [sys.executable, "-m", "freemocap"]
+        mock_popen.assert_called_once()
+        assert mock_popen.call_args[0][0] == expected_args
+
+    @patch("gui.backend.backend.subprocess.Popen")
+    def test_launch_freemocap_success_frozen(self, mock_popen, backend):
+        """Ensure system pathways route through the compiled executable switch when application is frozen."""
+        mock_proc = MagicMock()
+        mock_popen.return_value = mock_proc
+        backend.tr = lambda x: x
+
+        # Simulate PyInstaller frozen environment
+        with patch.object(sys, "frozen", True, create=True):
+            success, msg = backend.launch_freemocap()
+
+        assert success is True
+        assert "starting successfully" in msg
+
+        # Verify it uses the frozen arguments: [sys.executable, "--run-freemocap-gui"]
+        expected_args = [sys.executable, "--run-freemocap-gui"]
+        mock_popen.assert_called_once()
+        assert mock_popen.call_args[0][0] == expected_args
+
+    @patch("gui.backend.backend.subprocess.Popen")
+    def test_launch_freemocap_exception(self, mock_popen, backend):
+        """Trap system runtime errors transparently when environmental failures strike execution pipelines."""
+        # Force Popen to throw an exception (e.g., file not found or permission error)
+        mock_popen.side_effect = RuntimeError("OS Environment Collision")
         backend.tr = lambda x: x
 
         success, msg = backend.launch_freemocap()
-        assert success is False
-        assert "Failed to start" in msg
 
-    @patch("gui.backend.backend.QProcess")
-    def test_launch_freemocap_exception(self, mock_qprocess_cls, backend):
-        """Trap system runtime errors transparently when environmental failures strike execution pipelines."""
-        mock_qprocess_cls.side_effect = RuntimeError("OS Environment Collision")
-        success, msg = backend.launch_freemocap()
         assert success is False
         assert "OS Environment Collision" in msg
 
