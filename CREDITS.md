@@ -64,6 +64,7 @@
 | jupyter_client                | 8.8.0        | BSD License                                                                    |
 | jupyter_core                  | 5.9.1        | BSD-3-Clause                                                                   |
 | kiwisolver                    | 1.5.0        | BSD License                                                                    |
+| lap                           | 0.5.13       | BSD-2-Clause                                                                   |
 | lazy-loader                   | 0.5          | BSD-3-Clause                                                                   |
 | librosa                       | 0.10.1       | ISC License (ISCL)                                                             |
 | libsass                       | 0.21.0       | MIT License                                                                    |

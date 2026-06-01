@@ -4,7 +4,7 @@
 
 | Status | Location | Description |
 | :--- | :--- | :--- |
-| **TODO** | [`main.py:85`](main.py#L85) | implement this |
+| **TODO** | [`main.py:136`](main.py#L136) | implement this |
 | **TODO** | [`pyproject.toml:55`](pyproject.toml#L55) | remove this or specify only for matplotlib |
 | **TODO** | [`pyproject.toml:77`](pyproject.toml#L77) | should be 100% or closer!! |
 | **TODO** | [`README.md:274`](README.md#L274) | Scan** | `pre-commit run generate-todo-list --all-files` | Triggers the local task scanning script. | |
@@ -72,10 +72,9 @@
 | **TODO** | [`gui\frontend.py:233`](gui\frontend.py#L233) | implement a better kill switch for all threads and processes of the app in particular freemocap |
 | **TODO** | [`gui\frontend.py:242`](gui\frontend.py#L242) | add docsrings and include this function in MainWindow Docstringas |
 | **TODO** | [`gui\frontend.py:271`](gui\frontend.py#L271) | make setting view and open as secondary window |
-| **TODO** | [`gui\backend\backend.py:261`](gui\backend\backend.py#L261) | replace tuple with Custom Message Model |
-| **TODO** | [`gui\backend\backend.py:335`](gui\backend\backend.py#L335) | do better handling here and signal error to frontend |
-| **TODO** | [`gui\backend\backend.py:446`](gui\backend\backend.py#L446) | change return type to custom model |
-| **TODO** | [`gui\backend\backend.py:631`](gui\backend\backend.py#L631) | check this and test it |
+| **TODO** | [`gui\backend\backend.py:325`](gui\backend\backend.py#L325) | do better handling here and signal error to frontend |
+| **TODO** | [`gui\backend\backend.py:436`](gui\backend\backend.py#L436) | change return type to custom model |
+| **TODO** | [`gui\backend\backend.py:621`](gui\backend\backend.py#L621) | check this and test it |
 | **TODO** | [`gui\backend\report_backend.py:170`](gui\backend\report_backend.py#L170) | print_reactivate |
 | **TODO** | [`gui\backend\report_backend.py:174`](gui\backend\report_backend.py#L174) | print_reactivate |
 | **TODO** | [`gui\backend\report_backend.py:312`](gui\backend\report_backend.py#L312) | make this programmatic, now is REBA centric |
@@ -103,8 +102,9 @@
 | **TODO** | [`gui\utils\utils.py:88`](gui\utils\utils.py#L88) | review this |
 | **TODO** | [`gui\utils\utils.py:93`](gui\utils\utils.py#L93) | print_reactivate |
 | **TODO** | [`gui\utils\utils.py:94`](gui\utils\utils.py#L94) | print_reactivate |
-| **TODO** | [`gui\views\report_view.py:371`](gui\views\report_view.py#L371) | print_reactivate |
-| **TODO** | [`gui\views\report_view.py:386`](gui\views\report_view.py#L386) | fix not working |
+| **TODO** | [`gui\views\report_view.py:78`](gui\views\report_view.py#L78) | implement logger |
+| **TODO** | [`gui\views\report_view.py:369`](gui\views\report_view.py#L369) | print_reactivate |
+| **TODO** | [`gui\views\report_view.py:384`](gui\views\report_view.py#L384) | fix not working |
 | **TODO** | [`gui\widgets\table_report_widget.py:179`](gui\widgets\table_report_widget.py#L179) | delete this |
 | **TODO** | [`gui\widgets\video_canvas.py:33`](gui\widgets\video_canvas.py#L33) | refractor this code, it's still trying to paint while the annotation is done with freemocap! |
 | **TODO** | [`intl\update_intl.py:133`](intl\update_intl.py#L133) | remove print statement and place proper logging |

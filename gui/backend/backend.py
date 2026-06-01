@@ -41,7 +41,7 @@ Key Features:
     * Signal-based communication for real-time GUI updates and error handling.
 """
 
-import subprocess
+import subprocess  # nosec B404 process inputs are hardcoded and user cannot input args.
 import sys
 
 from pathlib import Path
@@ -281,7 +281,7 @@ class ErgoBackend(QObject):
             # Fire the subprocess using the self-contained interpreter context
             self.freemocap_process = subprocess.Popen(
                 args, creationflags=creation_flags
-            )
+            )  # nosec B603 args are hardcoded, no user input that could inject malicious code
 
             return True, self.tr(
                 "FreeMoCap is starting successfully. Please wait until it opens."

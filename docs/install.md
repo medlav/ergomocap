@@ -19,7 +19,7 @@ Inside the extracted folder, you will find an `_internal` directory. Here is wha
 
 ### Data Directories
 * **Output Location:** Your generated files will be saved inside `_internal/ergomocap_data/`. This directory will store your processed calculation data and annotated videos.
-* **FreeMoCap Integration:** If you are using and setting up **FreeMoCap** for the first time, we highly recommend placing your `freemocap_data` folder right here inside the `_internal` directory.
+* **FreeMoCap Integration:** If you are using and setting up **FreeMoCap** for the first time, we highly recommend locating your `freemocap_data` folder and use the **📂 SELECT FREEMOCAP ROOT** to point ErgoMoCap to the same folder.
 
 > ⚠️ **Important Note:** The `_internal` folder contains a large number of system packages and core files. We strongly suggest **not touching or modifying** anything else inside this directory unless you know exactly what you are doing.
 

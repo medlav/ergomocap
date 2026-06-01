@@ -61,7 +61,7 @@ def run_intl() -> None:
     the [main][main.main] application entry point for runtime translation.
 
     Returns:
-        None (None): The return value is always None.
+        None: The return value is always None.
 
     Raises:
         subprocess.CalledProcessError: If the external Qt tools (`lupdate` or `lrelease`) fail
@@ -80,8 +80,12 @@ def run_intl() -> None:
     root_dir = intl_dir.parent
 
     # Target directory for generated files
-    gen_dir = intl_dir / "generated"
-    gen_dir.mkdir(parents=True, exist_ok=True)
+    try:
+        gen_dir = intl_dir / "generated"
+        gen_dir.mkdir(parents=True, exist_ok=True)
+    except OSError as e:
+        logger.error(f"❌ Failed to create generated directory: {e}")
+        raise
 
     folders_to_scan = ["gui", "calculators"]
     ts_file = gen_dir / "strings_it.ts"
@@ -89,12 +93,16 @@ def run_intl() -> None:
 
     # 2. Manually collect all .py files for a deep scan
     py_files = []
-    for folder in folders_to_scan:
-        target_path = root_dir / folder
-        if target_path.exists():
-            # rglob finds everything in subdirectories too
-            found = [str(f) for f in target_path.rglob("*.py")]
-            py_files.extend(found)
+    try:
+        for folder in folders_to_scan:
+            target_path = root_dir / folder
+            if target_path.exists():
+                # rglob finds everything in subdirectories too
+                found = [str(f) for f in target_path.rglob("*.py")]
+                py_files.extend(found)
+    except OSError as e:
+        logger.error(f"❌ Failed to scan directories: {e}")
+        raise
 
     if not py_files:
         logger.info(f"❌ No .py files found in: {', '.join(folders_to_scan)}")
@@ -108,9 +116,9 @@ def run_intl() -> None:
     try:
         subprocess.run(cmd_update, check=True)
         logger.info(f"✅ TS file updated at: {ts_file}")
-    except Exception as e:
-        logger.info(f"❌ lupdate failed: {e}")
-        return
+    except subprocess.CalledProcessError as e:
+        logger.error(f"❌ lupdate failed: {e}")
+        raise
 
     # 4. Compile strings (lrelease)
     logger.info(
@@ -123,8 +131,9 @@ def run_intl() -> None:
         try:
             subprocess.run(cmd_release, check=True)
             logger.info(f"✅ Binary ready at: {qm_file}")
-        except Exception as e:
-            logger.info(f"❌ lrelease failed: {e}")
+        except subprocess.CalledProcessError as e:
+            logger.error(f"❌ lrelease failed: {e}")
+            raise
 
 
 if __name__ == "__main__":
