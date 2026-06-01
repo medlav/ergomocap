@@ -3166,6 +3166,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#gui.backend.report_backend.ReportBackend.update_method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        update_method
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -8594,6 +8605,17 @@
     <span class="md-ellipsis">
       
         prepare_pdf_export
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gui.backend.report_backend.ReportBackend.update_method" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        update_method
       
     </span>
   </a>
@@ -14115,7 +14137,8 @@ and Table C (Grand Score).</p>
 <span class="normal">160</span>
 <span class="normal">161</span>
 <span class="normal">162</span>
-<span class="normal">163</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">calculate_frame_rula_from_degs</span><span class="p">(</span>
+<span class="normal">163</span>
+<span class="normal">164</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">calculate_frame_rula_from_degs</span><span class="p">(</span>
     <span class="n">degs</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
     <span class="n">muscle_score</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="n">force_score</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
@@ -14208,6 +14231,7 @@ and Table C (Grand Score).</p>
         <span class="s2">&quot;Trunk_Score_RULA&quot;</span><span class="p">:</span> <span class="n">trunk_score</span><span class="p">,</span>
         <span class="s2">&quot;Neck_Score_RULA&quot;</span><span class="p">:</span> <span class="n">neck_score</span><span class="p">,</span>
         <span class="s2">&quot;Wrist_Score_RULA&quot;</span><span class="p">:</span> <span class="n">wrist_score</span><span class="p">,</span>
+        <span class="s2">&quot;Legs_Score_RULA&quot;</span><span class="p">:</span> <span class="n">legs_score</span><span class="p">,</span>
         <span class="s2">&quot;Score_A_RULA&quot;</span><span class="p">:</span> <span class="n">grand_score_a</span><span class="p">,</span>
         <span class="s2">&quot;Score_B_RULA&quot;</span><span class="p">:</span> <span class="n">grand_score_b</span><span class="p">,</span>
         <span class="s2">&quot;Final_Score_RULA&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">final_rula</span><span class="p">),</span>
@@ -16136,7 +16160,8 @@ and Table C (Grand Score).</p>
 <span class="normal">160</span>
 <span class="normal">161</span>
 <span class="normal">162</span>
-<span class="normal">163</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">calculate_frame_rula_from_degs</span><span class="p">(</span>
+<span class="normal">163</span>
+<span class="normal">164</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">calculate_frame_rula_from_degs</span><span class="p">(</span>
     <span class="n">degs</span><span class="p">:</span> <span class="n">NDArray</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">float64</span><span class="p">],</span>
     <span class="n">muscle_score</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
     <span class="n">force_score</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
@@ -16229,6 +16254,7 @@ and Table C (Grand Score).</p>
         <span class="s2">&quot;Trunk_Score_RULA&quot;</span><span class="p">:</span> <span class="n">trunk_score</span><span class="p">,</span>
         <span class="s2">&quot;Neck_Score_RULA&quot;</span><span class="p">:</span> <span class="n">neck_score</span><span class="p">,</span>
         <span class="s2">&quot;Wrist_Score_RULA&quot;</span><span class="p">:</span> <span class="n">wrist_score</span><span class="p">,</span>
+        <span class="s2">&quot;Legs_Score_RULA&quot;</span><span class="p">:</span> <span class="n">legs_score</span><span class="p">,</span>
         <span class="s2">&quot;Score_A_RULA&quot;</span><span class="p">:</span> <span class="n">grand_score_a</span><span class="p">,</span>
         <span class="s2">&quot;Score_B_RULA&quot;</span><span class="p">:</span> <span class="n">grand_score_b</span><span class="p">,</span>
         <span class="s2">&quot;Final_Score_RULA&quot;</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">final_rula</span><span class="p">),</span>
@@ -23900,10 +23926,10 @@ including REBA, RULA, NIOSH, OCRA, EWAS, and Snook &amp; Ciriello.</p>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_thresholds</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">RiskLevel</span><span class="p">]]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns standardized RULA risk thresholds.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">[</span>
-            <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">RiskLevel</span><span class="o">.</span><span class="n">LOW</span><span class="p">),</span>
-            <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">RiskLevel</span><span class="o">.</span><span class="n">MEDIUM</span><span class="p">),</span>
-            <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">RiskLevel</span><span class="o">.</span><span class="n">HIGH</span><span class="p">),</span>
-            <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="n">RiskLevel</span><span class="o">.</span><span class="n">VERY_HIGH</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">RiskLevel</span><span class="o">.</span><span class="n">NEGLIGIBLE</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">RiskLevel</span><span class="o">.</span><span class="n">LOW</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">RiskLevel</span><span class="o">.</span><span class="n">MEDIUM</span><span class="p">),</span>
+            <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="n">RiskLevel</span><span class="o">.</span><span class="n">HIGH</span><span class="p">),</span>
         <span class="p">]</span>
 </code></pre></div></td></tr></table></div>
               </details>
@@ -23986,10 +24012,10 @@ including REBA, RULA, NIOSH, OCRA, EWAS, and Snook &amp; Ciriello.</p>
 <span class="k">def</span><span class="w"> </span><span class="nf">get_thresholds</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">RiskLevel</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns standardized RULA risk thresholds.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="p">[</span>
-        <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">RiskLevel</span><span class="o">.</span><span class="n">LOW</span><span class="p">),</span>
-        <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">RiskLevel</span><span class="o">.</span><span class="n">MEDIUM</span><span class="p">),</span>
-        <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="n">RiskLevel</span><span class="o">.</span><span class="n">HIGH</span><span class="p">),</span>
-        <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="n">RiskLevel</span><span class="o">.</span><span class="n">VERY_HIGH</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">RiskLevel</span><span class="o">.</span><span class="n">NEGLIGIBLE</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">RiskLevel</span><span class="o">.</span><span class="n">LOW</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">RiskLevel</span><span class="o">.</span><span class="n">MEDIUM</span><span class="p">),</span>
+        <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="n">RiskLevel</span><span class="o">.</span><span class="n">HIGH</span><span class="p">),</span>
     <span class="p">]</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -24375,8 +24401,7 @@ protocol into a structured visual format.</p>
 
               <details class="mkdocstrings-source">
                 <summary>Source code in <code>gui\core\report_strategies.py</code></summary>
-                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">148</span>
-<span class="normal">149</span>
+                <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">149</span>
 <span class="normal">150</span>
 <span class="normal">151</span>
 <span class="normal">152</span>
@@ -24417,7 +24442,8 @@ protocol into a structured visual format.</p>
 <span class="normal">187</span>
 <span class="normal">188</span>
 <span class="normal">189</span>
-<span class="normal">190</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">RebaStrategy</span><span class="p">:</span>
+<span class="normal">190</span>
+<span class="normal">191</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">RebaStrategy</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Transform raw ergonomic data into a list of formatted REBA report rows.</span>
 
@@ -24558,8 +24584,7 @@ objects structured for the REBA table layout.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>gui\core\report_strategies.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">164</span>
-<span class="normal">165</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">165</span>
 <span class="normal">166</span>
 <span class="normal">167</span>
 <span class="normal">168</span>
@@ -24584,7 +24609,8 @@ objects structured for the REBA table layout.</p>
 <span class="normal">187</span>
 <span class="normal">188</span>
 <span class="normal">189</span>
-<span class="normal">190</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">ResultRow</span><span class="p">]:</span>
+<span class="normal">190</span>
+<span class="normal">191</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">ResultRow</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Format REBA specific data into table rows.</span>
 
@@ -25161,7 +25187,8 @@ protocol into a structured visual format.</p>
 <span class="normal">142</span>
 <span class="normal">143</span>
 <span class="normal">144</span>
-<span class="normal">145</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">RulaStrategy</span><span class="p">:</span>
+<span class="normal">145</span>
+<span class="normal">146</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">RulaStrategy</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Transform raw ergonomic data into a list of formatted RULA report rows.</span>
 
@@ -25198,6 +25225,7 @@ protocol into a structured visual format.</p>
             <span class="n">ResultRow</span><span class="p">(</span><span class="s2">&quot;Group B (Neck/Trunk)&quot;</span><span class="p">,</span> <span class="s2">&quot;---&quot;</span><span class="p">,</span> <span class="n">is_header</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
             <span class="n">ResultRow</span><span class="p">(</span><span class="s2">&quot;Neck&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Neck_Score_RULA&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)),</span>
             <span class="n">ResultRow</span><span class="p">(</span><span class="s2">&quot;Trunk&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Trunk_Score_RULA&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)),</span>
+            <span class="n">ResultRow</span><span class="p">(</span><span class="s2">&quot;Legs&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Legs_Score_RULA&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)),</span>
             <span class="n">ResultRow</span><span class="p">(</span>
                 <span class="s2">&quot;FINAL RULA&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Final_Score_RULA&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">),</span> <span class="n">is_critical</span><span class="o">=</span><span class="kc">True</span>
             <span class="p">),</span>
@@ -25326,7 +25354,8 @@ objects structured for the RULA table layout.</p>
 <span class="normal">142</span>
 <span class="normal">143</span>
 <span class="normal">144</span>
-<span class="normal">145</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">ResultRow</span><span class="p">]:</span>
+<span class="normal">145</span>
+<span class="normal">146</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">ResultRow</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Format RULA specific data into table rows.</span>
 
@@ -25347,6 +25376,7 @@ objects structured for the RULA table layout.</p>
         <span class="n">ResultRow</span><span class="p">(</span><span class="s2">&quot;Group B (Neck/Trunk)&quot;</span><span class="p">,</span> <span class="s2">&quot;---&quot;</span><span class="p">,</span> <span class="n">is_header</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
         <span class="n">ResultRow</span><span class="p">(</span><span class="s2">&quot;Neck&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Neck_Score_RULA&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)),</span>
         <span class="n">ResultRow</span><span class="p">(</span><span class="s2">&quot;Trunk&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Trunk_Score_RULA&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)),</span>
+        <span class="n">ResultRow</span><span class="p">(</span><span class="s2">&quot;Legs&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Legs_Score_RULA&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">)),</span>
         <span class="n">ResultRow</span><span class="p">(</span>
             <span class="s2">&quot;FINAL RULA&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Final_Score_RULA&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">),</span> <span class="n">is_critical</span><span class="o">=</span><span class="kc">True</span>
         <span class="p">),</span>
@@ -29785,7 +29815,49 @@ metric aggregation, and template preparation for both PDF and DOCX exports.</p>
 <span class="normal">436</span>
 <span class="normal">437</span>
 <span class="normal">438</span>
-<span class="normal">439</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ReportBackend</span><span class="p">(</span><span class="n">QObject</span><span class="p">):</span>
+<span class="normal">439</span>
+<span class="normal">440</span>
+<span class="normal">441</span>
+<span class="normal">442</span>
+<span class="normal">443</span>
+<span class="normal">444</span>
+<span class="normal">445</span>
+<span class="normal">446</span>
+<span class="normal">447</span>
+<span class="normal">448</span>
+<span class="normal">449</span>
+<span class="normal">450</span>
+<span class="normal">451</span>
+<span class="normal">452</span>
+<span class="normal">453</span>
+<span class="normal">454</span>
+<span class="normal">455</span>
+<span class="normal">456</span>
+<span class="normal">457</span>
+<span class="normal">458</span>
+<span class="normal">459</span>
+<span class="normal">460</span>
+<span class="normal">461</span>
+<span class="normal">462</span>
+<span class="normal">463</span>
+<span class="normal">464</span>
+<span class="normal">465</span>
+<span class="normal">466</span>
+<span class="normal">467</span>
+<span class="normal">468</span>
+<span class="normal">469</span>
+<span class="normal">470</span>
+<span class="normal">471</span>
+<span class="normal">472</span>
+<span class="normal">473</span>
+<span class="normal">474</span>
+<span class="normal">475</span>
+<span class="normal">476</span>
+<span class="normal">477</span>
+<span class="normal">478</span>
+<span class="normal">479</span>
+<span class="normal">480</span>
+<span class="normal">481</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ReportBackend</span><span class="p">(</span><span class="n">QObject</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Data processing core for the Report module.</span>
 
@@ -29917,6 +29989,21 @@ metric aggregation, and template preparation for both PDF and DOCX exports.</p>
                 <span class="p">)</span>
             <span class="p">)</span>
 
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="n">AssessmentMethod</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Update the active ergonomic assessment method.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            method (AssessmentMethod): The name of the method to apply (e.g., AssessmentMethod.RULA, AssessmentMethod.REBA).</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None (None): Updates internal state and clears previous strategy if necessary.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;current_method&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_method</span> <span class="o">==</span> <span class="n">method</span><span class="p">:</span>
+            <span class="k">return</span>  <span class="c1"># Don&#39;t change if it&#39;s the same</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_method</span> <span class="o">=</span> <span class="n">method</span>
+
     <span class="k">def</span><span class="w"> </span><span class="nf">prepare_pdf_export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">report_export_request</span><span class="p">:</span> <span class="n">ReportExportRequest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compiles the HTML report context using Jinja2 and emits the generated markup.</span>
@@ -29983,9 +30070,23 @@ metric aggregation, and template preparation for both PDF and DOCX exports.</p>
                 <span class="p">),</span>
                 <span class="kc">None</span><span class="p">,</span>
             <span class="p">)</span>
-            <span class="n">context_metrics</span><span class="p">[</span><span class="s2">&quot;risk&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="n">df</span><span class="p">[</span><span class="n">risk_col</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">risk_col</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span> <span class="k">else</span> <span class="s2">&quot;N/A&quot;</span>
-            <span class="p">)</span>
+            <span class="n">risk_value</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">risk_col</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">risk_col</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span> <span class="k">else</span> <span class="s2">&quot;N/A&quot;</span>
+
+            <span class="n">translated_risk</span> <span class="o">=</span> <span class="s2">&quot;N/A&quot;</span>
+
+            <span class="k">match</span> <span class="n">risk_value</span><span class="p">:</span>
+                <span class="k">case</span> <span class="s2">&quot;negligible&quot;</span><span class="p">:</span>
+                    <span class="n">translated_risk</span> <span class="o">=</span> <span class="s2">&quot;trascurabile&quot;</span>
+                <span class="k">case</span> <span class="s2">&quot;low&quot;</span><span class="p">:</span>
+                    <span class="n">translated_risk</span> <span class="o">=</span> <span class="s2">&quot;basso&quot;</span>
+                <span class="k">case</span> <span class="s2">&quot;medium&quot;</span><span class="p">:</span>
+                    <span class="n">translated_risk</span> <span class="o">=</span> <span class="s2">&quot;medio&quot;</span>
+                <span class="k">case</span> <span class="s2">&quot;high&quot;</span><span class="p">:</span>
+                    <span class="n">translated_risk</span> <span class="o">=</span> <span class="s2">&quot;alto&quot;</span>
+                <span class="k">case</span> <span class="s2">&quot;very_high&quot;</span><span class="p">:</span>
+                    <span class="n">translated_risk</span> <span class="o">=</span> <span class="s2">&quot;altissimo&quot;</span>
+
+            <span class="n">context_metrics</span><span class="p">[</span><span class="s2">&quot;risk&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">translated_risk</span>
 
             <span class="c1"># Convert chart bytes to base64 for HTML embedding</span>
             <span class="n">img_base64</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">report_export_request</span><span class="o">.</span><span class="n">chart_data</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span>
@@ -30052,7 +30153,7 @@ metric aggregation, and template preparation for both PDF and DOCX exports.</p>
                 <span class="s2">&quot;tot_a&quot;</span><span class="p">:</span> <span class="n">m_raw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Score_A_</span><span class="si">{</span><span class="n">method_suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
                 <span class="s2">&quot;tot_b&quot;</span><span class="p">:</span> <span class="n">m_raw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Score_B_</span><span class="si">{</span><span class="n">method_suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
                 <span class="s2">&quot;score_c&quot;</span><span class="p">:</span> <span class="n">m_raw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Score_C_</span><span class="si">{</span><span class="n">method_suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
-                <span class="s2">&quot;reba_final&quot;</span><span class="p">:</span> <span class="n">m_raw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final_Score_</span><span class="si">{</span><span class="n">method_suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+                <span class="s2">&quot;score_finale&quot;</span><span class="p">:</span> <span class="n">m_raw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final_Score_</span><span class="si">{</span><span class="n">method_suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
             <span class="p">}</span>
 
             <span class="n">risk_col</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span>
@@ -30063,9 +30164,22 @@ metric aggregation, and template preparation for both PDF and DOCX exports.</p>
                 <span class="p">),</span>
                 <span class="kc">None</span><span class="p">,</span>
             <span class="p">)</span>
-            <span class="n">context</span><span class="p">[</span><span class="s2">&quot;rischio&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-                <span class="n">df</span><span class="p">[</span><span class="n">risk_col</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">risk_col</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span> <span class="k">else</span> <span class="s2">&quot;N/A&quot;</span>
-            <span class="p">)</span>
+            <span class="n">risk_value</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">risk_col</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">risk_col</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span> <span class="k">else</span> <span class="s2">&quot;N/A&quot;</span>
+            <span class="n">translated_risk</span> <span class="o">=</span> <span class="s2">&quot;N/A&quot;</span>
+
+            <span class="k">match</span> <span class="n">risk_value</span><span class="p">:</span>
+                <span class="k">case</span> <span class="s2">&quot;negligible&quot;</span><span class="p">:</span>
+                    <span class="n">translated_risk</span> <span class="o">=</span> <span class="s2">&quot;trascurabile&quot;</span>
+                <span class="k">case</span> <span class="s2">&quot;low&quot;</span><span class="p">:</span>
+                    <span class="n">translated_risk</span> <span class="o">=</span> <span class="s2">&quot;basso&quot;</span>
+                <span class="k">case</span> <span class="s2">&quot;medium&quot;</span><span class="p">:</span>
+                    <span class="n">translated_risk</span> <span class="o">=</span> <span class="s2">&quot;medio&quot;</span>
+                <span class="k">case</span> <span class="s2">&quot;high&quot;</span><span class="p">:</span>
+                    <span class="n">translated_risk</span> <span class="o">=</span> <span class="s2">&quot;alto&quot;</span>
+                <span class="k">case</span> <span class="s2">&quot;very_high&quot;</span><span class="p">:</span>
+                    <span class="n">translated_risk</span> <span class="o">=</span> <span class="s2">&quot;altissimo&quot;</span>
+
+            <span class="n">context</span><span class="p">[</span><span class="s2">&quot;rischio&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">translated_risk</span>
 
             <span class="n">template_path</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">template_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">method_suffix</span><span class="si">}</span><span class="s2">_report_template.docx&quot;</span>
@@ -30258,36 +30372,7 @@ thread execution. Completion status is dispatched via the <code>report_export_fi
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>gui\backend\report_backend.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">281</span>
-<span class="normal">282</span>
-<span class="normal">283</span>
-<span class="normal">284</span>
-<span class="normal">285</span>
-<span class="normal">286</span>
-<span class="normal">287</span>
-<span class="normal">288</span>
-<span class="normal">289</span>
-<span class="normal">290</span>
-<span class="normal">291</span>
-<span class="normal">292</span>
-<span class="normal">293</span>
-<span class="normal">294</span>
-<span class="normal">295</span>
-<span class="normal">296</span>
-<span class="normal">297</span>
-<span class="normal">298</span>
-<span class="normal">299</span>
-<span class="normal">300</span>
-<span class="normal">301</span>
-<span class="normal">302</span>
-<span class="normal">303</span>
-<span class="normal">304</span>
-<span class="normal">305</span>
-<span class="normal">306</span>
-<span class="normal">307</span>
-<span class="normal">308</span>
-<span class="normal">309</span>
-<span class="normal">310</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">310</span>
 <span class="normal">311</span>
 <span class="normal">312</span>
 <span class="normal">313</span>
@@ -30346,7 +30431,49 @@ thread execution. Completion status is dispatched via the <code>report_export_fi
 <span class="normal">366</span>
 <span class="normal">367</span>
 <span class="normal">368</span>
-<span class="normal">369</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@Slot</span><span class="p">(</span><span class="n">ReportExportRequest</span><span class="p">)</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@Slot</span><span class="p">(</span><span class="n">ReportExportRequest</span><span class="p">)</span>
 <span class="k">def</span><span class="w"> </span><span class="nf">export_to_docx</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">report_export_request</span><span class="p">:</span> <span class="n">ReportExportRequest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generates and saves a Word document report synchronously.</span>
@@ -30394,7 +30521,7 @@ thread execution. Completion status is dispatched via the <code>report_export_fi
             <span class="s2">&quot;tot_a&quot;</span><span class="p">:</span> <span class="n">m_raw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Score_A_</span><span class="si">{</span><span class="n">method_suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
             <span class="s2">&quot;tot_b&quot;</span><span class="p">:</span> <span class="n">m_raw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Score_B_</span><span class="si">{</span><span class="n">method_suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
             <span class="s2">&quot;score_c&quot;</span><span class="p">:</span> <span class="n">m_raw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Score_C_</span><span class="si">{</span><span class="n">method_suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
-            <span class="s2">&quot;reba_final&quot;</span><span class="p">:</span> <span class="n">m_raw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final_Score_</span><span class="si">{</span><span class="n">method_suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
+            <span class="s2">&quot;score_finale&quot;</span><span class="p">:</span> <span class="n">m_raw</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Final_Score_</span><span class="si">{</span><span class="n">method_suffix</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">),</span>
         <span class="p">}</span>
 
         <span class="n">risk_col</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span>
@@ -30405,9 +30532,22 @@ thread execution. Completion status is dispatched via the <code>report_export_fi
             <span class="p">),</span>
             <span class="kc">None</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="n">context</span><span class="p">[</span><span class="s2">&quot;rischio&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">df</span><span class="p">[</span><span class="n">risk_col</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">risk_col</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span> <span class="k">else</span> <span class="s2">&quot;N/A&quot;</span>
-        <span class="p">)</span>
+        <span class="n">risk_value</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">risk_col</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">risk_col</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span> <span class="k">else</span> <span class="s2">&quot;N/A&quot;</span>
+        <span class="n">translated_risk</span> <span class="o">=</span> <span class="s2">&quot;N/A&quot;</span>
+
+        <span class="k">match</span> <span class="n">risk_value</span><span class="p">:</span>
+            <span class="k">case</span> <span class="s2">&quot;negligible&quot;</span><span class="p">:</span>
+                <span class="n">translated_risk</span> <span class="o">=</span> <span class="s2">&quot;trascurabile&quot;</span>
+            <span class="k">case</span> <span class="s2">&quot;low&quot;</span><span class="p">:</span>
+                <span class="n">translated_risk</span> <span class="o">=</span> <span class="s2">&quot;basso&quot;</span>
+            <span class="k">case</span> <span class="s2">&quot;medium&quot;</span><span class="p">:</span>
+                <span class="n">translated_risk</span> <span class="o">=</span> <span class="s2">&quot;medio&quot;</span>
+            <span class="k">case</span> <span class="s2">&quot;high&quot;</span><span class="p">:</span>
+                <span class="n">translated_risk</span> <span class="o">=</span> <span class="s2">&quot;alto&quot;</span>
+            <span class="k">case</span> <span class="s2">&quot;very_high&quot;</span><span class="p">:</span>
+                <span class="n">translated_risk</span> <span class="o">=</span> <span class="s2">&quot;altissimo&quot;</span>
+
+        <span class="n">context</span><span class="p">[</span><span class="s2">&quot;rischio&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">translated_risk</span>
 
         <span class="n">template_path</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">template_dir</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">method_suffix</span><span class="si">}</span><span class="s2">_report_template.docx&quot;</span>
@@ -30516,49 +30656,7 @@ for presentation inside frontend graphical visualizations.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>gui\backend\report_backend.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">371</span>
-<span class="normal">372</span>
-<span class="normal">373</span>
-<span class="normal">374</span>
-<span class="normal">375</span>
-<span class="normal">376</span>
-<span class="normal">377</span>
-<span class="normal">378</span>
-<span class="normal">379</span>
-<span class="normal">380</span>
-<span class="normal">381</span>
-<span class="normal">382</span>
-<span class="normal">383</span>
-<span class="normal">384</span>
-<span class="normal">385</span>
-<span class="normal">386</span>
-<span class="normal">387</span>
-<span class="normal">388</span>
-<span class="normal">389</span>
-<span class="normal">390</span>
-<span class="normal">391</span>
-<span class="normal">392</span>
-<span class="normal">393</span>
-<span class="normal">394</span>
-<span class="normal">395</span>
-<span class="normal">396</span>
-<span class="normal">397</span>
-<span class="normal">398</span>
-<span class="normal">399</span>
-<span class="normal">400</span>
-<span class="normal">401</span>
-<span class="normal">402</span>
-<span class="normal">403</span>
-<span class="normal">404</span>
-<span class="normal">405</span>
-<span class="normal">406</span>
-<span class="normal">407</span>
-<span class="normal">408</span>
-<span class="normal">409</span>
-<span class="normal">410</span>
-<span class="normal">411</span>
-<span class="normal">412</span>
-<span class="normal">413</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">413</span>
 <span class="normal">414</span>
 <span class="normal">415</span>
 <span class="normal">416</span>
@@ -30584,7 +30682,49 @@ for presentation inside frontend graphical visualizations.</p>
 <span class="normal">436</span>
 <span class="normal">437</span>
 <span class="normal">438</span>
-<span class="normal">439</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_chart_distribution_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">]:</span>
+<span class="normal">439</span>
+<span class="normal">440</span>
+<span class="normal">441</span>
+<span class="normal">442</span>
+<span class="normal">443</span>
+<span class="normal">444</span>
+<span class="normal">445</span>
+<span class="normal">446</span>
+<span class="normal">447</span>
+<span class="normal">448</span>
+<span class="normal">449</span>
+<span class="normal">450</span>
+<span class="normal">451</span>
+<span class="normal">452</span>
+<span class="normal">453</span>
+<span class="normal">454</span>
+<span class="normal">455</span>
+<span class="normal">456</span>
+<span class="normal">457</span>
+<span class="normal">458</span>
+<span class="normal">459</span>
+<span class="normal">460</span>
+<span class="normal">461</span>
+<span class="normal">462</span>
+<span class="normal">463</span>
+<span class="normal">464</span>
+<span class="normal">465</span>
+<span class="normal">466</span>
+<span class="normal">467</span>
+<span class="normal">468</span>
+<span class="normal">469</span>
+<span class="normal">470</span>
+<span class="normal">471</span>
+<span class="normal">472</span>
+<span class="normal">473</span>
+<span class="normal">474</span>
+<span class="normal">475</span>
+<span class="normal">476</span>
+<span class="normal">477</span>
+<span class="normal">478</span>
+<span class="normal">479</span>
+<span class="normal">480</span>
+<span class="normal">481</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_chart_distribution_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Calculates distributions using strict column targeting based on the active method.</span>
 
@@ -30998,22 +31138,7 @@ from engaging in unsafe GUI-bound rendering calls.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>gui\backend\report_backend.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">194</span>
-<span class="normal">195</span>
-<span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span>
-<span class="normal">201</span>
-<span class="normal">202</span>
-<span class="normal">203</span>
-<span class="normal">204</span>
-<span class="normal">205</span>
-<span class="normal">206</span>
-<span class="normal">207</span>
-<span class="normal">208</span>
-<span class="normal">209</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">209</span>
 <span class="normal">210</span>
 <span class="normal">211</span>
 <span class="normal">212</span>
@@ -31083,7 +31208,36 @@ from engaging in unsafe GUI-bound rendering calls.</p>
 <span class="normal">276</span>
 <span class="normal">277</span>
 <span class="normal">278</span>
-<span class="normal">279</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">prepare_pdf_export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">report_export_request</span><span class="p">:</span> <span class="n">ReportExportRequest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">prepare_pdf_export</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">report_export_request</span><span class="p">:</span> <span class="n">ReportExportRequest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compiles the HTML report context using Jinja2 and emits the generated markup.</span>
 
@@ -31149,9 +31303,23 @@ from engaging in unsafe GUI-bound rendering calls.</p>
             <span class="p">),</span>
             <span class="kc">None</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="n">context_metrics</span><span class="p">[</span><span class="s2">&quot;risk&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
-            <span class="n">df</span><span class="p">[</span><span class="n">risk_col</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">risk_col</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span> <span class="k">else</span> <span class="s2">&quot;N/A&quot;</span>
-        <span class="p">)</span>
+        <span class="n">risk_value</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">risk_col</span><span class="p">]</span><span class="o">.</span><span class="n">mode</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">risk_col</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">df</span><span class="o">.</span><span class="n">empty</span> <span class="k">else</span> <span class="s2">&quot;N/A&quot;</span>
+
+        <span class="n">translated_risk</span> <span class="o">=</span> <span class="s2">&quot;N/A&quot;</span>
+
+        <span class="k">match</span> <span class="n">risk_value</span><span class="p">:</span>
+            <span class="k">case</span> <span class="s2">&quot;negligible&quot;</span><span class="p">:</span>
+                <span class="n">translated_risk</span> <span class="o">=</span> <span class="s2">&quot;trascurabile&quot;</span>
+            <span class="k">case</span> <span class="s2">&quot;low&quot;</span><span class="p">:</span>
+                <span class="n">translated_risk</span> <span class="o">=</span> <span class="s2">&quot;basso&quot;</span>
+            <span class="k">case</span> <span class="s2">&quot;medium&quot;</span><span class="p">:</span>
+                <span class="n">translated_risk</span> <span class="o">=</span> <span class="s2">&quot;medio&quot;</span>
+            <span class="k">case</span> <span class="s2">&quot;high&quot;</span><span class="p">:</span>
+                <span class="n">translated_risk</span> <span class="o">=</span> <span class="s2">&quot;alto&quot;</span>
+            <span class="k">case</span> <span class="s2">&quot;very_high&quot;</span><span class="p">:</span>
+                <span class="n">translated_risk</span> <span class="o">=</span> <span class="s2">&quot;altissimo&quot;</span>
+
+        <span class="n">context_metrics</span><span class="p">[</span><span class="s2">&quot;risk&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">translated_risk</span>
 
         <span class="c1"># Convert chart bytes to base64 for HTML embedding</span>
         <span class="n">img_base64</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">report_export_request</span><span class="o">.</span><span class="n">chart_data</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span>
@@ -31169,6 +31337,109 @@ from engaging in unsafe GUI-bound rendering calls.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">error_occurred</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span>
             <span class="n">ErrorInfo</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="s2">&quot;PDF Preparation Error&quot;</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">))</span>
         <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h6 id="gui.backend.report_backend.ReportBackend.update_method" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">update_method</span><span class="p">(</span><span class="n">method</span><span class="p">)</span></code>
+
+</h6>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Update the active ergonomic assessment method.</p>
+
+
+<p><span class="doc-section-title">Parameters:</span></p>
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Type</th>
+          <th>Description</th>
+          <th>Default</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+            <td>
+                <code>method</code>
+            </td>
+            <td>
+                  <code><a class="autorefs autorefs-internal" title="AssessmentMethod (gui.utils.constants.AssessmentMethod)" href="#gui.utils.constants.AssessmentMethod">AssessmentMethod</a></code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>The name of the method to apply (e.g., AssessmentMethod.RULA, AssessmentMethod.REBA).</p>
+              </div>
+            </td>
+            <td>
+                <em>required</em>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+    <p><span class="doc-section-title">Returns:</span></p>
+    <table>
+      <thead>
+        <tr>
+<th>Name</th>          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr class="doc-section-item">
+<td><code>None</code></td>            <td>
+                  <code>None</code>
+            </td>
+            <td>
+              <div class="doc-md-description">
+                <p>Updates internal state and clears previous strategy if necessary.</p>
+              </div>
+            </td>
+          </tr>
+      </tbody>
+    </table>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>gui\backend\report_backend.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">update_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="n">AssessmentMethod</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Update the active ergonomic assessment method.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        method (AssessmentMethod): The name of the method to apply (e.g., AssessmentMethod.RULA, AssessmentMethod.REBA).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None (None): Updates internal state and clears previous strategy if necessary.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;current_method&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_method</span> <span class="o">==</span> <span class="n">method</span><span class="p">:</span>
+        <span class="k">return</span>  <span class="c1"># Don&#39;t change if it&#39;s the same</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">current_method</span> <span class="o">=</span> <span class="n">method</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -41083,7 +41354,10 @@ into medical-grade reports.</p>
 <span class="normal">551</span>
 <span class="normal">552</span>
 <span class="normal">553</span>
-<span class="normal">554</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ReportView</span><span class="p">(</span><span class="n">QMainWindow</span><span class="p">):</span>
+<span class="normal">554</span>
+<span class="normal">555</span>
+<span class="normal">556</span>
+<span class="normal">557</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ReportView</span><span class="p">(</span><span class="n">QMainWindow</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The main dashboard window for ergonomic report generation and visualization.</span>
 
@@ -41540,6 +41814,8 @@ into medical-grade reports.</p>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">current_method</span> <span class="o">=</span> <span class="n">method</span>
 
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_current_strategy</span><span class="p">()</span>
+
     <span class="k">def</span><span class="w"> </span><span class="nf">update_current_strategy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Synchronize the UI strategy with the currently selected assessment method.</span>
@@ -41549,13 +41825,14 @@ into medical-grade reports.</p>
 <span class="sd">                [ReportStrategy][gui.core.report_strategies.ReportStrategy].</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">match</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_method</span><span class="p">:</span>
-            <span class="k">case</span> <span class="s2">&quot;REBA&quot;</span><span class="p">:</span>
+            <span class="k">case</span> <span class="n">AssessmentMethod</span><span class="o">.</span><span class="n">REBA</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">current_strategy</span> <span class="o">=</span> <span class="n">RebaStrategy</span><span class="p">()</span>
 
-            <span class="k">case</span> <span class="s2">&quot;RULA&quot;</span><span class="p">:</span>
+            <span class="k">case</span> <span class="n">AssessmentMethod</span><span class="o">.</span><span class="n">RULA</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">current_strategy</span> <span class="o">=</span> <span class="n">RulaStrategy</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">report_widget</span><span class="o">.</span><span class="n">update_strategy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_strategy</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">update_method</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_method</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
               </details>
@@ -43037,7 +43314,9 @@ the provided dataset.</p>
 <span class="normal">533</span>
 <span class="normal">534</span>
 <span class="normal">535</span>
-<span class="normal">536</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">set_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="n">AssessmentMethod</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">536</span>
+<span class="normal">537</span>
+<span class="normal">538</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">set_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="n">AssessmentMethod</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Update the active ergonomic assessment method.</span>
 
@@ -43053,6 +43332,8 @@ the provided dataset.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">strategy</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">current_method</span> <span class="o">=</span> <span class="n">method</span>
+
+    <span class="bp">self</span><span class="o">.</span><span class="n">update_current_strategy</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -43099,9 +43380,7 @@ the provided dataset.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>gui\views\report_view.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">538</span>
-<span class="normal">539</span>
-<span class="normal">540</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">540</span>
 <span class="normal">541</span>
 <span class="normal">542</span>
 <span class="normal">543</span>
@@ -43115,7 +43394,10 @@ the provided dataset.</p>
 <span class="normal">551</span>
 <span class="normal">552</span>
 <span class="normal">553</span>
-<span class="normal">554</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">update_current_strategy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">554</span>
+<span class="normal">555</span>
+<span class="normal">556</span>
+<span class="normal">557</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">update_current_strategy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Synchronize the UI strategy with the currently selected assessment method.</span>
 
@@ -43124,13 +43406,14 @@ the provided dataset.</p>
 <span class="sd">            [ReportStrategy][gui.core.report_strategies.ReportStrategy].</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">match</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_method</span><span class="p">:</span>
-        <span class="k">case</span> <span class="s2">&quot;REBA&quot;</span><span class="p">:</span>
+        <span class="k">case</span> <span class="n">AssessmentMethod</span><span class="o">.</span><span class="n">REBA</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">current_strategy</span> <span class="o">=</span> <span class="n">RebaStrategy</span><span class="p">()</span>
 
-        <span class="k">case</span> <span class="s2">&quot;RULA&quot;</span><span class="p">:</span>
+        <span class="k">case</span> <span class="n">AssessmentMethod</span><span class="o">.</span><span class="n">RULA</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">current_strategy</span> <span class="o">=</span> <span class="n">RulaStrategy</span><span class="p">()</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">report_widget</span><span class="o">.</span><span class="n">update_strategy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_strategy</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">backend</span><span class="o">.</span><span class="n">update_method</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_method</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -43978,7 +44261,9 @@ and processing logic.</p>
 <span class="normal">416</span>
 <span class="normal">417</span>
 <span class="normal">418</span>
-<span class="normal">419</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ErgoSidebar</span><span class="p">(</span><span class="n">QDockWidget</span><span class="p">):</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">ErgoSidebar</span><span class="p">(</span><span class="n">QDockWidget</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A scrollable control panel for managing ergonomic analysis workflows.</span>
 
@@ -44133,7 +44418,9 @@ and processing logic.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">combo_method</span><span class="o">.</span><span class="n">addItems</span><span class="p">(</span>
             <span class="p">[</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;REBA&quot;</span><span class="p">),</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;RULA (Unstable)&quot;</span><span class="p">),</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;RULA&quot;</span><span class="p">),</span>
+                <span class="c1"># NOTE IF U RENAME THESE AND ADD THE CORRESPONDING TO THE ASSESSMENT METHOD ENUM \</span>
+                <span class="c1"># IT WILL CAUSE BUGS IF THE CALCULATOR IS NOT IMPLEMENTED! KEEP THESE NAMES UNTIL THE END.</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;OCRA (Planned)&quot;</span><span class="p">),</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;EWAS (Planned)&quot;</span><span class="p">),</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;NIOSH (Planned)&quot;</span><span class="p">),</span>
@@ -44397,9 +44684,7 @@ signals, effectively proxying widget interactions to the application controller.
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>gui\widgets\sidebar.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">303</span>
-<span class="normal">304</span>
-<span class="normal">305</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">305</span>
 <span class="normal">306</span>
 <span class="normal">307</span>
 <span class="normal">308</span>
@@ -44410,7 +44695,9 @@ signals, effectively proxying widget interactions to the application controller.
 <span class="normal">313</span>
 <span class="normal">314</span>
 <span class="normal">315</span>
-<span class="normal">316</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">_connect_internal_signals</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">_connect_internal_signals</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Establish signal-slot connections for internal child widgets.</span>
 
@@ -44643,7 +44930,9 @@ left-aligned dock.</p>
 <span class="normal">298</span>
 <span class="normal">299</span>
 <span class="normal">300</span>
-<span class="normal">301</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">_setup_ui</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">_setup_ui</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Construct the visual layout of the sidebar.</span>
 
@@ -44726,7 +45015,9 @@ left-aligned dock.</p>
     <span class="bp">self</span><span class="o">.</span><span class="n">combo_method</span><span class="o">.</span><span class="n">addItems</span><span class="p">(</span>
         <span class="p">[</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;REBA&quot;</span><span class="p">),</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;RULA (Unstable)&quot;</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;RULA&quot;</span><span class="p">),</span>
+            <span class="c1"># NOTE IF U RENAME THESE AND ADD THE CORRESPONDING TO THE ASSESSMENT METHOD ENUM \</span>
+            <span class="c1"># IT WILL CAUSE BUGS IF THE CALCULATOR IS NOT IMPLEMENTED! KEEP THESE NAMES UNTIL THE END.</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;OCRA (Planned)&quot;</span><span class="p">),</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;EWAS (Planned)&quot;</span><span class="p">),</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">tr</span><span class="p">(</span><span class="s2">&quot;NIOSH (Planned)&quot;</span><span class="p">),</span>
@@ -44860,14 +45151,14 @@ left-aligned dock.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>gui\widgets\sidebar.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">367</span>
-<span class="normal">368</span>
-<span class="normal">369</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">369</span>
 <span class="normal">370</span>
 <span class="normal">371</span>
 <span class="normal">372</span>
 <span class="normal">373</span>
-<span class="normal">374</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_current_session</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_current_session</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the currently selected session name.</span>
 
@@ -44920,14 +45211,14 @@ left-aligned dock.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>gui\widgets\sidebar.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">376</span>
-<span class="normal">377</span>
-<span class="normal">378</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">378</span>
 <span class="normal">379</span>
 <span class="normal">380</span>
 <span class="normal">381</span>
 <span class="normal">382</span>
-<span class="normal">383</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_current_video</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_current_video</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the currently selected video name.</span>
 
@@ -44980,15 +45271,15 @@ left-aligned dock.</p>
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>gui\widgets\sidebar.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">385</span>
-<span class="normal">386</span>
-<span class="normal">387</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">387</span>
 <span class="normal">388</span>
 <span class="normal">389</span>
 <span class="normal">390</span>
 <span class="normal">391</span>
 <span class="normal">392</span>
-<span class="normal">393</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_selected_method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_selected_method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Returns the currently selected analysis method.</span>
 
@@ -45052,9 +45343,7 @@ frontend orchestrator slot <a class="autorefs autorefs-internal" title="run_anal
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>gui\widgets\sidebar.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">395</span>
-<span class="normal">396</span>
-<span class="normal">397</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">397</span>
 <span class="normal">398</span>
 <span class="normal">399</span>
 <span class="normal">400</span>
@@ -45076,7 +45365,9 @@ frontend orchestrator slot <a class="autorefs autorefs-internal" title="run_anal
 <span class="normal">416</span>
 <span class="normal">417</span>
 <span class="normal">418</span>
-<span class="normal">419</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">handle_run_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">handle_run_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Map selected GUI configurations to structured downstream events.</span>
 
@@ -45177,9 +45468,7 @@ frontend orchestrator slot <a class="autorefs autorefs-internal" title="run_anal
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>gui\widgets\sidebar.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">355</span>
-<span class="normal">356</span>
-<span class="normal">357</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">357</span>
 <span class="normal">358</span>
 <span class="normal">359</span>
 <span class="normal">360</span>
@@ -45187,7 +45476,9 @@ frontend orchestrator slot <a class="autorefs autorefs-internal" title="run_anal
 <span class="normal">362</span>
 <span class="normal">363</span>
 <span class="normal">364</span>
-<span class="normal">365</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">set_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">set_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Update the status label text in the UI.</span>
 
@@ -45274,9 +45565,7 @@ frontend orchestrator slot <a class="autorefs autorefs-internal" title="run_anal
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>gui\widgets\sidebar.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">320</span>
-<span class="normal">321</span>
-<span class="normal">322</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">322</span>
 <span class="normal">323</span>
 <span class="normal">324</span>
 <span class="normal">325</span>
@@ -45288,7 +45577,9 @@ frontend orchestrator slot <a class="autorefs autorefs-internal" title="run_anal
 <span class="normal">331</span>
 <span class="normal">332</span>
 <span class="normal">333</span>
-<span class="normal">334</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">update_sessions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sessions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">update_sessions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">sessions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Refresh the session selection list.</span>
 
@@ -45379,9 +45670,7 @@ frontend orchestrator slot <a class="autorefs autorefs-internal" title="run_anal
 
             <details class="mkdocstrings-source">
               <summary>Source code in <code>gui\widgets\sidebar.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">336</span>
-<span class="normal">337</span>
-<span class="normal">338</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">338</span>
 <span class="normal">339</span>
 <span class="normal">340</span>
 <span class="normal">341</span>
@@ -45396,7 +45685,9 @@ frontend orchestrator slot <a class="autorefs autorefs-internal" title="run_anal
 <span class="normal">350</span>
 <span class="normal">351</span>
 <span class="normal">352</span>
-<span class="normal">353</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">update_videos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">videos</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">update_videos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">videos</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Refresh the available video list and update playback controls.</span>
 
