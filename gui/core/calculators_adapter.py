@@ -221,10 +221,10 @@ class RULAAdapter(BaseErgoAdapter):
     def get_thresholds() -> list[tuple[int, RiskLevel]]:
         """Returns standardized RULA risk thresholds."""
         return [
-            (2, RiskLevel.LOW),
-            (4, RiskLevel.MEDIUM),
-            (6, RiskLevel.HIGH),
-            (7, RiskLevel.VERY_HIGH),
+            (1, RiskLevel.NEGLIGIBLE),
+            (3, RiskLevel.LOW),
+            (5, RiskLevel.MEDIUM),
+            (7, RiskLevel.HIGH),
         ]
 
 

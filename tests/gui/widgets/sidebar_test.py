@@ -84,11 +84,11 @@ def test_getters_and_setters(sidebar):
     sidebar.combo_videos.setCurrentIndex(0)
 
     # Fix: Reflect the modified items array schema present in sidebar.py layout ("RULA (Unstable)")
-    sidebar.combo_method.setCurrentText("RULA (Unstable)")
+    sidebar.combo_method.setCurrentText("REBA")
 
     assert sidebar.get_current_session() == "S2"
     assert sidebar.get_current_video() == "V1"
-    assert sidebar.get_selected_method() == "RULA (Unstable)"
+    assert sidebar.get_selected_method() == "REBA"
 
     sidebar.set_status("Running Framework pipeline...")
     assert "STATUS: Running Framework pipeline..." in sidebar.status_label.toPlainText()

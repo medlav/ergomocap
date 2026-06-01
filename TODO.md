@@ -7,7 +7,7 @@
 | **TODO** | [`main.py:136`](main.py#L136) | implement this |
 | **TODO** | [`pyproject.toml:55`](pyproject.toml#L55) | remove this or specify only for matplotlib |
 | **TODO** | [`pyproject.toml:77`](pyproject.toml#L77) | should be 100% or closer!! |
-| **TODO** | [`README.md:274`](README.md#L274) | Scan** | `pre-commit run generate-todo-list --all-files` | Triggers the local task scanning script. | |
+| **TODO** | [`README.md:279`](README.md#L279) | Scan** | `pre-commit run generate-todo-list --all-files` | Triggers the local task scanning script. | |
 | **TODO** | [`calculators\calculators.py:35`](calculators\calculators.py#L35) | all niosh_calculator/ code and relative adapter/ is to be done |
 | **TODO** | [`calculators\calculators.py:38`](calculators\calculators.py#L38) | all ocra_calculator/ code and relative adapter/ is to be done |
 | **TODO** | [`calculators\calculators.py:41`](calculators\calculators.py#L41) | all ewas_calculator/ code and relative adapter/ is to be done |
@@ -77,7 +77,7 @@
 | **TODO** | [`gui\backend\backend.py:621`](gui\backend\backend.py#L621) | check this and test it |
 | **TODO** | [`gui\backend\report_backend.py:170`](gui\backend\report_backend.py#L170) | print_reactivate |
 | **TODO** | [`gui\backend\report_backend.py:174`](gui\backend\report_backend.py#L174) | print_reactivate |
-| **TODO** | [`gui\backend\report_backend.py:312`](gui\backend\report_backend.py#L312) | make this programmatic, now is REBA centric |
+| **TODO** | [`gui\backend\report_backend.py:341`](gui\backend\report_backend.py#L341) | make this programmatic, now is REBA centric |
 | **TODO** | [`gui\core\calculators_adapter.py:53`](gui\core\calculators_adapter.py#L53) | all niosh_calculator/ code and relative adapter/ is to be done |
 | **TODO** | [`gui\core\calculators_adapter.py:54`](gui\core\calculators_adapter.py#L54) | all ocra_calculator/ code and relative adapter/ is to be done |
 | **TODO** | [`gui\core\calculators_adapter.py:55`](gui\core\calculators_adapter.py#L55) | all ewas_calculator/ code and relative adapter/ is to be done |
@@ -92,8 +92,8 @@
 | **TODO** | [`gui\core\calculators_adapter.py:260`](gui\core\calculators_adapter.py#L260) | all ocra_calculator/ code and relative adapter/ is to be done |
 | **TODO** | [`gui\core\calculators_adapter.py:289`](gui\core\calculators_adapter.py#L289) | all ewas_calculator/ code and relative adapter/ is to be done |
 | **TODO** | [`gui\core\calculators_adapter.py:316`](gui\core\calculators_adapter.py#L316) | all snook_calculator/ code and relative adapter/ is to be done |
-| **TODO** | [`gui\core\report_strategies.py:193`](gui\core\report_strategies.py#L193) | Next Calculator |
-| **TODO** | [`gui\core\report_strategies.py:196`](gui\core\report_strategies.py#L196) | Next Calculator |
+| **TODO** | [`gui\core\report_strategies.py:194`](gui\core\report_strategies.py#L194) | Next Calculator |
+| **TODO** | [`gui\core\report_strategies.py:197`](gui\core\report_strategies.py#L197) | Next Calculator |
 | **TODO** | [`gui\core\session_manager.py:155`](gui\core\session_manager.py#L155) | print_reactivate |
 | **TODO** | [`gui\utils\app_paths.py:243`](gui\utils\app_paths.py#L243) | do something better like return ErgoPaths.output_folder() / f"{method.lower()}_analysis.csv" |
 | **TODO** | [`gui\utils\constants.py:101`](gui\utils\constants.py#L101) | uncomment when implemented pdf/docx and scores_list in video canvas for rula too |

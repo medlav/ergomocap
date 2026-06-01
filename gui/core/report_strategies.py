@@ -138,6 +138,7 @@ class RulaStrategy:
             ResultRow("Group B (Neck/Trunk)", "---", is_header=True),
             ResultRow("Neck", data.get("Neck_Score_RULA", "-")),
             ResultRow("Trunk", data.get("Trunk_Score_RULA", "-")),
+            ResultRow("Legs", data.get("Legs_Score_RULA", "-")),
             ResultRow(
                 "FINAL RULA", data.get("Final_Score_RULA", "-"), is_critical=True
             ),

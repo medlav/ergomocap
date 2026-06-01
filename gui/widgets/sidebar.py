@@ -210,7 +210,9 @@ class ErgoSidebar(QDockWidget):
         self.combo_method.addItems(
             [
                 self.tr("REBA"),
-                self.tr("RULA (Unstable)"),
+                self.tr("RULA"),
+                # NOTE IF U RENAME THESE AND ADD THE CORRESPONDING TO THE ASSESSMENT METHOD ENUM \
+                # IT WILL CAUSE BUGS IF THE CALCULATOR IS NOT IMPLEMENTED! KEEP THESE NAMES UNTIL THE END.
                 self.tr("OCRA (Planned)"),
                 self.tr("EWAS (Planned)"),
                 self.tr("NIOSH (Planned)"),

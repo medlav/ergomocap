@@ -155,6 +155,7 @@ def calculate_frame_rula_from_degs(
         "Trunk_Score_RULA": trunk_score,
         "Neck_Score_RULA": neck_score,
         "Wrist_Score_RULA": wrist_score,
+        "Legs_Score_RULA": legs_score,
         "Score_A_RULA": grand_score_a,
         "Score_B_RULA": grand_score_b,
         "Final_Score_RULA": int(final_rula),

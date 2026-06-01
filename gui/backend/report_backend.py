@@ -191,6 +191,21 @@ class ReportBackend(QObject):
                 )
             )
 
+    def update_method(self, method: AssessmentMethod) -> None:
+        """
+        Update the active ergonomic assessment method.
+
+        Args:
+            method (AssessmentMethod): The name of the method to apply (e.g., AssessmentMethod.RULA, AssessmentMethod.REBA).
+
+        Returns:
+            None (None): Updates internal state and clears previous strategy if necessary.
+        """
+        if hasattr(self, "current_method") and self.current_method == method:
+            return  # Don't change if it's the same
+
+        self.current_method = method
+
     def prepare_pdf_export(self, report_export_request: ReportExportRequest) -> None:
         """
         Compiles the HTML report context using Jinja2 and emits the generated markup.
@@ -257,9 +272,23 @@ class ReportBackend(QObject):
                 ),
                 None,
             )
-            context_metrics["risk"] = (
-                df[risk_col].mode()[0] if risk_col and not df.empty else "N/A"
-            )
+            risk_value = df[risk_col].mode()[0] if risk_col and not df.empty else "N/A"
+
+            translated_risk = "N/A"
+
+            match risk_value:
+                case "negligible":
+                    translated_risk = "trascurabile"
+                case "low":
+                    translated_risk = "basso"
+                case "medium":
+                    translated_risk = "medio"
+                case "high":
+                    translated_risk = "alto"
+                case "very_high":
+                    translated_risk = "altissimo"
+
+            context_metrics["risk"] = translated_risk
 
             # Convert chart bytes to base64 for HTML embedding
             img_base64: str = base64.b64encode(report_export_request.chart_data).decode(
@@ -326,7 +355,7 @@ class ReportBackend(QObject):
                 "tot_a": m_raw.get(f"Score_A_{method_suffix}", 0.0),
                 "tot_b": m_raw.get(f"Score_B_{method_suffix}", 0.0),
                 "score_c": m_raw.get(f"Score_C_{method_suffix}", 0.0),
-                "reba_final": m_raw.get(f"Final_Score_{method_suffix}", 0.0),
+                "score_finale": m_raw.get(f"Final_Score_{method_suffix}", 0.0),
             }
 
             risk_col = next(
@@ -337,9 +366,22 @@ class ReportBackend(QObject):
                 ),
                 None,
             )
-            context["rischio"] = (
-                df[risk_col].mode()[0] if risk_col and not df.empty else "N/A"
-            )
+            risk_value = df[risk_col].mode()[0] if risk_col and not df.empty else "N/A"
+            translated_risk = "N/A"
+
+            match risk_value:
+                case "negligible":
+                    translated_risk = "trascurabile"
+                case "low":
+                    translated_risk = "basso"
+                case "medium":
+                    translated_risk = "medio"
+                case "high":
+                    translated_risk = "alto"
+                case "very_high":
+                    translated_risk = "altissimo"
+
+            context["rischio"] = translated_risk
 
             template_path: Path = (
                 self.template_dir / f"{method_suffix}_report_template.docx"

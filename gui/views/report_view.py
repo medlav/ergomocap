@@ -535,6 +535,8 @@ class ReportView(QMainWindow):
 
         self.current_method = method
 
+        self.update_current_strategy()
+
     def update_current_strategy(self):
         """
         Synchronize the UI strategy with the currently selected assessment method.
@@ -544,11 +546,12 @@ class ReportView(QMainWindow):
                 [ReportStrategy][gui.core.report_strategies.ReportStrategy].
         """
         match self.current_method:
-            case "REBA":
+            case AssessmentMethod.REBA:
                 self.current_strategy = RebaStrategy()
 
-            case "RULA":
+            case AssessmentMethod.RULA:
                 self.current_strategy = RulaStrategy()
 
         self.report_widget.update_strategy(self.current_strategy)
+        self.backend.update_method(self.current_method)
         self.update()
