@@ -88,10 +88,10 @@ class VideoWorker(QObject):
         execute_frames_export: Runs an unthrottled loop to combine frame saving and rendering into a single worker script.
     """
 
-    frame_ready = Signal(FrameData)
-    position_changed = Signal(VideoPosition)
-    export_progress = Signal(VideoPosition)  # current, total
-    frames_export_finished = Signal(FramesExportResult)
+    frame_ready: Signal = Signal(FrameData)
+    position_changed: Signal = Signal(VideoPosition)
+    export_progress: Signal = Signal(VideoPosition)  # current, total
+    frames_export_finished: Signal = Signal(FramesExportResult)
 
     def __init__(self) -> None:
 
@@ -322,7 +322,7 @@ class VideoWorker(QObject):
         Bundles spatial features and risk labels into metadata packets.
 
         Evaluates index points against calculated assessment tables, extracts structural enum items
-        via [AnalysisEngine.get_risk_level_enum][calculators.core.analysis_engine.AnalysisEngine.get_risk_level_enum],
+        via [AnalysisEngine.get_risk_level_enum][gui.core.analysis_engine.AnalysisEngine.get_risk_level_enum],
         and emits telemetry packages.
 
         Args:

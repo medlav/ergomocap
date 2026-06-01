@@ -146,7 +146,7 @@ class ErgoPaths:
             new_root (Path): The unique identifier/folder name of the session.
 
         Returns:
-            None: Simply Updated the class.
+            None (None): Simply Updated the class.
         """
         if new_root.name == cls.SESSIONS_FOLDER_NAME:
             # If they picked 'recording_sessions', go one step up to find freemocap_data

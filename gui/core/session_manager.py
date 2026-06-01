@@ -74,7 +74,7 @@ class SessionManager:
             sessions_dir: Path to the directory containing ergonomic sessions.
 
         Returns:
-            None: Initializer does not return a value.
+            None (None): Initializer does not return a value.
 
         NOTE:
         Uses get_external_root() as a fallback to ensure PyInstaller

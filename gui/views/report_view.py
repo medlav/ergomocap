@@ -526,7 +526,7 @@ class ReportView(QMainWindow):
             method (AssessmentMethod): The name of the method to apply (e.g., AssessmentMethod.RULA, AssessmentMethod.REBA).
 
         Returns:
-            None: Updates internal state and clears previous strategy if necessary.
+            None (None): Updates internal state and clears previous strategy if necessary.
         """
         if hasattr(self, "current_method") and self.current_method == method:
             return  # Don't recreate the strategy if it's the same

@@ -360,7 +360,7 @@ class ErgoSidebar(QDockWidget):
             text (str): The status message to display.
 
         Returns:
-            None: Updates the `status_label` widget text.
+            None (None): Updates the `status_label` widget text.
         """
         self.status_label.setText(f"STATUS: {text}")
 

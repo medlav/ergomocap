@@ -107,7 +107,7 @@
 | **TODO** | [`gui\views\report_view.py:384`](gui\views\report_view.py#L384) | fix not working |
 | **TODO** | [`gui\widgets\table_report_widget.py:179`](gui\widgets\table_report_widget.py#L179) | delete this |
 | **TODO** | [`gui\widgets\video_canvas.py:33`](gui\widgets\video_canvas.py#L33) | refractor this code, it's still trying to paint while the annotation is done with freemocap! |
-| **TODO** | [`intl\update_intl.py:133`](intl\update_intl.py#L133) | remove print statement and place proper logging |
+| **TODO** | [`intl\update_intl.py:142`](intl\update_intl.py#L142) | remove print statement and place proper logging |
 | **TODO** | [`scripts\todo_scanner.py:63`](scripts\todo_scanner.py#L63) | strings.""" |
 | **TODO** | [`scripts\todo_scanner.py:68`](scripts\todo_scanner.py#L68) | ", "todo ", "FIXME:", etc. |
 | **TODO** | [`tests\test_qtbot_tests.py:34`](tests\test_qtbot_tests.py#L34) | delete after pytest paths cleared |

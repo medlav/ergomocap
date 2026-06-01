@@ -6,7 +6,7 @@ Rapid entire body assessment (REBA)
 
 **S Hignett 1, L McAtamney**
 
-PMID: 10711982 DOI: [Study](10.1016/s0003-6870(99)00039-3)
+PMID: 10711982 DOI: [Study](https://doi.org/10.1016/s0003-6870(99)00039-3)
 
 ![REBA worksheet](image.png)
 

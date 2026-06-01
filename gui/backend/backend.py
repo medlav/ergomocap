@@ -153,7 +153,7 @@ class ErgoBackend(QObject):
         relative to the application root.
 
         Returns:
-            None: The return value is always None.
+            None (None): The return value is always None.
         """
         super().__init__()
         self.freemocap_process = None

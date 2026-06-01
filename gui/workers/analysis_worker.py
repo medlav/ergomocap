@@ -81,7 +81,7 @@ class AnalysisWorker(QObject):
         and prepares internal storage buffers for asynchronous parameter queuing.
 
         Returns:
-            None: The return value is always None.
+            None (None): The return value is always None.
         """
         super().__init__()
         self.engine: AnalysisEngine = AnalysisEngine()
@@ -100,7 +100,7 @@ class AnalysisWorker(QObject):
         serialization constraints for complex objects like pandas DataFrames.
 
         Returns:
-            None: Delegates to `start_analysis` for background processing.
+            None (None): Delegates to `start_analysis` for background processing.
         """
         # Extract pending data
         data = self._pending_data
@@ -134,7 +134,7 @@ class AnalysisWorker(QObject):
             method (AssessmentMethod): Structural framework metric enumeration settings tracking computation variants. Defaults to REBA.
 
         Returns:
-            None: Dispatches output results directly back upstream using the `finished` signal pipeline.
+            None (None): Dispatches output results directly back upstream using the `finished` signal pipeline.
         """
 
         import threading

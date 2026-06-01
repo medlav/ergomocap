@@ -46,6 +46,10 @@ plugins:
               - https://matplotlib.org/stable/objects.inv
               - https://docs.freemocap.org/objects.inv
 
+            filters:
+              - "!^__.*__$"  # exclude magic (dunder) attributes and methods
+              - "^_[^_]"     # include private attributes and methods
+              - "^[a-zA-Z]"  # include all public methods and attributes
 nav:
   - Landing Page: index.html
   - Home: home.md

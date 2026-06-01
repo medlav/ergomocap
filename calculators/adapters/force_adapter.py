@@ -92,9 +92,6 @@ class ForceDataAdapter:
         to `numpy.interp` are `numpy.float64`. It maps the high-frequency sensor
         time series onto the MoCap timeline.
 
-        Args:
-            None (None): Uses instance data for target and source timelines.
-
         Returns:
             interp_values (numpy.ndarray): The force values interpolated to match MoCap frame timestamps.
         """

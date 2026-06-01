@@ -5,7 +5,7 @@
 RULA: a survey method for the investigation of work-related upper limb disorders
 **L McAtamney 1, E Nigel Corlett**
 
-PMID: 15676903 DOI: 10.1016/0003-6870(93)90080-s
+PMID: 15676903 DOI: (https://doi.org/10.1016/0003-6870(93)90080-s)
 
 
 ![RULA worksheet](image.png)

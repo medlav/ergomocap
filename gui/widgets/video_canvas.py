@@ -120,7 +120,7 @@ class VideoCanvas(QLabel):
         Initializes the VideoCanvas with default dimensions and styling.
 
         Returns:
-            None: Initializer return.
+            None (None): Initializer return.
         """
         super().__init__()
         self.setMinimumSize(854, 480)
@@ -151,7 +151,7 @@ class VideoCanvas(QLabel):
             show_frame_overlay (bool): Whether to render the metadata text.
 
         Returns:
-            None: Updates the overlay state.
+            None (None): Updates the overlay state.
         """
         self.show_frame_overlay = show_frame_overlay
 
@@ -266,7 +266,7 @@ class VideoCanvas(QLabel):
             event (QPaintEvent): The paint event triggered by the system or `update()`.
 
         Returns:
-            None: Draws directly to the widget's surface.
+            None (None): Draws directly to the widget's surface.
         """
         if not self.final_pixmap:
             super().paintEvent(event)
@@ -308,7 +308,7 @@ class VideoCanvas(QLabel):
             h (int): Video height.
 
         Returns:
-            None: Draws seeker bar.
+            None (None): Draws seeker bar.
         """
         if self.total_frames <= 0:
             return
@@ -335,7 +335,7 @@ class VideoCanvas(QLabel):
             y (int): Vertical offset of the scaled video.
 
         Returns:
-            None: Renders text using the active painter.
+            None (None): Renders text using the active painter.
         """
         painter.setPen(QColor("#ff0000ff"))
         painter.setFont(self.font())
