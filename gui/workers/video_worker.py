@@ -94,7 +94,6 @@ class VideoWorker(QObject):
     frames_export_finished: Signal = Signal(FramesExportResult)
 
     def __init__(self) -> None:
-
         super().__init__()
         self.cap: Optional[cv2.VideoCapture] = None
         self.video_path: str = ""
