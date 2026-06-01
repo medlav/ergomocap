@@ -6,7 +6,7 @@ authors = [{ name = "medlav", email = "your.email@example.com" }]
 license = { text = "AGPL-3.0" }
 requires-python = ">=3.12.10"
 dependencies = [
-    "freemocap>=1.7.4", # will include most of the other dependecies..
+    "freemocap>=1.8.2", # will include most of the other dependecies..
     "docxtpl>=0.20.2",
 ]
 
