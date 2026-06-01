@@ -9,6 +9,10 @@
       
       
       
+        <link rel="prev" href="user_guide.html">
+      
+      
+        <link rel="next" href="tutorial.html">
       
       
         
@@ -19,7 +23,7 @@
     
     
       
-        <title>TODO - ErgoMoCap</title>
+        <title>Freemocap Tutorial - ErgoMoCap</title>
       
     
     
@@ -62,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#todo" class="md-skip">
+        <a href="#ergomocap-and-freemocap-integration-tutorial" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              TODO
+              Freemocap Tutorial
             
           </span>
         </div>
@@ -291,6 +295,258 @@
   
 
       </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Freemocap Tutorial
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="freemocap_tutorial.html" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Freemocap Tutorial
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-launching-freemocap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Launching FreeMoCap
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 1: Launching FreeMoCap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#window-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Window Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opencv-conflict-warning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenCV Conflict Warning
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-configuring-the-root-data-folder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Configuring the Root Data Folder
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-importing-videos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Importing Videos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-verification-and-system-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Verification and System Prerequisites
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 4: Verification and System Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#directory-and-active-recording-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Directory and Active Recording Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#critical-prerequisite-blender-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Critical Prerequisite: Blender Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-data-processing-and-skeleton-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Data Processing and Skeleton Generation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 5: Data Processing and Skeleton Generation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuring-and-running-the-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuring and Running the Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automated-blender-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automated Blender Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#final-data-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Final Data Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-6-closing-freemocap-and-returning-to-ergomocap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6: Closing FreeMoCap and Returning to ErgoMoCap
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 6: Closing FreeMoCap and Returning to ErgoMoCap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -504,6 +760,192 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#step-1-launching-freemocap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 1: Launching FreeMoCap
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 1: Launching FreeMoCap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#window-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Window Management
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#opencv-conflict-warning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        OpenCV Conflict Warning
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-2-configuring-the-root-data-folder" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 2: Configuring the Root Data Folder
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-3-importing-videos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 3: Importing Videos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-4-verification-and-system-prerequisites" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 4: Verification and System Prerequisites
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 4: Verification and System Prerequisites">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#directory-and-active-recording-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Directory and Active Recording Verification
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#critical-prerequisite-blender-installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Critical Prerequisite: Blender Installation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-5-data-processing-and-skeleton-generation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Data Processing and Skeleton Generation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 5: Data Processing and Skeleton Generation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuring-and-running-the-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Configuring and Running the Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#automated-blender-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Automated Blender Integration
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#final-data-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Final Data Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#step-6-closing-freemocap-and-returning-to-ergomocap" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 6: Closing FreeMoCap and Returning to ErgoMoCap
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Step 6: Closing FreeMoCap and Returning to ErgoMoCap">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Next Steps
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -519,8 +961,174 @@
 
 
 
-<h1 id="todo">TODO</h1>
-<p>Still to be done</p>
+<h1 id="ergomocap-and-freemocap-integration-tutorial">ErgoMoCap and FreeMoCap Integration Tutorial</h1>
+<p>This guide provides step-by-step instructions for launching FreeMoCap within ErgoMoCap, configuring your data directories, and importing video files for processing.</p>
+<h2 id="step-1-launching-freemocap">Step 1: Launching FreeMoCap</h2>
+<ol>
+<li>Locate the <strong>Capture Source</strong> section on the left-hand <strong>Sidebar</strong> of the ErgoMoCap interface.</li>
+<li>Click the red <strong>💀 RUN FREEMOCAP</strong> button.</li>
+</ol>
+<p><img alt="Step 1.1 Click the RUN FREEMOCAP button" src="images/freemocap_tutorial/step1_1_click_open_fmc_button.png" /></p>
+<blockquote>
+<p><strong>Important:</strong> FreeMoCap is a resource-intensive application and can be slow to initialize. Expect a delay of at least 5 to 15 seconds for the program to load. Do not close ErgoMoCap or click the button multiple times while the initialization is in progress.</p>
+</blockquote>
+<p><img alt="Step 1.2 Wait until freemocap opens. DO NOT CLOSE THE PROGRAM WHILE FREEMOCAP OPENS" src="images/freemocap_tutorial/step1_2_wait_dialog.png" /></p>
+<h3 id="window-management">Window Management</h3>
+<p><em>Screenshot of FreeMoCap open and ErgoMoCap behind open in full-screen</em></p>
+<p><img alt="Step 1.3 FreeMoCap is Open" src="images/freemocap_tutorial/step1_3_fremocap_open.png" /></p>
+<p>FreeMoCap launches as a separate process and window. If the FreeMoCap interface does not automatically appear on top of ErgoMoCap:</p>
+<ul>
+<li>Check your Windows taskbar.</li>
+<li>Click on the FreeMoCap icon to bring its window to the foreground.</li>
+<li>ErgoMoCap will remain open in the background.</li>
+</ul>
+<p><em>NOTE: check the Taskbar in case the freemocap window doesn't open as top level</em></p>
+<p><img alt="Step 1.4 Check the Taskbar if the FreeMoCap is hidden" src="images/freemocap_tutorial/step1_4_hint_hidden_fms_window.png" /></p>
+<p>After opening, FreeMoCap will display some pop-up dialogs like the "tutorial" one in the screenshot below</p>
+<p><img alt="Step 1.5 FreeMoCap Tutorial Dialog" src="images/freemocap_tutorial/step1_5_freemocap_tutorial_dialog.png" /></p>
+<p>Click <strong>Done</strong> if you want to skip the tutorials</p>
+<p>IMPORTANT! We strongly recommend watching the FreeMoCap Tutorial to avoid video recording artifacts and poor data collection.</p>
+<h3 id="opencv-conflict-warning">OpenCV Conflict Warning</h3>
+<p>During the first launch or environment check, FreeMoCap may display a prompt asking to resolve an <strong>OpenCV conflict</strong>.</p>
+<p><img alt="Step 1.6 FreeMoCap OpenCV conflict" src="images/freemocap_tutorial/step1_6_freemocap_opencv_conflicts.png" /></p>
+<p>That means that in the python environment in use there is some conflict, usually between <code>opencv-python</code> and <code>opencv-contrib-python</code></p>
+<ul>
+<li><strong>Action Required:</strong> Select <strong>Continue without fixing conflicts</strong> if you don't need calibration. Select <strong>Fix OpenCV conflicts (Recommended)</strong> if you need multi-camera tracking and calibration (<strong>Recommended</strong>).</li>
+<li><strong>NOTE:</strong> Allowing the program to modify or resolve this conflict can cause compatibility issues, software crashes, or unpredictable application behavior, as of v0.0.1, it has not been tested.</li>
+</ul>
+<h2 id="step-2-configuring-the-root-data-folder">Step 2: Configuring the Root Data Folder</h2>
+<p>FreeMoCap manages data within a dedicated directory. By default, it creates and uses the following path:
+<code>C:\Users\&lt;Your_Username&gt;\freemocap_data</code></p>
+<ol>
+<li>Open the <strong>Directory View</strong> tab in FreeMoCap to see the current session directory and freemocap_data folder.</li>
+</ol>
+<p><img alt="Step 2.1 Open Directory View" src="images/freemocap_tutorial/step2_1_open_directory_view.png" /></p>
+<ol>
+<li>Click on <strong>Show FreeMoCap Data Folder</strong> to show the current freemocap_data folder in use with all the subfolders, in particular the <code>freemocap_data\recording_sessions\</code> which contains all the recording session folders with motion capture data processed by freemocap and then used by ergomocap.</li>
+</ol>
+<p><img alt="Step 2.2 Show the FreeMoCap Data Folder in use" src="images/freemocap_tutorial/step2_2_open_fmc_data_folder.png" /></p>
+<p>NOTE: You can select a different folder for FreeMoCap Data. Under Main Menu -&gt; File -&gt; Set FreeMoCap Data Folder Location or by pressing Ctrl+S. We recommend keeping the initial location to avoid unexpected behaviors.</p>
+<p><img alt="Step 2.3 NOTE: you can change fmc data folder, NOT Recommended" src="images/freemocap_tutorial/step2_3_set_fmc_data_folder_note.png" /></p>
+<p>To ensure seamless data exchange between both applications:</p>
+<ol>
+<li>Go back to the ErgoMoCap window.</li>
+<li>Under the <strong>Data Management</strong> section, click <strong>📁 SELECT FREEMOCAP ROOT</strong>. <a href="tutorial.html">Look at the full tutorial</a></li>
+<li>Target and select the exact same <code>freemocap_data</code> folder used by FreeMoCap. (The one shown in the 2.2 screenshot)</li>
+</ol>
+<p>Keeping these paths identical ensures ErgoMoCap can find and analyze the recording sessions generated by FreeMoCap.</p>
+<h2 id="step-3-importing-videos">Step 3: Importing Videos</h2>
+<p>Once the FreeMoCap window is open and the "Welcome to FreeMoCap!" dialog appears, you can begin loading your video data.</p>
+<p><img alt="Step 3.1 Click on FMC main Import Videos to open the File Dialog" src="images/freemocap_tutorial/step3_1_import_videos_folder_dialog.png" /></p>
+<ol>
+<li>Click the <strong>Import Videos</strong> button to open the File Dialog to select the video folder.</li>
+<li><strong>Select the Target Folder:</strong> FreeMoCap processes data by folders, not by individual files. Each folder represents a distinct scene.</li>
+<li>If you are doing a <strong>Multi-Camera / Multi-Perspective</strong> recording, select the folder containing all the synchronized video files for that session.</li>
+<li>If you are using a <strong>Single-Camera</strong> setup, you must still select the <em>folder</em> that contains your single video file, rather than selecting the video file itself.</li>
+</ol>
+<p><img alt="Step 3.2 Name Recording Session and Synchronize Videos" src="images/freemocap_tutorial/step3_2_name_recording_session.png" /></p>
+<ol>
+<li><strong>Configure Import Settings:</strong></li>
+<li><strong>Recording Name:</strong> Assign a clear, identifiable name to your session (for example: <code>test_first_release</code>). FreeMoCap will use this name to create a dedicated subfolder inside your <code>freemocap_data\recording_sessions\</code> directory.</li>
+<li>
+<p><strong>Synchronize Videos Checkbox:</strong> If you are importing a single video file, ensure the <strong>Synchronize videos</strong> checkbox is left <strong>unchecked</strong>.</p>
+</li>
+<li>
+<p>Click <strong>Continue</strong> to finalize the import process.</p>
+</li>
+</ol>
+<h2 id="step-4-verification-and-system-prerequisites">Step 4: Verification and System Prerequisites</h2>
+<p>Before initiating the tracking analysis, verify your imported files and ensure your environment meets the essential software requirements.</p>
+<h3 id="directory-and-active-recording-verification">Directory and Active Recording Verification</h3>
+<ol>
+<li>Navigate to the <strong>Directory View</strong> tab within FreeMoCap.</li>
+<li>Confirm that your session folder (e.g., <code>test_first_release</code>) has been successfully created and contains a <code>synchronized_videos</code> subfolder with your video files inside.</li>
+</ol>
+<p><img alt="Step 4.1 Open Directory View" src="images/freemocap_tutorial/step2_1_open_directory_view.png" /></p>
+<ol>
+<li>If you need to verify the absolute directory path on your local storage, click the <strong>Show FreeMoCap Data Folder</strong> button to launch your system's file explorer directly inside the active data root.</li>
+</ol>
+<p><img alt="Step 4.2 Show the FreeMoCap Data Folder in use" src="images/freemocap_tutorial/step2_2_open_fmc_data_folder.png" /></p>
+<ol>
+<li>Open the <strong>Active Recording Info</strong> tab. This dashboard presents a structural checklist of your current session data (such as the presence of 2D data, 3D data, and calibration configurations) using True/False status flags.</li>
+</ol>
+<p><img alt="Step 4.3 Check Active Recording Info" src="images/freemocap_tutorial/step4_3_active_recording_info.png" /></p>
+<h3 id="critical-prerequisite-blender-installation">Critical Prerequisite: Blender Installation</h3>
+<blockquote>
+<p>⚠️ CRITICAL NOTE!
+For ErgoMoCap to perform a complete assessment, specifically the joint angles analysis, <strong>Blender must be installed on your system.</strong> This is a core hardware-software dependency for version v0.0.1. Without Blender, the tracking pipeline cannot generate the necessary dataset.</p>
+</blockquote>
+<ul>
+<li>Download the software directly from the official repository: <a href="https://www.blender.org/">Blender Official Website</a> or <a href="https://www.blender.org/download/">Download Blender Release Setup</a>.</li>
+<li>Once installed, switch to the <strong>Export Data</strong> tab in the right-hand Control Panel of FreeMoCap.</li>
+<li>Look at the <strong>Blender Executable Path</strong> field. Ensure that this file path matches the exact location of your local Blender installation (for example: <code>C:\Program Files\Blender Foundation\Blender 4.5\blender.exe</code>). If it is incorrect, click <strong>Choose your Blender Executable</strong> to manually target the correct file.</li>
+</ul>
+<p><img alt="Step 4.4 Check Blender .exe Path" src="images/freemocap_tutorial/step4_4_check_blender_path.png" /></p>
+<h2 id="step-5-data-processing-and-skeleton-generation">Step 5: Data Processing and Skeleton Generation</h2>
+<p>With your video files imported and your Blender execution path verified, you can now run the motion capture extraction pipeline.</p>
+<h3 id="configuring-and-running-the-pipeline">Configuring and Running the Pipeline</h3>
+<ol>
+<li>Locate the right-hand Control Panel in FreeMoCap and click on the <strong>Process Data</strong> tab.</li>
+</ol>
+<p><img alt="Step 5.1 Open Process Data Tab" src="images/freemocap_tutorial/step5_1_process_data.png" /></p>
+<ol>
+<li>Review your data parameters (such as bounding configurations, YOLO cropping, or Butterworth filtering settings).</li>
+<li><strong>Single Video Configuration:</strong> If you are analyzing a single camera viewpoint, ensure you review the <strong>3D Triangulation Methods</strong> panel and adjust the parameters accordingly (such as utilizing the <em>Flatten Single Camera Data</em> recommendation).</li>
+<li>Click the large green <strong>Process Motion Capture Videos</strong> button to start the execution.</li>
+<li>The tracking processes will write status updates dynamically inside the lower <strong>Log View</strong> window as the 2D tracking pipelines execute.</li>
+</ol>
+<p><img alt="Step 5.2 Check the Log View for Process Logs" src="images/freemocap_tutorial/step5_2_fmc_process_started_log_view.png" /></p>
+<h3 id="automated-blender-integration">Automated Blender Integration</h3>
+<p>During the data processing cycle, the application will automatically launch separate system terminal (cmd) windows to pass the tracked data into Blender.</p>
+<ol>
+<li>A background Blender instance will open to compile and generate the 3D scene data file. Do not manually close these terminal spaces prematurely!</li>
+</ol>
+<p><img alt="Step 5.3 Terminal Windows Open. DO NOT CLOSE" src="images/freemocap_tutorial/step5_3_terminal_open_for_blender.png" /></p>
+<p><em>Blender will open automatically, displaying the generated Blender file and MoCap skeleton.</em></p>
+<p><img alt="Step 5.4 Blender Open" src="images/freemocap_tutorial/step5_4_blender_view.png" /></p>
+<ol>
+<li>Once the computational script completes its task, the <strong>Log View</strong> at the bottom of the FreeMoCap interface will output the confirmation message: <code>::: Done with Blender Export :D</code>. As highlighted in the screenshot below</li>
+</ol>
+<p><img alt="Step 5.5 Data Viewer - Log View Highlight" src="images/freemocap_tutorial/step5_5_skeleton_data_view.png" /></p>
+<ol>
+<li>After this log message appears, you can safely close the open Blender window.</li>
+</ol>
+<h3 id="final-data-validation">Final Data Validation</h3>
+<p>To ensure that the workflow completed successfully without errors, execute these three post-processing checks:</p>
+<ul>
+<li><strong>Visualize the Skeleton:</strong> Switch to the <strong>Data Viewer</strong> tab in the main panel. Click <strong>Play</strong> to check the generated 3D skeleton animation and ensure the tracking coordinates align accurately with your target movement.</li>
+</ul>
+<p><img alt="Step 5.5 Data Viewer - Log View Highlight" src="images/freemocap_tutorial/step5_5_skeleton_data_view.png" /></p>
+<ul>
+<li><strong>Verify Status Compliance:</strong> Return to the <strong>Active Recording Info</strong> tab. Ensure that all data parameters including <em>2D data exists?</em>, <em>3D data exists?</em>, <em>Center-of-Mass data exists?</em>, and <em>Blender scene file exists?</em> have converted to a <strong>True</strong> status.</li>
+</ul>
+<p><img alt="Step 5.6 Active Recording Info - All True" src="images/freemocap_tutorial/step5_6_active_recording_info.png" /></p>
+<ul>
+<li><strong>Confirm CSV Generation:</strong> Open the <strong>Directory View</strong> tab and expand your active session folder. Verify that the system has successfully generated the spreadsheet file named <code>joint_angles.csv</code>.</li>
+</ul>
+<p><img alt="Step 5.7 Check joint_angles csv in Directory View" src="images/freemocap_tutorial/step5_7_check_joint_angles.png" /></p>
+<blockquote>
+<p><strong>Important:</strong> The <code>joint_angles.csv</code> file contains the processed coordinate metrics that ErgoMoCap reads. This file must be present in the folder structure for ErgoMoCap to successfully run its subsequent ergonomic safety algorithms.</p>
+</blockquote>
+<h2 id="step-6-closing-freemocap-and-returning-to-ergomocap">Step 6: Closing FreeMoCap and Returning to ErgoMoCap</h2>
+<p>Once the processing pipeline is fully complete and you have verified the generation of your <code>joint_angles.csv</code> file, you can safely close the FreeMoCap application window.</p>
+<ol>
+<li>Close the FreeMoCap program interface.</li>
+<li>Return to the open <strong>ErgoMoCap</strong> application window.</li>
+<li>Locate the <strong>Data Management</strong> section on the sidebar panel and click the <strong>📁 SELECT FREEMOCAP ROOT</strong> button.</li>
+<li>In the file explorer selection dialog, target and select the exact same <code>freemocap_data</code> root folder utilized by FreeMoCap (the directory verified in Step 2.2).</li>
+</ol>
+<p><img alt="Step 6.1 Select FreeMoCap Data as ErgoMoCap Data Root" src="images/freemocap_tutorial/step6_1_select_freemocap_data_as_root.png" /></p>
+<ol>
+<li>You can verify the correct configuration of the root folder by checking the recording session options from the <strong>Select Recording Session</strong> combobox.</li>
+</ol>
+<p><img alt="Step 6.2 Select Recording Session" src="images/freemocap_tutorial/step6_2_select_recording_session.png" /></p>
+<blockquote>
+<p><strong>Note:</strong> Keeping these database paths perfectly identical ensures that ErgoMoCap can successfully locate, parse, and analyze the tracking datasets and recording sessions generated by your FreeMoCap pipeline.</p>
+</blockquote>
+<hr />
+<h3 id="next-steps">Next Steps</h3>
+<p>Now that your raw video data has been successfully converted into joint coordinate tracking metrics, you are ready to execute the automated ergonomic assessment algorithms.</p>
+<p>Continue the pipeline process by following the <a href="tutorial.html">ErgoMoCap Tutorial</a>.</p>
 
 
 
