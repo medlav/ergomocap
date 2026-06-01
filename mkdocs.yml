@@ -55,6 +55,7 @@ nav:
   - Home: home.md
   - Install and Get Started: install.md
   - User Guide: user_guide.md
+  - Freemocap Tutorial: freemocap_tutorial.md
   - Tutorial: tutorial.md
   - Roadmap: roadmap.md
   - GUI Architecture: gui_architecture.md
