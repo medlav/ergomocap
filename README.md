@@ -28,6 +28,7 @@
 
 </div>
 
+
 ---
 
 # ErgoMoCap: FOSS Ergonomics Motion Capture
@@ -41,6 +42,10 @@
 ![Python 3.12](https://img.shields.io/badge/python-3.12-3776AB?logo=python&logoColor=white)
 ![Security: Bandit](https://img.shields.io/badge/security-bandit-yellow.svg)
 ![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)
+
+
+[![Windows](https://img.shields.io/badge/PLATFORM-WINDOWS-000000?style=flat-square&logo=windows)](https://github.com/medlav/ergomocap/releases/latest)
+
 
 ![Tests](./assets/tests_badge.svg)
 ![Documentation](./assets/interrogate_badge.svg)
