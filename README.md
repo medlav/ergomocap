@@ -297,5 +297,7 @@ Distributed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.
 
 Developed and maintained by **medlav**.
 
+---
+
 © 2026 medlav. Distributed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.
 
