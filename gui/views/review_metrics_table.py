@@ -24,7 +24,7 @@ class ReviewMetricsTable(QTableWidget):
     def _initialize_table_properties(self) -> None:
         """Configures the aesthetic layout framework variables for the data spreadsheet view."""
         self.setColumnCount(2)
-        self.setHorizontalHeaderLabels(["Biomechanical Element", "Calculated Value"])
+        self.setHorizontalHeaderLabels(["Parameter", "Value"])
         self.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
         self.horizontalHeader().setSectionResizeMode(
             1, QHeaderView.ResizeMode.ResizeToContents
@@ -34,7 +34,6 @@ class ReviewMetricsTable(QTableWidget):
         self.verticalHeader().setVisible(False)
         self.setAlternatingRowColors(True)
 
-    @Slot(FrameReviewData)
     def sync_frame_review_data(self, review_data: FrameReviewData) -> None:
         """
         Re-populates layout data rows inside the data grid directly from

@@ -47,6 +47,7 @@ class ReviewView(QWidget):
         # Initialize Data Layer
         self.backend = ReviewBackend()
         self.landmarks = None
+        self.scores_dict = None
 
         # Build UI
         self._setup_ui()
@@ -125,6 +126,9 @@ class ReviewView(QWidget):
         self.lbl_field = QLabel(self.tr("Select Discovered Variable:"))
         self.combo_fields = QComboBox()
 
+        self.lbl_field_value = QLabel(self.tr("No Variable Selected"))
+        self.lbl_field_value.setFixedHeight(40)
+
         self.lbl_value = QLabel(self.tr("Enter Adjusted Value Overrides:"))
         self.spin_value = QDoubleSpinBox()
         self.spin_value.setRange(0.0, 100.0)
@@ -136,6 +140,7 @@ class ReviewView(QWidget):
 
         override_lay.addWidget(self.lbl_field)
         override_lay.addWidget(self.combo_fields)
+        override_lay.addWidget(self.lbl_field_value)
         override_lay.addWidget(self.lbl_value)
         override_lay.addWidget(self.spin_value)
         override_lay.addWidget(self.btn_apply)
@@ -150,7 +155,7 @@ class ReviewView(QWidget):
                 "Document any specific human adjustments, tracking failures, or workspace anomalies here..."
             )
         )
-        self.txt_notes.setMaximumHeight(70)
+        self.txt_notes.setMinimumHeight(200)
         notes_lay.addWidget(self.txt_notes)
         layout.addWidget(notes_group)
 
@@ -185,6 +190,7 @@ class ReviewView(QWidget):
             lambda: self.note_added.emit(self.txt_notes.toPlainText())
         )
         self.combo_scope.currentIndexChanged.connect(self._handle_scope_changed)
+        self.combo_fields.currentIndexChanged.connect(self._handle_combo_field_changed)
 
         # We route packets cleanly directly through our structured class slot
         self.backend.frame_review_ready.connect(self.sync_frame_review_data)
@@ -195,12 +201,21 @@ class ReviewView(QWidget):
         """Intercepts frame packets to populate fields before routing to the metrics table."""
         if self.combo_fields.count() == 0 and review_data.scores_dict:
             self.combo_fields.blockSignals(True)
-            score_fields = list(review_data.scores_dict.keys())
-            self.combo_fields.addItems(score_fields)
+            self.combo_fields.addItems(list(review_data.scores_dict.keys()))
             self.combo_fields.blockSignals(False)
-
+        if review_data.scores_dict:
+            self.scores_dict = review_data.scores_dict
         # Pass the update downward to the table UI
         self.metrics_table.sync_frame_review_data(review_data)
+
+    def _handle_combo_field_changed(self):
+        selected_field = self.combo_fields.currentText()
+        if not self.scores_dict:
+            raise ValueError("No scores_dict")
+        print(self.scores_dict, "\nHERE SCORES DICT\n\n")
+        field_value = self.scores_dict[selected_field]
+        lbl_field_value_text = f"Current Field Value is: {field_value}"
+        self.lbl_field_value.setText(str(lbl_field_value_text))
 
     def _handle_scope_changed(self, index: int) -> None:
         is_range = index == 1
@@ -238,14 +253,18 @@ class ReviewView(QWidget):
         success, message = self.backend.load_review_session(session_data)
         if success:
             fields = self.backend.get_dataset_fields()
+
             self.combo_fields.blockSignals(True)
             self.combo_fields.clear()
             self.combo_fields.addItems(fields)
+            # TODO UPDATE THE SCORES DICT TOO
             self.combo_fields.blockSignals(False)
             self.set_status(message)
 
             # Auto-populate table with frame 0 data when a session initializes
             self.backend.emit_frame_review_data(0)
+
+            self.update()
         else:
             self.set_status(f"Error: {message}")
 

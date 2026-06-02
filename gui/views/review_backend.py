@@ -266,9 +266,12 @@ class ReviewBackend(QObject):
         method_suffix = str(score_row.get("Method", "REBA")).upper()
 
         # 2. Extract completely dynamic metric payloads
-        scores_payload = self._parse_pure_row_metrics(
-            score_row, is_score_file=True, method_suffix=method_suffix
-        )
+        # scores_payload = self._parse_pure_row_metrics(
+        #     score_row, is_score_file=True, method_suffix=method_suffix
+        # )
+        scores_payload = {str(key): value for key, value in score_row.items()}
+        print(scores_payload, "\n\nHERE\n\n")
+
         angles_payload = self._parse_pure_row_metrics(angle_row, is_score_file=False)
 
         # 3. Resolve global summary metadata with none-safety checks

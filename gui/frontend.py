@@ -588,11 +588,6 @@ class MainWindow(QMainWindow):
         # Connect the image to the canvas
         self.backend.frame_ready.connect(self.canvas.update_frame)
 
-        # updates FrameReviewData
-        # self.review_window.backend.frame_review_ready.connect(
-        #     self.review_window.sync_frame_review_data
-        # )
-
         # Connect the seeker data (current/total frames) to the canvas
         # This makes the progress bar actually move!
         self.backend.position_changed.connect(self.canvas.update_position)
@@ -745,6 +740,8 @@ class MainWindow(QMainWindow):
             None (None): Shows or raises the `review_window`.
         """
 
+        self.handle_session_selected()
+        self.review_window.update()
         if self.review_window.isHidden():
             self.review_window.show()
         else:
@@ -824,6 +821,7 @@ class MainWindow(QMainWindow):
                 self._pending_analysis_request = None
 
             self.report_window.backend.load_data_and_run(file_path=result.output_path)
+            self.handle_session_selected()
 
             if self.report_window.isHidden():
                 self.report_window.show()
