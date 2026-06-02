@@ -201,16 +201,12 @@ class VideoWorker(QObject):
                 self.current_frame_idx = max(
                     0, min(action.target_frame, self.total_frames - 1)
                 )
-                self.seek(frame_idx=self.current_frame_idx)
+                self._seek_to_index(frame_idx=self.current_frame_idx)
 
         elif action.command == VideoCommand.STEP_FORWARD:
-            self.current_frame_idx = min(
-                self.current_frame_idx + 1, self.total_frames - 1
-            )
             self.step_frame(forward=True)
 
         elif action.command == VideoCommand.STEP_BACKWARD:
-            self.current_frame_idx = max(0, self.current_frame_idx - 1)
             self.step_frame(forward=False)
 
     @Slot()
