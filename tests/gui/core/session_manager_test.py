@@ -128,41 +128,41 @@ class TestSessionManager:
         assert vid is None
         assert vids == []
 
-    def test_load_file_data_csv(self, tmp_path):
+    def test_load_joint_angles_file_csv(self, tmp_path):
         """Verifies loading of CSV files into DataFrames."""
         csv_path = tmp_path / "data.csv"
         df_orig = pd.DataFrame({"a": [1, 2], "b": [3, 4]})
         df_orig.to_csv(csv_path, index=False)
 
         sm = SessionManager(tmp_path)
-        data, path = sm.load_file_data(csv_path)
+        data, path = sm.load_joint_angles_file(csv_path)
 
         assert isinstance(data, pd.DataFrame)
         assert data.shape == (2, 2)
         assert path == csv_path
 
-    def test_load_file_data_npy(self, tmp_path):
+    def test_load_joint_angles_file_npy(self, tmp_path):
         """Verifies loading of NPY files into NumPy arrays."""
         npy_path = tmp_path / "data.npy"
         arr_orig = np.array([1, 2, 3])
         np.save(npy_path, arr_orig)
 
         sm = SessionManager(tmp_path)
-        data, path = sm.load_file_data(npy_path)
+        data, path = sm.load_joint_angles_file(npy_path)
 
         assert isinstance(data, np.ndarray)
         assert np.array_equal(data, arr_orig)
 
-    def test_load_file_data_errors(self, tmp_path):
+    def test_load_joint_angles_file_errors(self, tmp_path):
         """Covers error raising for missing files and unsupported formats."""
         sm = SessionManager(tmp_path)
 
         # FileNotFoundError
         with pytest.raises(FileNotFoundError):
-            sm.load_file_data(tmp_path / "missing.csv")
+            sm.load_joint_angles_file(tmp_path / "missing.csv")
 
         # ValueError (Unsupported Format)
         bad_file = tmp_path / "data.txt"
         bad_file.write_text("oops")
         with pytest.raises(ValueError, match="Unsupported file format"):
-            sm.load_file_data(bad_file)
+            sm.load_joint_angles_file(bad_file)

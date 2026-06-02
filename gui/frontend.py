@@ -106,7 +106,7 @@ class MainWindow(QMainWindow):
         _handle_canvas_seek: Handles the seek request from the video canvas overlay.
         handle_toggle_video: Slot to play or pause video playback.
         handle_run_fmc: Slot to trigger external FreeMoCap processing.
-        handle_import: Slot to manually import joint data files.
+        handle_import_joint_data: Slot to manually import joint data files.
         show_review: Displays the live review window.
         show_report: Displays the analysis reporting window.
         run_analysis: Triggers the ergonomic calculation engine.
@@ -136,7 +136,7 @@ class MainWindow(QMainWindow):
         self.report_window: ReportView = ReportView(self)
 
         # Initialize your Review Window as a persistent separate window
-        self.review_window: ReviewView = ReviewView()
+        self.review_window: ReviewView = ReviewView(self)
 
         self.setup_ui()
         self.connect_signals()
@@ -334,8 +334,8 @@ class MainWindow(QMainWindow):
         c.toggle_requested.connect(self.handle_toggle_video)
 
         # New Button Connections
-        s.btn_prev_frame.clicked.connect(lambda: self.step_video(-1))
-        s.btn_next_frame.clicked.connect(lambda: self.step_video(1))
+        s.btn_prev_frame.clicked.connect(self._on_prev_clicked)
+        s.btn_next_frame.clicked.connect(self._on_next_clicked)
 
         self.backend.status_updated.connect(self.sidebar.set_status)
 
@@ -343,6 +343,8 @@ class MainWindow(QMainWindow):
             self._handle_analysis_finished,
             type=Qt.ConnectionType.QueuedConnection,  # ← CRITICAL: UI updates must run on main thread
         )
+
+        self.backend.session_loaded.connect(self.review_window.update_session_data)
 
     def toggle_theme(self) -> None:
         """
@@ -501,6 +503,8 @@ class MainWindow(QMainWindow):
                 )
             )
 
+            self.review_window.update_session_data(session_data)
+
         else:
             # This is likely where your error is happening
             self.sidebar.set_status(self.tr("ERROR: {}").format(session_data.message))
@@ -584,9 +588,24 @@ class MainWindow(QMainWindow):
         # Connect the image to the canvas
         self.backend.frame_ready.connect(self.canvas.update_frame)
 
+        # updates FrameReviewData
+        # self.review_window.backend.frame_review_ready.connect(
+        #     self.review_window.sync_frame_review_data
+        # )
+
         # Connect the seeker data (current/total frames) to the canvas
         # This makes the progress bar actually move!
         self.backend.position_changed.connect(self.canvas.update_position)
+        self.backend.position_changed.connect(self.review_window.sync_video_position)
+
+    # Define these helper slots in your view class:
+    @Slot()
+    def _on_prev_clicked(self) -> None:
+        self.step_video(-1)
+
+    @Slot()
+    def _on_next_clicked(self) -> None:
+        self.step_video(1)
 
     def step_video(self, delta: int) -> None:
         """
@@ -703,7 +722,7 @@ class MainWindow(QMainWindow):
         self.wait_dialog.deleteLater()
 
     @Slot()
-    def handle_import(self) -> None:
+    def handle_import_joint_data(self) -> None:
         """
         Opens a file dialog to manually import joint coordinate data.
 
@@ -725,15 +744,6 @@ class MainWindow(QMainWindow):
         Returns:
             None (None): Shows or raises the `review_window`.
         """
-
-        current_video: str = self.sidebar.get_current_video()
-
-        self.review_window.update_video(current_video)
-
-        selected_method: str = self.sidebar.get_selected_method().upper()
-        method: AssessmentMethod = AssessmentMethod[selected_method]
-        self.review_window.set_method(method)
-        self.review_window.update_current_strategy()
 
         if self.review_window.isHidden():
             self.review_window.show()

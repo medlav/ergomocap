@@ -92,7 +92,7 @@ class TestBackendInitialization:
         assert backend.freemocap_process is None
         assert backend._current_method == AssessmentMethod.REBA
         assert backend.current_data is None
-        assert backend.current_file_path is None
+        assert backend.current_joint_angles_file_path is None
         assert backend.scores_list == []
         assert "REBA" in backend._adapters
         assert "RULA" in backend._adapters
@@ -555,19 +555,19 @@ class TestDataImportationAndDirectoryScanning:
     def test_import_joint_data_success(self, backend):
         """Verify session variable configurations when parsing maps out perfectly."""
         backend.tr = lambda x: x
-        backend.session_manager.load_file_data = MagicMock(
+        backend.session_manager.load_joint_angles_file = MagicMock(
             return_value=(pd.DataFrame(), Path("export.csv"))
         )
 
         success, msg = backend.import_joint_data("export.csv")
         assert success is True
         assert "Successfully loaded:" in msg
-        assert backend.current_file_path == Path("export.csv")
+        assert backend.current_joint_angles_file_path == Path("export.csv")
 
     def test_import_joint_data_failure(self, backend):
         """Map failed structural configurations neatly when system IO access exceptions occur."""
         backend.tr = lambda x: x
-        backend.session_manager.load_file_data = MagicMock(
+        backend.session_manager.load_joint_angles_file = MagicMock(
             side_effect=PermissionError("Disk Locked")
         )
 

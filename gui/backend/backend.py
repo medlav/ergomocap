@@ -104,7 +104,7 @@ class ErgoBackend(QObject):
         video_thread (QThread): Dedicated tracking execution runtime loop processing video file buffers.
         video_worker (VideoWorker): Background operational worker parsing video stream indices.
         current_data (pandas.DataFrame | None): The currently active dataset metrics container, or `None` if completely empty.
-        current_file_path (Path | None): Absolute filesystem location reference path to the loaded matrix data asset.
+        current_joint_angles_file_path (Path | None): Absolute filesystem location reference path to the loaded matrix data asset.
         scores_list (list[int]): Sequential array structure holding processed single frame evaluation integers.
 
     Methods:
@@ -159,7 +159,7 @@ class ErgoBackend(QObject):
         self.freemocap_process = None
         self._current_method: AssessmentMethod = AssessmentMethod.REBA
         self.current_data = None
-        self.current_file_path = None
+        self.current_joint_angles_file_path = None
         self.scores_list = []
 
         self.engine = AnalysisEngine()
@@ -530,11 +530,13 @@ class ErgoBackend(QObject):
         try:
             logger.debug(f"Attempting to import joint data from: {file_path}")
             # session_manager returns (data, path_object)
-            self.current_data, self.current_file_path = (
-                self.session_manager.load_file_data(file_path)
+            self.current_data, self.current_joint_angles_file_path = (
+                self.session_manager.load_joint_angles_file(file_path)
             )
             return True, self.tr("Successfully loaded: {}").format(
-                self.current_file_path.name if self.current_file_path else "Data"
+                self.current_joint_angles_file_path.name
+                if self.current_joint_angles_file_path
+                else "Data"
             )
         except Exception as e:
             return False, self.tr("Failed to load data: {}").format(str(e))
@@ -631,7 +633,9 @@ class ErgoBackend(QObject):
             name=session_name,
             success=True,
             message=self.tr("Loaded Session: {}").format(session_name),
+            joint_angles_csv_path=target_csv,
             video_paths=video_files,
+            loaded=True,
         )
         self.session_loaded.emit(session_data)
         return session_data

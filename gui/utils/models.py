@@ -58,6 +58,49 @@ class PlaybackState(Enum):
 
 
 @dataclass(frozen=True, slots=True)
+class FrameReviewData:
+    """
+    Lean typed contract for frame-by-frame metric visualization and tabular review.
+
+    This model completely bypasses heavy raw image matrix arrays to prevent memory thrashing
+    and maximize data delivery speed during concurrent temporal timeline scrubbing sessions.
+
+    Attributes:
+        frame_idx (int): The absolute temporal timeline sequential element integer frame index identifier.
+        total_frames (int): The complete temporal size bound constraint of the active session recording.
+        landmarks (list): Collection array structure holding multi-dimensional coordinate mapping elements.
+        score (int | None): The unified structural risk calculation score index value for the frame.
+        risk (RiskLevel | None): The qualitative risk ranking assignment context classification enum.
+        joint_angles (dict): Key-value pairs matching joint identifiers to calculated geometric float degrees.
+        scores_dict (dict): Granular diagnostic dictionary holding isolated component body metric scoring items.
+    """
+
+    frame_idx: int
+    total_frames: int
+    landmarks: list = field(default_factory=list)
+    score: int | None = None
+    risk: RiskLevel | None = None
+    joint_angles: dict = field(default_factory=dict)
+    scores_dict: dict = field(default_factory=dict)
+
+    def to_dict(self) -> dict:
+        """
+        Flattens operational parameters into legacy key lookup primitive dictionaries.
+
+        Returns:
+            dict: Composed metrics matching tracking configuration parameters.
+        """
+        return {
+            "frame_idx": self.frame_idx,
+            "total_frames": self.total_frames,
+            MetricType.SCORE.value: self.score if self.score is not None else None,
+            MetricType.RISK.value: self.risk.value if self.risk is not None else None,
+            "joint_angles": self.joint_angles,
+            "scores_dict": self.scores_dict,
+        }
+
+
+@dataclass(frozen=True, slots=True)
 class FrameData:
     """
     Typed contract for sequential video frame emission pipelines.
@@ -161,7 +204,7 @@ class SessionData:
         name (str): Label string identifying unique target folder recording session items profiles.
         success (bool): Operational status assertion flag verifying disk structure lookup results mappings.
         message (str): Log tracing diagnostic notification description text parameters.
-        csv_path (Path | None): Absolute system folder mapping target identifying joint coordinate files, or None. Defaults to None.
+        joint_angles_csv_path (Path | None): Absolute system folder mapping target identifying joint coordinate files, or None. Defaults to None.
         video_paths (list[str]): Sequential listing array containing absolute string links paths pointing to media files. Defaults to empty list.
         loaded (bool): Initialization evaluation track status monitoring flag component. Defaults to False.
     """
@@ -169,7 +212,7 @@ class SessionData:
     name: str
     success: bool
     message: str
-    csv_path: Path | None = None
+    joint_angles_csv_path: Path | None = None
     video_paths: list[str] = field(default_factory=list)
     loaded: bool = False
 
@@ -181,7 +224,7 @@ class SessionData:
         Returns:
             bool (bool): True if session paths resolution criteria parameters components matches healthy targets.
         """
-        return self.loaded and self.csv_path is not None
+        return self.loaded and self.joint_angles_csv_path is not None
 
 
 @dataclass(frozen=True, slots=True)

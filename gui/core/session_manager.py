@@ -64,7 +64,7 @@ class SessionManager:
         get_initial_sessions: Scans the sessions_dir for valid session directories.
         scan_custom_path: Scans an arbitrary external path for session folders.
         resolve_session_assets: Locates primary data and video assets within a specific session.
-        load_file_data: Loads session data from the disk based on file extension.
+        load_joint_angles_file: Loads session data from the disk based on file extension.
     """
 
     def __init__(self, sessions_dir: Union[str, Path]) -> None:
@@ -156,7 +156,7 @@ class SessionManager:
 
         return target_csv, target_video, video_files
 
-    def load_file_data(self, file_path: Union[str, Path]) -> tuple[Any, Path]:
+    def load_joint_angles_file(self, file_path: Union[str, Path]) -> tuple[Any, Path]:
         """
         Loads session data from the disk based on file extension.
 
