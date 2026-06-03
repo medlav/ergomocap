@@ -109,4 +109,4 @@ def trunk_reba_score(trunk_degrees: NDArray[np.float64]) -> NDArray[np.int16]:
     )
 
 
-# TODO REBA FIX #2 Find a way to calculate the trunk_torsion_degree or ALERT USER ABOUT THIS..
+# TODO REBA FIX #2 Find a way to calculate the trunk_torsion_degree or ALERT USER ABOUT THIS.. (IT REDUCES MAX TRUNK SCORE BY 1, UNDERESTIMATE)

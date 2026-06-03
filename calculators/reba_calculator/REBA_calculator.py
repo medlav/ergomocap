@@ -60,6 +60,9 @@ from calculators.adapters.freemocap_adapter import DegsIndexes as DI
 # @njit(int16[:](int16[:, :], int16[:, :]))
 def calculate_frame_reba_from_degs(
     degs: NDArray[np.float64],
+    load: int = 0,
+    shock_force: bool = False,
+    coupling_score: int = 0,
 ) -> tuple[dict[str, int], dict[str, Any]]:
     """
     Modular REBA Scoring Entry Point (Vectorized Input).
@@ -83,6 +86,15 @@ def calculate_frame_reba_from_degs(
                               RIGHT_HAND_LATERAL_SIDE, LEFT_HAND_LATERAL_SIDE,
                               RIGHT_HAND_TWIST, LEFT_HAND_TWIST]
 
+        load (int): The value of the load in lbs, defaults to 0
+        shock_force (bool): If the force is a shock or got a rapid build up, defaults to False.
+        coupling_score: (int): Coupling/Activity Score Adjustments (to be added to Score B), defaults to 0:
+            - Well fitting Handle and mid rang power grip, good: +0
+            - Acceptable but not ideal hand hold or coupling, fair: +1
+            - Hand hold not acceptable but possible, poor: +2
+            - No handles, awkward, unsafe with any body part, unacceptable: +3
+
+    # Well fitting Handle and mid rang power grip, good: +0
     Returns:
         tuple[dict[str, int], dict[str, Any]]:
             - final_scores: dictionary containing integer penalty scores for
@@ -131,10 +143,16 @@ def calculate_frame_reba_from_degs(
     # If load < 11 lbs. : +0
     # If load 11 to 22 lbs. : +1
     # If load > 22 lbs.: +2
+    load_score = load
+    if load > 22:
+        load_score = 2
+    elif load >= 11:
+        load_score = 1
+
     # Adjust: If shock or rapid build up of force: add +1
-    load_score = (
-        0  # Placeholder for load score (to be integrated with actual load data)
-    )
+    if shock_force:
+        load_score += 1
+
     adjusted_score_a = score_a + load_score
 
     score_b = get_score_b(
@@ -151,7 +169,7 @@ def calculate_frame_reba_from_degs(
     # Hand hold not acceptable but possible, poor: +2
     # No handles, awkward, unsafe with any body part,
     # Unacceptable: +3
-    coupling_score = 0  # Placeholder for coupling/activity score (to be integrated with actual task data)
+
     adjusted_score_b = score_b + coupling_score
 
     final_reba_val = get_final_reba(adjusted_score_a, adjusted_score_b)
@@ -167,6 +185,10 @@ def calculate_frame_reba_from_degs(
         "Score_A_REBA": int(adjusted_score_a),
         "Score_B_REBA": int(adjusted_score_b),
         "Score_C_REBA": int(final_reba_val),
+        # This section is to return the optional variables
+        "coupling_score": int(coupling_score),
+        "load": int(load),
+        "load_score": int(load_score),
     }
 
     return final_scores, {}

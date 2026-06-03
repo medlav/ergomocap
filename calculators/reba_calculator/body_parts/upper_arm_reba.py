@@ -61,20 +61,13 @@ def upper_arm_reba_score(upper_arm_degrees: NDArray[np.float64]) -> NDArray[np.i
         NDArray[np.int16]: A 1D NumPy array containing:
             [total_score, flex_score, side_score, shoulder_rise_score].
     """
-    # freemocap_adapter.py mapping TODO remove or implement!
-    # 4. Upper Arm [8:14] -> [R_flex, L_flex, R_side, L_side, R_rise, L_rise]
-    # degs[8] = row["right_shoulder_extension_flexion"]
-    # degs[9] = row["left_shoulder_extension_flexion"]
-    # degs[10] = row["right_shoulder_abduction_adduction"]
-    # degs[11] = row["left_shoulder_abduction_adduction"]
-    # R/L Shoulder rise usually mapped from abduction or separate landmarks
-    # degs[12] = 0
-    # degs[13] = 0
 
     right_flexion = upper_arm_degrees[0]
     left_flexion = upper_arm_degrees[1]
     right_side = upper_arm_degrees[2]
     left_side = upper_arm_degrees[3]
+
+    # TO FIX
     right_shoulder_rise = upper_arm_degrees[
         4
     ]  # TODO EFFECTIVELY ALWAYS 0 !! MUST IMPLEMENT IN FMC ADAPTER TO GET REAL VALUES
