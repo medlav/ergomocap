@@ -327,7 +327,7 @@ class VideoCanvas(QLabel):
 
     def _draw_overlay(self, painter: QPainter, x: int, y: int):
         """
-        Draw technical metadata onto the video surface.
+        Draw technical metadata onto the video surface with a high-contrast dark background.
 
         Args:
             painter (QPainter): The active painting object.
@@ -337,8 +337,24 @@ class VideoCanvas(QLabel):
         Returns:
             None (None): Renders text using the active painter.
         """
-        painter.setPen(QColor("#ff0000ff"))
+        # --- 1. Draw the High-Contrast Dark Background ---
+        # Adjust width (200) and height (50) based on your maximum expected text length
+        bg_width = 160
+        bg_height = 50
+        bg_x = x + 5
+        bg_y = y + 5
+
+        # Using an almost fully opaque dark background (#E6 = ~90% opacity)
+        # For pure solid black, use QColor(0, 0, 0, 255) or QColor("#000000")
+        painter.fillRect(bg_x, bg_y, bg_width, bg_height, QColor(10, 10, 10, 230))
+
+        # --- 2. Draw the Text ---
         painter.setFont(self.font())
-        painter.drawText(x + 10, y + 20, f"FRAME: #{self.frame_num:05d}")
+
+        # Frame Number (Bright Yellow text)
+        painter.setPen(QColor("#ffff00"))
+        painter.drawText(x + 10, y + 25, f"FRAME: #{self.frame_num:05d}")
+
+        # Risk Text
         painter.setPen(QPen(self.risk_color, 2))
-        painter.drawText(x + 10, y + 35, f"RISK: {self.risk_text.upper()}")
+        painter.drawText(x + 10, y + 42, f"RISK: {self.risk_text.upper()}")

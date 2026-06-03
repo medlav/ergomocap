@@ -75,7 +75,7 @@ from gui.core.report_strategies import RebaStrategy, RulaStrategy
 from gui.widgets.table_report_widget import TableReportWidget
 
 
-# from gui.utils.logger import logger TODO implement logger
+from gui.utils.logger import logger
 
 
 class ReportView(QMainWindow):
@@ -461,6 +461,7 @@ class ReportView(QMainWindow):
                 else:
                     pass
         except Exception as e:
+            logger.error(f"Export Error: {e}")
             QMessageBox.critical(self, self.tr("Export Error"), str(e))
 
     def _handle_docx_request(self) -> None:

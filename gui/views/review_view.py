@@ -1,6 +1,3 @@
-# Save this file directly as: C:\Users\nosle\Desktop\MedLavR\programmi\ergomocap\gui\views\review_view.py
-
-from pathlib import Path
 from PySide6.QtCore import Qt, Signal, Slot
 from PySide6.QtWidgets import (
     QWidget,
@@ -18,8 +15,9 @@ from PySide6.QtWidgets import (
     QSizePolicy,
     QMessageBox,
 )
-from gui.utils.app_paths import ErgoPaths
-from gui.utils.models import FrameData, SessionData, VideoPosition, FrameReviewData
+
+from gui.utils.logger import logger
+from gui.utils.models import SessionData, VideoPosition, FrameReviewData
 from gui.views.review_backend import ReviewBackend
 from gui.views.review_metrics_table import ReviewMetricsTable
 
@@ -28,8 +26,8 @@ class ReviewView(QWidget):
     """
     Unified Orchestration & Correction View for Human-in-the-Loop video reviews.
 
-    Combines the sidebar options and view window management into a single,
-    highly performant class. Stays floating on top of the main workspace canvas.
+    Combines the sidebar options and view window management into a single class.
+    Stays floating on top of the main workspace canvas.
     """
 
     apply_override_requested = Signal(int, int, str, float)
@@ -45,9 +43,10 @@ class ReviewView(QWidget):
         self.resize(420, 850)
 
         # Initialize Data Layer
-        self.backend = ReviewBackend()
+        self.review_backend = ReviewBackend()
         self.landmarks = None
         self.scores_dict = None
+        self.current_idx = None
 
         # Build UI
         self._setup_ui()
@@ -193,8 +192,8 @@ class ReviewView(QWidget):
         self.combo_fields.currentIndexChanged.connect(self._handle_combo_field_changed)
 
         # We route packets cleanly directly through our structured class slot
-        self.backend.frame_review_ready.connect(self.sync_frame_review_data)
-        self.backend.status_updated.connect(self.set_status)
+        self.review_backend.frame_review_ready.connect(self.sync_frame_review_data)
+        self.review_backend.status_updated.connect(self.set_status)
 
     @Slot(FrameReviewData)
     def sync_frame_review_data(self, review_data: FrameReviewData) -> None:
@@ -207,6 +206,7 @@ class ReviewView(QWidget):
             self.scores_dict = review_data.scores_dict
         # Pass the update downward to the table UI
         self.metrics_table.sync_frame_review_data(review_data)
+        self.current_idx = review_data.frame_idx
 
     def _handle_combo_field_changed(self):
         selected_field = self.combo_fields.currentText()
@@ -228,31 +228,34 @@ class ReviewView(QWidget):
         val = self.spin_value.value()
 
         if scope == 0:
-            start, end = self.spin_start.value(), self.spin_start.value()
+            if self.current_idx:
+                start = end = self.current_idx
+        elif scope == 1:
+            start, end = self.spin_start.value(), self.spin_end.value()
         elif scope == 2:
             start, end = 0, -1
         else:
             start, end = self.spin_start.value(), self.spin_end.value()
 
-        self.backend.mutate_records(
+        self.review_backend.mutate_records(
             start_frame=start, end_frame=end, variable_field=field, override_value=val
         )
 
     @Slot(VideoPosition)
     def sync_video_position(self, video_position: VideoPosition):
         # TODO NEED TO ADD CHECKING HERE..
-        if not self.backend.current_joint_analysis_path:
+        if not self.review_backend.current_joint_analysis_path:
             return
-        self.backend.emit_frame_review_data(
+        self.review_backend.emit_frame_review_data(
             current_frame_idx=video_position.current_frame
         )
 
     @Slot(SessionData)
     def update_session_data(self, session_data: SessionData):
 
-        success, message = self.backend.load_review_session(session_data)
+        success, message = self.review_backend.load_review_session(session_data)
         if success:
-            fields = self.backend.get_dataset_fields()
+            fields = self.review_backend.get_dataset_fields()
 
             self.combo_fields.blockSignals(True)
             self.combo_fields.clear()
@@ -262,30 +265,16 @@ class ReviewView(QWidget):
             self.set_status(message)
 
             # Auto-populate table with frame 0 data when a session initializes
-            self.backend.emit_frame_review_data(0)
+            self.review_backend.emit_frame_review_data(0)
 
             self.update()
         else:
+            logger.error(f"Error: {message}")
             self.set_status(f"Error: {message}")
-
-    # def load_analysis_session(self) -> None:
-    #     success, message = self.backend.load_review_session()
-    #     if success:
-    #         fields = self.backend.get_dataset_fields()
-    #         self.combo_fields.blockSignals(True)
-    #         self.combo_fields.clear()
-    #         self.combo_fields.addItems(fields)
-    #         self.combo_fields.blockSignals(False)
-    #         self.set_status(message)
-
-    #         # Auto-populate table with frame 0 data when a session initializes
-    #         self.backend.emit_frame_review_data(0)
-    #     else:
-    #         self.set_status(f"Error: {message}")
 
     @Slot()
     def _on_save_session(self) -> None:
-        if self.backend.commit_final_review():
+        if self.review_backend.commit_final_review():
             QMessageBox.information(
                 self,
                 self.tr("Success"),

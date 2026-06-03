@@ -36,6 +36,7 @@ from pathlib import Path
 
 from PySide6.QtCore import Signal, QObject
 
+from gui.utils.logger import logger
 from gui.utils.models import VideoPosition
 
 
@@ -150,7 +151,7 @@ def export_frames_headless(
 
     while True:
         if should_stop and should_stop():
-            print("Export stopped by user.")
+            logger.warning("Export stopped by user.")
             break
         ret, frame = cap.read()
         if not ret:

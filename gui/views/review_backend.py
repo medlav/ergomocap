@@ -1,16 +1,14 @@
-import logging
 import math
 from typing import Any
 import pandas as pd
 from pathlib import Path
-from PySide6.QtCore import QObject, Signal, QThread, Qt, Slot
+from PySide6.QtCore import QObject, Signal, QThread, Qt
 
 from gui.utils.app_paths import ErgoPaths
 from gui.utils.constants import AssessmentMethod, RiskLevel
 from gui.utils.models import FrameReviewData, AnalysisResult, SessionData
+from gui.utils.logger import logger
 from gui.workers.analysis_worker import AnalysisWorker
-
-logger = logging.getLogger(__name__)
 
 
 class ReviewBackend(QObject):
@@ -148,7 +146,7 @@ class ReviewBackend(QObject):
 
             self.status_updated.emit("Review pass updated. Soft checkpoint saved.")
 
-        # Forward results up to the UI layers
+        # Forward results up to the UI layers (ReviewView or MainWindow?)
         self.analysis_finished.emit(result)
 
     def mutate_records(
@@ -266,9 +264,6 @@ class ReviewBackend(QObject):
         method_suffix = str(score_row.get("Method", "REBA")).upper()
 
         # 2. Extract completely dynamic metric payloads
-        # scores_payload = self._parse_pure_row_metrics(
-        #     score_row, is_score_file=True, method_suffix=method_suffix
-        # )
         scores_payload = {str(key): value for key, value in score_row.items()}
         print(scores_payload, "\n\nHERE\n\n")
 
@@ -319,6 +314,7 @@ class ReviewBackend(QObject):
                 )
 
             # Format raw key into clean, title-cased presentation string
+            # TODO is better to delegate all this to one interface /Strategy Pattern Class
             clean_name = col_name
             if (
                 is_score_file
@@ -368,15 +364,13 @@ class ReviewBackend(QObject):
 
     def _resolve_risk_level(self, row_data: dict) -> RiskLevel:
         """Maps target string values safely into designated structural Enum types."""
-        # Find the key that contains 'RISK' (case-insensitive search)
+
         risk_key = next((k for k in row_data.keys() if "RISK" in str(k).upper()), None)
         if not risk_key:
             raise ValueError(
                 "Strict Check Failure: Missing mandatory descriptive 'risk' indicator entry column."
             )
 
-        # FIX: Use .lower() so "medium", "Medium", or "MEDIUM" all become "medium"
-        # to match your RiskLevel Enum values exactly.
         raw_risk = str(row_data[risk_key]).strip().lower()
 
         if not raw_risk or raw_risk in ("nan", "none", ""):
@@ -385,7 +379,6 @@ class ReviewBackend(QObject):
             )
 
         try:
-            # This will now successfully match RiskLevel("medium")
             return RiskLevel(raw_risk)
         except ValueError as e:
             valid_options = [e.value for e in RiskLevel]
