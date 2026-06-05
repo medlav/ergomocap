@@ -192,7 +192,7 @@ ergomocap/
 1. **Clone the repository:**
 
 ```bash
-git clone [https://github.com/medlav/ergomocap.git](https://github.com/medlav/ergomocap.git)
+git clone https://github.com/medlav/ergomocap.git
 cd ergomocap
 
 ```
