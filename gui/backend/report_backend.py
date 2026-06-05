@@ -329,7 +329,7 @@ class ReportBackend(QObject):
         try:
             df: pd.DataFrame = pd.read_csv(self.current_file)
 
-            print(df.columns)
+            # print(df.columns)
 
             method_suffix = self.current_method.value.upper()
 

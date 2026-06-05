@@ -127,12 +127,13 @@ class ChartReportWidget(QWidget):
                 raw.value_counts()
                 if metric == MetricType.RISK
                 else pd.cut(
-                    raw, bins=range(16), labels=[str(i) for i in range(1, 16)]
+                    raw, bins=range(32), labels=[str(i) for i in range(1, 32)]
                 ).value_counts()
             )
         else:
             plot_data = pd.Series(data)
 
+        plot_data = plot_data[plot_data > 0]
         # 2. Rendering Logic
         if not plot_data.empty:
             # Unpack safely using a single variable to satisfy Pylance's Union type

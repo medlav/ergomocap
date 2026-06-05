@@ -506,6 +506,7 @@ class ReportView(QMainWindow):
         Returns:
             None (None): Redraws the Matplotlib canvases via the chart widgets.
         """
+
         self.chart_risk.update_chart(
             df,
             MetricType.RISK,

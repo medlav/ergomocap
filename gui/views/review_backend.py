@@ -51,7 +51,7 @@ class ReviewBackend(QObject):
             self.current_joint_analysis_path = session_data.joint_angles_csv_path
 
             if not self.current_joint_analysis_path:
-                print("\n\n", session_data, "\n\n")
+                # print("\n\n", session_data, "\n\n")
                 raise ValueError(
                     "No joint angles file path in ReviewBackend load_review_session"
                 )
@@ -265,7 +265,7 @@ class ReviewBackend(QObject):
 
         # 2. Extract completely dynamic metric payloads
         scores_payload = {str(key): value for key, value in score_row.items()}
-        print(scores_payload, "\n\nHERE\n\n")
+        # print(scores_payload, "\n\nHERE\n\n")
 
         angles_payload = self._parse_pure_row_metrics(angle_row, is_score_file=False)
 

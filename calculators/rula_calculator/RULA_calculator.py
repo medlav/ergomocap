@@ -160,10 +160,10 @@ def calculate_frame_rula_from_degs(
         "Score_B_RULA": grand_score_b,
         "Final_Score_RULA": int(final_rula),
         # Section to return optional values
-        "muscle_score": int(muscle_score),
-        "force_score": int(muscle_score),
-        "is_arm_supported": is_arm_supported,
-        "are_legs_unsupported": are_legs_unsupported,
+        # "muscle_score": int(muscle_score),
+        # "force_score": int(muscle_score),
+        # "is_arm_supported": is_arm_supported,
+        # "are_legs_unsupported": are_legs_unsupported,
     }
 
     return final_scores, {}

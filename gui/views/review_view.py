@@ -212,7 +212,7 @@ class ReviewView(QWidget):
         selected_field = self.combo_fields.currentText()
         if not self.scores_dict:
             raise ValueError("No scores_dict")
-        print(self.scores_dict, "\nHERE SCORES DICT\n\n")
+        # print(self.scores_dict, "\nHERE SCORES DICT\n\n")
         field_value = self.scores_dict[selected_field]
         lbl_field_value_text = f"Current Field Value is: {field_value}"
         self.lbl_field_value.setText(str(lbl_field_value_text))
