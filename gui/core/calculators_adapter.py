@@ -66,6 +66,7 @@ from calculators.calculators import (
 )
 
 # CENTRALIZED CONSTANTS & ENUMS
+from gui.utils.logger import logger
 from gui.utils.constants import RiskLevel, MetricType
 
 
@@ -91,6 +92,8 @@ class BaseErgoAdapter(ABC):
         get_stats: Calculates the frequency distribution of scores across risk levels.
     """
 
+    INTERNAL_SCORE_KEY: str = MetricType.SCORE.value
+
     @staticmethod
     @abstractmethod
     def get_thresholds() -> list[tuple[int, RiskLevel]]:
@@ -111,24 +114,24 @@ class BaseErgoAdapter(ABC):
         """
         pass
 
-    @classmethod
-    def run_on_dataframe(cls, df: pd.DataFrame) -> list[dict[str, Any]]:
-        """Iterates through a DataFrame to calculate scores for every frame.
+    # @classmethod TODO unused dead code implement it or remove it
+    # def run_on_dataframe(cls, df: pd.DataFrame) -> list[dict[str, Any]]:
+    #     """Iterates through a DataFrame to calculate scores for every frame.
 
-        Args:
-            df: Input motion data where each row represents one time frame.
+    #     Args:
+    #         df: Input motion data where each row represents one time frame.
 
-        Returns:
-            list[dict[str, Any]]: A list of score dictionaries (one per frame).
-        """
-        mapper, calculator = cls.get_relay_tools()
-        results: list[dict[str, Any]] = []
+    #     Returns:
+    #         list[dict[str, Any]]: A list of score dictionaries (one per frame).
+    #     """
+    #     mapper, calculator = cls.get_relay_tools()
+    #     results: list[dict[str, Any]] = []
 
-        for _, row in df.iterrows():
-            input_data = mapper(row)
-            scores, _ = calculator(input_data)
-            results.append(scores)
-        return results
+    #     for _, row in df.iterrows():
+    #         input_data = mapper(row)
+    #         scores, _ = calculator(input_data)
+    #         results.append(scores)
+    #     return results
 
     @classmethod
     def process(
@@ -149,9 +152,17 @@ class BaseErgoAdapter(ABC):
         if df.empty:
             return df
 
-        internal_key = getattr(
-            cls, "INTERNAL_SCORE_KEY", df.columns[-1]
-        )  # TODO this bullshit is breaking my balls and my code
+        heuristic_score_col = [
+            col for col in df.columns if "FINAL_SCORE" in col.upper()
+        ][0]
+
+        internal_key = getattr(cls, "INTERNAL_SCORE_KEY", heuristic_score_col)
+
+        if internal_key not in df.columns:
+            logger.error(
+                f"Key '{internal_key}' not found in results. Available: {list(df.columns)}"
+            )
+            raise KeyError("No Score Column in the Dataframe")
 
         df[MetricType.SCORE.value] = df[internal_key]
 
@@ -192,6 +203,8 @@ class BaseErgoAdapter(ABC):
 class REBAAdapter(BaseErgoAdapter):
     """Adapter for Rapid Entire Body Assessment (REBA)."""
 
+    INTERNAL_SCORE_KEY = "Final_Score_REBA"
+
     @staticmethod
     def get_relay_tools() -> tuple[Callable, Callable]:
         """Returns tools for REBA mapping and calculation."""
@@ -211,6 +224,8 @@ class REBAAdapter(BaseErgoAdapter):
 
 class RULAAdapter(BaseErgoAdapter):
     """Adapter for Rapid Upper Limb Assessment (RULA)."""
+
+    INTERNAL_SCORE_KEY = "Final_Score_RULA"
 
     @staticmethod
     def get_relay_tools() -> tuple[Callable, Callable]:

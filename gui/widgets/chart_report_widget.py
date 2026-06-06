@@ -114,32 +114,30 @@ class ChartReportWidget(QWidget):
         Returns:
             None (None): Clears and redraws the `canvas`.
         """
+        # Canvas preparation
         self.canvas.figure.clear()
         ax = self.canvas.figure.add_subplot(111)
         theme: dict[str, str] = THEMES[self.current_theme]
         bg_color: str = theme["background"]
+
         self.canvas.figure.patch.set_facecolor(bg_color)
         ax.set_facecolor(bg_color)
-        # 1. Data Normalization
+
+        # Data Normalization
+
         if isinstance(data, pd.DataFrame):
             raw = data[metric.value]
-            plot_data = (
-                raw.value_counts()
-                if metric == MetricType.RISK
-                else pd.cut(
-                    raw, bins=range(32), labels=[str(i) for i in range(1, 32)]
-                ).value_counts()
-            )
+            plot_data = raw.value_counts()  # Works perfectly for both Text and Numbers!
         else:
             plot_data = pd.Series(data)
 
-        plot_data = plot_data[plot_data > 0]
-        # 2. Rendering Logic
+        # Rendering Logic
         if not plot_data.empty:
             # Unpack safely using a single variable to satisfy Pylance's Union type
+            labels = [str(i) for i in plot_data.index]
             results = ax.pie(
                 plot_data,
-                labels=[str(i) for i in plot_data.index],
+                labels=labels,
                 autopct="%1.1f%%",
                 colors=COLOR_MAP.get(metric, COLOR_MAP[MetricType.SCORE]),
                 startangle=140,

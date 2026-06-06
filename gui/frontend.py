@@ -30,6 +30,7 @@ engine (`ErgoBackend`). It manages the top-level window lifecycle, application-w
 asynchronous thread cleanup, and shortcuts.
 """
 
+import threading
 import os
 from pathlib import Path
 import sys
@@ -800,7 +801,6 @@ class MainWindow(QMainWindow):
             result (AnalysisResult): The analysis result containing the success status,
                 message, output path, and optional scores or stats.
         """
-        import threading
 
         logger.debug(
             f"Frontend: _handle_analysis_finished on thread: {threading.current_thread().name}"

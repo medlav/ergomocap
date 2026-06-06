@@ -34,6 +34,7 @@ the worker handles dispatch requests gracefully using Qt's cross-thread signal s
 and dispatches typed structural analysis receipts upon operation boundaries.
 """
 
+import threading
 from pathlib import Path
 from typing import Union
 import numpy as np
@@ -137,8 +138,6 @@ class AnalysisWorker(QObject):
             None (None): Dispatches output results directly back upstream using the `finished` signal pipeline.
         """
 
-        import threading
-
         logger.debug(
             f"🔹 Worker: start_analysis running on thread: {threading.current_thread().name}"
         )
@@ -160,6 +159,9 @@ class AnalysisWorker(QObject):
             raw_results = self.engine.run_calculation(current_data, mapper, calculator)
 
             if not raw_results:
+                logger.warning(
+                    f"Analysis loop completed but engine returned no results for method {method.name}."
+                )
                 self.finished.emit(
                     AnalysisResult(
                         success=False,
@@ -198,6 +200,10 @@ class AnalysisWorker(QObject):
 
             msg: str = f"Analysis Complete.\n{method.name} executed on {len(raw_results)} frames"
 
+            logger.info(
+                f"✅ Background routine finish successfully for {method.name}. Dispatching results capsule upstream."
+            )
+
             # 7. Dispatch structural analytics result capsule back upstream to tracking receivers
             self.finished.emit(
                 AnalysisResult(
@@ -210,6 +216,9 @@ class AnalysisWorker(QObject):
             )
 
         except NotImplementedError as e:
+            logger.exception(
+                f"Structural interface execution failure: method variant {method.name} lacks complete endpoint implementation."
+            )
             self.finished.emit(
                 AnalysisResult(
                     success=False,
@@ -218,6 +227,9 @@ class AnalysisWorker(QObject):
                 )
             )
         except Exception as e:
+            logger.error(
+                f"Critical analysis engine breakdown during execution sequence for {method.name}. Error: {e}"
+            )
             self.finished.emit(
                 AnalysisResult(
                     success=False,

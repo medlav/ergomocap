@@ -1,0 +1,80 @@
+graph TD
+    %% -----------------------------------------------------------------
+    %% 1. UI Layer
+    %% -----------------------------------------------------------------
+    subgraph UI_Layer["Frontend / UI Layer"]
+        A[Sidebar / Buttons] -- "1. Triggers run_analysis(AnalysisRequest)" --> B[Frontend Window]
+    end
+
+    %% -----------------------------------------------------------------
+    %% 2. Orchestration Layer (Backend & Thread Management)
+    %% -----------------------------------------------------------------
+    subgraph Engine_Layer["Orchestration Layer (Backend / Threading)"]
+        B -- "2. Invokes backend" --> C[Backend Engine]
+        C -- "3. Picks Strategy via get_adapter(method)" --> D{AssessmentMethod}
+        C -- "4. Sets pending data/adapter & moves worker" --> E[AnalysisWorker]
+        C -- "5. Spawns Async" --> F[QThread]
+        E --> F
+    end
+
+    %% -----------------------------------------------------------------
+    %% 3. Asynchronous Worker Execution (start_analysis Slot)
+    %% -----------------------------------------------------------------
+    subgraph Worker_Execution["AnalysisWorker Thread Sequence (start_analysis)"]
+        F -->|Started Signal| ESlot["Slot: start_analysis()"]
+
+        %% Step-by-step internal execution
+        ESlot -->|"6a. Call"| ToolCall["adapter.get_relay_tools()"]
+        ESlot -->|"6b. Dispatch"| RunCalc["self.engine.run_calculation(data, mapper, calculator)"]
+        ESlot -->|"6c. Call"| ThreshCall["adapter.get_thresholds()"]
+        ESlot -->|"6d. Define callback"| RiskCB["risk_callback(score)"]
+        ESlot -->|"6e. Process final data"| ProcCall["adapter.process(raw_results, risk_callback)"]
+
+        RiskCB -->|"Resolves dynamic enum"| RunCalcEnum["self.engine.get_risk_level_enum()"]
+    end
+
+    %% -----------------------------------------------------------------
+    %% 4. Concrete Adapters & Low-Level Modules
+    %% -----------------------------------------------------------------
+    subgraph Adapter_Layer["calculator_adapter.py"]
+        G[[BaseErgoAdapter ABC]]
+
+        D --> H[REBAAdapter]
+
+    end
+
+    subgraph Calculators_Module["calculators/ Functions"]
+        M[map_fmc_joint_angles_to_ergo_degs]
+        N[calculate_frame_reba_from_degs]
+
+        ToolCall ===>|Returns| M
+        ToolCall ===>|Returns| N
+    end
+
+    %% -----------------------------------------------------------------
+    %% 5. Data Finalization & Return Path
+    %% -----------------------------------------------------------------
+    ProcCall -->|Returns dataset| P[(Processed pandas.DataFrame)]
+    P -->|"to_csv()"| Disk[(ErgoPaths.analysis_output)]
+    P -->|"Extract stats & scores"| OutputCapsule[AnalysisResult Capsule]
+
+    OutputCapsule -->|7. Emit finished signal| Q[self.finished]
+    Q -->|8. Received upstream| C
+    C -->|9. Loads data into views| R[Report Window / Chart Updates]
+
+    %% -----------------------------------------------------------------
+    %% Styling and Color Customizations
+    %% -----------------------------------------------------------------
+    classDef ui fill:#3498db,stroke:#2980b9,color:#fff;
+    classDef engine fill:#e67e22,stroke:#d35400,color:#fff;
+    classDef worker fill:#d35400,stroke:#ba4a00,color:#fff;
+    classDef adapter fill:#9b59b6,stroke:#8e44ad,color:#fff;
+    classDef calc fill:#1abc9c,stroke:#16a085,color:#fff;
+    classDef data fill:#2ecc71,stroke:#27ae60,color:#fff;
+
+    class A,B,R ui;
+    class C,D,E,F engine;
+    class ESlot,ToolCall,RunCalc,ThreshCall,RiskCB,ProcCall,RunCalcEnum worker;
+    class G,H adapter;
+    class M,N calc;
+    class P,Disk,OutputCapsule,Q data;

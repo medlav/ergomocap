@@ -48,6 +48,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 from PySide6.QtCore import QObject, Signal, Slot
 
+from gui.utils.logger import logger
 from gui.utils.app_paths import ErgoPaths
 from gui.utils.constants import AssessmentMethod, MetricType
 from gui.utils.models import (
@@ -146,6 +147,7 @@ class ReportBackend(QObject):
                 try:
                     df: pd.DataFrame = pd.read_csv(file_path)
                 except UnicodeDecodeError:
+                    logger.error("pandas.read_csv Failed for an UnicodeError")
                     df: pd.DataFrame = pd.read_csv(file_path, encoding="latin-1")
 
             if df.empty:

@@ -5,7 +5,7 @@ from PySide6.QtWidgets import (
     QAbstractItemView,
 )
 from PySide6.QtGui import QColor
-from PySide6.QtCore import Qt, Slot
+from PySide6.QtCore import Qt
 from gui.utils.models import FrameReviewData
 
 
@@ -56,13 +56,13 @@ class ReviewMetricsTable(QTableWidget):
 
         # --- 2. DYNAMIC COMPONENT BREAKDOWNS (SCORES_DICT) ---
         if review_data.scores_dict:
-            self._add_header_row("--- Component Framework Breakdowns ---")
+            self._add_header_row("--- Score Components Breakdown ---")
             for body_part, localized_score in review_data.scores_dict.items():
                 self._add_row_metric(str(body_part), str(localized_score))
 
-        # --- 3. DYNAMIC KINEMATIC TRAJECTORIES (JOINT_ANGLES) ---
+        # --- 3. DYNAMIC KINEMATIC VARIABLES (JOINT_ANGLES) ---
         if review_data.joint_angles:
-            self._add_header_row("--- Measured Kinematic Trajectories ---")
+            self._add_header_row("--- Measured Kinematic Variables ---")
             for joint_name, kinematic_angle in review_data.joint_angles.items():
                 try:
                     self._add_row_metric(
