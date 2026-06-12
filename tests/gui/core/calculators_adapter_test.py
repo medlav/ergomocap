@@ -20,7 +20,6 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import pytest
-import pandas as pd
 from gui.core.calculators_adapter import (
     BaseErgoAdapter,
     REBAAdapter,
