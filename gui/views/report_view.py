@@ -206,6 +206,8 @@ class ReportView(QMainWindow):
         lbl_menu: QLabel = QLabel(self.tr("REPORT CONTROLS"))
         lbl_menu.setProperty("class", "h2")
 
+        self.btn_refresh: QPushButton = QPushButton(self.tr("🔄 REFRESH"))
+
         self.btn_import: QPushButton = QPushButton(self.tr("📁 LOAD DATA"))
 
         self.btn_pdf: QPushButton = QPushButton(self.tr("📜 EXPORT TO PDF"))
@@ -216,6 +218,8 @@ class ReportView(QMainWindow):
 
         side_layout.addWidget(lbl_menu)
         side_layout.addSpacing(20)
+        side_layout.addWidget(self.btn_refresh)
+        side_layout.addSpacing(10)
         side_layout.addWidget(self.btn_import)
         side_layout.addSpacing(10)
         side_layout.addWidget(self.btn_pdf)
@@ -303,6 +307,7 @@ class ReportView(QMainWindow):
         Returns:
             None (None): Establishes signal-slot connections.
         """
+        self.btn_refresh.clicked.connect(self._handle_refresh)
         self.btn_import.clicked.connect(self._handle_import_dialog)
         self.btn_pdf.clicked.connect(self._handle_pdf_request)
         self.btn_docx.clicked.connect(self._handle_docx_request)
@@ -376,6 +381,22 @@ class ReportView(QMainWindow):
         self.file_info.setPlainText(
             f"Analysis Run on data from:\n{report_data.file_path}"
         )
+
+        self.current_file = report_data.file_path
+
+    def _handle_refresh(self):
+        """Handles the refresh button click event.
+
+        Use the current file path to trigger the report backend to reload the data from the same file.
+        Useful when changing data with the review tool [ReviewView][gui.views.review_view.ReviewView].
+
+        Returns:
+            None (None): Updates the report backend with the new file path.
+        """
+        if not self.current_file:
+            logger.error("No active data loaded.")
+            raise ValueError("No active data loaded.")
+        self.backend.load_data_and_run(self.current_file)
 
     #############################################
     # --- Handle Import Requests (Import Buttons)

@@ -186,6 +186,7 @@ class ReportBackend(QObject):
             self.data_processed.emit(processed_data)
 
         except Exception as e:
+            logger.error(f"Error: {e}", exc_info=True)
             self.error_occurred.emit(
                 ErrorInfo(
                     title="Load Error",
