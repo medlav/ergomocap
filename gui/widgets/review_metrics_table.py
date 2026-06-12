@@ -1,3 +1,17 @@
+"""
+ErgoMoCap: Review Metrics Table View
+------------------------------------
+Tabular Telemetry Display Widget for Ergonomic Data Presentation.
+
+This module implements the `ReviewMetricsTable`, a specialized `QTableWidget` sub-component
+designed to render real-time ergonomic telemetry outputs. It parses dynamic sub-scores
+and physical joint kinematic angle values from incoming frame packets, organizing them
+into clear, user-scannable categorical groups.
+
+The table serves as a pure structural visualizer within the human-in-the-loop
+review workflow, offloading all raw calculation logic to the underlying back-end data engines.
+"""
+
 from PySide6.QtWidgets import (
     QTableWidget,
     QTableWidgetItem,
@@ -15,6 +29,12 @@ class ReviewMetricsTable(QTableWidget):
 
     This specialized view widget organizes key-value telemetry payloads into categorized,
     user-scannable data grids without maintaining local heavy logic calculations.
+
+    Methods:
+        sync_frame_review_data: Re-populates layout data rows inside the data grid directly from the data structural properties of our FrameReviewData contract.
+        _initialize_table_properties: Configures the aesthetic layout framework variables for the data spreadsheet view.
+        _add_row_metric: Appends a standard key-value string row data layout element.
+        _add_header_row: Appends a spanning structural subsection label divider.
     """
 
     def __init__(self, parent=None) -> None:
@@ -22,7 +42,12 @@ class ReviewMetricsTable(QTableWidget):
         self._initialize_table_properties()
 
     def _initialize_table_properties(self) -> None:
-        """Configures the aesthetic layout framework variables for the data spreadsheet view."""
+        """
+        Configures the aesthetic layout framework variables for the data spreadsheet view.
+
+        Returns:
+            None (None): Modifies row, column, header, and selection properties internally.
+        """
         self.setColumnCount(2)
         self.setHorizontalHeaderLabels(["Parameter", "Value"])
         self.horizontalHeader().setSectionResizeMode(0, QHeaderView.ResizeMode.Stretch)
@@ -36,8 +61,13 @@ class ReviewMetricsTable(QTableWidget):
 
     def sync_frame_review_data(self, review_data: FrameReviewData) -> None:
         """
-        Re-populates layout data rows inside the data grid directly from
-        the data structural properties of our FrameReviewData contract.
+        Re-populates layout data rows inside the data grid directly from the data structural properties of our FrameReviewData contract.
+
+        Args:
+            review_data (FrameReviewData): Structural frame packet payload container housing evaluated ergonomic scores, risk designations, and angular telemetry.
+
+        Returns:
+            None (None): Disables UI paint triggers, flushes existing rows, maps clean strings data collections, and re-enables layout paint updates.
         """
         self.setUpdatesEnabled(False)
         self.setRowCount(0)
@@ -74,7 +104,16 @@ class ReviewMetricsTable(QTableWidget):
         self.setUpdatesEnabled(True)
 
     def _add_row_metric(self, name_label: str, value_label: str) -> None:
-        """Appends a standard key-value string row data layout element."""
+        """
+        Appends a standard key-value string row data layout element.
+
+        Args:
+            name_label (str): Text tag string describing the target parameter column label row entry.
+            value_label (str): Numeric evaluation rating or geometric calculation scale text label value string.
+
+        Returns:
+            None (None): Mutates table matrix elements structural entries states.
+        """
         row: int = self.rowCount()
         self.insertRow(row)
 
@@ -86,7 +125,15 @@ class ReviewMetricsTable(QTableWidget):
         self.setItem(row, 1, value_item)
 
     def _add_header_row(self, group_title: str) -> None:
-        """Appends a spanning structural subsection label divider."""
+        """
+        Appends a spanning structural subsection label divider.
+
+        Args:
+            group_title (str): Grouping subsection text label identifier sequence content.
+
+        Returns:
+            None (None): Inserts styled background structural division elements across active columns pathways.
+        """
         row: int = self.rowCount()
         self.insertRow(row)
 

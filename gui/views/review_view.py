@@ -1,3 +1,19 @@
+"""
+ErgoMoCap: Video Review Suite View
+----------------------------------
+Unified Orchestration & Correction View for Human-in-the-Loop Video Reviews.
+
+This module implements the `ReviewView`, a specialized floating `QWidget` that serves
+as an interactive control center for review, inspection, and manual verification of
+computer-vision tracking and algorithmic outputs. It integrates diagnostic telemetry
+data streams with contextual timeline-targeted data manipulation tools.
+
+The interface adheres to a strict model-view-controller separation by wrapping
+data-layer synchronization and persistence operations inside a dedicated
+`ReviewBackend` component while piping presentation structures directly
+to responsive PySide6 components.
+"""
+
 from PySide6.QtCore import Qt, Signal, Slot
 from PySide6.QtWidgets import (
     QWidget,
@@ -28,6 +44,43 @@ class ReviewView(QWidget):
 
     Combines the sidebar options and view window management into a single class.
     Stays floating on top of the main workspace canvas.
+
+    Attributes:
+        apply_override_requested (Signal): Signal emitted when an override correction is requested.
+        save_session_requested (Signal): Signal emitted when saving the session dataset is requested.
+        note_added (Signal): Signal emitted when the operator modifies the text notes area.
+        review_backend (ReviewBackend): The underlying execution engine managing the current review session data state.
+        landmarks (Any): Storage slot for human-in-the-loop tracking coordinate data.
+        scores_dict (dict): Dictionary mapping metric fields to their extracted or calculated ergonomic scores.
+        current_idx (int): The currently focused individual video timeline frame tracking index.
+        scroll_area (QScrollArea): Inner viewport scroll framing area widget.
+        container (QWidget): Central structural block layout containing panel elements.
+        metrics_table (ReviewMetricsTable): Embedded spreadsheet viewport tracking multi-variable data outputs.
+        lbl_scope (QLabel): Descriptive range text marker layout element.
+        combo_scope (QComboBox): Range constraint drop-down target selection object.
+        spin_start (QSpinBox): Lower framework timeline margin selection slider layout piece.
+        spin_end (QSpinBox): Upper framework timeline margin selection slider layout piece.
+        lbl_field (QLabel): Descriptive drop-down variable listing text marker layout element.
+        combo_fields (QComboBox): Active column tracking field context selection drop-down selector.
+        lbl_field_value (QLabel): Real-time numeric variable value view update tracker wrapper text label.
+        lbl_value (QLabel): Manual entry field descriptor string line element widget.
+        spin_value (QDoubleSpinBox): Numeric user entry point viewport tracking configuration container element.
+        btn_apply (QPushButton): Control click workflow mutation request emitter action component.
+        txt_notes (QTextEdit): Text logging viewport canvas component panel region interface box.
+        btn_save (QPushButton): Local workspace text format commit layout operator command interface button.
+        status_label (QTextEdit): Visual debugging data pipeline readout status screen pane block.
+
+    Methods:
+        sync_frame_review_data: Intercepts frame packets to populate fields before routing to the metrics table.
+        sync_video_position: Updates the backend state with the currently active video player layout position frame index.
+        update_session_data: Loads a newly updated ergonomic analysis folder data packet layer onto the UI layout.
+        set_status: Updates the visual text message console stream box widget inside the view.
+        _setup_ui: Instantiates, structures, and configures the graphical view widgets layout chain.
+        _connect_signals: Attaches view action events and incoming back-end notification slots to event paths.
+        _handle_scope_changed: Updates numeric boundary limits view component edit availability state selections.
+        _handle_combo_field_changed: Refreshes real-time numeric variables content metadata context displays.
+        _handle_apply_clicked: Formulates multi-frame timeline mutation processing arguments to apply variable value modifications.
+        _on_save_session: Confirms data commits with interactive platform graphical alert window diagnostics boxes.
     """
 
     apply_override_requested = Signal(int, int, str, float)
@@ -37,7 +90,7 @@ class ReviewView(QWidget):
     def __init__(self, parent: QWidget | None = None) -> None:
         super().__init__(parent)
 
-        # 1. Floating Windows Configuration (PRESERVED)
+        # 1. Floating Windows Configuration
         self.setWindowFlags(Qt.WindowType.Window | Qt.WindowType.WindowStaysOnTopHint)
         self.setWindowTitle("Video Review Suite")
         self.resize(420, 850)
@@ -53,6 +106,12 @@ class ReviewView(QWidget):
         self._connect_signals()
 
     def _setup_ui(self) -> None:
+        """
+        Instantiates, structures, and configures the graphical view widgets layout chain.
+
+        Returns:
+            None (None): Creates the layout configuration internally.
+        """
         main_layout = QVBoxLayout(self)
         main_layout.setContentsMargins(5, 5, 5, 5)
 
@@ -75,12 +134,11 @@ class ReviewView(QWidget):
         layout.setContentsMargins(10, 10, 10, 10)
         layout.setSpacing(15)
 
-        # --- FRAME DATA MONITOR (FIXED VISIBILITY) ---
+        # --- FRAME DATA MONITOR ---
         data_group = QGroupBox(self.tr("FRAME DATA SPECS"))
         data_lay = QVBoxLayout(data_group)
 
         self.metrics_table = ReviewMetricsTable(self)
-        # FIX: Give the table a size policy and explicit minimum height so it doesn't collapse to 0px
         self.metrics_table.setSizePolicy(
             QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Expanding
         )
@@ -183,6 +241,12 @@ class ReviewView(QWidget):
         main_layout.addWidget(self.scroll_area)
 
     def _connect_signals(self) -> None:
+        """
+        Connects UI signals to their respective slots and handlers.
+
+        Returns:
+            None (None): Binds signals internally.
+        """
         self.btn_apply.clicked.connect(self._handle_apply_clicked)
         self.btn_save.clicked.connect(self._on_save_session)
         self.txt_notes.textChanged.connect(
@@ -197,7 +261,15 @@ class ReviewView(QWidget):
 
     @Slot(FrameReviewData)
     def sync_frame_review_data(self, review_data: FrameReviewData) -> None:
-        """Intercepts frame packets to populate fields before routing to the metrics table."""
+        """
+        Intercepts frame packets to populate fields before routing to the metrics table.
+
+        Args:
+            review_data (FrameReviewData): Structural incoming data frame tracking updates tracking container payload.
+
+        Returns:
+            None (None): Updates child variables cache tables and calls inner layouts updates functions.
+        """
         if self.combo_fields.count() == 0 and review_data.scores_dict:
             self.combo_fields.blockSignals(True)
             self.combo_fields.addItems(list(review_data.scores_dict.keys()))
@@ -209,11 +281,29 @@ class ReviewView(QWidget):
         self.current_idx = review_data.frame_idx
 
     def _handle_scope_changed(self, index: int) -> None:
+        """
+        Updates numeric boundary limits view component edit availability state selections.
+
+        Args:
+            index (int): Dropdown tracking layout options position choice reference index value.
+
+        Returns:
+            None (None): Modifies visual visibility constraints states internally.
+        """
         is_range = index == 1
         self.spin_start.setEnabled(is_range)
         self.spin_end.setEnabled(is_range)
 
     def _handle_combo_field_changed(self):
+        """
+        Refreshes real-time numeric variables content metadata context displays.
+
+        Raises:
+            ValueError: If internal `scores_dict` state object reference mapping tracks as empty.
+
+        Returns:
+            None (None): Updates the label text representation value layout fields directly.
+        """
         selected_field = self.combo_fields.currentText()
         # If the combobox was cleared or is empty, return early gracefully
         if not selected_field:
@@ -230,18 +320,22 @@ class ReviewView(QWidget):
         self.lbl_field_value.setText(str(lbl_field_value_text))
 
     def _handle_apply_clicked(self) -> None:
+        """
+        Formulates multi-frame timeline mutation processing arguments to apply variable value modifications.
+
+        Returns:
+            None (None): Directs state variables values manipulation calls payload routing actions downward.
+        """
         scope = self.combo_scope.currentIndex()
         field = self.combo_fields.currentText()
         val = self.spin_value.value()
 
-        # FIX: Provide fallback defaults to completely eliminate UnboundLocalError
         start, end = None, None
 
         if scope == 0:
             if self.current_idx is not None:
                 start = end = self.current_idx
             else:
-                # FIX: Return early if no valid frame context exists
                 return
         elif scope == 1:
             start, end = self.spin_start.value(), self.spin_end.value()
@@ -256,6 +350,15 @@ class ReviewView(QWidget):
 
     @Slot(VideoPosition)
     def sync_video_position(self, video_position: VideoPosition):
+        """
+        Updates the backend state with the currently active video player layout position frame index.
+
+        Args:
+            video_position (VideoPosition): Data model payload container indicating frame index layout metrics positions.
+
+        Returns:
+            None (None): Commands data queries across active back-end data storage arrays.
+        """
         # TODO NEED TO ADD CHECKING HERE..
         if not self.review_backend.current_joint_analysis_path:
             return
@@ -265,7 +368,15 @@ class ReviewView(QWidget):
 
     @Slot(SessionData)
     def update_session_data(self, session_data: SessionData):
+        """
+        Loads a newly updated ergonomic analysis folder data packet layer onto the UI layout.
 
+        Args:
+            session_data (SessionData): Structural session properties directory context tracking info definition wrapper.
+
+        Returns:
+            None (None): Clears layout caches and repopulates visual selections data controls tracking targets lists.
+        """
         success, message = self.review_backend.load_review_session(session_data)
         if success:
             fields = self.review_backend.get_dataset_fields()
@@ -287,6 +398,12 @@ class ReviewView(QWidget):
 
     @Slot()
     def _on_save_session(self) -> None:
+        """
+        Confirms data commits with interactive platform graphical alert window diagnostics boxes.
+
+        Returns:
+            None (None): Spawns operating system native desktop alert information dialogs blocks views.
+        """
         if self.review_backend.commit_final_review():
             QMessageBox.information(
                 self,
@@ -303,4 +420,13 @@ class ReviewView(QWidget):
             )
 
     def set_status(self, text: str) -> None:
+        """
+        Updates the visual text message console stream box widget inside the view.
+
+        Args:
+            text (str): Raw tracking console information logging output display text lines string.
+
+        Returns:
+            None (None): Sets formatting content blocks values onto the interface window views directly.
+        """
         self.status_label.setText(f"REVIEW STATUS: {text}")

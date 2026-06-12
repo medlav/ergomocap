@@ -1,3 +1,17 @@
+"""
+ErgoMoCap: Video Review Suite Backend Controller
+------------------------------------------------
+Sandboxed Data Architecture and Multi-Threaded Re-Analysis Execution Engine.
+
+This module implements the `ReviewBackend`, which governs in-memory data mutation,
+isolated snapshot checkpoints, and worker orchestration for human-in-the-loop
+modifications. It safely manipulates ergonomic score vectors without corrupting
+primary recording files.
+
+Data synchronization between the storage layout and processing threads is
+managed via asynchronous Qt Signal pipelines utilizing thread-safe event passing.
+"""
+
 import math
 from typing import Any
 import pandas as pd
@@ -13,8 +27,32 @@ from gui.workers.analysis_worker import AnalysisWorker
 
 class ReviewBackend(QObject):
     """
-    An independent backend controller managing sandboxed, human-in-the-loop
-    ergonomic re-analyses without interfering with raw session logs.
+    An independent backend controller managing sandboxed, human-in-the-loop ergonomic re-analyses without interfering with raw session logs.
+
+    Attributes:
+        status_updated (Signal): Signal emitted with a `str` describing real-time processing status updates.
+        analysis_finished (Signal): Signal emitted with an `AnalysisResult` data block when calculations finish.
+        frame_review_ready (Signal): Signal emitted with a `FrameReviewData` package when structural frame telemetry parsing resolves.
+        active_dataframe (pandas.DataFrame | None): In-memory workspace storing the active ergonomic framework assessment spreadsheet matrix.
+        joint_angles_dataframe (pandas.DataFrame | None): Dataframe storing structural kinematic tracking variables loaded from local resources.
+        current_ergo_analysis_path (Path | None): System file path targeting the source ergonomic assessment storage location.
+        current_joint_analysis_path (Path | None): System file path targeting the tracking session source joint mechanics data location.
+        checkpoint_file_path (Path | None): Isolated safe file system destination path targeting the runtime local memory backup clone.
+        _analysis_thread (QThread | None): Dedicated thread allocation instance handler for isolated processing algorithms execution.
+        _analysis_worker (AnalysisWorker | None): Core background calculation runnable object lifecycle target container state.
+
+    Methods:
+        load_review_session: Loads the existing analysis data, provisions an in-memory copy, and establishes an on-disk safety checkpoint instantly.
+        get_dataset_fields: Returns columns from the active dataframe for UI selectors.
+        run_review_analysis: Executes a targeted analysis run using the modified in-memory dataframe state.
+        mutate_records: Modifies selected rows in memory based on instructions received from the UI.
+        commit_final_review: Hard-saves the actively modified memory dataset into a discrete file layout.
+        emit_frame_review_data: Extracts frame properties dynamically from separate score and kinematic data sources.
+        _handle_review_worker_finished: Interceptors worker output to update our memory layer and soft-checkpoint.
+        _terminate_active_worker: Safely breaks down running threads before spinning up successive runs.
+        _parse_pure_row_metrics: Iterates over all columns present inside a file row without text keyword tracking.
+        _resolve_unified_score: Dynamically isolates the dominant global summary calculation value.
+        _resolve_risk_level: Maps target string values safely into designated structural Enum types.
     """
 
     # Signals required by the UI
@@ -37,8 +75,13 @@ class ReviewBackend(QObject):
 
     def load_review_session(self, session_data: SessionData) -> tuple[bool, str]:
         """
-        Loads the existing analysis data, provisions an in-memory copy,
-        and establishes an on-disk safety checkpoint instantly.
+        Loads the existing analysis data, provisions an in-memory copy, and establishes an on-disk safety checkpoint instantly.
+
+        Args:
+            session_data (SessionData): Context configuration package identifying directory and file assets properties locations.
+
+        Returns:
+            tuple[bool, str] (tuple): A structural paired array containing initialization success confirmation status flag (`bool`) along with context trace message descriptors (`str`).
         """
         try:
             self.current_ergo_analysis_path = ErgoPaths.analysis_output()
@@ -75,7 +118,12 @@ class ReviewBackend(QObject):
             return False, f"Sandbox initialization failure: {str(e)}"
 
     def get_dataset_fields(self) -> list[str]:
-        """Returns columns from the active dataframe for UI selectors."""
+        """
+        Returns columns from the active dataframe for UI selectors.
+
+        Returns:
+            list[str] (list): A structural raw text strings sequence collection containing column headings tags filters.
+        """
         if self.active_dataframe is not None:
             return list(self.active_dataframe.columns)
         return []
@@ -85,7 +133,14 @@ class ReviewBackend(QObject):
     ) -> None:
         """
         Executes a targeted analysis run using the modified in-memory dataframe state.
+
         Allows consecutive executions without affecting the original source files.
+
+        Args:
+            method (AssessmentMethod): Structural enum value context mapping indicating whether to deploy REBA or RULA calculations blocks. Defaults to AssessmentMethod.REBA.
+
+        Returns:
+            None (None): Dispatches pipeline commands across independent thread lifecycles.
         """
         if self.active_dataframe is None:
             logger.warning("Review analysis attempted with no sandboxed data loaded.")
@@ -139,7 +194,15 @@ class ReviewBackend(QObject):
             )
 
     def _handle_review_worker_finished(self, result: AnalysisResult) -> None:
-        """Interceptors worker output to update our memory layer and soft-checkpoint."""
+        """
+        Interceptors worker output to update our memory layer and soft-checkpoint.
+
+        Args:
+            result (AnalysisResult): Structural worker data execution container layer indicating calculation statuses properties values.
+
+        Returns:
+            None (None): Persists runtime states to intermediate local storage targets and alerts parent interfaces layout frameworks.
+        """
         if result.success:
             if self.checkpoint_file_path and self.active_dataframe is not None:
                 self.active_dataframe.to_csv(self.checkpoint_file_path, index=False)
@@ -156,7 +219,18 @@ class ReviewBackend(QObject):
         variable_field: str,
         override_value: float,
     ) -> None:
-        """Modifies selected rows in memory based on instructions received from the UI."""
+        """
+        Modifies selected rows in memory based on instructions received from the UI.
+
+        Args:
+            start_frame (int): Integer index parameter declaring lower bounds context markers framing configurations.
+            end_frame (int): Integer index parameter declaring upper bounds context markers framing configurations. Pass `-1` to specify a global timeline sequence update.
+            variable_field (str): Data frame specific target identifier column string line.
+            override_value (float): New floating point precision variable quantity data specification factor assignment value.
+
+        Returns:
+            None (None): Mutates data states in memory records structures.
+        """
         if self.active_dataframe is None:
             self.status_updated.emit("Data modification rejected: No dataset mounted.")
             return
@@ -182,8 +256,10 @@ class ReviewBackend(QObject):
 
     def commit_final_review(self) -> bool:
         """
-        The Double-Confirmation Trigger. Hard-saves the actively modified
-        memory dataset into a discrete 'ergomocap_review.csv' file.
+        The Double-Confirmation Trigger. Hard-saves the actively modified memory dataset into a discrete 'ergomocap_review.csv' file.
+
+        Returns:
+            bool (bool): Returns True if data writes commit cleanly without tracking failures, False otherwise.
         """
         if self.active_dataframe is None or self.current_ergo_analysis_path is None:
             self.status_updated.emit("Commit blocked: No active dataset found.")
@@ -207,7 +283,12 @@ class ReviewBackend(QObject):
             return False
 
     def _terminate_active_worker(self) -> None:
-        """Safely breaks down running threads before spinning up successive runs."""
+        """
+        Safely breaks down running threads before spinning up successive runs.
+
+        Returns:
+            None (None): Terminates processing loops contexts and frees handles tracking objects safely.
+        """
         if hasattr(self, "_analysis_thread") and self._analysis_thread is not None:
             try:
                 if self._analysis_thread.isRunning():
@@ -231,8 +312,17 @@ class ReviewBackend(QObject):
 
     def emit_frame_review_data(self, current_frame_idx: int) -> None:
         """
-        Extracts frame properties dynamically from separate score and kinematic
-        data sources using structural parsing, ensuring strict validation safety.
+        Extracts frame properties dynamically from separate score and kinematic data sources using structural parsing, ensuring strict validation safety.
+
+        Args:
+            current_frame_idx (int): Absolute timeline sequential indexing position pointer ID.
+
+        Raises:
+            ValueError: If active score matrices or joint kinematic databases track as uninitialized.
+            IndexError: If the specified frame position target index tracks completely out of row matrix bounds boundaries.
+
+        Returns:
+            None (None): Compiles structural tracking packages and releases downstream signals payloads notifications.
         """
         # Strict state validation
         if self.active_dataframe is None:
@@ -290,7 +380,19 @@ class ReviewBackend(QObject):
     ) -> dict[str, Any]:
         """
         Iterates over all columns present inside a file row without text keyword tracking.
+
         Converts column keys to clean labels and raises exceptions on null/corrupted fields.
+
+        Args:
+            row_dict (dict): Raw key-value sequence parameters data pairs properties dictionary.
+            is_score_file (bool): Structural operational context state selection flag declaring the dataset schema structure origin layout source.
+            method_suffix (str): Targeted identification acronym trailing key extension descriptor strings. Defaults to "".
+
+        Raises:
+            ValueError: If fields contain corrupt null entries or unparsable empty text structures values.
+
+        Returns:
+            dict[str, Any] (dict): Parsed and sanitized output dictionary tracking translated human-readable display values tags.
         """
         ignored_fields = {"METHOD", "FRAME", "INDEX", "FRAME_IDX", "SCORE", "RISK"}
         payload = {}

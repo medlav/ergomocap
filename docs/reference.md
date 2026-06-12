@@ -151,6 +151,10 @@ Detailed component definitions across Presentation, Domain, and Asynchronous Wor
   options:
     show_root_heading: true
 
+::: gui.backend.review_backend
+  options:
+    show_root_heading: true
+
 ### Asynchronous Concurrency Workers
 
 ::: gui.workers.analysis_worker
@@ -176,6 +180,10 @@ Detailed component definitions across Presentation, Domain, and Asynchronous Wor
   options:
     show_root_heading: true
 
+::: gui.views.review_view
+  options:
+    show_root_heading: true
+
 ::: gui.views.settings_view
   options:
     show_root_heading: true
@@ -193,6 +201,10 @@ Detailed component definitions across Presentation, Domain, and Asynchronous Wor
     show_root_heading: true
 
 ::: gui.widgets.chart_report_widget
+  options:
+    show_root_heading: true
+
+::: gui.widgets.review_metrics_table
   options:
     show_root_heading: true
 
