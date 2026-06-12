@@ -46,17 +46,20 @@ class TestReportStrategies:
         strategy = RulaStrategy()
         data = {
             "Upper_Arm_Score_RULA": "3",
-            "Wrist_Score_RULA": "2",
-            "Score_A_RULA": "4",
-            "Neck_Score_RULA": "2",
+            "Lower_Arm_Score_RULA": "3",
             "Trunk_Score_RULA": "3",
+            "Neck_Score_RULA": "3",
+            "Wrist_Score_RULA": "2",
+            "Legs_Score_RULA": "3",
+            "Score_A_RULA": "6",
+            "Score_B_RULA": "6",
             "Final_Score_RULA": "7",
         }
 
         rows = strategy.format(data)
 
         assert strategy.name == "RULA"
-        assert len(rows) == 8
+        assert len(rows) == 9
 
         # Check Header
         assert rows[0].label == "Group A (Upper Limbs)"

@@ -18,8 +18,8 @@ from PySide6.QtWidgets import (
 
 from gui.utils.logger import logger
 from gui.utils.models import SessionData, VideoPosition, FrameReviewData
-from gui.views.review_backend import ReviewBackend
-from gui.views.review_metrics_table import ReviewMetricsTable
+from gui.backend.review_backend import ReviewBackend
+from gui.widgets.review_metrics_table import ReviewMetricsTable
 
 
 class ReviewView(QWidget):
@@ -208,28 +208,41 @@ class ReviewView(QWidget):
         self.metrics_table.sync_frame_review_data(review_data)
         self.current_idx = review_data.frame_idx
 
-    def _handle_combo_field_changed(self):
-        selected_field = self.combo_fields.currentText()
-        if not self.scores_dict:
-            raise ValueError("No scores_dict")
-        # print(self.scores_dict, "\nHERE SCORES DICT\n\n")
-        field_value = self.scores_dict[selected_field]
-        lbl_field_value_text = f"Current Field Value is: {field_value}"
-        self.lbl_field_value.setText(str(lbl_field_value_text))
-
     def _handle_scope_changed(self, index: int) -> None:
         is_range = index == 1
         self.spin_start.setEnabled(is_range)
         self.spin_end.setEnabled(is_range)
+
+    def _handle_combo_field_changed(self):
+        selected_field = self.combo_fields.currentText()
+        # If the combobox was cleared or is empty, return early gracefully
+        if not selected_field:
+            return
+
+        if self.scores_dict is None:
+            raise ValueError("No scores_dict")
+
+        if selected_field not in self.scores_dict:
+            return
+
+        field_value = self.scores_dict[selected_field]
+        lbl_field_value_text = f"Current Field Value is: {field_value}"
+        self.lbl_field_value.setText(str(lbl_field_value_text))
 
     def _handle_apply_clicked(self) -> None:
         scope = self.combo_scope.currentIndex()
         field = self.combo_fields.currentText()
         val = self.spin_value.value()
 
+        # FIX: Provide fallback defaults to completely eliminate UnboundLocalError
+        start, end = None, None
+
         if scope == 0:
-            if self.current_idx:
+            if self.current_idx is not None:
                 start = end = self.current_idx
+            else:
+                # FIX: Return early if no valid frame context exists
+                return
         elif scope == 1:
             start, end = self.spin_start.value(), self.spin_end.value()
         elif scope == 2:

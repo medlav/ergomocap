@@ -467,7 +467,7 @@ def test_handle_import_joint_data(window, mock_backend):
         "gui.frontend.QFileDialog.getOpenFileName",
         return_value=("/data/joints.csv", "Data"),
     ):
-        window.handle_import()
+        window.handle_import_joint_data()
         mock_backend.import_joint_data.assert_called_with("/data/joints.csv")
 
 

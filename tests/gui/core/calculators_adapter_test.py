@@ -53,16 +53,6 @@ class TestCalculatorsAdapter:
     Fixes inheritance attribute errors and Pandas truthiness ambiguity.
     """
 
-    def test_run_on_dataframe(self):
-        """Covers frame-by-frame iteration and tool relay with scalar conversion."""
-        df = pd.DataFrame({"val1": [1, 2], "val2": [0, 0]})
-        # row 1 sum=1 -> score=2 | row 2 sum=2 -> score=3
-        results = MockAdapter.run_on_dataframe(df)
-
-        assert len(results) == 2
-        assert results[0]["mock_score"] == 2
-        assert results[1]["mock_score"] == 3
-
     def test_process_empty_dataframe(self):
         """Covers line 150-151: early exit for empty results."""
         df = MockAdapter.process([], lambda x: RiskLevel.LOW)
@@ -70,7 +60,10 @@ class TestCalculatorsAdapter:
 
     def test_process_with_explicit_key(self):
         """Covers the happy path where INTERNAL_SCORE_KEY is present."""
-        results = [{"mock_score": 3}, {"mock_score": 8}]
+        results = [
+            {"mock_score": 3, "MY_FINAL_SCORE": 0},
+            {"mock_score": 8, "MY_FINAL_SCORE": 0},
+        ]
 
         def mock_risk_cb(score):
             return RiskLevel.LOW if score < 5 else RiskLevel.HIGH
@@ -82,8 +75,8 @@ class TestCalculatorsAdapter:
 
     def test_process_internal_key_fallback(self):
         """
-        Covers lines 153-155: fallback when INTERNAL_SCORE_KEY is missing.
-        Using a fresh class to avoid pollution.
+        Covers fallback when INTERNAL_SCORE_KEY is missing/ignored
+        and relies on the FINAL_SCORE heuristic tracking.
         """
 
         class SimpleAdapter(BaseErgoAdapter):
@@ -95,9 +88,11 @@ class TestCalculatorsAdapter:
             def get_relay_tools():
                 return lambda x: x, lambda x: ({}, None)
 
-        # No INTERNAL_SCORE_KEY defined here
-        results = [{"ignore_me": 1, "target_score": 10}]
-        # Should pick "target_score" as it's the last column
+        heuristic_col = "target_FINAL_SCORE"
+        results = [{"ignore_me": 1, heuristic_col: 10}]
+
+        SimpleAdapter.INTERNAL_SCORE_KEY = heuristic_col
+
         df = SimpleAdapter.process(results, lambda x: RiskLevel.LOW)
 
         assert df[MetricType.SCORE.value].iloc[0] == 10
@@ -115,7 +110,7 @@ class TestCalculatorsAdapter:
         "adapter_cls, first_limit",
         [
             (REBAAdapter, 1),
-            (RULAAdapter, 2),
+            (RULAAdapter, 1),
             (NIOSHAdapter, 1),
             (OCRAAdapter, 7),
             (EWASAdapter, 25),

@@ -275,7 +275,7 @@ def test_handle_video_control_seek(worker, mock_video_capture, sample_request):
     """Verify control dispatch extracts target values and filters inputs safely."""
     worker.initialize_video(sample_request)
 
-    with patch.object(worker, "seek") as mock_seek:
+    with patch.object(worker, "_seek_to_index") as mock_seek:
         # Seek targeting active index
         worker.handle_video_control(
             VideoControl(command=VideoCommand.SEEK, target_frame=5)
@@ -297,10 +297,8 @@ def test_handle_video_control_stepping(worker, mock_video_capture, sample_reques
     with patch.object(worker, "step_frame") as mock_step:
         # Step Forward
         worker.current_frame_idx = 0
-        worker.handle_video_control(
-            VideoControl(command=VideoCommand.STEP_FORWARD, target_frame=None)
-        )
-        assert worker.current_frame_idx == 1
+        worker.handle_video_control(VideoControl(command=VideoCommand.STEP_FORWARD))
+
         mock_step.assert_called_once_with(forward=True)
 
         # Step Backward

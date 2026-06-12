@@ -105,6 +105,9 @@ class TestCalculateFrameRebaFromDegs:
             "Score_A_REBA": 2,
             "Score_B_REBA": 4,
             "Score_C_REBA": 3,
+            "coupling_score": int(0),
+            "load": int(0),
+            "load_score": int(0),
         }
 
         assert scores == expected_scores
