@@ -35,7 +35,7 @@ class ReviewBackend(QObject):
         frame_review_ready (Signal): Signal emitted with a `FrameReviewData` package when structural frame telemetry parsing resolves.
         active_dataframe (pandas.DataFrame | None): In-memory workspace storing the active ergonomic framework assessment spreadsheet matrix.
         joint_angles_dataframe (pandas.DataFrame | None): Dataframe storing structural kinematic tracking variables loaded from local resources.
-        current_ergo_analysis_path (Path | None): System file path targeting the source ergonomic assessment storage location.
+        current_ergomocap_analysis_path (Path | None): System file path targeting the source ergonomic assessment storage location.
         current_joint_analysis_path (Path | None): System file path targeting the tracking session source joint mechanics data location.
         checkpoint_file_path (Path | None): Isolated safe file system destination path targeting the runtime local memory backup clone.
         _analysis_thread (QThread | None): Dedicated thread allocation instance handler for isolated processing algorithms execution.
@@ -65,7 +65,7 @@ class ReviewBackend(QObject):
         # Memory Sandboxes
         self.active_dataframe: pd.DataFrame | None = None
         self.joint_angles_dataframe: pd.DataFrame | None = None
-        self.current_ergo_analysis_path: Path | None = None
+        self.current_ergomocap_analysis_path: Path | None = None
         self.current_joint_analysis_path: Path | None = None
         self.checkpoint_file_path: Path | None = None
 
@@ -84,11 +84,11 @@ class ReviewBackend(QObject):
             tuple[bool, str] (tuple): A structural paired array containing initialization success confirmation status flag (`bool`) along with context trace message descriptors (`str`).
         """
         try:
-            self.current_ergo_analysis_path = ErgoPaths.analysis_output()
-            if not self.current_ergo_analysis_path.exists():
+            self.current_ergomocap_analysis_path = ErgoPaths.analysis_output()
+            if not self.current_ergomocap_analysis_path.exists():
                 return (
                     False,
-                    f"Target file does not exist: {self.current_ergo_analysis_path.name}",
+                    f"Target file does not exist: {self.current_ergomocap_analysis_path.name}",
                 )
 
             self.current_joint_analysis_path = session_data.joint_angles_csv_path
@@ -100,18 +100,18 @@ class ReviewBackend(QObject):
                 )
 
             # 1. Read Data directly into Memory (Copy #1: The In-Memory Sandbox)
-            self.active_dataframe = pd.read_csv(self.current_ergo_analysis_path)
+            self.active_dataframe = pd.read_csv(self.current_ergomocap_analysis_path)
             self.joint_angles_dataframe = pd.read_csv(self.current_joint_analysis_path)
 
             # 2. Generate a local disk checkpoint (Copy #2: The I/O Safety Net)
-            self.checkpoint_file_path = self.current_ergo_analysis_path.with_suffix(
-                ".bak_review"
+            self.checkpoint_file_path = (
+                self.current_ergomocap_analysis_path.with_suffix(".bak_review")
             )
             self.active_dataframe.to_csv(self.checkpoint_file_path, index=False)
 
             return (
                 True,
-                f"Successfully sandboxed: {self.current_ergo_analysis_path.name}",
+                f"Successfully sandboxed: {self.current_ergomocap_analysis_path.name}",
             )
         except Exception as e:
             logger.error(f"Failed to initialize review sandbox: {e}", exc_info=True)
@@ -261,12 +261,15 @@ class ReviewBackend(QObject):
         Returns:
             bool (bool): Returns True if data writes commit cleanly without tracking failures, False otherwise.
         """
-        if self.active_dataframe is None or self.current_ergo_analysis_path is None:
+        if (
+            self.active_dataframe is None
+            or self.current_ergomocap_analysis_path is None
+        ):
             self.status_updated.emit("Commit blocked: No active dataset found.")
             return False
         try:
             final_output_path = (
-                self.current_ergo_analysis_path.parent / "ergomocap_review.csv"
+                self.current_ergomocap_analysis_path.parent / "ergomocap_review.csv"
             )
             self.active_dataframe.to_csv(final_output_path, index=False)
             self.status_updated.emit(

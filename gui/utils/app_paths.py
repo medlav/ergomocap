@@ -238,10 +238,36 @@ class ErgoPaths:
         output directory.
 
         Returns:
-            Path (Path): Absolute path to 'ergo_analysis.csv'.
+            Path (Path): Absolute path to 'ergomocap_analysis.csv'.
         """
         # TODO do something better like return ErgoPaths.output_folder() / f"{method.lower()}_analysis.csv"
-        return ErgoPaths.output_folder() / "ergo_analysis.csv"
+        return ErgoPaths.output_folder() / "ergomocap_analysis.csv"
+
+    @staticmethod
+    def get_review_data_file_path() -> Path:
+        """
+        Returns the standardized path for the primary review CSV.
+
+        Ensures that analysis results are consistently stored in the recognized
+        output directory.
+
+        Returns:
+            Path (Path): Absolute path to 'ergomocap_review.csv'.
+        """
+        return ErgoPaths.output_folder() / "ergomocap_review.csv"
+
+    @staticmethod
+    def get_analysis_data_file_path() -> Path:
+        """
+        Returns the standardized path for the primary analysis CSV.
+
+        Ensures that analysis results are consistently stored in the recognized
+        output directory.
+
+        Returns:
+            Path (Path): Absolute path to 'ergomocap_analysis.csv'.
+        """
+        return ErgoPaths.output_folder() / "ergomocap_analysis.csv"
 
     @staticmethod
     def get_local_site_url(page_name: str) -> QUrl:

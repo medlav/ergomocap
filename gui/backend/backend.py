@@ -447,6 +447,7 @@ class ErgoBackend(QObject):
         analysis_path = ErgoPaths.analysis_output() / analysis_filename
 
         # Fallback to shared general configuration file if contextual analytics don't exist
+        # TODO add the review csv option here too
         if not analysis_path.exists():
             analysis_path = ErgoPaths.analysis_output()
 

@@ -42,6 +42,7 @@ from io import BytesIO
 import pandas as pd
 from pathlib import Path
 from PySide6.QtWidgets import (
+    QGroupBox,
     QMainWindow,
     QTextEdit,
     QWidget,
@@ -76,6 +77,10 @@ from gui.widgets.table_report_widget import TableReportWidget
 
 
 from gui.utils.logger import logger
+
+
+ERGO_ANALYSIS_PATH = ErgoPaths.get_analysis_data_file_path()
+ERGO_REVIEW_PATH = ErgoPaths.get_review_data_file_path()
 
 
 class ReportView(QMainWindow):
@@ -151,6 +156,8 @@ class ReportView(QMainWindow):
         self.current_strategy = RebaStrategy()
         self.backend = ReportBackend()
         self.current_file: Path | None = Path(initial_csv) if initial_csv else None
+        self.current_review_file: Path | None = ERGO_REVIEW_PATH
+        self.current_analysis_file: Path | None = ERGO_ANALYSIS_PATH
 
         self.setWindowTitle(self.tr("ErgoMoCap Reports"))
         self.resize(1280, 720)
@@ -206,9 +213,36 @@ class ReportView(QMainWindow):
         lbl_menu: QLabel = QLabel(self.tr("REPORT CONTROLS"))
         lbl_menu.setProperty("class", "h2")
 
+        data_group = QGroupBox(self.tr("DATA MANAGEMENT"))
+        data_layout = QVBoxLayout(data_group)
+
+        self.btn_analysis_data = QPushButton(self.tr("USE ANALYSIS DATA"))
+        self.btn_analysis_data.setObjectName("AnalysisDataBtn")
+        self.btn_analysis_data.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+
+        self.btn_review_data = QPushButton(self.tr("USE REVIEW DATA"))
+        self.btn_review_data.setObjectName("ReviewDataBtn")
+        self.btn_review_data.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+
         self.btn_refresh: QPushButton = QPushButton(self.tr("🔄 REFRESH"))
+        self.btn_refresh.setObjectName("RefreshDataBtn")
+        self.btn_refresh.setFocusPolicy(Qt.FocusPolicy.NoFocus)
 
         self.btn_import: QPushButton = QPushButton(self.tr("📁 LOAD DATA"))
+        self.btn_import.setObjectName("AImportDataBtn")
+        self.btn_import.setFocusPolicy(Qt.FocusPolicy.NoFocus)
+
+        data_layout.addWidget(self.btn_analysis_data)
+        data_layout.addSpacing(10)
+        data_layout.addWidget(self.btn_review_data)
+        data_layout.addSpacing(10)
+        data_layout.addWidget(self.btn_refresh)
+        data_layout.addSpacing(10)
+        data_layout.addWidget(self.btn_import)
+        data_layout.addSpacing(10)
+
+        export_group = QGroupBox(self.tr("EXPORT REPORT"))
+        export_layout = QVBoxLayout(export_group)
 
         self.btn_pdf: QPushButton = QPushButton(self.tr("📜 EXPORT TO PDF"))
         self.btn_pdf.setEnabled(False)
@@ -216,14 +250,14 @@ class ReportView(QMainWindow):
         self.btn_docx: QPushButton = QPushButton(self.tr("📄 EXPORT TO DOCX"))
         self.btn_docx.setEnabled(False)
 
+        export_layout.addWidget(self.btn_pdf)
+        export_layout.addWidget(self.btn_docx)
+
         side_layout.addWidget(lbl_menu)
         side_layout.addSpacing(20)
-        side_layout.addWidget(self.btn_refresh)
-        side_layout.addSpacing(10)
-        side_layout.addWidget(self.btn_import)
-        side_layout.addSpacing(10)
-        side_layout.addWidget(self.btn_pdf)
-        side_layout.addWidget(self.btn_docx)
+        side_layout.addWidget(data_group)
+        side_layout.addSpacing(20)
+        side_layout.addWidget(export_group)
         side_layout.addStretch()
 
         # Create a QTextEdit instead of a QLabel
@@ -307,6 +341,8 @@ class ReportView(QMainWindow):
         Returns:
             None (None): Establishes signal-slot connections.
         """
+        self.btn_analysis_data.clicked.connect(self._handle_analysis_data)
+        self.btn_review_data.clicked.connect(self._handle_review_data)
         self.btn_refresh.clicked.connect(self._handle_refresh)
         self.btn_import.clicked.connect(self._handle_import_dialog)
         self.btn_pdf.clicked.connect(self._handle_pdf_request)
@@ -383,6 +419,34 @@ class ReportView(QMainWindow):
         )
 
         self.current_file = report_data.file_path
+
+    ###############################################################
+    # --- Handle Data Manament Requests (Data Management Buttons)
+    ###############################################################
+
+    def _handle_analysis_data(self) -> None:
+        """
+        Handles the analysis data button click event.
+
+        Returns:
+            None (None): Updates the report backend with the new file path.
+        """
+        if not self.current_analysis_file:
+            logger.error("No active data loaded.")
+            raise ValueError("No active data loaded.")
+        self.backend.load_data_and_run(self.current_analysis_file)
+
+    def _handle_review_data(self) -> None:
+        """
+        Handles the review data button click event.
+
+        Returns:
+            None (None): Updates the report backend with the new file path.
+        """
+        if not self.current_review_file:
+            logger.error("No active data loaded.")
+            raise ValueError("No active data loaded.")
+        self.backend.load_data_and_run(self.current_review_file)
 
     def _handle_refresh(self):
         """Handles the refresh button click event.

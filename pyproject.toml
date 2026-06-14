@@ -1,6 +1,6 @@
 [project]
 name = "ErgoMoCap"
-version = "0.0.1"
+version = "0.0.2"
 description = "Modular Backend Engine for Ergonomic Risk Assessment from MoCap data"
 authors = [{ name = "medlav", email = "your.email@example.com" }]
 license = { text = "AGPL-3.0" }
@@ -216,5 +216,6 @@ output-file = "CREDITS.md"
 
 [tool.pydoclint]
 style = 'google'
+arg-type-hints-in-docstrings = true
 # This regex ignores your build, envs, tests, data, and dev folders
 exclude = '(\.venv|venv|ENV|env|dist|build|htmlcov|\.tox|\.pytest_cache|\.ruff_cache|tests|scripts|ergomocap_data|freemocap_data|output|runs|release|site|\.github|\.vscode)/|__pycache__|\.py[cod]'

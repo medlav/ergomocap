@@ -1,6 +1,6 @@
 # ROADMAP
 
-## Current v0.0.1 (Pre-Alpha)
+## Current v0.0.X (Pre-Alpha)
 
 **Goal:** Fix the core math, clean up the UI, add manual overrides, and lay the foundation for new calculation tools.
 
@@ -11,7 +11,7 @@
 * [ ] **Add Manual Overrides:** Allow users to manually input Force/Load values and save these inputs to the session.
 * [ ] **Refactor Code Architecture:** Clean up the base calculator code to make it easy for developers to integrate new tools later.
 
-## v0.1.0 (Alpha)
+## v0.1.X (Alpha)
 
 **Goal:** Establish a stable core and GUI while adding new ergonomic calculation engines.
 
@@ -22,7 +22,7 @@
 
 ---
 
-## v0.2.0 (Beta)
+## v0.2.X (Beta)
 
 **Goal:** Conduct thorough real-world QA testing, resolve edge-case bugs, and optimize calculation speeds.
 
@@ -33,7 +33,7 @@
 
 ---
 
-## v0.3.0+ (Production)
+## v0.3.X+ (Pre-Production)
 
 **Goal:** Continuous bug fixing, performance tuning, and adding minor feature updates only as strictly necessary.
 
@@ -49,8 +49,8 @@
 
 | Version | Main Focus | Status |
 | --- | --- | --- |
-| **v0.0.1 (Pre-Alpha)** | Fix math errors, clean up UI, add manual overrides, and prepare architecture | In Progress |
-| **v0.1.0 (Alpha) & v0.2.0 (Beta)** | Stabilize core math and GUI; add NIOSH, OCRA, and Snook packages | Up Next |
+| **v0.0.X (Pre-Alpha)** | Fix math errors, clean up UI, add manual overrides, and prepare architecture | In Progress |
+| **v0.1.X (Alpha) & v0.2.X (Beta)** | Stabilize core math and GUI; add NIOSH, OCRA, and Snook packages | Up Next |
 | **v1.0.0 (Production)** | Comprehensive standalone tool with minimal dependencies | Planned |
 
 ---

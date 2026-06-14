@@ -79,7 +79,7 @@ The app calculates these automatically:
 
 ![Light Mode Theme](images/screenshots/guide_settings_theme_light_mode.png)
 
-* **Language**: Switch between English and Italian. (Planned still not working on v0.0.1)
+* **Language**: Switch between English and Italian. (Planned still not working on v0.0.X)
 
 ---
 

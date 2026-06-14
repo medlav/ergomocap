@@ -4,9 +4,9 @@
 VSVersionInfo(
   # Binary versions (must be integers: Major, Minor, Patch, Build)
   ffi=FixedFileInfo(
-    # Set the version to 0.0.1.1
-    filevers=(0, 0, 1, 1),
-    prodvers=(0, 0, 1, 1),
+    # Set the version to 0.0.2.0
+    filevers=(0, 0, 2, 0),
+    prodvers=(0, 0, 2, 0),
 
     # Standard flags
     mask=0x3f,
@@ -25,12 +25,12 @@ VSVersionInfo(
           # --- Application-Specific Details ---
           StringStruct(u'CompanyName', u'medlav'),
           StringStruct(u'FileDescription', u'ErgoMoCap'),
-          StringStruct(u'FileVersion', u'0.0.1.1 (Date: 29-05-2026)'),
+          StringStruct(u'FileVersion', u'0.0.2.0 (Date: 29-05-2026)'),
           StringStruct(u'InternalName', u'app.py'),
           StringStruct(u'LegalCopyright', u'\xa9 2026 medlav. All rights reserved.'),
           StringStruct(u'OriginalFilename', u'ErgoMoCap.exe'),
           StringStruct(u'ProductName', u'ErgoMoCap'),
-          StringStruct(u'ProductVersion', u'0.0.1.1')
+          StringStruct(u'ProductVersion', u'0.0.2.0')
         ]
       )
       ]),

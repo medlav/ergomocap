@@ -121,5 +121,5 @@ class TestErgoPaths:
         monkeypatch.setattr(ErgoPaths, "OUTPUT_FOLDER", mock_output)
 
         csv_path = ErgoPaths.analysis_output()
-        assert csv_path.name == "ergo_analysis.csv"
+        assert csv_path.name == "ergomocap_analysis.csv"
         assert csv_path.parent == mock_output

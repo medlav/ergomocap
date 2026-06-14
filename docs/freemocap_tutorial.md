@@ -47,7 +47,7 @@ During the first launch or environment check, FreeMoCap may display a prompt ask
 That means that in the python environment in use there is some conflict, usually between `opencv-python` and `opencv-contrib-python`
 
 * **Action Required:** Select **Continue without fixing conflicts** if you don't need calibration. Select **Fix OpenCV conflicts (Recommended)** if you need multi-camera tracking and calibration (**Recommended**).
-* **NOTE:** Allowing the program to modify or resolve this conflict can cause compatibility issues, software crashes, or unpredictable application behavior, as of v0.0.1, it has not been tested.
+* **NOTE:** Allowing the program to modify or resolve this conflict can cause compatibility issues, software crashes, or unpredictable application behavior, as of v0.0.X, it has not been tested.
 
 ## Step 2: Configuring the Root Data Folder
 
@@ -116,7 +116,7 @@ Before initiating the tracking analysis, verify your imported files and ensure y
 ### Critical Prerequisite: Blender Installation
 
 > ⚠️ CRITICAL NOTE!
->For ErgoMoCap to perform a complete assessment, specifically the joint angles analysis, **Blender must be installed on your system.** This is a core hardware-software dependency for version v0.0.1. Without Blender, the tracking pipeline cannot generate the necessary dataset.
+>For ErgoMoCap to perform a complete assessment, specifically the joint angles analysis, **Blender must be installed on your system.** This is a core hardware-software dependency for pre-alpha versions. Without Blender, the tracking pipeline cannot generate the necessary dataset.
 
 * Download the software directly from the official repository: [Blender Official Website](https://www.blender.org/) or [Download Blender Release Setup](https://www.blender.org/download/).
 * Once installed, switch to the **Export Data** tab in the right-hand Control Panel of FreeMoCap.

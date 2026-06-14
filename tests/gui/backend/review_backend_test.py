@@ -167,7 +167,7 @@ def test_commit_final_review_success(review_backend, tmp_path, qtbot):
     checkpoint = tmp_path / "raw_session.bak_review"
     checkpoint.touch()
 
-    review_backend.current_ergo_analysis_path = origin_file
+    review_backend.current_ergomocap_analysis_path = origin_file
     review_backend.checkpoint_file_path = checkpoint
     review_backend.active_dataframe = pd.DataFrame({"Data": [42]})
 
@@ -183,7 +183,9 @@ def test_commit_final_review_success(review_backend, tmp_path, qtbot):
 
 def test_commit_final_review_exception(review_backend, tmp_path):
     """Asserts tracking system failure handling path behavior across file systems exceptions."""
-    review_backend.current_ergo_analysis_path = tmp_path / "read_only_dir" / "file.csv"
+    review_backend.current_ergomocap_analysis_path = (
+        tmp_path / "read_only_dir" / "file.csv"
+    )
     review_backend.active_dataframe = pd.DataFrame({"Data": [42]})
 
     res = review_backend.commit_final_review()

@@ -34,7 +34,7 @@
 # ErgoMoCap: FOSS Ergonomics Motion Capture
 
 ![Project Status: Pre-Alpha](https://img.shields.io/badge/status-pre--alpha-red)
-![Version](https://img.shields.io/badge/version-0.0.1-red)
+![Version](https://img.shields.io/badge/version-0.0.2-red)
 ![Purpose: Academic](https://img.shields.io/badge/purpose-academic-research)
 ![License: AGPL-3.0](https://img.shields.io/badge/license-AGPL--3.0-orange)
 ![Build: In Public](https://img.shields.io/badge/build-in%20public-brightgreen)

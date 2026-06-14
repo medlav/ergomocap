@@ -134,6 +134,18 @@ class ReviewView(QWidget):
         layout.setContentsMargins(10, 10, 10, 10)
         layout.setSpacing(15)
 
+        # --- SESSION TERMINAL MONITOR ---
+        self.session_label = QTextEdit()
+        self.session_label.setReadOnly(True)
+        self.session_label.setPlainText(self.tr("CURRENT SESSION: None"))
+        self.session_label.setFrameShape(QFrame.Shape.NoFrame)
+        self.session_label.viewport().setAutoFillBackground(False)
+        self.session_label.setFixedHeight(30)
+        self.session_label.setSizePolicy(
+            QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Fixed
+        )
+        layout.addWidget(self.session_label)
+
         # --- FRAME DATA MONITOR ---
         data_group = QGroupBox(self.tr("FRAME DATA SPECS"))
         data_lay = QVBoxLayout(data_group)
@@ -180,13 +192,13 @@ class ReviewView(QWidget):
         override_group = QGroupBox(self.tr("2. ERGONOMIC ADJUSTMENTS"))
         override_lay = QVBoxLayout(override_group)
 
-        self.lbl_field = QLabel(self.tr("Select Discovered Variable:"))
+        self.lbl_field = QLabel(self.tr("Select Variable:"))
         self.combo_fields = QComboBox()
 
         self.lbl_field_value = QLabel(self.tr("No Variable Selected"))
         self.lbl_field_value.setFixedHeight(40)
 
-        self.lbl_value = QLabel(self.tr("Enter Adjusted Value Overrides:"))
+        self.lbl_value = QLabel(self.tr("Enter Value Overrides:"))
         self.spin_value = QDoubleSpinBox()
         self.spin_value.setRange(0.0, 100.0)
         self.spin_value.setSingleStep(1.0)
@@ -384,9 +396,10 @@ class ReviewView(QWidget):
             self.combo_fields.blockSignals(True)
             self.combo_fields.clear()
             self.combo_fields.addItems(fields)
-            # TODO UPDATE THE SCORES DICT TOO
+            # TODO UPDATE THE SCORES DICT TOO , check twice but the get_score_list_from_video_source should be doing this already
             self.combo_fields.blockSignals(False)
             self.set_status(message)
+            self.session_label.setPlainText(f"CURRENT SESSION: {session_data.name}")
 
             # Auto-populate table with frame 0 data when a session initializes
             self.review_backend.emit_frame_review_data(0)

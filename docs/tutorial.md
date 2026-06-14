@@ -60,6 +60,26 @@ Follow these steps to check the ergonomics of a lifting task using the REBA meth
    - Click **📜 EXPORT TO PDF** for a clean shareable report.
    - Click **📄 EXPORT TO DOCX** if you need a Word file you can type in later.
 
+### Step 5: Review the results
+
+TODO review this
+
+1. Click **🧐 RUN REVIEW** to  show the floating widget "Video Review Suite"
+2. Review current frame data in the "Frame Data Specs" section (scores and kinematic variablesa)
+
+This table is read only, to change the values and apply corrections follow the next instructions.
+
+3. In the "1. Scope Target" section select the scope you want to apply the changes from the "Apply Correction to" combobox (Current Frame Only, Custom Frame Range, Entire Recording Timeline). If you select "Custom Frame Range" you MUST input the first and last frame index in the 2 numbers inputs below ("From" and "To")
+
+4. Select the variable you want to overwrite from the "Select Variable" combobox in the "2. Ergonomic Adjustments" section, and enter the correct value in the "Enter Adjusted Value Overrides" input.
+
+5. Click **⚡ APPLY CORRECTION** to overwrite the values and apply the changes. NOTE: the changes are applied to the runtime dataframe, and are not saved until you commit the revision clicking the button (see last point)
+
+6. You can add a note in the "3. Operator Observations" section
+
+7. Click the **💾 COMMIT REVISIONS** button to save the applied changes to the new ergomocap_review.csv file (saved in ergomocap_data folder)
+
+
 ---
 
 ### 💡 Tips for better results
