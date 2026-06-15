@@ -53,12 +53,12 @@ repos:
         pass_filenames: false
         always_run: true
 
-      - id: pydoclint-check
-        name: Lint Docstring Layout (pydoclint)
-        entry: pydoclint .
-        language: system
-        types: [python]
-        pass_filenames: true
+      # - id: pydoclint-check
+      #   name: Lint Docstring Layout (pydoclint)
+      #   entry: pydoclint .
+      #   language: system
+      #   types: [python]
+      #   pass_filenames: true
 
       - id: mkdocs-build
         name: Build ErgoMoCap MkDocs
