@@ -325,6 +325,8 @@ class MainWindow(QMainWindow):
         s.run_analysis_clicked.connect(self.run_analysis)
         s.btn_review.clicked.connect(self.show_review)
         s.btn_report.clicked.connect(self.show_report)
+        s.radio_analysis.clicked.connect(self.set_analysis_mode)
+        s.radio_review.clicked.connect(self.set_review_mode)
         s.btn_load_video.clicked.connect(self.handle_load_video)
         s.btn_play_video.clicked.connect(self.handle_toggle_video)
         s.combo_videos.currentIndexChanged.connect(self.handle_video_selection_changed)
@@ -475,6 +477,16 @@ class MainWindow(QMainWindow):
             sessions: list[str] = self.backend.set_root_and_scan(sessions_folder)
             self.sidebar.update_sessions(sessions)
             self.sidebar.set_status(self.tr("Found {} sessions.").format(len(sessions)))
+
+    def set_analysis_mode(self):
+
+        self.current_mode = "ANALYSIS"
+        self.handle_session_selected()
+
+    def set_review_mode(self):
+
+        self.current_mode = "REVIEW"
+        self.handle_session_selected()
 
     @Slot()
     def handle_session_selected(self) -> None:

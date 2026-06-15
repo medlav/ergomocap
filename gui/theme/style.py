@@ -205,6 +205,12 @@ def get_stylesheet(mode=ErgoTheme.DARK) -> str:
         color: #000000;
     }}
 
+    QPushButton:checked {{
+        background-color: {c["accent"]};
+        color: {c["btn_main_text"]};
+        border-color: {c["border"]};
+    }}
+
     QPushButton#btnAction {{
         padding: {GRID * 2}px;
         font-size: 12px;

@@ -36,6 +36,7 @@ and processing logic.
 
 from PySide6.QtCore import Qt, Signal
 from PySide6.QtWidgets import (
+    QButtonGroup,
     QCheckBox,
     QDockWidget,
     QFrame,
@@ -49,6 +50,7 @@ from PySide6.QtWidgets import (
     QComboBox,
     QScrollArea,
     QWidget,
+    QRadioButton,
 )
 
 from gui.utils.constants import AssessmentMethod
@@ -247,6 +249,34 @@ class ErgoSidebar(QDockWidget):
         # --- VIDEO VISUALIZER ---
         video_group: QGroupBox = QGroupBox(self.tr("VIDEO VISUALIZER"))
         video_lay: QVBoxLayout = QVBoxLayout(video_group)
+
+        self.lbl_video_data_mode: QLabel = QLabel(self.tr("Select Mode:"))
+        self.lbl_video_data_mode.setObjectName("FieldLabel")
+        video_lay.addWidget(self.lbl_video_data_mode)
+
+        mode_lay = QHBoxLayout()
+
+        self.radio_analysis = QPushButton("ANALYSIS")
+        self.radio_review = QPushButton("REVIEW")
+
+        # Make them a radio button and a default selection if desired (e.g., ANALYSIS starts checked)
+        self.radio_analysis.setCheckable(True)
+        self.radio_review.setCheckable(True)
+
+        self.radio_analysis.setChecked(True)
+
+        mode_lay.addWidget(self.radio_analysis)
+        mode_lay.addWidget(self.radio_review)
+
+        # Add the horizontal row to the main video layout
+        video_lay.addLayout(mode_lay)
+
+        self.video_mode_group = QButtonGroup(self)
+        self.video_mode_group.addButton(self.radio_analysis, 1)
+        self.video_mode_group.addButton(self.radio_review, 2)
+        self.video_mode_group.buttonToggled.connect(self.on_video_mode_toggled)
+
+        # --- Rest of your original code ---
         self.lbl_video_select: QLabel = QLabel(self.tr("Select Video:"))
         self.lbl_video_select.setObjectName("FieldLabel")
         video_lay.addWidget(self.lbl_video_select)
@@ -273,7 +303,6 @@ class ErgoSidebar(QDockWidget):
         video_lay.addLayout(frame_ctrl_lay)
 
         layout.addWidget(video_group)
-
         layout.addStretch()
 
         # Inside ErgoSidebar._setup_ui, apply this to your buttons:
@@ -402,6 +431,24 @@ class ErgoSidebar(QDockWidget):
         """
 
         return self.combo_method.currentText()
+
+    def on_video_mode_toggled(self, button: QRadioButton, checked: bool) -> str | None:
+        if checked:
+            selected_mode: str = button.text()  # This will be "ANALYSIS" or "REVIEW"
+            print(f"Current active mode: {selected_mode}")
+            return selected_mode
+
+    def get_selected_video_mode(self) -> str:
+        """
+        Returns the currently active mode string from the push button group.
+
+        Returns:
+            str: "ANALYSIS" or "REVIEW"
+        """
+        selected_button = self.video_mode_group.checkedButton()
+        if selected_button:
+            return selected_button.text()
+        return "ANALYSIS"  # Safe fallback default
 
     def handle_run_analysis(self):
         """
