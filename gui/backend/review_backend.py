@@ -84,7 +84,9 @@ class ReviewBackend(QObject):
             tuple[bool, str] (tuple): A structural paired array containing initialization success confirmation status flag (`bool`) along with context trace message descriptors (`str`).
         """
         try:
-            self.current_ergomocap_analysis_path = ErgoPaths.analysis_output()
+            self.current_ergomocap_analysis_path = (
+                ErgoPaths.get_analysis_data_file_path()
+            )
             if not self.current_ergomocap_analysis_path.exists():
                 return (
                     False,
@@ -283,6 +285,7 @@ class ReviewBackend(QObject):
         except Exception as e:
             logger.error(f"Failed to commit final review track: {e}")
             self.status_updated.emit(f"Final Write Failure: {str(e)}")
+
             return False
 
     def _terminate_active_worker(self) -> None:

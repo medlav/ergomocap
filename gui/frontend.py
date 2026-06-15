@@ -139,6 +139,8 @@ class MainWindow(QMainWindow):
         # Initialize your Review Window as a persistent separate window
         self.review_window: ReviewView = ReviewView(self)
 
+        self.current_mode = "ANALYSIS"
+
         self.setup_ui()
         self.connect_signals()
         self.init_root()
@@ -181,7 +183,7 @@ class MainWindow(QMainWindow):
         self._menu_bar = MenuBar(actions=self.menu_actions, parent=self)
         self.setMenuBar(self._menu_bar)
 
-        self.sidebar = ErgoSidebar(self)
+        self.sidebar: ErgoSidebar = ErgoSidebar(self)
         self.addDockWidget(Qt.DockWidgetArea.LeftDockWidgetArea, self.sidebar)
 
     # --- Methods for Actions ---
@@ -346,6 +348,7 @@ class MainWindow(QMainWindow):
         )
 
         self.backend.session_loaded.connect(self.review_window.update_session_data)
+        self.review_window.review_data_changed.connect(self.handle_session_selected)
 
     def toggle_theme(self) -> None:
         """
@@ -433,7 +436,9 @@ class MainWindow(QMainWindow):
 
         # Safe to extract target video now that length check has passed
         target_video = session_data.video_paths[0]
-        video_result = self.backend.load_video_source(target_video)
+        video_result = self.backend.load_video_source(
+            target_video, mode=self.current_mode
+        )
 
         # Check video loading outcome
         if video_result.success:
@@ -534,7 +539,9 @@ class MainWindow(QMainWindow):
         # Safety: Reconnect frame signals
         self._reconnect_video_signals()
 
-        video_result = self.backend.load_video_source(str(video_path))
+        video_result = self.backend.load_video_source(
+            str(video_path), mode=self.current_mode
+        )
         if video_result.success:
             self.sidebar.btn_play_video.setEnabled(True)
             self.sidebar.set_status(self.tr("Loaded {}").format(video_name))
@@ -561,7 +568,7 @@ class MainWindow(QMainWindow):
             self.tr("Videos (*.mp4 *.avi *.mov *.mkv)"),
         )
         if path:
-            video_result = self.backend.load_video_source(path)
+            video_result = self.backend.load_video_source(path, mode=self.current_mode)
 
             self.sidebar.set_status(self.tr("{}").format(video_result.message))
             if video_result.success:
@@ -740,8 +747,9 @@ class MainWindow(QMainWindow):
         Returns:
             None (None): Shows or raises the `review_window`.
         """
-
+        self.current_mode = "REVIEW"
         self.handle_session_selected()
+
         self.review_window.update()
         if self.review_window.isHidden():
             self.review_window.show()
@@ -778,6 +786,7 @@ class MainWindow(QMainWindow):
         Args:
             analysis_request (AnalysisRequest): Parameters configuring the method and frame export triggers.
         """
+        self.current_mode = "ANALYSIS"  # ADDED for review mode
         self._pending_analysis_request = analysis_request
         self.report_window.set_method(analysis_request.method)
 

@@ -86,6 +86,7 @@ class ReviewView(QWidget):
     apply_override_requested = Signal(int, int, str, float)
     save_session_requested = Signal()
     note_added = Signal(str)
+    review_data_changed = Signal(bool)
 
     def __init__(self, parent: QWidget | None = None) -> None:
         super().__init__(parent)
@@ -425,6 +426,8 @@ class ReviewView(QWidget):
                     "Human corrections committed safely to disk as 'ergomocap_review.csv'."
                 ),
             )
+
+            self.review_data_changed.emit(True)
         else:
             QMessageBox.critical(
                 self,

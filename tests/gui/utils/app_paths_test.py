@@ -108,18 +108,18 @@ class TestErgoPaths:
         """Verify output_folder creates the directory if it doesn't exist."""
         mock_output = tmp_path / "fake_output"
         # We patch the attribute on the class
-        monkeypatch.setattr(ErgoPaths, "OUTPUT_FOLDER", mock_output)
+        monkeypatch.setattr(ErgoPaths, "ERGOMOCAP_DATA_FOLDER", mock_output)
 
         assert not mock_output.exists()
-        resolved_path = ErgoPaths.output_folder()
+        resolved_path = ErgoPaths.ergomocap_data_folder()
         assert resolved_path.exists()
         assert resolved_path == mock_output
 
     def test_analysis_output_path(self, tmp_path, monkeypatch):
         """Verify the final CSV output pathing."""
         mock_output = tmp_path / "fake_output"
-        monkeypatch.setattr(ErgoPaths, "OUTPUT_FOLDER", mock_output)
+        monkeypatch.setattr(ErgoPaths, "ERGOMOCAP_DATA_FOLDER", mock_output)
 
-        csv_path = ErgoPaths.analysis_output()
+        csv_path = ErgoPaths.get_analysis_data_file_path()
         assert csv_path.name == "ergomocap_analysis.csv"
         assert csv_path.parent == mock_output

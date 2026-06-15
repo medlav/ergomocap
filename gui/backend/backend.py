@@ -421,7 +421,10 @@ class ErgoBackend(QObject):
             )
 
     def get_score_list_from_video_source(
-        self, video_path: str, method: AssessmentMethod = AssessmentMethod.REBA
+        self,
+        video_path: str,
+        method: AssessmentMethod = AssessmentMethod.REBA,
+        mode: str = "ANALYSIS",
     ) -> tuple[list[int], list[tuple[int, RiskLevel]]]:
         """
         Retrieves synchronized scores matching the specific video context.
@@ -442,25 +445,35 @@ class ErgoBackend(QObject):
         current_thresholds = adapter.get_thresholds()
 
         # Isolate video file base stem safely (e.g., "cam_1.mp4" -> "cam_1")
-        video_stem = Path(video_path).stem
-        analysis_filename = f"{video_stem}_{method.value.lower()}_metrics.csv"
-        analysis_path = ErgoPaths.analysis_output() / analysis_filename
+        # video_stem = Path(video_path).stem
+        # analysis_filename = f"{video_stem}_{method.value.lower()}_metrics.csv"
+        # analysis_path = ErgoPaths.ergomocap_data_folder() / analysis_filename
 
         # Fallback to shared general configuration file if contextual analytics don't exist
         # TODO add the review csv option here too
-        if not analysis_path.exists():
-            analysis_path = ErgoPaths.analysis_output()
+        # if not analysis_path.exists():
+        #     analysis_path = ErgoPaths.get_analysis_data_file_path()
+
+        analysis_path = ErgoPaths.get_analysis_data_file_path()
+        review_path = ErgoPaths.get_review_data_file_path()
 
         if not analysis_path.exists():
             # If no tracking data sheets are found, run analysis generation directly
             self.run_analysis(method=method)
-            analysis_path = ErgoPaths.analysis_output()
+            analysis_path = ErgoPaths.get_analysis_data_file_path()
 
         if not analysis_path.exists():
             return [], current_thresholds
 
+        if not review_path.exists():
+            df = pd.read_csv(analysis_path)
+            df.to_csv(review_path)
+
         try:
-            analysis_df = pd.read_csv(analysis_path)
+            current_path = (
+                analysis_path if mode == "ANALYSIS" else review_path
+            )  # ADDED to add review mode
+            analysis_df = pd.read_csv(current_path)
             self.scores_list = analysis_df[MetricType.SCORE.value].tolist()
             return self.scores_list, current_thresholds
         except Exception as e:
@@ -468,7 +481,7 @@ class ErgoBackend(QObject):
             return [], current_thresholds
 
     def load_video_source(
-        self, path: str, scores_list: list[int] | None = None
+        self, path: str, scores_list: list[int] | None = None, mode: str = "ANALYSIS"
     ) -> VideoLoadResult:
         """
         Initializes a new video thread context for the given file path.
@@ -490,7 +503,7 @@ class ErgoBackend(QObject):
                 )
 
             fresh_score_list, thresholds = self.get_score_list_from_video_source(
-                path, method=self._current_method
+                path, method=self._current_method, mode=mode
             )
             self.scores_list = fresh_score_list
 

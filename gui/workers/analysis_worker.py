@@ -195,7 +195,7 @@ class AnalysisWorker(QObject):
             stats_dict = analysis_df[MetricType.SCORE.value].value_counts().to_dict()
             stats = {str(k): int(v) for k, v in stats_dict.items()}
 
-            output_path: Path = ErgoPaths.analysis_output()
+            output_path: Path = ErgoPaths.get_analysis_data_file_path()
             analysis_df.to_csv(output_path, index=False)
 
             msg: str = f"Analysis Complete.\n{method.name} executed on {len(raw_results)} frames"

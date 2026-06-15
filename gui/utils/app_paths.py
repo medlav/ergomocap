@@ -96,7 +96,7 @@ class ErgoPaths:
         APP_CODE (Path): Root path for the core application source and asset resources.
         ASSETS (Path): Directory containing UI images, icons, and static graphics.
         TEMPLATES (Path): Directory containing Jinja2/HTML visual report templates.
-        OUTPUT_FOLDER (Path): Standardized directory for generated ergonomic analysis results.
+        ERGOMOCAP_DATA_FOLDER (Path): Standardized directory for generated ergonomic analysis results.
         DATA_FOLDER_NAME (str): Static directory string identifying subfolders holding raw metric data.
         VIDEO_FOLDER_NAME (str): Static directory string identifying subfolders holding annotated video streams.
         LOCAL_SITE (str): Static directory string pointing to local web assets or report packages.
@@ -124,7 +124,7 @@ class ErgoPaths:
     ASSETS = APP_CODE / "assets"
     TEMPLATES = APP_CODE / "gui" / "templates"
 
-    OUTPUT_FOLDER = APP_CODE / "ergomocap_data"
+    ERGOMOCAP_DATA_FOLDER = APP_CODE / "ergomocap_data"
 
     # --- Specific Folder Names ---
     # These are the "Magic Strings" we are killing
@@ -214,34 +214,22 @@ class ErgoPaths:
             Path (Path): Path to the video's 'frames' directory.
         """
 
-        frames_dir = ErgoPaths.output_folder() / session_name / video_name / "frames"
+        frames_dir = (
+            ErgoPaths.ergomocap_data_folder() / session_name / video_name / "frames"
+        )
         frames_dir.mkdir(parents=True, exist_ok=True)
         return frames_dir
 
     @staticmethod
-    def output_folder() -> Path:
+    def ergomocap_data_folder() -> Path:
         """
         Resolves the global output folder, creating it if it does not exist.
 
         Returns:
             Path (Path): The verified directory for ergonomic data output.
         """
-        ErgoPaths.OUTPUT_FOLDER.mkdir(parents=True, exist_ok=True)
-        return ErgoPaths.OUTPUT_FOLDER
-
-    @staticmethod
-    def analysis_output() -> Path:
-        """
-        Returns the standardized path for the primary analysis CSV.
-
-        Ensures that analysis results are consistently stored in the recognized
-        output directory.
-
-        Returns:
-            Path (Path): Absolute path to 'ergomocap_analysis.csv'.
-        """
-        # TODO do something better like return ErgoPaths.output_folder() / f"{method.lower()}_analysis.csv"
-        return ErgoPaths.output_folder() / "ergomocap_analysis.csv"
+        ErgoPaths.ERGOMOCAP_DATA_FOLDER.mkdir(parents=True, exist_ok=True)
+        return ErgoPaths.ERGOMOCAP_DATA_FOLDER
 
     @staticmethod
     def get_review_data_file_path() -> Path:
@@ -254,7 +242,7 @@ class ErgoPaths:
         Returns:
             Path (Path): Absolute path to 'ergomocap_review.csv'.
         """
-        return ErgoPaths.output_folder() / "ergomocap_review.csv"
+        return ErgoPaths.ergomocap_data_folder() / "ergomocap_review.csv"
 
     @staticmethod
     def get_analysis_data_file_path() -> Path:
@@ -267,7 +255,7 @@ class ErgoPaths:
         Returns:
             Path (Path): Absolute path to 'ergomocap_analysis.csv'.
         """
-        return ErgoPaths.output_folder() / "ergomocap_analysis.csv"
+        return ErgoPaths.ergomocap_data_folder() / "ergomocap_analysis.csv"
 
     @staticmethod
     def get_local_site_url(page_name: str) -> QUrl:

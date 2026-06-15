@@ -96,7 +96,7 @@
 | **TODO** | [`gui\core\report_strategies.py:194`](gui\core\report_strategies.py#L194) | Next Calculator |
 | **TODO** | [`gui\core\report_strategies.py:197`](gui\core\report_strategies.py#L197) | Next Calculator |
 | **TODO** | [`gui\core\session_manager.py:155`](gui\core\session_manager.py#L155) | print_reactivate |
-| **TODO** | [`gui\utils\app_paths.py:243`](gui\utils\app_paths.py#L243) | do something better like return ErgoPaths.output_folder() / f"{method.lower()}_analysis.csv" |
+| **TODO** | [`gui\utils\app_paths.py:243`](gui\utils\app_paths.py#L243) | do something better like return ErgoPaths.ergomocap_data_folder() / f"{method.lower()}_analysis.csv" |
 | **TODO** | [`gui\utils\constants.py:101`](gui\utils\constants.py#L101) | uncomment when implemented pdf/docx and scores_list in video canvas for rula too |
 | **TODO** | [`gui\utils\constants.py:257`](gui\utils\constants.py#L257) | check if need to be deleted |
 | **TODO** | [`gui\utils\utils.py:62`](gui\utils\utils.py#L62) | generate a table with the averages or remove this from backend |
