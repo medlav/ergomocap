@@ -1370,7 +1370,8 @@
 
                 <ol class="ordered-list-style">
                     <li class="list-item-spacing"><strong>Download:</strong> Get the latest ZIP file from the <a
-                            href="https://github.com/" class="anchor-accent" target="_blank">GitHub
+                            href="https://github.com/medlav/ergomocap/releases" class="anchor-accent"
+                            target="_blank">GitHub
                             releases page</a> of the public repository.</li>
                     <li class="list-item-spacing"><strong>Extract:</strong> Extract all the files and folders from the
                         downloaded ZIP to your desired location.</li>
@@ -1414,8 +1415,17 @@
                     <li class="list-item-spacing-small"><strong>Python 3.12 or higher</strong>: This is the engine that
                         runs
                         the code.</li>
-                    <li><strong>FreeMoCap</strong>: If you want to record new data, you need their software installed
+                    <li class="list-item-spacing-small"><strong>FreeMoCap</strong>: If you want to record new data, you
+                        need their software installed
                         and calibrated.</li>
+
+                    <li class="list-item-spacing-small"><strong>Blender</strong>: If you want to get all the motion
+                        capture data from freemocap, you
+                        need a version of Blender installed, check the <a class="anchor-accent" target="_blank"
+                            href="https://medlav.github.io/ergomocap/freemocap_tutorial.html">FreeMoCap tutorial</a> for
+                        more info.
+
+                    </li>
                 </ul>
 
                 <h3 class="requirement-heading-margin">2. INSTALLATION</h3>
@@ -1664,6 +1674,37 @@
                 <p style="font-family:var(--font-mono); font-size:0.85rem; color:var(--color-text-muted);">Files
                     involved: <code>gui/views/report_view.py</code>, <code>gui/templates/REBA_report.j2</code>,
                     <code>exports/pdf_generator.py</code>
+                </p>
+            </div>
+        </section>
+
+        <section class="guide-step reveal">
+            <div class="step-number">05</div>
+            <div class="guide-text">
+                <h2 style="font-family:var(--font-heading); font-size: 2.5rem;">REVIEW & OVERWRITE</h2>
+                <p>Audit automated tracking results frame-by-frame and manually overwrite tracking errors or clinical
+                    variables.</p>
+                <ol style="font-family:var(--font-body); margin:20px 0 20px 20px; color:var(--color-text-secondary);">
+                    <li style="margin-bottom:12px;">Click <strong>🧐 RUN REVIEW</strong> to launch the floating
+                        <strong>Video Review Suite</strong> dashboard
+                    </li>
+                    <li style="margin-bottom:12px;">Isolate your target timeline window using the <strong>Scope
+                            Target</strong> parameter fields</li>
+                    <li style="margin-bottom:12px;">Select your target variable, insert your custom values, and click
+                        <strong>⚡ APPLY CORRECTION</strong>
+                    </li>
+                    <li> Click the 💾 <strong>COMMIT REVISIONS</strong> button to persist your human-in-the-loop
+                        adjustments to your local file path (ergomocap_review.csv).
+                    </li>
+                    <li style="margin-bottom:12px;">Toggle the workspace view to <strong>REVIEW</strong> under the Video
+                        Visualizer mode panel to see the review scores in the overlay</li>
+                </ol>
+
+                <img class="image-shot" src="images/review_tutorial/review_save_changes.png"
+                    alt="Video Review Suite Overview"
+                    style="width:100%; border:2px solid var(--color-border); margin:15px 0;">
+                <p style="font-family:var(--font-mono); font-size:0.85rem; color:var(--color-text-muted);">Files
+                    involved: <code>gui/views/review_view.py</code>, <code>gui/backend/review_backend.py</code>,
                 </p>
             </div>
         </section>

@@ -72,9 +72,11 @@
 | **TODO** | [`gui\frontend.py:250`](gui\frontend.py#L250) | add docsrings and include this function in MainWindow Docstringas |
 | **TODO** | [`gui\frontend.py:279`](gui\frontend.py#L279) | make setting view and open as secondary window |
 | **TODO** | [`gui\backend\backend.py:325`](gui\backend\backend.py#L325) | do better handling here and signal error to frontend |
+| **TODO** | [`gui\backend\backend.py:425`](gui\backend\backend.py#L425) | remove this and use get score_list_from_session?? |
 | **TODO** | [`gui\backend\backend.py:439`](gui\backend\backend.py#L439) | change return type to custom model |
-| **TODO** | [`gui\backend\backend.py:453`](gui\backend\backend.py#L453) | add the review csv option here too |
-| **TODO** | [`gui\backend\backend.py:637`](gui\backend\backend.py#L637) | check this and test it |
+| **TODO** | [`gui\backend\backend.py:447`](gui\backend\backend.py#L447) | rewrite all this function, update ErgoPaths to create a folder for each session and subfolder for each video with relative analysis and review files |
+| **TODO** | [`gui\backend\backend.py:454`](gui\backend\backend.py#L454) | add the review csv option here too |
+| **TODO** | [`gui\backend\backend.py:638`](gui\backend\backend.py#L638) | check this and test it |
 | **TODO** | [`gui\backend\report_backend.py:172`](gui\backend\report_backend.py#L172) | print_reactivate |
 | **TODO** | [`gui\backend\report_backend.py:176`](gui\backend\report_backend.py#L176) | print_reactivate |
 | **TODO** | [`gui\backend\report_backend.py:344`](gui\backend\report_backend.py#L344) | make this programmatic, now is REBA centric |

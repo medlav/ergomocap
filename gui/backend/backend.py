@@ -444,6 +444,7 @@ class ErgoBackend(QObject):
         adapter = self.get_adapter(method)
         current_thresholds = adapter.get_thresholds()
 
+        # TODO rewrite all this function, update ErgoPaths to create a folder for each session and subfolder for each video with relative analysis and review files
         # Isolate video file base stem safely (e.g., "cam_1.mp4" -> "cam_1")
         # video_stem = Path(video_path).stem
         # analysis_filename = f"{video_stem}_{method.value.lower()}_metrics.csv"

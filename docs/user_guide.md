@@ -2,26 +2,20 @@
 
 ErgoMoCap is a tool that takes 3D motion data and turns it into ergonomic scores. It has two parts: the **Main Window** (where you do the work) and the **Report Dashboard** (where you look at the results).
 
-
->NOTE
->
->For specific and detailed info about Video Recording, Calibration with ChArUco boards and MoCap data collection you can read the official [FreeMoCap Documentation](https://docs.freemocap.org/documentation/index_md.html)
-
+> NOTE
+> For specific and detailed info about Video Recording, Calibration with ChArUco boards and MoCap data collection you can read the official [FreeMoCap Documentation](https://docs.freemocap.org/documentation/index_md.html)
 
 ---
 
 ## 1. Main Window
-This is where you load your files and run the calculations.
 
-![Main Window Interface Layout](images/screenshots/guide_main_window_overview.png)
+This is where you load your files and run the calculations.
 
 ### 📁 Files & Recording
 
 * **💀 RUN FREEMOCAP**: Opens the FreeMoCap software so you can record a new session.
 * **📂 SELECT FREEMOCAP ROOT**: Tell the app which folder contains all your recordings.
 * **Select Recording Session**: Pick the specific folder (e.g., `session_001`) you want to look at.
-
-![File Selection Panel Close-up](images/screenshots/guide_mainwindow_files_section.png)
 
 ### 🏃 Analysis
 
@@ -30,17 +24,27 @@ Pick a method from the list.
 * **Working**: REBA, RULA.
 * **Coming Soon**: OCRA, NIOSH, SNOOK, MAPO.
 
-![Selecting Ergonomic Method](images/screenshots/guide_analysis_method_dropdown.png)
+* **🏃 RUN ANALYSIS**: Click this to calculate the joint angles and save the raw analysis scores.
+* **🧐 RUN REVIEW**: Click this to open the floating **Video Review Suite** window to audit and manually overwrite scores.
 
-Click **🏃 RUN ANALYSIS** to calculate the joint angles and save the results to a file.
-
-### 🎞️ Video Player
+### 🎞️ Video Player & Visualizer
 
 * **Select Video**: Pick a video from the current session.
 * **▶ PLAY / PAUSE**: Start or stop the video to see the skeleton overlay.
+* **SELECT MODE (ANALYSIS / REVIEW)**: Toggle between these buttons to switch which score overlay is displayed on top of the video canvas (raw analysis data vs your manual review revisions).
 * **🎞️ BROWSE OTHER VIDEO**: If your video isn't in the session folder, find it manually here.
 
-![Video Player Controls](images/screenshots/guide_video_player_controls.png)
+---
+
+## 🧐 Video Review Suite
+
+When you click **🧐 RUN REVIEW**, this separate floating window opens up. It allows you to correct any tracking glitches or bad automated scores manually.
+
+* **FRAME DATA SPECS**: A read-only table showing the current frame's individual body part scores, loads, and raw joint angles.
+* **1. SCOPE TARGET**: Choose how many frames your change will apply to (**Current Frame Only**, **Custom Frame Range**, or **Entire Recording Timeline**). If you use a custom range, you must fill in the **From:** and **To:** frame boxes.
+* **2. ERGONOMIC ADJUSTMENTS**: Select the variable you want to fix, enter your new value, and click **⚡ APPLY CORRECTION** to update the data in temporary memory.
+* **3. OPERATOR OBSERVATIONS**: Add your own custom notes or comments about the frame or session.
+* **4. COMMIT REVISIONS**: Click the **💾 COMMIT REVISIONS** button to save all your changes permanently to an `ergomocap_review.csv` file inside your recording folder.
 
 ---
 
@@ -57,15 +61,11 @@ The app calculates these automatically:
 * **Risk Pie Charts**: Shows how much time was spent in "Safe" vs "Danger" zones.
 * **Score Table**: Shows the specific scores for **Trunk, Neck, Legs, Arms, and Wrists**.
 
-![Charts and Scores Summary](images/screenshots/guide_dashboard_charts_and_metrics.png)
-
 ### 💾 Saving Reports
 
 1. **📁 LOAD DATA**: Open an analysis file you made earlier (.csv or .xlsx).
 2. **📜 EXPORT TO PDF**: Saves a PDF version of the report.
 3. **📄 EXPORT TO DOCX**: Saves a Word document you can edit.
-
-![Load and Export Buttons](images/screenshots/guide_dashboard_save_and_export_buttons.png)
 
 ---
 
@@ -73,11 +73,7 @@ The app calculates these automatically:
 
 * **Sidebar**: Click ☰ to hide the left menu and make the video/charts bigger.
 
-![Main Window with Sidebar Hidden](images/screenshots/guide_settings_sidebar_collapsed.png)
-
 * **Theme**: Click ☀️/🌓 to switch between Dark and Light mode.
-
-![Light Mode Theme](images/screenshots/guide_settings_theme_light_mode.png)
 
 * **Language**: Switch between English and Italian. (Planned still not working on v0.0.X)
 
@@ -91,8 +87,6 @@ Check the **STATUS** text at the bottom left. It tells you:
 * How many sessions were found.
 * If the video is playing or paused.
 * If the analysis finished.
-
-![Status Bar Messages](images/screenshots/guide_status_bar_indicators.png)
 
 ---
 
