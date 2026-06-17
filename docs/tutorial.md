@@ -48,6 +48,7 @@ Follow these steps to check the ergonomics of a lifting task using the REBA meth
 ![Checking Skeleton Overlay](images/screenshots/step3_video_skeleton_overlay.png)
 
 3. If the skeleton is jumping around or "shaky," you might need better lighting or a different camera angle next time.
+4. * **SELECT MODE (ANALYSIS / REVIEW)**: Toggle between these buttons to switch which score overlay is displayed on top of the video canvas (raw analysis data vs your manual review revisions) see Step 5 for more info about the review mode.
 
 ### Step 4: See the results and save
 
@@ -62,7 +63,7 @@ Follow these steps to check the ergonomics of a lifting task using the REBA meth
 
 ### Step 5: Review the results
 
-TODO review this
+![Review Mode Overview](./images/review_tutorial/review_view.png)
 
 1. Click **🧐 RUN REVIEW** to  show the floating widget "Video Review Suite"
 2. Review current frame data in the "Frame Data Specs" section (scores and kinematic variablesa)

@@ -106,6 +106,11 @@ For layout overviews, implementation details, and step-by-step guides, refer to 
 | **Step 4: Asynchronous Engine Analysis**<br><br>![Analysis Finished](docs/images/screenshots/step2_analysis_finished.png) |
 | **Step 5: Media Playback & Video Controls**<br><br>![Video Controls](docs/images/screenshots/guide_video_player_controls.png) |
 | **Step 6: Statistical Distribution Dashboard**<br><br>![Report Dashboard](docs/images/screenshots/step4_report_dashboard.png) |
+| **Step 7: Human Review Mode**<br><br>![Review Mode Overview](docs/images/review_tutorial/review_view.png) |
+
+
+
+
 
 ## Technical Implementation & Pipeline
 
