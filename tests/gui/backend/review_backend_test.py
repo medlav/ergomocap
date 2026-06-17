@@ -67,7 +67,9 @@ def test_load_review_session_success(
     review_backend, sample_session_data, sample_ergo_data
 ):
     """Verifies happy path dataset initialization and copy isolation behavior."""
-    with patch.object(ErgoPaths, "analysis_output", return_value=sample_ergo_data):
+    with patch.object(
+        ErgoPaths, "get_analysis_data_file_path", return_value=sample_ergo_data
+    ):
         success, message = review_backend.load_review_session(sample_session_data)
 
         assert success is True
@@ -83,7 +85,9 @@ def test_load_review_session_missing_ergo_file(
 ):
     """Verifies clean failure propagation if target calculation file is absent."""
     non_existent = tmp_path / "does_not_exist.csv"
-    with patch.object(ErgoPaths, "analysis_output", return_value=non_existent):
+    with patch.object(
+        ErgoPaths, "get_analysis_data_file_path", return_value=non_existent
+    ):
         success, message = review_backend.load_review_session(sample_session_data)
 
         assert success is False
@@ -95,7 +99,9 @@ def test_load_review_session_missing_joint_path(review_backend, sample_ergo_data
     invalid_session = MagicMock(spec=SessionData)
     invalid_session.joint_angles_csv_path = None
 
-    with patch.object(ErgoPaths, "analysis_output", return_value=sample_ergo_data):
+    with patch.object(
+        ErgoPaths, "get_analysis_data_file_path", return_value=sample_ergo_data
+    ):
         success, message = review_backend.load_review_session(invalid_session)
 
         assert success is False

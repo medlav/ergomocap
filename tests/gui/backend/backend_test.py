@@ -466,11 +466,25 @@ class TestSynchronizedVideoScoreResolution:
             assert scores == [4, 4, 6]
             assert thresholds == [(2, RiskLevel.MEDIUM)]
 
-    @patch("gui.backend.backend.Path.exists")
-    def test_get_score_list_missing_runs_analysis(self, mock_exists, backend):
+    @patch(
+        "gui.backend.backend.ErgoPaths"
+    )  # Path where ErgoPaths is imported/used in backend
+    def test_get_score_list_missing_runs_analysis(self, mock_ergopaths, backend):
         """Auto-trigger analysis rendering loops if storage targets return empty file traces."""
-        # Setup lookup triggers: unique file check fails -> matching fallback fails -> post checking fails
-        mock_exists.side_effect = [False, False, False]
+
+        # Create explicit mock path objects
+        mock_analysis_path = MagicMock()
+        mock_review_path = MagicMock()
+
+        # Side effects for .exists():
+        # First call (analysis check) -> False (triggers run_analysis)
+        # Second call (post-run analysis check) -> False (triggers early return)
+        mock_analysis_path.exists.side_effect = [False, False]
+        mock_review_path.exists.return_value = False
+
+        # Link them back to the ErgoPaths mock
+        mock_ergopaths.get_analysis_data_file_path.return_value = mock_analysis_path
+        mock_ergopaths.get_review_data_file_path.return_value = mock_review_path
 
         mock_adapter = MagicMock()
         mock_adapter.get_thresholds.return_value = []

@@ -52,7 +52,7 @@ class TestAnalysisWorkerPipeline:
             patch("pandas.DataFrame.to_csv") as mock_to_csv,
             patch.object(worker, "engine", mock_engine),
             patch(
-                "gui.workers.analysis_worker.ErgoPaths.analysis_output",
+                "gui.workers.analysis_worker.ErgoPaths.get_analysis_data_file_path",
                 return_value=mock_output_path,
             ),
         ):

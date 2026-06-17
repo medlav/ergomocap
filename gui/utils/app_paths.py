@@ -109,7 +109,7 @@ class ErgoPaths:
         video_folder: Constructs the absolute path to the video subfolder of a session.
         frames_folder: Constructs the absolute path to the video frames subfolder of a video, creating it if needed.
         output_folder: Resolves the global output directory, ensuring its safe creation on disk.
-        analysis_output: Returns the standardized target path for the primary analysis CSV export sheet.
+        get_analysis_data_file_path: Returns the standardized target path for the primary analysis CSV export sheet.
         get_local_site_url: Converts an absolute systemic path string into a valid QUrl resource location.
     """
 

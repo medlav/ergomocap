@@ -66,19 +66,19 @@
 | **TODO** | [`calculators\rula_calculator\RULA_calculator.py:39`](calculators\rula_calculator\RULA_calculator.py#L39) | test numba and activate |
 | **TODO** | [`calculators\rula_calculator\RULA_calculator.py:116`](calculators\rula_calculator\RULA_calculator.py#L116) | here only uses RIGHT Side and even before, address this |
 | **TODO** | [`calculators\snook_calculator\SNOOK_calculator.py:26`](calculators\snook_calculator\SNOOK_calculator.py#L26) | Calculate SNOOK Index.""" |
-| **TODO** | [`gui\frontend.py:195`](gui\frontend.py#L195) | replace if possible |
-| **TODO** | [`gui\frontend.py:196`](gui\frontend.py#L196) | replace if possible |
-| **TODO** | [`gui\frontend.py:239`](gui\frontend.py#L239) | implement a better kill switch for all threads and processes of the app in particular freemocap |
-| **TODO** | [`gui\frontend.py:248`](gui\frontend.py#L248) | add docsrings and include this function in MainWindow Docstringas |
-| **TODO** | [`gui\frontend.py:277`](gui\frontend.py#L277) | make setting view and open as secondary window |
+| **TODO** | [`gui\frontend.py:197`](gui\frontend.py#L197) | replace if possible |
+| **TODO** | [`gui\frontend.py:198`](gui\frontend.py#L198) | replace if possible |
+| **TODO** | [`gui\frontend.py:241`](gui\frontend.py#L241) | implement a better kill switch for all threads and processes of the app in particular freemocap |
+| **TODO** | [`gui\frontend.py:250`](gui\frontend.py#L250) | add docsrings and include this function in MainWindow Docstringas |
+| **TODO** | [`gui\frontend.py:279`](gui\frontend.py#L279) | make setting view and open as secondary window |
 | **TODO** | [`gui\backend\backend.py:325`](gui\backend\backend.py#L325) | do better handling here and signal error to frontend |
-| **TODO** | [`gui\backend\backend.py:436`](gui\backend\backend.py#L436) | change return type to custom model |
-| **TODO** | [`gui\backend\backend.py:450`](gui\backend\backend.py#L450) | add the review csv option here too |
-| **TODO** | [`gui\backend\backend.py:624`](gui\backend\backend.py#L624) | check this and test it |
+| **TODO** | [`gui\backend\backend.py:439`](gui\backend\backend.py#L439) | change return type to custom model |
+| **TODO** | [`gui\backend\backend.py:453`](gui\backend\backend.py#L453) | add the review csv option here too |
+| **TODO** | [`gui\backend\backend.py:637`](gui\backend\backend.py#L637) | check this and test it |
 | **TODO** | [`gui\backend\report_backend.py:172`](gui\backend\report_backend.py#L172) | print_reactivate |
 | **TODO** | [`gui\backend\report_backend.py:176`](gui\backend\report_backend.py#L176) | print_reactivate |
 | **TODO** | [`gui\backend\report_backend.py:344`](gui\backend\report_backend.py#L344) | make this programmatic, now is REBA centric |
-| **TODO** | [`gui\backend\review_backend.py:422`](gui\backend\review_backend.py#L422) | is better to delegate all this to one interface /Strategy Pattern Class |
+| **TODO** | [`gui\backend\review_backend.py:425`](gui\backend\review_backend.py#L425) | is better to delegate all this to one interface /Strategy Pattern Class |
 | **TODO** | [`gui\core\calculators_adapter.py:53`](gui\core\calculators_adapter.py#L53) | all niosh_calculator/ code and relative adapter/ is to be done |
 | **TODO** | [`gui\core\calculators_adapter.py:54`](gui\core\calculators_adapter.py#L54) | all ocra_calculator/ code and relative adapter/ is to be done |
 | **TODO** | [`gui\core\calculators_adapter.py:55`](gui\core\calculators_adapter.py#L55) | all ewas_calculator/ code and relative adapter/ is to be done |
@@ -96,7 +96,6 @@
 | **TODO** | [`gui\core\report_strategies.py:194`](gui\core\report_strategies.py#L194) | Next Calculator |
 | **TODO** | [`gui\core\report_strategies.py:197`](gui\core\report_strategies.py#L197) | Next Calculator |
 | **TODO** | [`gui\core\session_manager.py:155`](gui\core\session_manager.py#L155) | print_reactivate |
-| **TODO** | [`gui\utils\app_paths.py:243`](gui\utils\app_paths.py#L243) | do something better like return ErgoPaths.ergomocap_data_folder() / f"{method.lower()}_analysis.csv" |
 | **TODO** | [`gui\utils\constants.py:101`](gui\utils\constants.py#L101) | uncomment when implemented pdf/docx and scores_list in video canvas for rula too |
 | **TODO** | [`gui\utils\constants.py:257`](gui\utils\constants.py#L257) | check if need to be deleted |
 | **TODO** | [`gui\utils\utils.py:62`](gui\utils\utils.py#L62) | generate a table with the averages or remove this from backend |
@@ -105,8 +104,8 @@
 | **TODO** | [`gui\utils\utils.py:94`](gui\utils\utils.py#L94) | print_reactivate |
 | **TODO** | [`gui\views\report_view.py:410`](gui\views\report_view.py#L410) | print_reactivate |
 | **TODO** | [`gui\views\report_view.py:469`](gui\views\report_view.py#L469) | fix not working |
-| **TODO** | [`gui\views\review_view.py:374`](gui\views\review_view.py#L374) | NEED TO ADD CHECKING HERE.. |
-| **TODO** | [`gui\views\review_view.py:399`](gui\views\review_view.py#L399) | UPDATE THE SCORES DICT TOO , check twice but the get_score_list_from_video_source should be doing this already |
+| **TODO** | [`gui\views\review_view.py:375`](gui\views\review_view.py#L375) | NEED TO ADD CHECKING HERE.. |
+| **TODO** | [`gui\views\review_view.py:400`](gui\views\review_view.py#L400) | UPDATE THE SCORES DICT TOO , check twice but the get_score_list_from_video_source should be doing this already |
 | **TODO** | [`gui\widgets\table_report_widget.py:179`](gui\widgets\table_report_widget.py#L179) | delete this |
 | **TODO** | [`gui\widgets\video_canvas.py:33`](gui\widgets\video_canvas.py#L33) | refractor this code, it's still trying to paint while the annotation is done with freemocap! |
 | **TODO** | [`intl\update_intl.py:142`](intl\update_intl.py#L142) | remove print statement and place proper logging |

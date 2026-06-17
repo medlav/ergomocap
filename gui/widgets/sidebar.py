@@ -50,7 +50,6 @@ from PySide6.QtWidgets import (
     QComboBox,
     QScrollArea,
     QWidget,
-    QRadioButton,
 )
 
 from gui.utils.constants import AssessmentMethod
@@ -274,7 +273,6 @@ class ErgoSidebar(QDockWidget):
         self.video_mode_group = QButtonGroup(self)
         self.video_mode_group.addButton(self.radio_analysis, 1)
         self.video_mode_group.addButton(self.radio_review, 2)
-        self.video_mode_group.buttonToggled.connect(self.on_video_mode_toggled)
 
         # --- Rest of your original code ---
         self.lbl_video_select: QLabel = QLabel(self.tr("Select Video:"))
@@ -431,12 +429,6 @@ class ErgoSidebar(QDockWidget):
         """
 
         return self.combo_method.currentText()
-
-    def on_video_mode_toggled(self, button: QRadioButton, checked: bool) -> str | None:
-        if checked:
-            selected_mode: str = button.text()  # This will be "ANALYSIS" or "REVIEW"
-            print(f"Current active mode: {selected_mode}")
-            return selected_mode
 
     def get_selected_video_mode(self) -> str:
         """

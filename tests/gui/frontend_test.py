@@ -116,7 +116,7 @@ def test_initialization_with_valid_paths(window, mock_backend):
     assert window.current_theme == ErgoTheme.DARK
     mock_backend.set_root_and_scan.assert_called_once()
     mock_backend.load_session_automatically.assert_called_with("session_01")
-    mock_backend.load_video_source.assert_called_with("video1.mp4")
+    mock_backend.load_video_source.assert_called_with("video1.mp4", mode="ANALYSIS")
 
 
 def test_init_root_no_path(mock_backend):
@@ -418,7 +418,7 @@ def test_handle_video_selection_changed_success(window, mock_backend):
     ):
         window.handle_video_selection_changed()
         mock_backend.load_video_source.assert_called_with(
-            str(Path("/mock/root/session_01/cam1.mp4"))
+            str(Path("/mock/root/session_01/cam1.mp4")), mode="ANALYSIS"
         )
 
 
@@ -458,7 +458,9 @@ def test_handle_load_video_via_dialog(window, mock_backend):
         ),
     ):
         window.handle_load_video()
-        mock_backend.load_video_source.assert_called_with("/custom/path/video.mp4")
+        mock_backend.load_video_source.assert_called_with(
+            "/custom/path/video.mp4", mode="ANALYSIS"
+        )
 
 
 def test_handle_import_joint_data(window, mock_backend):

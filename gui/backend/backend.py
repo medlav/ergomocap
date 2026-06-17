@@ -422,7 +422,7 @@ class ErgoBackend(QObject):
 
     def get_score_list_from_video_source(
         self,
-        video_path: str,
+        video_path: str,  # TODO remove this and use get score_list_from_session??
         method: AssessmentMethod = AssessmentMethod.REBA,
         mode: str = "ANALYSIS",
     ) -> tuple[list[int], list[tuple[int, RiskLevel]]]:

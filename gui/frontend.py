@@ -479,12 +479,10 @@ class MainWindow(QMainWindow):
             self.sidebar.set_status(self.tr("Found {} sessions.").format(len(sessions)))
 
     def set_analysis_mode(self):
-
         self.current_mode = "ANALYSIS"
         self.handle_session_selected()
 
     def set_review_mode(self):
-
         self.current_mode = "REVIEW"
         self.handle_session_selected()
 
