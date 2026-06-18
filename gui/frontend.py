@@ -306,7 +306,7 @@ class MainWindow(QMainWindow):
         Returns:
             None (None): Launches system default desktop browser.
         """
-        url = QUrl("https://github.com/freemocap/freemocap")
+        url = QUrl("https://github.com/medlav/ergomocap")
         QDesktopServices.openUrl(url)
 
     def connect_signals(self) -> None:
