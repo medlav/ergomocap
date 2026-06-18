@@ -990,7 +990,8 @@
             <div class="nav-links">
                 <a href="home.html">DOCS</a>
                 <a href="#pipeline">TUTORIAL</a>
-                <a href="https://github.com/medlav" target="_blank" class="github-icon" aria-label="GitHub Repository">
+                <a href="https://github.com/medlav/ergomocap" target="_blank" class="github-icon"
+                    aria-label="GitHub Repository">
                     <svg height="20" viewBox="0 0 16 16" width="20" fill="currentColor">
                         <path
                             d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z">
@@ -1039,8 +1040,6 @@
 
     <section class="marquee-container">
         <div class="marquee-content" id="imgMarquee">
-            <img src="images/screenshots/step1_select_recording_session.png" alt="Recording Selection Window"
-                class="app-shot">
             <img src="images/screenshots/step1_select_video.png" alt="Skeletal Joint Tracking Preview" class="app-shot">
             <img src="images/screenshots/step2_select_method_reba.png" alt="Assessment Method Selection"
                 class="app-shot">
@@ -1048,16 +1047,12 @@
                 class="app-shot">
             <img src="images/screenshots/step4_report_dashboard.png" alt="Statistical Report Dashboard"
                 class="app-shot">
-
-            <img src="images/screenshots/step1_select_recording_session.png" alt="Recording Selection Window"
+            <img src="images/review_tutorial/review_joint_angles.png" alt="Review Joint Angles" class="app-shot">
+            <img src="images/review_tutorial/review_scope_target.png" alt="Review Scope Target" class="app-shot">
+            <img src="images/review_tutorial/review_ergonomic_adjustments.png" alt="Review Ergonomic Adjustments"
                 class="app-shot">
-            <img src="images/screenshots/step1_select_video.png" alt="Skeletal Joint Tracking Preview" class="app-shot">
-            <img src="images/screenshots/step2_select_method_reba.png" alt="Assessment Method Selection"
-                class="app-shot">
-            <img src="images/screenshots/step2_analysis_finished.png" alt="Ergonomic Analysis Finished"
-                class="app-shot">
-            <img src="images/screenshots/step4_report_dashboard.png" alt="Statistical Report Dashboard"
-                class="app-shot">
+            <img src="images/review_tutorial/review_apply_changes.png" alt="Review Apply Changes" class="app-shot">
+            <img src="images/review_tutorial/review_save_changes.png" alt="Review Save Changes" class="app-shot">
         </div>
     </section>
 
@@ -1218,7 +1213,8 @@
                 <strong>ErgoMoCap</strong> is a free, open-source app that runs completely on your own computer. It
                 connects standard video motion tracking with official workplace ergonomics checks. It gives students and
                 researchers a free, and reliable way to measure physical workplace safety
-                risks without needing to buy expensive, corporate hardware and software. At the time of v0.0.1 the tool
+                risks without needing to buy expensive, corporate hardware and software. At the time of pre-alpha
+                versions v0.0.X, the tool
                 is not reliable and prone to errors.
             </p>
         </div>
@@ -1266,7 +1262,8 @@
                         <p class="row-desc">
                             The app imports the 3D body tracking data created by FreeMoCap. It uses a translation file
                             (the <code>freemocap_adapter</code>) to read the positions of 22 key body joints. Right now,
-                            in this early version (v0.0.1), the app uses the calculated joint angles to run its checks.
+                            in these early pre-alpha versions (v0.0.X), the app uses the calculated joint angles to run
+                            its checks.
                         </p>
                     </div>
                     <div class="brutalist-row border-brand-accent">
@@ -1319,7 +1316,7 @@
             <h3 class="status-title">⚠️ SYSTEM STATUS</h3>
             <div class="status-text">
                 <p class="paragraph-spacing">
-                    <strong>CURRENT PHASE: PRE-ALPHA (V0.0.1)</strong><br>
+                    <strong>CURRENT PHASE: PRE-ALPHA (V0.0.X)</strong><br>
                     The main visual controls and FreeMoCap data links are working. However, the RULA tracking scores are
                     still unstable. Right now, the app should only be used for testing and academic experiments, not
                     official certifications.
@@ -1368,7 +1365,8 @@
 
                 <ol class="ordered-list-style">
                     <li class="list-item-spacing"><strong>Download:</strong> Get the latest ZIP file from the <a
-                            href="https://github.com/" class="anchor-accent" target="_blank">GitHub
+                            href="https://github.com/medlav/ergomocap/releases" class="anchor-accent"
+                            target="_blank">GitHub
                             releases page</a> of the public repository.</li>
                     <li class="list-item-spacing"><strong>Extract:</strong> Extract all the files and folders from the
                         downloaded ZIP to your desired location.</li>
@@ -1412,8 +1410,17 @@
                     <li class="list-item-spacing-small"><strong>Python 3.12 or higher</strong>: This is the engine that
                         runs
                         the code.</li>
-                    <li><strong>FreeMoCap</strong>: If you want to record new data, you need their software installed
+                    <li class="list-item-spacing-small"><strong>FreeMoCap</strong>: If you want to record new data, you
+                        need their software installed
                         and calibrated.</li>
+
+                    <li class="list-item-spacing-small"><strong>Blender</strong>: If you want to get all the motion
+                        capture data from freemocap, you
+                        need a version of Blender installed, check the <a class="anchor-accent" target="_blank"
+                            href="https://medlav.github.io/ergomocap/freemocap_tutorial.html">FreeMoCap tutorial</a> for
+                        more info.
+
+                    </li>
                 </ul>
 
                 <h3 class="requirement-heading-margin">2. INSTALLATION</h3>
@@ -1662,6 +1669,37 @@
                 <p style="font-family:var(--font-mono); font-size:0.85rem; color:var(--color-text-muted);">Files
                     involved: <code>gui/views/report_view.py</code>, <code>gui/templates/REBA_report.j2</code>,
                     <code>exports/pdf_generator.py</code>
+                </p>
+            </div>
+        </section>
+
+        <section class="guide-step reveal">
+            <div class="step-number">05</div>
+            <div class="guide-text">
+                <h2 style="font-family:var(--font-heading); font-size: 2.5rem;">REVIEW & OVERWRITE</h2>
+                <p>Audit automated tracking results frame-by-frame and manually overwrite tracking errors or clinical
+                    variables.</p>
+                <ol style="font-family:var(--font-body); margin:20px 0 20px 20px; color:var(--color-text-secondary);">
+                    <li style="margin-bottom:12px;">Click <strong>🧐 RUN REVIEW</strong> to launch the floating
+                        <strong>Video Review Suite</strong> dashboard
+                    </li>
+                    <li style="margin-bottom:12px;">Isolate your target timeline window using the <strong>Scope
+                            Target</strong> parameter fields</li>
+                    <li style="margin-bottom:12px;">Select your target variable, insert your custom values, and click
+                        <strong>⚡ APPLY CORRECTION</strong>
+                    </li>
+                    <li> Click the 💾 <strong>COMMIT REVISIONS</strong> button to persist your human-in-the-loop
+                        adjustments to your local file path (ergomocap_review.csv).
+                    </li>
+                    <li style="margin-bottom:12px;">Toggle the workspace view to <strong>REVIEW</strong> under the Video
+                        Visualizer mode panel to see the review scores in the overlay</li>
+                </ol>
+
+                <img class="image-shot" src="images/review_tutorial/review_save_changes.png"
+                    alt="Video Review Suite Overview"
+                    style="width:100%; border:2px solid var(--color-border); margin:15px 0;">
+                <p style="font-family:var(--font-mono); font-size:0.85rem; color:var(--color-text-muted);">Files
+                    involved: <code>gui/views/review_view.py</code>, <code>gui/backend/review_backend.py</code>,
                 </p>
             </div>
         </section>

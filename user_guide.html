@@ -373,10 +373,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#video-player" class="md-nav__link">
+  <a href="#video-player-visualizer" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🎞️ Video Player
+        🎞️ Video Player &amp; Visualizer
       
     </span>
   </a>
@@ -385,6 +385,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#video-review-suite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧐 Video Review Suite
+      
+    </span>
+  </a>
   
 </li>
       
@@ -734,10 +745,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#video-player" class="md-nav__link">
+  <a href="#video-player-visualizer" class="md-nav__link">
     <span class="md-ellipsis">
       
-        🎞️ Video Player
+        🎞️ Video Player &amp; Visualizer
       
     </span>
   </a>
@@ -746,6 +757,17 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#video-review-suite" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        🧐 Video Review Suite
+      
+    </span>
+  </a>
   
 </li>
       
@@ -830,35 +852,47 @@
 <h1 id="ergomocap-user-guide">ErgoMoCap User Guide</h1>
 <p>ErgoMoCap is a tool that takes 3D motion data and turns it into ergonomic scores. It has two parts: the <strong>Main Window</strong> (where you do the work) and the <strong>Report Dashboard</strong> (where you look at the results).</p>
 <blockquote>
-<p>NOTE</p>
-<p>For specific and detailed info about Video Recording, Calibration with ChArUco boards and MoCap data collection you can read the official <a href="https://docs.freemocap.org/documentation/index_md.html">FreeMoCap Documentation</a></p>
+<p>NOTE
+For specific and detailed info about Video Recording, Calibration with ChArUco boards and MoCap data collection you can read the official <a href="https://docs.freemocap.org/documentation/index_md.html">FreeMoCap Documentation</a></p>
 </blockquote>
 <hr />
 <h2 id="1-main-window">1. Main Window</h2>
 <p>This is where you load your files and run the calculations.</p>
-<p><img alt="Main Window Interface Layout" src="images/screenshots/guide_main_window_overview.png" /></p>
 <h3 id="files-recording">📁 Files &amp; Recording</h3>
 <ul>
 <li><strong>💀 RUN FREEMOCAP</strong>: Opens the FreeMoCap software so you can record a new session.</li>
 <li><strong>📂 SELECT FREEMOCAP ROOT</strong>: Tell the app which folder contains all your recordings.</li>
 <li><strong>Select Recording Session</strong>: Pick the specific folder (e.g., <code>session_001</code>) you want to look at.</li>
 </ul>
-<p><img alt="File Selection Panel Close-up" src="images/screenshots/guide_mainwindow_files_section.png" /></p>
 <h3 id="analysis">🏃 Analysis</h3>
 <p>Pick a method from the list.</p>
 <ul>
 <li><strong>Working</strong>: REBA, RULA.</li>
-<li><strong>Coming Soon</strong>: OCRA, NIOSH, SNOOK, MAPO.</li>
+<li>
+<p><strong>Coming Soon</strong>: OCRA, NIOSH, SNOOK, MAPO.</p>
+</li>
+<li>
+<p><strong>🏃 RUN ANALYSIS</strong>: Click this to calculate the joint angles and save the raw analysis scores.</p>
+</li>
+<li><strong>🧐 RUN REVIEW</strong>: Click this to open the floating <strong>Video Review Suite</strong> window to audit and manually overwrite scores.</li>
 </ul>
-<p><img alt="Selecting Ergonomic Method" src="images/screenshots/guide_analysis_method_dropdown.png" /></p>
-<p>Click <strong>🏃 RUN ANALYSIS</strong> to calculate the joint angles and save the results to a file.</p>
-<h3 id="video-player">🎞️ Video Player</h3>
+<h3 id="video-player-visualizer">🎞️ Video Player &amp; Visualizer</h3>
 <ul>
 <li><strong>Select Video</strong>: Pick a video from the current session.</li>
 <li><strong>▶ PLAY / PAUSE</strong>: Start or stop the video to see the skeleton overlay.</li>
+<li><strong>SELECT MODE (ANALYSIS / REVIEW)</strong>: Toggle between these buttons to switch which score overlay is displayed on top of the video canvas (raw analysis data vs your manual review revisions).</li>
 <li><strong>🎞️ BROWSE OTHER VIDEO</strong>: If your video isn't in the session folder, find it manually here.</li>
 </ul>
-<p><img alt="Video Player Controls" src="images/screenshots/guide_video_player_controls.png" /></p>
+<hr />
+<h2 id="video-review-suite">🧐 Video Review Suite</h2>
+<p>When you click <strong>🧐 RUN REVIEW</strong>, this separate floating window opens up. It allows you to correct any tracking glitches or bad automated scores manually.</p>
+<ul>
+<li><strong>FRAME DATA SPECS</strong>: A read-only table showing the current frame's individual body part scores, loads, and raw joint angles.</li>
+<li><strong>1. SCOPE TARGET</strong>: Choose how many frames your change will apply to (<strong>Current Frame Only</strong>, <strong>Custom Frame Range</strong>, or <strong>Entire Recording Timeline</strong>). If you use a custom range, you must fill in the <strong>From:</strong> and <strong>To:</strong> frame boxes.</li>
+<li><strong>2. ERGONOMIC ADJUSTMENTS</strong>: Select the variable you want to fix, enter your new value, and click <strong>⚡ APPLY CORRECTION</strong> to update the data in temporary memory.</li>
+<li><strong>3. OPERATOR OBSERVATIONS</strong>: Add your own custom notes or comments about the frame or session.</li>
+<li><strong>4. COMMIT REVISIONS</strong>: Click the <strong>💾 COMMIT REVISIONS</strong> button to save all your changes permanently to an <code>ergomocap_review.csv</code> file inside your recording folder.</li>
+</ul>
 <hr />
 <h2 id="2-report-dashboard">2. Report Dashboard</h2>
 <p>Click <strong>📊 OPEN REPORT DASHBOARD</strong> to see the data breakdown.</p>
@@ -870,26 +904,24 @@
 <li><strong>Risk Pie Charts</strong>: Shows how much time was spent in "Safe" vs "Danger" zones.</li>
 <li><strong>Score Table</strong>: Shows the specific scores for <strong>Trunk, Neck, Legs, Arms, and Wrists</strong>.</li>
 </ul>
-<p><img alt="Charts and Scores Summary" src="images/screenshots/guide_dashboard_charts_and_metrics.png" /></p>
 <h3 id="saving-reports">💾 Saving Reports</h3>
 <ol>
 <li><strong>📁 LOAD DATA</strong>: Open an analysis file you made earlier (.csv or .xlsx).</li>
 <li><strong>📜 EXPORT TO PDF</strong>: Saves a PDF version of the report.</li>
 <li><strong>📄 EXPORT TO DOCX</strong>: Saves a Word document you can edit.</li>
 </ol>
-<p><img alt="Load and Export Buttons" src="images/screenshots/guide_dashboard_save_and_export_buttons.png" /></p>
 <hr />
 <h2 id="settings">Settings</h2>
 <ul>
-<li><strong>Sidebar</strong>: Click ☰ to hide the left menu and make the video/charts bigger.</li>
-</ul>
-<p><img alt="Main Window with Sidebar Hidden" src="images/screenshots/guide_settings_sidebar_collapsed.png" /></p>
-<ul>
-<li><strong>Theme</strong>: Click ☀️/🌓 to switch between Dark and Light mode.</li>
-</ul>
-<p><img alt="Light Mode Theme" src="images/screenshots/guide_settings_theme_light_mode.png" /></p>
-<ul>
-<li><strong>Language</strong>: Switch between English and Italian. (Planned still not working on v0.0.1)</li>
+<li>
+<p><strong>Sidebar</strong>: Click ☰ to hide the left menu and make the video/charts bigger.</p>
+</li>
+<li>
+<p><strong>Theme</strong>: Click ☀️/🌓 to switch between Dark and Light mode.</p>
+</li>
+<li>
+<p><strong>Language</strong>: Switch between English and Italian. (Planned still not working on v0.0.X)</p>
+</li>
 </ul>
 <hr />
 <h2 id="status-bar">⚠️ Status Bar</h2>
@@ -900,7 +932,6 @@
 <li>If the video is playing or paused.</li>
 <li>If the analysis finished.</li>
 </ul>
-<p><img alt="Status Bar Messages" src="images/screenshots/guide_status_bar_indicators.png" /></p>
 <hr />
 <p>© 2026 medlav. Distributed under the AGPL-3.0 License.</p>
 

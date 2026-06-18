@@ -437,6 +437,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#step-5-review-the-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Review the results
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#tips-for-better-results" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -688,6 +699,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#step-5-review-the-results" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Step 5: Review the results
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#tips-for-better-results" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -761,6 +783,11 @@
 <p><img alt="Checking Skeleton Overlay" src="images/screenshots/step3_video_skeleton_overlay.png" /></p>
 <ol>
 <li>If the skeleton is jumping around or "shaky," you might need better lighting or a different camera angle next time.</li>
+<li>
+<ul>
+<li><strong>SELECT MODE (ANALYSIS / REVIEW)</strong>: Toggle between these buttons to switch which score overlay is displayed on top of the video canvas (raw analysis data vs your manual review revisions) see Step 5 for more info about the review mode.</li>
+</ul>
+</li>
 </ol>
 <h3 id="step-4-see-the-results-and-save">Step 4: See the results and save</h3>
 <ol>
@@ -772,6 +799,30 @@
 <li>If you need a file for your records:</li>
 <li>Click <strong>📜 EXPORT TO PDF</strong> for a clean shareable report.</li>
 <li>Click <strong>📄 EXPORT TO DOCX</strong> if you need a Word file you can type in later.</li>
+</ol>
+<h3 id="step-5-review-the-results">Step 5: Review the results</h3>
+<p><img alt="Review Mode Overview" src="images/review_tutorial/review_view.png" /></p>
+<ol>
+<li>Click <strong>🧐 RUN REVIEW</strong> to  show the floating widget "Video Review Suite"</li>
+<li>Review current frame data in the "Frame Data Specs" section (scores and kinematic variablesa)</li>
+</ol>
+<p>This table is read only, to change the values and apply corrections follow the next instructions.</p>
+<ol>
+<li>
+<p>In the "1. Scope Target" section select the scope you want to apply the changes from the "Apply Correction to" combobox (Current Frame Only, Custom Frame Range, Entire Recording Timeline). If you select "Custom Frame Range" you MUST input the first and last frame index in the 2 numbers inputs below ("From" and "To")</p>
+</li>
+<li>
+<p>Select the variable you want to overwrite from the "Select Variable" combobox in the "2. Ergonomic Adjustments" section, and enter the correct value in the "Enter Adjusted Value Overrides" input.</p>
+</li>
+<li>
+<p>Click <strong>⚡ APPLY CORRECTION</strong> to overwrite the values and apply the changes. NOTE: the changes are applied to the runtime dataframe, and are not saved until you commit the revision clicking the button (see last point)</p>
+</li>
+<li>
+<p>You can add a note in the "3. Operator Observations" section</p>
+</li>
+<li>
+<p>Click the <strong>💾 COMMIT REVISIONS</strong> button to save the applied changes to the new ergomocap_review.csv file (saved in ergomocap_data folder)</p>
+</li>
 </ol>
 <hr />
 <h3 id="tips-for-better-results">💡 Tips for better results</h3>
