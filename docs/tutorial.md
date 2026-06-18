@@ -63,7 +63,7 @@ Follow these steps to check the ergonomics of a lifting task using the REBA meth
 
 ### Step 5: Review the results
 
-![Review Mode Overview](./images/review_tutorial/review_view.png)
+![Review Mode Overview](./images/review_tutorial/review_joint_angles.png)
 
 1. Click **🧐 RUN REVIEW** to  show the floating widget "Video Review Suite"
 2. Review current frame data in the "Frame Data Specs" section (scores and kinematic variablesa)
