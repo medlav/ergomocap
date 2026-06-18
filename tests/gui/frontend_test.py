@@ -276,7 +276,7 @@ def test_handle_reboot(window):
     [
         ("open_docs", "mock_local_site/index.html"),
         ("open_tutorial", "mock_local_site/tutorial/index.html"),
-        ("open_source", "https://github.com/freemocap/freemocap"),
+        ("open_source", "https://github.com/medlav/ergomocap"),
     ],
 )
 def test_external_url_routing(window, method_name, expected_url):

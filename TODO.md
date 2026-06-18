@@ -112,7 +112,6 @@
 | **TODO** | [`gui\widgets\video_canvas.py:33`](gui\widgets\video_canvas.py#L33) | refractor this code, it's still trying to paint while the annotation is done with freemocap! |
 | **TODO** | [`intl\update_intl.py:142`](intl\update_intl.py#L142) | remove print statement and place proper logging |
 | **TODO** | [`scripts\generate_folder_structure.py:1`](scripts\generate_folder_structure.py#L1) | write a script to automate folder structure generation to avoid using the VSCode Extension and mistakes in docs and README |
-| **TODO** | [`scripts\generate_screenshots.py:143`](scripts\generate_screenshots.py#L143) | NOTE the numbers order is wrong btw 2 n 3 |
 | **TODO** | [`scripts\todo_scanner.py:63`](scripts\todo_scanner.py#L63) | strings.""" |
 | **TODO** | [`scripts\todo_scanner.py:68`](scripts\todo_scanner.py#L68) | ", "todo ", "FIXME:", etc. |
 | **TODO** | [`tests\test_qtbot_tests.py:34`](tests\test_qtbot_tests.py#L34) | delete after pytest paths cleared |

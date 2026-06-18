@@ -103,8 +103,8 @@
 | pydantic                      | 2.13.4       | MIT                                                                            |
 | pydantic_core                 | 2.46.4       | MIT                                                                            |
 | pydoclint                     | 0.8.4        | MIT License                                                                    |
-| pyinstaller                   | 6.20.0       | GNU General Public License v2 (GPLv2)                                          |
-| pyinstaller-hooks-contrib     | 2026.5       | Apache Software License; GNU General Public License v2 (GPLv2)                 |
+| pyinstaller                   | 6.21.0       | GNU General Public License v2 (GPLv2)                                          |
+| pyinstaller-hooks-contrib     | 2026.6       | Apache Software License; GNU General Public License v2 (GPLv2)                 |
 | pyparsing                     | 3.3.2        | MIT                                                                            |
 | pyqtgraph                     | 0.13.3       | MIT License                                                                    |
 | pytest                        | 9.0.3        | MIT                                                                            |
