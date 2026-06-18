@@ -7,7 +7,7 @@
 | **TODO** | [`main.py:136`](main.py#L136) | implement this |
 | **TODO** | [`pyproject.toml:55`](pyproject.toml#L55) | remove this or specify only for matplotlib |
 | **TODO** | [`pyproject.toml:77`](pyproject.toml#L77) | should be 100% or closer!! |
-| **TODO** | [`README.md:279`](README.md#L279) | Scan** | `pre-commit run generate-todo-list --all-files` | Triggers the local task scanning script. | |
+| **TODO** | [`README.md:281`](README.md#L281) | Scan** | `pre-commit run generate-todo-list --all-files` | Triggers the local task scanning script. | |
 | **TODO** | [`calculators\calculators.py:35`](calculators\calculators.py#L35) | all niosh_calculator/ code and relative adapter/ is to be done |
 | **TODO** | [`calculators\calculators.py:38`](calculators\calculators.py#L38) | all ocra_calculator/ code and relative adapter/ is to be done |
 | **TODO** | [`calculators\calculators.py:41`](calculators\calculators.py#L41) | all ewas_calculator/ code and relative adapter/ is to be done |
@@ -71,12 +71,12 @@
 | **TODO** | [`gui\frontend.py:241`](gui\frontend.py#L241) | implement a better kill switch for all threads and processes of the app in particular freemocap |
 | **TODO** | [`gui\frontend.py:250`](gui\frontend.py#L250) | add docsrings and include this function in MainWindow Docstringas |
 | **TODO** | [`gui\frontend.py:279`](gui\frontend.py#L279) | make setting view and open as secondary window |
-| **TODO** | [`gui\backend\backend.py:325`](gui\backend\backend.py#L325) | do better handling here and signal error to frontend |
-| **TODO** | [`gui\backend\backend.py:425`](gui\backend\backend.py#L425) | remove this and use get score_list_from_session?? |
-| **TODO** | [`gui\backend\backend.py:439`](gui\backend\backend.py#L439) | change return type to custom model |
-| **TODO** | [`gui\backend\backend.py:447`](gui\backend\backend.py#L447) | rewrite all this function, update ErgoPaths to create a folder for each session and subfolder for each video with relative analysis and review files |
-| **TODO** | [`gui\backend\backend.py:454`](gui\backend\backend.py#L454) | add the review csv option here too |
-| **TODO** | [`gui\backend\backend.py:638`](gui\backend\backend.py#L638) | check this and test it |
+| **TODO** | [`gui\backend\backend.py:328`](gui\backend\backend.py#L328) | do better handling here and signal error to frontend |
+| **TODO** | [`gui\backend\backend.py:429`](gui\backend\backend.py#L429) | remove this and use get score_list_from_session?? |
+| **TODO** | [`gui\backend\backend.py:443`](gui\backend\backend.py#L443) | change return type to custom model |
+| **TODO** | [`gui\backend\backend.py:451`](gui\backend\backend.py#L451) | rewrite all this function, update ErgoPaths to create a folder for each session and subfolder for each video with relative analysis and review files |
+| **TODO** | [`gui\backend\backend.py:458`](gui\backend\backend.py#L458) | add the review csv option here too |
+| **TODO** | [`gui\backend\backend.py:644`](gui\backend\backend.py#L644) | check this and test it |
 | **TODO** | [`gui\backend\report_backend.py:172`](gui\backend\report_backend.py#L172) | print_reactivate |
 | **TODO** | [`gui\backend\report_backend.py:176`](gui\backend\report_backend.py#L176) | print_reactivate |
 | **TODO** | [`gui\backend\report_backend.py:344`](gui\backend\report_backend.py#L344) | make this programmatic, now is REBA centric |
@@ -112,6 +112,7 @@
 | **TODO** | [`gui\widgets\video_canvas.py:33`](gui\widgets\video_canvas.py#L33) | refractor this code, it's still trying to paint while the annotation is done with freemocap! |
 | **TODO** | [`intl\update_intl.py:142`](intl\update_intl.py#L142) | remove print statement and place proper logging |
 | **TODO** | [`scripts\generate_folder_structure.py:1`](scripts\generate_folder_structure.py#L1) | write a script to automate folder structure generation to avoid using the VSCode Extension and mistakes in docs and README |
+| **TODO** | [`scripts\generate_screenshots.py:143`](scripts\generate_screenshots.py#L143) | NOTE the numbers order is wrong btw 2 n 3 |
 | **TODO** | [`scripts\todo_scanner.py:63`](scripts\todo_scanner.py#L63) | strings.""" |
 | **TODO** | [`scripts\todo_scanner.py:68`](scripts\todo_scanner.py#L68) | ", "todo ", "FIXME:", etc. |
 | **TODO** | [`tests\test_qtbot_tests.py:34`](tests\test_qtbot_tests.py#L34) | delete after pytest paths cleared |
