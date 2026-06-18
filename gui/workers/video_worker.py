@@ -51,6 +51,7 @@ from gui.utils.models import (
 
 
 from gui.core.analysis_engine import AnalysisEngine
+from gui.utils.logger import logger
 
 
 class VideoWorker(QObject):
@@ -415,6 +416,7 @@ class VideoWorker(QObject):
             # Reset timeline layout preview
             self._seek_to_index(0)
         except Exception as e:
+            logger.error(f"Frames Export failed: {e}")
             self.frames_export_finished.emit(
                 FramesExportResult(
                     success=False,

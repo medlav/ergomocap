@@ -288,6 +288,7 @@ class ErgoBackend(QObject):
             )
 
         except Exception as e:
+            logger.error("Freemocap failed to launch. {e}")
             return False, str(e)
 
     def get_adapter(self, method: AssessmentMethod) -> BaseErgoAdapter:
@@ -305,7 +306,9 @@ class ErgoBackend(QObject):
         """
         adapter = self._adapters.get(method.value.upper())
         if not adapter:
+            logger.debug(f"The current method ({method.name}) is not implemented")
             raise NotImplementedError(f"{method} integration in progress.")
+
         return adapter
 
     def get_summary_statistics(
@@ -328,6 +331,7 @@ class ErgoBackend(QObject):
             adapter = self.get_adapter(method)
             return adapter.get_stats(self.scores_list)
         except NotImplementedError:
+            logger.debug(f"The current method ({method.name}) is not implemented")
             return {}
 
     def run_analysis(self, method: AssessmentMethod = AssessmentMethod.REBA) -> None:
@@ -526,6 +530,7 @@ class ErgoBackend(QObject):
             )
 
         except Exception as e:
+            logger.error(f"Video error: {e}")
             return VideoLoadResult(
                 success=False, message=self.tr("Video error: {}").format(str(e))
             )
@@ -554,6 +559,7 @@ class ErgoBackend(QObject):
                 else "Data"
             )
         except Exception as e:
+            logger.error(f"Failed to load data: {e}")
             return False, self.tr("Failed to load data: {}").format(str(e))
 
     def set_root_and_scan(self, path: str | Path) -> list[str]:

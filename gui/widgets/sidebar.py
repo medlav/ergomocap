@@ -258,7 +258,6 @@ class ErgoSidebar(QDockWidget):
         self.radio_analysis = QPushButton("ANALYSIS")
         self.radio_review = QPushButton("REVIEW")
 
-        # Make them a radio button and a default selection if desired (e.g., ANALYSIS starts checked)
         self.radio_analysis.setCheckable(True)
         self.radio_review.setCheckable(True)
 
@@ -267,7 +266,6 @@ class ErgoSidebar(QDockWidget):
         mode_lay.addWidget(self.radio_analysis)
         mode_lay.addWidget(self.radio_review)
 
-        # Add the horizontal row to the main video layout
         video_lay.addLayout(mode_lay)
 
         self.video_mode_group = QButtonGroup(self)

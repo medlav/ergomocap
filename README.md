@@ -109,9 +109,6 @@ For layout overviews, implementation details, and step-by-step guides, refer to 
 | **Step 7: Human Review Mode**<br><br>![Review Mode Overview](docs/images/review_tutorial/review_view.png) |
 
 
-
-
-
 ## Technical Implementation & Pipeline
 
 The data pipeline separates data acquisition from the mathematical scoring engines.

@@ -61,7 +61,7 @@ from qtpy.QtCore import QTranslator, QLocale
 from gui.frontend import MainWindow
 from gui.theme.style import get_stylesheet
 from gui.utils.app_paths import ErgoPaths
-
+from gui.utils.logger import logger
 
 if sys.stdout is None:
     sys.stdout = StringIO()
@@ -125,7 +125,7 @@ def main() -> None:
             qt_gui_main()
             sys.exit(0)
         except Exception as e:
-            print(f"Failed to route FreeMoCap subprocess execution: {e}")
+            logger.warning(f"Failed to route FreeMoCap subprocess execution: {e}")
             sys.exit(1)
 
     ##########################################

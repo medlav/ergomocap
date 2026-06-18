@@ -3,17 +3,25 @@ from pathlib import Path
 import time
 from typing import List, cast
 from PySide6.QtGui import QIcon, QPixmap
-from PySide6.QtWidgets import QApplication, QComboBox, QAbstractItemView
+from PySide6.QtWidgets import (
+    QApplication,
+    QComboBox,
+    QAbstractItemView,
+    QMessageBox,
+    QWidget,
+)
 from PySide6.QtCore import (
     QCoreApplication,
     QEventLoop,
     QAbstractItemModel,
     QModelIndex,
+    QTimer,
 )
 from unittest.mock import MagicMock
 
-project_root: Path = Path(__file__).resolve().parent.parent
-sys.path.append(str(project_root))
+PROJECT_ROOT: Path = Path(__file__).resolve().parent.parent
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.append(str(PROJECT_ROOT))
 
 from gui.utils.app_paths import ErgoPaths  # type: ignore # noqa: E402
 from gui.theme.style import get_stylesheet  # type: ignore # noqa: E402
@@ -22,22 +30,46 @@ from gui.utils.models import AnalysisRequest  # type: ignore # noqa: E402
 from gui.frontend import MainWindow  # type: ignore  # noqa: E402
 
 
-def take_snapshot(filename: str) -> None:
-    """Force the UI to process events, repaint, and grab the primary screen."""
-    # Process all pending events multiple times to ensure layout recalculations complete
-    for _ in range(3):
-        QCoreApplication.processEvents(QEventLoop.ProcessEventsFlag.AllEvents)
-    time.sleep(0.3)  # Short pause for physical screen synchronization
+BASE_IMAGE_DIR = Path("docs/images")
 
-    path: Path = Path("docs/images/screenshots")
+
+def wait_and_process(seconds: float, iterations: int = 10):
+    """Helper to pause execution without freezing the Qt Main Event Loop."""
+    step = seconds / iterations
+    for _ in range(iterations):
+        QCoreApplication.processEvents(QEventLoop.ProcessEventsFlag.AllEvents)
+        time.sleep(step)
+
+
+def take_widget_snapshot(widget: QWidget, folder: str, filename: str) -> None:
+    """
+    Forces the specific widget to paint itself and saves a pixel-perfect
+    image without desktop backgrounds or artifacts.
+    """
+    wait_and_process(0.5)
+
+    target_path = BASE_IMAGE_DIR / folder
+    target_path.mkdir(parents=True, exist_ok=True)
+
+    # widget.grab() is much safer and cleaner than QApplication.primaryScreen().grabWindow(0)
+    pixmap: QPixmap = widget.grab()
+    output_file = target_path / filename
+    pixmap.save(str(output_file))
+    print(f"Captured ➔ [{folder}] {filename}")
+
+
+def take_snapshot(filename: str, subfolder: str = "screenshots") -> None:
+    """Force the UI to process events, repaint, and grab the primary screen area."""
+    wait_and_process(0.05)  # Short pause for physical screen synchronization
+
+    path: Path = BASE_IMAGE_DIR / subfolder
     path.mkdir(parents=True, exist_ok=True)
 
-    # Explicitly check for screen availability before attempting to grab
     screen = QApplication.primaryScreen()
     if screen is not None:
         pixmap: QPixmap = screen.grabWindow(0)
         pixmap.save(str(path / filename))
-        print(f"Captured: {filename}")
+        print(f"Captured Screen: {path / filename}")
     else:
         print(f"Error: Primary screen instance not found. Failed to snap {filename}")
 
@@ -45,7 +77,7 @@ def take_snapshot(filename: str) -> None:
 def hover_combo_item(combo: QComboBox, index_to_hover: int) -> None:
     """Programmatically highlights an item in the popup list."""
     combo.showPopup()
-    QCoreApplication.processEvents()
+    wait_and_process(0.2)
 
     view: QAbstractItemView = combo.view()
     model: QAbstractItemModel = combo.model()
@@ -66,6 +98,7 @@ def hover_combo_item(combo: QComboBox, index_to_hover: int) -> None:
 
 def take_tutorial_screenshots(mw: MainWindow) -> None:
     """Captures steps 1 through 4 exactly as written for the tutorial."""
+
     # ==========================================
     # STEP 1: Get your data in
     # ==========================================
@@ -73,11 +106,15 @@ def take_tutorial_screenshots(mw: MainWindow) -> None:
     hover_combo_item(mw.sidebar.combo_sessions, 1)
     take_snapshot("step1_select_recording_session.png")
     mw.sidebar.combo_sessions.hidePopup()
+    wait_and_process(0.1)
 
     # 4. From the Select Video list, pick a file. You should see the video and the skeleton appear.
     hover_combo_item(mw.sidebar.combo_videos, 0)
     take_snapshot("step1_select_video.png")
     mw.sidebar.combo_videos.hidePopup()
+    wait_and_process(0.2)
+
+    QCoreApplication.processEvents()
 
     # ==========================================
     # STEP 2: Choose your method
@@ -99,20 +136,27 @@ def take_tutorial_screenshots(mw: MainWindow) -> None:
     take_snapshot("step2_analysis_started.png")
 
     # Let UI and status bar update to represent the completed computation state
-    time.sleep(10.0)
+    wait_and_process(0.5)
     take_snapshot("step2_analysis_finished.png")
 
     # ==========================================
-    # STEP 3: Check the video
+    # STEP 3: Check the video TODO NOTE the numbers order is wrong btw 2 n 3
     # ==========================================
-    # 1. Click PLAY / PAUSE. 2. Watch the video to make sure the skeleton is on top.
-    for _ in range(20):
-        mw._reconnect_video_signals()
-        mw.step_video(1)
-        QCoreApplication.processEvents(QEventLoop.ProcessEventsFlag.AllEvents)
-        mw.canvas.repaint()
+    # Force a direct seek to frame 374 instead of stepping in a choking signal loop
+    if hasattr(mw, "_handle_canvas_seek"):
+        mw._handle_canvas_seek(374)
+        for _ in range(15):
+            QCoreApplication.processEvents()
+            time.sleep(0.05)
+
+    else:
+        print("ERROR: NO CANVAS SEEK METHOD")
+        return
+
+    QCoreApplication.processEvents()
 
     take_snapshot("step3_video_skeleton_overlay.png")
+    time.sleep(0.5)
 
     # ==========================================
     # STEP 4: See the results and save
@@ -149,7 +193,35 @@ def take_user_guide_screenshots(mw: MainWindow) -> None:
     # ==========================================
     # 1. MAIN WINDOW - VIDEO PLAYER CONTROLS
     # ==========================================
-    # Focus and capture the Play/Pause, Browse, and Selection layout
+    # Seek to target frame and allow the background decoder to paint
+    if hasattr(mw, "_handle_canvas_seek"):
+        mw._handle_canvas_seek(374)
+        for _ in range(10):
+            QCoreApplication.processEvents()
+            time.sleep(0.05)
+
+    # Fire the step controllers forward and backward to cycle the pipeline frame states
+    if hasattr(mw, "step_video"):
+        mw.step_video(1)
+        QCoreApplication.processEvents()
+        time.sleep(0.1)
+        mw.step_video(-1)
+        QCoreApplication.processEvents()
+        time.sleep(0.1)
+
+    # Trigger Play/Pause state and toggle back to prevent playback thread overrun
+    if hasattr(mw, "handle_toggle_video"):
+        mw.handle_toggle_video()  # Toggle Play
+        QCoreApplication.processEvents()
+        time.sleep(0.2)
+        mw.handle_toggle_video()  # Toggle Pause to freeze state for snapshot
+        QCoreApplication.processEvents()
+
+    # Ensure focus lands on the primary controller widget for visibility in the shot
+    if hasattr(mw.sidebar, "btn_play_video"):
+        mw.sidebar.btn_play_video.setFocus()
+        QCoreApplication.processEvents()
+
     take_snapshot("guide_video_player_controls.png")
 
     # ==========================================
@@ -199,6 +271,142 @@ def take_user_guide_screenshots(mw: MainWindow) -> None:
     take_snapshot("guide_status_bar_indicators.png")
 
 
+# =====================================================================
+# ADDED NEW: COMPLETE WORKING WORKSPACE FOR REVIEW_TUTORIAL AUTOMATION
+# =====================================================================
+def take_review_tutorial_screenshots(mw: MainWindow) -> None:
+    """Systematically automates and handles the images/review_tutorial folder items."""
+    print("\n--- Starting Review Tutorial Automation Execution ---")
+    folder = "review_tutorial"
+
+    if hasattr(mw, "_handle_canvas_seek"):
+        mw._handle_canvas_seek(374)
+
+        # Give the background worker thread a moment to decode the frame and update the canvas
+        for _ in range(15):
+            QCoreApplication.processEvents()
+            time.sleep(0.05)
+
+    # 2. Snapshot full screen window states for all targeted tutorial steps
+    if hasattr(mw, "review_window"):
+        # --- STEP 2: Review Video Mode ---
+        if hasattr(mw.sidebar, "btn_review") and hasattr(
+            mw.sidebar.btn_review, "click"
+        ):
+            mw.sidebar.btn_review.click()
+            QCoreApplication.processEvents()
+        take_snapshot("review_view.png", subfolder=folder)
+
+        # --- STEP 3: Scope Target ---
+        if hasattr(mw.review_window, "combo_scope"):
+            hover_combo_item(mw.review_window.combo_scope, 0)
+        take_snapshot("review_scope_target.png", subfolder=folder)
+        if hasattr(mw.review_window, "combo_scope"):
+            mw.review_window.combo_scope.hidePopup()
+            QCoreApplication.processEvents()
+
+        # --- STEP 4: Joint Angles (Scroll & Display Frame Data) ---
+        if hasattr(mw.review_window, "metrics_table"):
+            table = mw.review_window.metrics_table
+            if table.model() and table.model().rowCount() > 0:
+                # Scroll down a few rows to show data movement
+                target_idx = table.model().index(
+                    min(5, table.model().rowCount() - 1), 0
+                )
+                table.setCurrentIndex(target_idx)
+                table.scrollTo(target_idx)
+                QCoreApplication.processEvents()
+                time.sleep(0.3)
+        take_snapshot("review_joint_angles.png", subfolder=folder)
+
+        # ====================================================================
+        # SCROLL DOWN TO EXPOSE SECTIONS 2, 3, 4 & STATUS BAR
+        # ====================================================================
+        if hasattr(mw.review_window, "scroll_area"):
+            scroll_bar = mw.review_window.scroll_area.verticalScrollBar()
+            if scroll_bar:
+                # Force the scrollbar to its absolute maximum position
+                scroll_bar.setValue(scroll_bar.maximum())
+                # Let layout engine update, paint, and sync the viewport shifts
+                QCoreApplication.processEvents()
+                time.sleep(0.5)
+
+        # --- STEP 5: Ergonomic Adjustments ---
+        if hasattr(mw.review_window, "combo_fields"):
+            hover_combo_item(mw.review_window.combo_fields, 0)
+        take_snapshot("review_ergonomic_adjustments.png", subfolder=folder)
+        if hasattr(mw.review_window, "combo_fields"):
+            mw.review_window.combo_fields.hidePopup()
+            QCoreApplication.processEvents()
+
+        # ====================================================================
+        # --- STEP 6: Action Buttons (WITH ACTIVE TRIGGERS & MODAL HANDLING)
+        # ====================================================================
+
+        # 6A: Apply Changes & wait for status update
+        if hasattr(mw.review_window, "btn_apply"):
+            mw.review_window.btn_apply.setFocus()
+            mw.review_window.btn_apply.click()
+
+            # Inline wait loop for the backend to process the status label
+            for _ in range(15):
+                QCoreApplication.processEvents()
+                time.sleep(0.1)
+
+        take_snapshot("review_apply_changes.png", subfolder=folder)
+
+        # 6B: Save Changes & handle blocking QMessageBox concisely
+        if hasattr(mw.review_window, "btn_save"):
+            mw.review_window.btn_save.setFocus()
+
+            def handle_msg():
+                QCoreApplication.processEvents()
+                time.sleep(0.3)
+                take_snapshot("review_save_changes.png", subfolder=folder)
+                time.sleep(0.3)
+                # Hunt down and close any active QMessageBox dialogs
+                [
+                    w.close()
+                    for w in QApplication.topLevelWidgets()
+                    if isinstance(w, QMessageBox)
+                ]
+
+            QTimer.singleShot(500, handle_msg)
+            mw.review_window.btn_save.click()
+            QCoreApplication.processEvents()
+
+        # Return context back to the layout state runner
+        mw.review_window.close()
+        QCoreApplication.processEvents()
+
+        # --- STEP 7: Toggle Analysis and Review Modes ---
+        if hasattr(mw.sidebar, "radio_analysis") and hasattr(
+            mw.sidebar.radio_analysis, "click"
+        ):
+            mw.sidebar.radio_analysis.click()
+            QCoreApplication.processEvents()
+            # take_snapshot("sidebar_analysis_mode.png", subfolder=folder)
+            time.sleep(0.5)
+
+        if hasattr(mw.sidebar, "radio_review") and hasattr(
+            mw.sidebar.radio_review, "click"
+        ):
+            mw.sidebar.radio_review.click()
+            time.sleep(0.5)
+            QCoreApplication.processEvents()
+            take_snapshot("review_video_mode.png", subfolder=folder)
+            time.sleep(1)
+    else:
+        # Fallback to general window context screenshots if variables aren't initialized
+
+        take_snapshot("review_scope_target.png", subfolder=folder)
+        take_snapshot("review_joint_angles.png", subfolder=folder)
+        take_snapshot("review_ergonomic_adjustments.png", subfolder=folder)
+        take_snapshot("review_apply_changes.png", subfolder=folder)
+        take_snapshot("review_save_changes.png", subfolder=folder)
+        take_snapshot("review_video_mode.png", subfolder=folder)
+
+
 # ==========================================
 # ORCHESTRATOR
 # ==========================================
@@ -236,6 +444,7 @@ def run_documentation_flow() -> None:
     # Execute split layout capturing tasks
     take_tutorial_screenshots(mw)
     take_user_guide_screenshots(mw)
+    take_review_tutorial_screenshots(mw)
 
     print(
         "\n--- All matching screenshots captured precisely in docs/images/screenshots/ ---"
